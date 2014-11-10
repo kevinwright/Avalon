@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  .ui.content
+    .contain
+      h2.ui.title= message
+      h4.ui.sub.title.center.underline= error.status
+      p: pre #{error.stack}

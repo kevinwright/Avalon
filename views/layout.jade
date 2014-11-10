@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    include includes/meta
+    block head
+    include includes/seo
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    include includes/topbar
+    .ui.header
+    block content
+    include includes/footer
+    script(type="text/javascript", src="js/jquery-1.11.1.min.js")

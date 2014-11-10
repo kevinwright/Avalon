@@ -1,0 +1,1232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width"/>
+
+    <style type="text/css">
+      
+      /**********************************************
+      * Ink v1.0.5 - Copyright 2013 ZURB Inc        *
+      **********************************************/
+
+      /* Client-specific Styles & Reset */
+
+      #outlook a { 
+        padding:0; 
+      } 
+
+      body{ 
+        width:100% !important; 
+        min-width: 100%;
+        -webkit-text-size-adjust:100%; 
+        -ms-text-size-adjust:100%; 
+        margin:0; 
+        padding:0;
+      }
+
+      .ExternalClass { 
+        width:100%;
+      } 
+
+      .ExternalClass, 
+      .ExternalClass p, 
+      .ExternalClass span, 
+      .ExternalClass font, 
+      .ExternalClass td, 
+      .ExternalClass div { 
+        line-height: 100%; 
+      } 
+
+      #backgroundTable { 
+        margin:0; 
+        padding:0; 
+        width:100% !important; 
+        line-height: 100% !important; 
+      }
+
+      img { 
+        outline:none; 
+        text-decoration:none; 
+        -ms-interpolation-mode: bicubic;
+        width: auto;
+        max-width: 100%; 
+        float: left; 
+        clear: both; 
+        display: block;
+      }
+
+      center {
+        width: 100%;
+        min-width: 580px;
+      }
+
+      a img { 
+        border: none;
+      }
+
+      p {
+        margin: 0 0 0 10px;
+      }
+
+      table {
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+
+      td { 
+        word-break: break-word;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        hyphens: auto;
+        border-collapse: collapse !important; 
+      }
+
+      table, tr, td {
+        padding: 0;
+        vertical-align: top;
+        text-align: left;
+      }
+
+      hr {
+        color: #d9d9d9; 
+        background-color: #d9d9d9; 
+        height: 1px; 
+        border: none;
+      }
+
+      /* Responsive Grid */
+
+      table.body {
+        height: 100%;
+        width: 100%;
+      }
+
+      table.container {
+        width: 580px;
+        margin: 0 auto;
+        text-align: inherit;
+      }
+
+      table.row { 
+        padding: 0px; 
+        width: 100%;
+        position: relative;
+      }
+
+      table.container table.row {
+        display: block;
+      }
+
+      td.wrapper {
+        padding: 10px 20px 0px 0px;
+        position: relative;
+      }
+
+      table.columns,
+      table.column {
+        margin: 0 auto;
+      }
+
+      table.columns td,
+      table.column td {
+        padding: 0px 0px 10px; 
+      }
+
+      table.columns td.sub-columns,
+      table.column td.sub-columns,
+      table.columns td.sub-column,
+      table.column td.sub-column {
+        padding-right: 10px;
+      }
+
+      td.sub-column, td.sub-columns {
+        min-width: 0px;
+      }
+
+      table.row td.last,
+      table.container td.last {
+        padding-right: 0px;
+      }
+
+      table.one { width: 30px; }
+      table.two { width: 80px; }
+      table.three { width: 130px; }
+      table.four { width: 180px; }
+      table.five { width: 230px; }
+      table.six { width: 280px; }
+      table.seven { width: 330px; }
+      table.eight { width: 380px; }
+      table.nine { width: 430px; }
+      table.ten { width: 480px; }
+      table.eleven { width: 530px; }
+      table.twelve { width: 580px; }
+
+      table.one center { min-width: 30px; }
+      table.two center { min-width: 80px; }
+      table.three center { min-width: 130px; }
+      table.four center { min-width: 180px; }
+      table.five center { min-width: 230px; }
+      table.six center { min-width: 280px; }
+      table.seven center { min-width: 330px; }
+      table.eight center { min-width: 380px; }
+      table.nine center { min-width: 430px; }
+      table.ten center { min-width: 480px; }
+      table.eleven center { min-width: 530px; }
+      table.twelve center { min-width: 580px; }
+
+      table.one .panel center { min-width: 10px; }
+      table.two .panel center { min-width: 60px; }
+      table.three .panel center { min-width: 110px; }
+      table.four .panel center { min-width: 160px; }
+      table.five .panel center { min-width: 210px; }
+      table.six .panel center { min-width: 260px; }
+      table.seven .panel center { min-width: 310px; }
+      table.eight .panel center { min-width: 360px; }
+      table.nine .panel center { min-width: 410px; }
+      table.ten .panel center { min-width: 460px; }
+      table.eleven .panel center { min-width: 510px; }
+      table.twelve .panel center { min-width: 560px; }
+
+      .body .columns td.one,
+      .body .column td.one { width: 8.333333%; }
+      .body .columns td.two,
+      .body .column td.two { width: 16.666666%; }
+      .body .columns td.three,
+      .body .column td.three { width: 25%; }
+      .body .columns td.four,
+      .body .column td.four { width: 33.333333%; }
+      .body .columns td.five,
+      .body .column td.five { width: 41.666666%; }
+      .body .columns td.six,
+      .body .column td.six { width: 50%; }
+      .body .columns td.seven,
+      .body .column td.seven { width: 58.333333%; }
+      .body .columns td.eight,
+      .body .column td.eight { width: 66.666666%; }
+      .body .columns td.nine,
+      .body .column td.nine { width: 75%; }
+      .body .columns td.ten,
+      .body .column td.ten { width: 83.333333%; }
+      .body .columns td.eleven,
+      .body .column td.eleven { width: 91.666666%; }
+      .body .columns td.twelve,
+      .body .column td.twelve { width: 100%; }
+
+      td.offset-by-one { padding-left: 50px; }
+      td.offset-by-two { padding-left: 100px; }
+      td.offset-by-three { padding-left: 150px; }
+      td.offset-by-four { padding-left: 200px; }
+      td.offset-by-five { padding-left: 250px; }
+      td.offset-by-six { padding-left: 300px; }
+      td.offset-by-seven { padding-left: 350px; }
+      td.offset-by-eight { padding-left: 400px; }
+      td.offset-by-nine { padding-left: 450px; }
+      td.offset-by-ten { padding-left: 500px; }
+      td.offset-by-eleven { padding-left: 550px; }
+
+      td.expander {
+        visibility: hidden;
+        width: 0px;
+        padding: 0 !important;
+      }
+
+      table.columns .text-pad,
+      table.column .text-pad {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      table.columns .left-text-pad,
+      table.columns .text-pad-left,
+      table.column .left-text-pad,
+      table.column .text-pad-left {
+        padding-left: 10px;
+      }
+
+      table.columns .right-text-pad,
+      table.columns .text-pad-right,
+      table.column .right-text-pad,
+      table.column .text-pad-right {
+        padding-right: 10px;
+      }
+
+      /* Block Grid */
+
+      .block-grid {
+        width: 100%;
+        max-width: 580px;
+      }
+
+      .block-grid td {
+        display: inline-block;
+        padding:10px;
+      }
+
+      .two-up td {
+        width:270px;
+      }
+
+      .three-up td {
+        width:173px;
+      }
+
+      .four-up td {
+        width:125px;
+      }
+
+      .five-up td {
+        width:96px;
+      }
+
+      .six-up td {
+        width:76px;
+      }
+
+      .seven-up td {
+        width:62px;
+      }
+
+      .eight-up td {
+        width:52px;
+      }
+
+      /* Alignment & Visibility Classes */
+
+      table.center, td.center {
+        text-align: center;
+      }
+
+      h1.center,
+      h2.center,
+      h3.center,
+      h4.center,
+      h5.center,
+      h6.center {
+        text-align: center;
+      }
+
+      span.center {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+
+      img.center {
+        margin: 0 auto;
+        float: none;
+      }
+
+      .show-for-small,
+      .hide-for-desktop {
+        display: none;
+      }
+
+      /* Typography */
+
+      body, table.body, h1, h2, h3, h4, h5, h6, p, td { 
+        color: #222222;
+        font-family: "Helvetica", "Arial", sans-serif; 
+        font-weight: normal; 
+        padding:0; 
+        margin: 0;
+        text-align: left; 
+        line-height: 1.3;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        word-break: normal;
+      }
+
+      h1 {font-size: 40px;}
+      h2 {font-size: 36px;}
+      h3 {font-size: 32px;}
+      h4 {font-size: 28px;}
+      h5 {font-size: 24px;}
+      h6 {font-size: 20px;}
+      body, table.body, p, td {font-size: 14px;line-height:19px;}
+
+      p.lead, p.lede, p.leed {
+        font-size: 18px;
+        line-height:21px;
+      }
+
+      p { 
+        margin-bottom: 10px;
+      }
+
+      small {
+        font-size: 10px;
+      }
+
+      a {
+        color: #2ba6cb; 
+        text-decoration: none;
+      }
+
+      a:hover { 
+        color: #2795b6 !important;
+      }
+
+      a:active { 
+        color: #2795b6 !important;
+      }
+
+      a:visited { 
+        color: #2ba6cb !important;
+      }
+
+      h1 a, 
+      h2 a, 
+      h3 a, 
+      h4 a, 
+      h5 a, 
+      h6 a {
+        color: #2ba6cb;
+      }
+
+      h1 a:active, 
+      h2 a:active,  
+      h3 a:active, 
+      h4 a:active, 
+      h5 a:active, 
+      h6 a:active { 
+        color: #2ba6cb !important; 
+      } 
+
+      h1 a:visited, 
+      h2 a:visited,  
+      h3 a:visited, 
+      h4 a:visited, 
+      h5 a:visited, 
+      h6 a:visited { 
+        color: #2ba6cb !important; 
+      } 
+
+      /* Panels */
+
+      .panel {
+        background: #f2f2f2;
+        border: 1px solid #d9d9d9;
+        padding: 10px !important;
+      }
+
+      .sub-grid table {
+        width: 100%;
+      }
+
+      .sub-grid td.sub-columns {
+        padding-bottom: 0;
+      }
+
+      /* Buttons */
+
+      table.button,
+      table.tiny-button,
+      table.small-button,
+      table.medium-button,
+      table.large-button {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      table.button td,
+      table.tiny-button td,
+      table.small-button td,
+      table.medium-button td,
+      table.large-button td {
+        display: block;
+        width: auto !important;
+        text-align: center;
+        background: #2ba6cb;
+        border: 1px solid #2284a1;
+        color: #ffffff;
+        padding: 8px 0;
+      }
+
+      table.tiny-button td {
+        padding: 5px 0 4px;
+      }
+
+      table.small-button td {
+        padding: 8px 0 7px;
+      }
+
+      table.medium-button td {
+        padding: 12px 0 10px;
+      }
+
+      table.large-button td {
+        padding: 21px 0 18px;
+      }
+
+      table.button td a,
+      table.tiny-button td a,
+      table.small-button td a,
+      table.medium-button td a,
+      table.large-button td a {
+        font-weight: bold;
+        text-decoration: none;
+        font-family: Helvetica, Arial, sans-serif;
+        color: #ffffff;
+        font-size: 16px;
+      }
+
+      table.tiny-button td a {
+        font-size: 12px;
+        font-weight: normal;
+      }
+
+      table.small-button td a {
+        font-size: 16px;
+      }
+
+      table.medium-button td a {
+        font-size: 20px;
+      }
+
+      table.large-button td a {
+        font-size: 24px;
+      }
+
+      table.button:hover td,
+      table.button:visited td,
+      table.button:active td {
+        background: #2795b6 !important;
+      }
+
+      table.button:hover td a,
+      table.button:visited td a,
+      table.button:active td a {
+        color: #fff !important;
+      }
+
+      table.button:hover td,
+      table.tiny-button:hover td,
+      table.small-button:hover td,
+      table.medium-button:hover td,
+      table.large-button:hover td {
+        background: #2795b6 !important;
+      }
+
+      table.button:hover td a,
+      table.button:active td a,
+      table.button td a:visited,
+      table.tiny-button:hover td a,
+      table.tiny-button:active td a,
+      table.tiny-button td a:visited,
+      table.small-button:hover td a,
+      table.small-button:active td a,
+      table.small-button td a:visited,
+      table.medium-button:hover td a,
+      table.medium-button:active td a,
+      table.medium-button td a:visited,
+      table.large-button:hover td a,
+      table.large-button:active td a,
+      table.large-button td a:visited {
+        color: #ffffff !important; 
+      }
+
+      table.secondary td {
+        background: #e9e9e9;
+        border-color: #d0d0d0;
+        color: #555;
+      }
+
+      table.secondary td a {
+        color: #555;
+      }
+
+      table.secondary:hover td {
+        background: #d0d0d0 !important;
+        color: #555;
+      }
+
+      table.secondary:hover td a,
+      table.secondary td a:visited,
+      table.secondary:active td a {
+        color: #555 !important;
+      }
+
+      table.success td {
+        background: #5da423;
+        border-color: #457a1a;
+      }
+
+      table.success:hover td {
+        background: #457a1a !important;
+      }
+
+      table.alert td {
+        background: #c60f13;
+        border-color: #970b0e;
+      }
+
+      table.alert:hover td {
+        background: #970b0e !important;
+      }
+
+      table.radius td {
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+      }
+
+      table.round td {
+        -webkit-border-radius: 500px;
+        -moz-border-radius: 500px;
+        border-radius: 500px;
+      }
+
+      /* Outlook First */
+
+      body.outlook p {
+        display: inline !important;
+      }
+
+      /*  Media Queries */
+
+      @media only screen and (max-width: 600px) {
+
+        table[class="body"] img {
+          width: auto !important;
+          height: auto !important;
+        }
+
+        table[class="body"] center {
+          min-width: 0 !important;
+        }
+
+        table[class="body"] .container {
+          width: 95% !important;
+        }
+
+        table[class="body"] .row {
+          width: 100% !important;
+          display: block !important;
+        }
+
+        table[class="body"] .wrapper {
+          display: block !important;
+          padding-right: 0 !important;
+        }
+
+        table[class="body"] .columns,
+        table[class="body"] .column {
+          table-layout: fixed !important;
+          float: none !important;
+          width: 100% !important;
+          padding-right: 0px !important;
+          padding-left: 0px !important;
+          display: block !important;
+        }
+
+        table[class="body"] .wrapper.first .columns,
+        table[class="body"] .wrapper.first .column {
+          display: table !important;
+        }
+
+        table[class="body"] table.columns td,
+        table[class="body"] table.column td {
+          width: 100% !important;
+        }
+
+        table[class="body"] .columns td.one,
+        table[class="body"] .column td.one { width: 8.333333% !important; }
+        table[class="body"] .columns td.two,
+        table[class="body"] .column td.two { width: 16.666666% !important; }
+        table[class="body"] .columns td.three,
+        table[class="body"] .column td.three { width: 25% !important; }
+        table[class="body"] .columns td.four,
+        table[class="body"] .column td.four { width: 33.333333% !important; }
+        table[class="body"] .columns td.five,
+        table[class="body"] .column td.five { width: 41.666666% !important; }
+        table[class="body"] .columns td.six,
+        table[class="body"] .column td.six { width: 50% !important; }
+        table[class="body"] .columns td.seven,
+        table[class="body"] .column td.seven { width: 58.333333% !important; }
+        table[class="body"] .columns td.eight,
+        table[class="body"] .column td.eight { width: 66.666666% !important; }
+        table[class="body"] .columns td.nine,
+        table[class="body"] .column td.nine { width: 75% !important; }
+        table[class="body"] .columns td.ten,
+        table[class="body"] .column td.ten { width: 83.333333% !important; }
+        table[class="body"] .columns td.eleven,
+        table[class="body"] .column td.eleven { width: 91.666666% !important; }
+        table[class="body"] .columns td.twelve,
+        table[class="body"] .column td.twelve { width: 100% !important; }
+
+        table[class="body"] td.offset-by-one,
+        table[class="body"] td.offset-by-two,
+        table[class="body"] td.offset-by-three,
+        table[class="body"] td.offset-by-four,
+        table[class="body"] td.offset-by-five,
+        table[class="body"] td.offset-by-six,
+        table[class="body"] td.offset-by-seven,
+        table[class="body"] td.offset-by-eight,
+        table[class="body"] td.offset-by-nine,
+        table[class="body"] td.offset-by-ten,
+        table[class="body"] td.offset-by-eleven {
+          padding-left: 0 !important;
+        }
+
+        table[class="body"] table.columns td.expander {
+          width: 1px !important;
+        }
+
+        table[class="body"] .right-text-pad,
+        table[class="body"] .text-pad-right {
+          padding-left: 10px !important;
+        }
+
+        table[class="body"] .left-text-pad,
+        table[class="body"] .text-pad-left {
+          padding-right: 10px !important;
+        }
+
+        table[class="body"] .hide-for-small,
+        table[class="body"] .show-for-desktop {
+          display: none !important;
+        }
+
+        table[class="body"] .show-for-small,
+        table[class="body"] .hide-for-desktop {
+          display: inherit !important;
+        }
+      }
+
+      
+    </style>
+    <style type="text/css">
+    body, html, table[class="body"] {
+      background: #0D1215;
+    }
+    body, table.body, h1, h2, h3, h4, h5, h6, p, td {
+      color: #fff;
+    }
+
+    table.facebook td {
+      background: #3b5998;
+      border-color: #2d4473;
+    }
+
+    table.facebook:hover td {
+      background: #2d4473 !important;
+    }
+
+    table.twitter td {
+      background: #00acee;
+      border-color: #0087bb;
+    }
+
+    table.twitter:hover td {
+      background: #0087bb !important;
+    }
+
+    table.google-plus td {
+      background-color: #DB4A39;
+      border-color: #CC0000;
+    }
+
+    table.google-plus:hover td {
+      background: #CC0000 !important;
+    }
+
+    .template-label {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 11px;
+    }
+
+    .callout .wrapper {
+      padding-bottom: 20px;
+    }
+
+    .callout .panel {
+      border: 1px dashed #3F6A84;
+      background: rgb(22, 30, 34);
+      padding: 20px 30px !important;
+    }
+    .callout .panel ul {
+      list-style-position: outside;
+      padding-left: 10px;
+    }
+    .callout .panel ul li {
+      padding-bottom: 15px;
+    }
+    .callout {
+      margin-bottom: 32px;
+    }
+
+    .header {
+      background: url("http://i.imgur.com/969bzVv.jpg");
+      background-size: cover;
+      height: 420px;
+      background-position: center bottom;
+      margin-bottom: -175px;
+    }
+    .header .overlay {
+      text-align: center;
+    }
+    .header .overlay .template-label {
+      font-size: 16px;
+    }
+    .header img {
+      float: none;
+      margin: auto;
+    }
+    table.header.row {
+      padding-bottom: 10px;
+      padding-top: 10px;
+    }
+
+    .footer {
+      background: #e6dfd2;
+      margin-top: 100px;
+    }
+    .footer img {
+      position: absolute;
+      right: -200px;
+      top: 0px;
+      height: 330px;
+    }
+    .footer h1, .footer h2, .footer h3, .footer h4, .footer h5, .footer h6, .footer p, .footer td {
+      color: #0D1215;
+    }
+    .footer a {
+      color: #016786;
+    }
+    .footer a:hover {
+      color: #2A7991;
+    }
+
+    .footer h5 {
+      font-size: 16px;
+      font-weight: bold;
+      padding-bottom: 4px;
+      border-bottom: 1px dotted #20303A;
+      margin-bottom: 8px;
+      margin-top: 32px;
+      text-align: center;
+    }
+    .footer .tiny {
+      text-align: center;
+      margin-bottom: 0px;
+      font-size: 12px;
+    }
+
+    table.columns .text-pad {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    table.columns .left-text-pad {
+      padding-left: 10px;
+    }
+
+    table.columns .right-text-pad {
+      padding-right: 10px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      table[class="body"] {
+        table-layout: fixed;
+      }
+      table[class="body"] .right-text-pad {
+        padding-left: 10px !important;
+      }
+
+      table[class="body"] .left-text-pad {
+        padding-right: 10px !important;
+      }
+      table.six {
+        width: 100%;
+      }
+    }
+    @media only screen and (max-width: 102px) {
+      .footer .container {
+        overflow: hidden;
+      }
+    }
+
+    h1 {
+      font-size: 24px;
+      text-align: left;
+      font-weight: bold;
+      padding-bottom: 6px;
+      border-bottom: 1px dotted #618296;
+      margin-bottom: 14px;
+    }
+    h2 {
+      font-size: 16px;
+      font-weight: bold;
+      padding-bottom: 4px;
+      border-bottom: 1px dotted #20303A;
+      margin-bottom: 8px;
+      margin-top: 32px;
+    }
+    .top-title {
+      font-size: 32px;
+      text-align: center;
+      font-weight: bold;
+      margin-top: 50px;
+    }
+    h2.sub-title {
+      font-size: 16px;
+      text-align: center;
+      text-transform: uppercase;
+      margin-top: 12px;
+      border-bottom: none;
+    }
+
+    p.lead, p.lede, p.leed {
+      margin-top: 32px;
+    }
+
+    body, table.body, p, td {
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    ul.simple {
+      list-style-type: none;
+      padding-left: 0px;
+    }
+
+
+
+    </style>
+  </head>
+ <body>
+  <table class="body">
+    <tr>
+      <td class="center" align="center" valign="top">
+        <center>
+
+          <table class="row header">
+            <tr>
+              <td class="center" align="center">
+                <center>
+
+                  <table class="container">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="overlay">
+                              <img height="200" src="http://i.imgur.com/fRoGVNC.png"> <br>
+                              <span class="template-label">Thank you for registering at Avalon; the Legend Lives</span>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+                </center>
+              </td>
+            </tr>
+          </table>
+
+          <table class="container">
+            <tr>
+              <td>
+
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+
+                      <table class="twelve columns">
+                        <tr>
+                          <td>
+                            <h1 class="top-title">Greetings and Welcome!</h1>
+                            <p class="lead">We do not spam our users with unsolicited marketing e-mails. As a new user, you will be asked in game if you wish to receive helpful scrolls along your journey through novicehood to fully fledged player. It is highly advised for you to accept this help, as we will e-mail you specific help files and documents that will make your journey much easier to follow. However, you will always be in control of the e-mails you receive from us!</p>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+                <table class="row callout">
+                  <tr>
+                    <td class="wrapper last">
+
+                      <table class="twelve columns">
+                        <tr>
+                          <td class="panel">
+                            <p>
+                            For help and support with any aspect of Avalon, please don't hesitate to e-mail us at <a href="mailto:support@avalon-rpg.com">Avalon Support</a>. You'll find us friendly and willing to help, no matter what the issue may be.
+                            </p>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+
+                      <table class="twelve columns">
+                        <tr>
+                          <td>
+                            <h1 class="title">What's Next?</h1>
+                            <p>Much more information can be found at our web site at <a href="http://www.avalon-rpg.com/">avalon-rpg.com</a></p>
+                            <p>There is an introductory manual available for reading at our Intro section, which can be found at <a href="http://www.avalon-rpg.com/intro/">Avalon Introduction</a>. Dependant upon your experience as a roleplayer, some or all of it will help you familiarise yourself with the Avalon realm. Your next steps in the realm, should be to follow your guides and friendly adventurers. They will introduce you to the basics of the land and eventually help you integrate into a guild and profession, where you will gain skills and abilities that will increase your character's strength and potential influence. All this information can also be read about in the Introductory Guide mentioned above. However, until you have joined a guild your best course of action is to follow your adventurers' guidance, referring to the manuals and website if needed.</p>
+                            
+                            <p>It is important to remember that Avalon is not a quick "hack 'n' slash" type game; we think of it more as a living, breathing ever evolving world created by the imaginations of the mortals and gods who exist within it. It is a roleplaying game that will give as much as you put in to it. If you are patient, imaginative and willing to learn its intracacies, then there is quite literarlly an entire world for you to explore and become a living part of.</p>
+
+                            <p>If all else fails and you are quite simply not sure what to do type OON and include your question or message e.g OON I NEED HELP. There will nearly always be someone on your continent who will be willing to help.</p>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+
+                      <table class="twelve columns">
+                        <tr>
+                          <td>
+                            <h1 class="title">Problems Connecting?</h1>
+                            <p>Or perhaps you found your screen to be confusing while playing? The web site also includes browser based software for connecting to Avalon - click on the 'Play Now' button at the top right of the page. Once you have filled in the form found there, an in browser experience will load, which is the fastest and easiest way to play Avalon.</p>
+                            <p>Simply fill in the form on the Play Now page and choose at the bottom of the form whether or not you would like to use Flash or Java. For Flash click on the Lumiere option; if you prefer Java then click on the Javalon option. If you're not sure, then it is best to leave the option as Lumiere, as this will work with virtually all browsers. <em><b>Note</b>: only the Javalon option will work with iPads and iPhones.</em></p>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+
+                      <table class="twelve columns">
+                        <tr>
+                          <td>
+                            <h1>Advanced Roleplayer?</h1>
+                            <p>
+                            We also have a list of recommended downloadable clients you can use to connect to Avalon, which is updated regularly. These clients tend to be for the more advanced Mud player as they require a modicum of setting up. Simply visit our <a href="http://www.avalon-rpg.com/connect/">Mud Clients</a> page for more information. For this software, you will need to connect to avalon with the following details:</p>
+
+                            <ul class="simple">
+                              <li><b>Host:</b> avalon-rpg.com</li>
+                              <li><b>Port:</b> 23</li>
+                            </ul>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+
+                      <table class="twelve columns">
+                        <tr>
+                          <td>
+                            <h1>Join the Meetplace Community</h1>
+                            <p>
+                            Meetplace Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+
+              <!-- container end below -->
+
+
+              </td>
+            </tr>
+          </table>
+
+          <table class="row footer">
+            <tr>
+              <td class="center" align="center">
+                <center>
+
+                  <table class="container">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td>
+                              <img src="http://i.imgur.com/u3bMs2w.png">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <table class="six sub-columns">
+                                <tr>
+                                  <td class="left-text-pad">
+
+                                    <h5>Connect With Us:</h5>
+
+                                    <table class="tiny-button facebook">
+                                      <tr>
+                                        <td>
+                                          <a href="#">Facebook</a>
+                                        </td>
+                                      </tr>
+                                    </table>
+
+                                    <br>
+
+                                    <table class="tiny-button twitter">
+                                      <tr>
+                                        <td>
+                                          <a href="#">Twitter</a>
+                                        </td>
+                                      </tr>
+                                    </table>
+
+                                    <br>
+
+                                    <table class="tiny-button google-plus">
+                                      <tr>
+                                        <td>
+                                          <a href="#">Google +</a>
+                                        </td>
+                                      </tr>
+                                    </table>
+
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                            <td>
+                              <table class="six sub-columns last" style="vertical-align:middle;">
+                                <tr>
+                                  <td class="last right-text-pad center">
+                                    <h5>Featured MEETPLACE Group:</h5>
+                                    <a href="http://www.meetplace.net/groups/11%3E">BATTLEPHASE September</a><br>
+                                    <h5>Featured MEETPLACE Forum:</h5>
+                                    <a href="http://www.meetplace.net/forums/4">Meeting Place: MUD Clients</a>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          
+                          <tr>
+                            <td>
+                              <table class="six sub-columns">
+                                <tr>
+                                  <td class="left-text-pad">
+                                    
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                            <td>
+                              <table class="six sub-columns last" style="text-align:right; vertical-align:middle;">
+                                <tr>
+                                  <td class="last right-text-pad">
+                                    
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="wrapper">
+                        <table class="twelve columns">
+                          <tr>
+                            <td>
+                              <p class="tiny">
+                                <a href="<% unsubscribe %>">Unsubscribe</a> if you do not wish to receive any of the Avalon newsletters, journals or mailshots.
+                              </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p class="tiny">
+                                <a href="http://www.avalon-rpg.com/site_map.html">SITE MAP</a> • 
+                                <a href="http://www.avalon-rpg.com/connect/index.html">Avalon Clients</a> • 
+                                <a href="http://www.meetplace.net/events">FORTHCOMING EVENTS</a> • 
+                                <a href="http://www.avalon-rpg.com/vote.html">Support Avalon by Voting NOW!</a>
+                              </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p class="tiny">
+                                <a href="http://www.avalon-rpg.com/help/pages/privacy.html">Privacy Policy</a> • 
+                                <a href="http://www.avalon-rpg.com/help/pages/terms.html">Terms &amp; Conditions</a> • 
+                                <a href="http://www.avalon-rpg.com/help/pages/contact.html">Contact Us</a>
+                              </p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+
+                </center>
+              </td>
+            </tr>
+          </table>
+
+        
+
+        </center>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
