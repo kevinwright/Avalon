@@ -1,0 +1,32 @@
+extends layout
+
+block head
+  - var description = "API Documentation"
+  - var keywords = "api, code"
+  link(rel="stylesheet" href="/css/api.css")
+
+block content
+  .ui.content
+    .contain
+      h1.ui.title.underline.center= title
+
+  .ui.content
+    .contain
+      .ui.box
+        h3 Callbacks
+        p Callbacks are possible to be set up to enable cross-origin requests through JSONP.
+        p Simply add a ?callback=<b>[callback]</b> query to enable JSONP.
+
+      .card
+        .header
+          span.type GET
+          code.url /api/checkname/
+          span.variable name
+        .info
+          p Checks if a character exists with the specified <b>name</b> on the server.
+        pre.example.
+          {
+            name: "illyism"
+            available: false
+            status: 2
+          }

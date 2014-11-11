@@ -1,0 +1,68 @@
+    .card {
+      background: #fcfcfc;
+      border: 1px solid #a7bcce;
+      margin: -1px 0 39px -1px;
+      color: #000;
+      -webkit-border-radius: 4px;
+      border-radius: 4px;
+      -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    }
+    .card .header {
+      padding: 5px 5px 5px 20px;
+      position: relative;
+      margin: -1px -1px 0;
+      border: 1px solid #1c5380;
+      background-color: #517fa4;
+      -webkit-border-radius: 4px 4px 0 0;
+      border-radius: 4px 4px 0 0;
+      -webkit-box-shadow: 0 1px 0 rgba(111, 151, 182, 0.7) inset;
+      -moz-box-shadow: 0 1px 0 rgba(111, 151, 182, 0.7) inset;
+      box-shadow: 0 1px 0 rgba(111, 151, 182, 0.7) inset;
+      color: #fff;
+      height: 40px;
+    }
+    .card .info, .card .description, .example {
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    .card .header .url {
+      float: left;
+      display: inline;
+      position: relative;
+      top: 1px;
+      padding: 0 0 10px 0;
+      margin-left: 64px;
+    }
+    .card .header .type {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 64px;
+      height: 100%;
+      margin: 0 15px 0 0;
+      border-right: 1px solid #0f3556;
+      -webkit-border-radius: 4px 0 0 0;
+      border-radius: 4px 0 0 0;
+      -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 1px 0 0 rgba(255,255,255,0.1);
+      -moz-box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 1px 0 0 rgba(255,255,255,0.1);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 1px 0 0 rgba(255,255,255,0.1);
+      background-color: #1c5380;
+      background-position: 50% 50%;
+      text-align: center;
+      padding: 6px;
+    }
+    .card .variable {
+      float: left;
+      display: inline;
+      background: #06365f;
+      margin: 0 3px;
+      padding: 0 5px;
+      line-height: 20px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.2) inset, 0 1px 0 rgba(255,255,255,0.15);
+      -moz-box-shadow: 0 0 1px rgba(0,0,0,0.2) inset, 0 1px 0 rgba(255,255,255,0.15);
+      box-shadow: 0 0 1px rgba(0,0,0,0.2) inset, 0 1px 0 rgba(255,255,255,0.15);
+    }
