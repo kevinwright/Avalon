@@ -1,0 +1,17 @@
+extends ../layout
+
+block head
+  - var title = section.title
+
+block content
+  .ui.content
+    .contain
+      h1.ui.title.center Section #{section.id} - #{section.title}
+      ul.ui.menu.vertical.simple
+        for page in section.pages
+          li
+            a(href="/help/pages/" + page.title.toLowerCase()).item
+              | #{page.id} - 
+              b #{page.title}
+              br
+              span.small #{page.description}

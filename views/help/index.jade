@@ -1,0 +1,23 @@
+extends ../layout
+
+block head
+  - var title = "Online Rpg. Avalon- The Legend Lives - Help and manual section"
+  - var description = "Avalon - Online RPG. The home of Avalon, text based game, premier multiplayer roleplaying world. Windows and Java clients. The most complex, atmospheric RPG on the net."
+  - var keywords = "RPG, text, based, Roleplaying, Games, RPGS, MUDs, Interactive, Multiplayer, Multiuser, Avalon, Fantasy, Magic, Adventure, Java, Telnet, Online, Knight, Sorcerer, Sorcery, Poisons, Potions, Mage, Mystic, Thief, Guild, Bard, Battle, Army, Strategy"
+
+block content
+  .ui.content
+    .contain
+      h1.ui.title.center The Manual of Avalon
+      p.lead This is the full, comprehensive Avalon manual. If you are new to Avalon, we recommend you tackle the <a href="/intro/">Introduction</a> first. The manual here contains everything a player needs to know about Avalon. <!--The number in brackets after the section title denotes number of sub-section entries.-->Enjoy!
+      p There are also several <a href="/maps/">maps of Avalon</a> available.
+
+
+      ul.ui.menu.vertical.simple
+        for section in sections
+          li
+            a(href="/help/sections/" + section.id).item
+              b Section #{section.id} - 
+              | #{section.title}
+              br
+              span.small #{section.hint}

@@ -221,6 +221,10 @@ blockquote {
 	}
 }
 
+span.small, font.small {
+	font-size: .8em;
+}
+
 /*    _    _ | _ ._ 
  *   (_|\/(_||(_)| |
  *   -----BLOCKS----
@@ -251,6 +255,8 @@ blockquote {
 
 .ui.footer {
 	background: #e6dfd2;
+	background: url("/img/footer.jpg") 100% 100%;
+	background-size: cover;
 	position: relative;
 	color: lighten(@col_footer, 30%);
 	min-height: 300px;
@@ -457,6 +463,12 @@ blockquote {
 			&.active {
 				color: rgba(255, 255, 255, 1);
 				background: rgba(255, 255, 255, .05);
+			}
+		}
+		&.simple {
+			a {font-weight: normal;}
+			.item:hover, .item:focus {
+				background: transparent;
 			}
 		}
 		&.center {
