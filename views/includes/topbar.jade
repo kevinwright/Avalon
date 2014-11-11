@@ -2,7 +2,24 @@
   .ui.menu.very.tiny.contain
     .left.menu
       a.item(href="/") Avalon RPG
-      li: a.item(href="/intro/") Introduction
+      li.item.ui.dropdown
+        a(href="/intro/") Introduction
+        i.icon.triangle.down
+        .menu
+          a.item(href='/intro/beginner-handbook') Beginner's Handbook
+          a.item(href='/intro/character-building') Character Building
+          a.item(href='/intro/skills') Skills
+          a.item(href='/intro/locations-and-movement') Locations and Movement
+          a.item(href='/intro/the-continent-of-avalon') The Continent Of Avalon
+          a.item(href='/intro/the-cityports') The Cityports
+          a.item(href='/intro/communicating') Communicating
+          a.item(href='/intro/items-and-manipulating-them') Items and Manipulating Them
+          a.item(href='/intro/computer-controlled-characters') Computer Controlled Characters
+          a.item(href='/intro/guilds') Guilds
+          a.item(href='/intro/the-command-environment') The Command Environment
+          a.item(href='/intro/about-avalon') About Avalon
+          a.item(href='/intro/the-meeting-place') The Meeting Place          
+          
 
       li.item.ui.dropdown
         a(href="/world/") World
@@ -18,7 +35,7 @@
         a(href="/game/") Gameplay
         i.icon.triangle.down
         .menu
-          a.item(href="/world/history") Manual
+          a.item(href="/help") Manual
           a.item(href="/world/news") Mud Clients
 
       li.item.ui.dropdown
