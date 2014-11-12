@@ -39,11 +39,13 @@ block content
             label(for="create-email") Email
             input#create-email(type="text", name="email")
         .two.fields
+          p Gender
           .field.inline
-            label(for="create-gender") Gender
-            select#create-gender(name="gender")
-              option(name="value" value="male" selected="") Male
-              option(name="value" value="female") Female
+            input#male(type="radio", name="gender", value="male")
+            label(for="male") Male
+          .field.inline
+            input#female(type="radio", name="gender", value="female")
+            label(for="female") Female
         input(type="hidden", name="run", value="lumiere", checked="checked")
         input(type="hidden", name="create", value="yes")
         input(type="hidden", name="loginkey", value="")
