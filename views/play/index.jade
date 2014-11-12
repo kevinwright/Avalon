@@ -3,45 +3,99 @@ extends ../layout
 block content
   .ui.content
     .contain
-      .ui.form.box
-        if (code === 1 || code === 3)
-          h2.ui.title Create a Character
-          h5.ui.title.sub.underline #{message}
-        if (code === 0)
-          h2.ui.title.underline Character doesn't exist. Create one!
-        if (code === 4)
-          h2.ui.title.underline Create a character
-        .field.user
-          .ui.input
-            label Character Name
-            if (code === 0)
-              input#user(type="text", name="user", value=user)
-            else
-              input#user(type="text", name="user")
-        .two.fields.password
-          .field
-            .ui.input
-              label Password
-              if (code === 0)
-                input(type="password", name="password", value=password)
-              else
-                input(type="password", name="password")
-          .field
-            .ui.input
-              label Confirm Password
-              input(type="password", name="password2")
-        .field.user
-          .ui.input
-            label Email
-            input(type="text", name="email")
-        .field.inline
-          input#male(type="radio", name="gender", value="male")
-          label(for="male") Male
-        .field.inline
-          input#female(type="radio", name="gender", value="female")
-          label(for="female") Female
-        button.ui.button.save Play Now
+      .ui.grid.responsive
+        .eight.column.wide
 
+          form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box
+            h3.ui.title.underline Create a new Avalon character
+            if (code === 1 || code === 3)
+              h2.ui.title Create a Character
+              h5.ui.title.sub #{message}
+            if (code === 0)
+              h2.ui.title Character doesn't exist. Create one!
+            if (code === 4)
+              h2.ui.title Create a character
+            .field.user
+              .ui.input
+                label Character Name
+                if (code === 0)
+                  input#user(type="text", name="user", value=user)
+                else
+                  input#user(type="text", name="user")
+                p 3 characters minimum, letters only. Be sure to choose a name appropriate for a fantasy game-world setting.
+            .two.fields.password
+              .field
+                .ui.input
+                  label Password
+                  if (code === 0)
+                    input(type="password", name="password", value=password)
+                  else
+                    input(type="password", name="password")
+              .field
+                .ui.input
+                  label Confirm Password
+                  input(type="password", name="password2")
+              p(style="margin-bottom: 16px;") 3 characters minimum, may include letters, numbers and punctuation, but no spaces, carets or tildes. Example: s_ecr3.t.
+            .field.user
+              .ui.input
+                label Email
+                input(type="text", name="email")
+                p Entering your e-mail address will ensure that your character is saved when you exit as we regularly delete unregistered characters to make room for new players.
+            .two.fields
+              p Gender
+              .field.inline
+                input#male(type="radio", name="gender", value="male")
+                label(for="male") Male
+              .field.inline
+                input#female(type="radio", name="gender", value="female")
+                label(for="female") Female
+            .two.fields
+              p Client
+              .field.inline
+                input#create-run-lumiere(type="radio", name="run", value="lumiere", checked="checked")
+                label(for="create-run-lumiere") Lumiere
+                p our new client; works for everyone
+              .field.inline
+                input#create-run-applet(type="radio", name="run", value="applet")
+                label(for="create-run-applet") Javalon
+                p our original client; works for most people
+              p Lumiere is a Flash application which runs in your browser. Use Lumiere for maximum compatibility with Avalon. WARNING: Lumiere is still in its testing phase and only has the essential features to play Avalon. Choose Javalon if you want to enjoy all available features.
+            input(type="hidden", name="create", value="yes")
+            input(type="hidden", name="loginkey", value="")
+            button.ui.button.save.fluid(style="margin-top: 16px;") Create a new character
+
+        .eight.column.wide
+          form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box
+            h3.ui.title.underline Login existing character
+            .field.user
+              .ui.input
+                label Character Name
+                if (code === 0)
+                  input#user(type="text", name="user", value=user)
+                else
+                  input#user(type="text", name="user")
+            .field
+              .ui.input
+                label Password
+                if (code === 0)
+                  input(type="password", name="password", value=password)
+                else
+                  input(type="password", name="password")
+            .two.fields
+              p Client
+              .field.inline
+                input#create-run-lumiere(type="radio", name="run", value="lumiere", checked="checked")
+                label(for="create-run-lumiere") Lumiere
+                p our new client; works for everyone
+              .field.inline
+                input#create-run-applet(type="radio", name="run", value="applet")
+                label(for="create-run-applet") Javalon
+                p our original client; works for most people
+              p Lumiere is a Flash application which runs in your browser. Use Lumiere for maximum compatibility with Avalon. WARNING: Lumiere is still in its testing phase and only has the essential features to play Avalon. Choose Javalon if you want to enjoy all available features.
+
+            input(type="hidden", name="create", value="no")
+            input(type="hidden", name="loginkey", value="0")
+            button.ui.button.save.fluid(style="margin-top: 16px;") Login
 
 block scripts
   script.

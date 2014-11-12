@@ -299,6 +299,7 @@ span.small, font.small {
 	top: 0px;
 	width: 100%;
 	height: 40px;
+	z-index: 100000;
 
 	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
 	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzM0MzYzYSIgc3RvcC1vcGFjaXR5PSIwLjgiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjkiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
@@ -340,6 +341,12 @@ span.small, font.small {
 		&:last-child {
 			background: transparent;
 		}
+		.title {
+			margin-bottom: .2em;
+		}
+	}
+	&.margin {
+		padding: 75px 0;
 	}
 }
 
@@ -353,7 +360,7 @@ body.index {
 /*    _    _ | _ ._ 
  *   (_|\/(_||(_)| |
  *   ------BOX-------
- 
+ */
  
 
 .ui.box {
@@ -688,7 +695,7 @@ body.index {
 	 	-webkit-transition: opacity .2s ease;
 	 	-moz-transition: opacity .2s ease;
 	 	transition: opacity .2s ease;
-	 	z-index: 11;
+	 	z-index: 50000;
 
 	 	display: block;
 	 	overflow: hidden;
