@@ -9,6 +9,8 @@ block content
           h5.ui.title.sub.underline #{message}
         if (code === 0)
           h2.ui.title.underline Character doesn't exist. Create one!
+        if (code === 4)
+          h2.ui.title.underline Create a character
         .field.user
           .ui.input
             label Character Name
@@ -38,7 +40,7 @@ block content
         .field.inline
           input#female(type="radio", name="gender", value="female")
           label(for="female") Female
-        button.ui.button.save Save
+        button.ui.button.save Play Now
 
 
 block scripts

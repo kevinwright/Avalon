@@ -219,6 +219,19 @@ blockquote {
 			color: darken(@col_foreground, 20%); 
 		}
 	}
+	&.big {
+		font-size: 1.5em;
+		cite {
+			font-size: .8em;
+		}
+	}
+	&.center {
+		text-align: center;
+		border-left: none;
+		p {
+			margin-bottom: 0px;
+		}
+	}
 }
 
 span.small, font.small {
@@ -315,11 +328,32 @@ span.small, font.small {
 	}
 }
 
+.ui.content {
+	&.section {
+		padding: 115px 0;
+		border-bottom: 1px solid lighten(@col_background, 10%);
+		background: lighten(@col_background, 1%);
+		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2) inset;
+		&:nth-child(even) {
+			background: lighten(@col_background, 2%);
+		}
+		&:last-child {
+			background: transparent;
+		}
+	}
+}
+
+body.index {
+	.ui.footer {
+		 margin-top: 0px;
+	}
+}
+
 
 /*    _    _ | _ ._ 
  *   (_|\/(_||(_)| |
  *   ------BOX-------
- */
+ 
  
 
 .ui.box {
@@ -583,6 +617,11 @@ span.small, font.small {
 	-webkit-transition: color 0.2s, box-shadow 0.2s;
 	-moz-transition: color 0.2s, box-shadow 0.2s;
 	transition: color 0.2s, box-shadow 0.2s;
+	&.fluid {
+		width: 100%;
+		display: block;
+		text-align: center;
+	}
 	&:hover, &:active {
 		box-shadow: 0px 0px 0px 2px @col_primary inset;
 		color: @col_primary;

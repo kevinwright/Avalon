@@ -1,5 +1,8 @@
 extends layout
 
+block head
+  - var body = "index"
+
 block content
   .ui.content
     .contain
@@ -10,6 +13,7 @@ block content
   .ui.content
     .contain
       form(method="post", action="/play/").ui.form.box
+        h3.ui.title.underline Login or Register
         .error.message.solid.box.compact.ui
         .field.user
           .ui.input
@@ -19,28 +23,101 @@ block content
           .ui.input
             label Password
             input(type="password", name="password")
-        .field.inline
-          input#lumiere(type="radio", name="client", value="lumiere", checked)
-          label(for="lumiere") Lumiere
-        .field.inline
-          input#javalon(type="radio", name="client", value="javalon")
-          label(for="javalon") Javalon
-        button.ui.button.save Save
+        .two.fields
+          .field.inline
+            input#lumiere(type="radio", name="client", value="lumiere", checked)
+            label(for="lumiere") Lumiere
+          .field.inline
+            input#javalon(type="radio", name="client", value="javalon")
+            label(for="javalon") Javalon
+        button.ui.button.save.fluid Play Now
+  
+  .ui.content.section(style="background: transparent;")
+    blockquote.big.center
+      p Avalon is probably the largest and most complex multi-user online RPG ever.
+      cite Acorn User Magazine
 
-  .ui.content
+  include includes/lorem
+  .ui.content.section
     .contain
-      ul.ui.simple.vertical.menu
-        li.item Over Twenty-Five Years of Development
-        li.item The First Online Text Based Game with guilds, cities:<br/> total world simulation
-        li.item Over Four Thousand Unique Abilities
-        li.item Real World Economics &amp; Player Governance
-        li.item Complex, Original Combat of genre-defining intricacy
-        li.item Dozens Of Professions, such as Druids, Paladins &amp; Seers
-        li.item Warring City States &amp; Thrilling Military Strategy
-        li.item Real Weather Systems and Unique Ecosystems
-        li.item Thousands of Quests, Puzzles and Personal Goals
-        li.item Dramatic Events, Heroic Personae:<br/> the ultimate text based game
-        li.item A Free Environment for Roleplay and Making History
-        li.item And so much more...
+      .ui.grid
+        .eight.column.wide
+          h3.ui.title Over Twenty-Five Years of Development
+          +lipsum(2, "sentences")
+        .eight.column.wide
+  .ui.content.section
+     .contain
+       .ui.grid
+         .eight.column.wide
+         .eight.column.wide
+           h3.ui.title The First Online Text Based Game with guilds, cities:<br/> total world simulation
+           +lipsum(2, "sentences")
+   .ui.content.section
+     .contain
+       .ui.grid
+         .eight.column.wide
+           h3.ui.title Over Four Thousand Unique Abilities
+           +lipsum(2, "sentences")
+         .eight.column.wide
+   .ui.content.section
+     .contain
+       .ui.grid
+         .eight.column.wide
+         .eight.column.wide
+           h3.ui.title Real World Economics &amp; Player Governance
+           +lipsum(2, "sentences")
+   .ui.content.section
+     .contain
+       .ui.grid
+         .eight.column.wide
+           h3.ui.title Complex, Original Combat of genre-defining intricacy
+           +lipsum(2, "sentences")
+         .eight.column.wide
+   .ui.content.section
+     .contain
+       .ui.grid
+         .eight.column.wide
+         .eight.column.wide
+           h3.ui.title Dozens Of Professions, such as Druids, Paladins &amp; Seers
+           +lipsum(2, "sentences")
+   .ui.content.section
+     .contain
+       .ui.grid
+         .eight.column.wide
+           h3.ui.title Warring City States &amp; Thrilling Military Strategy
+           +lipsum(2, "sentences")
+         .eight.column.wide
+   .ui.content.section
+     .contain
+       .ui.grid
+         .eight.column.wide
+         .eight.column.wide
+           h3.ui.title Real Weather Systems and Unique Ecosystems
+           +lipsum(2, "sentences")
+   .ui.content.section
+     .contain
+       .ui.grid
+         .eight.column.wide
+           h3.ui.title Thousands of Quests, Puzzles and Personal Goals
+           +lipsum(2, "sentences")
+         .eight.column.wide
+   .ui.content.section
+     .contain
+       .ui.grid
+         .eight.column.wide
+         .eight.column.wide
+           h3.ui.title Dramatic Events, Heroic Personae:<br/> the ultimate text based game
+           +lipsum(2, "sentences")
+   .ui.content.section
+     .contain
+       .ui.grid
+         .eight.column.wide
+           h3.ui.title A Free Environment for Roleplay and Making History
+           +lipsum(2, "sentences")
+         .eight.column.wide
+   .ui.content.section
+     .contain
+         h3.ui.title.center And so much more...
+         +lipsum(64, "words")
 
-      center: a.ui.button(href="/play/") Play Now
+         a(style="margin-top:20px;", href="/play/").ui.button.fluid Play Now
