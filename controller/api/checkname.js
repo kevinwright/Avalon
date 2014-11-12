@@ -5,7 +5,7 @@ var name = process.argv[2];
 // True if no name exists
 // False, StatusCode if bad name or name exists
 function checkName(person, callback) {
-	var client = net.connect(23,"avalon-rpg.com",function(){
+	var client = net.connect(8080, "avalon-rpg.com",function(){
 		client.setEncoding('utf8');
 		client.on('data',function(chunk){
 			var match = /\#\#\#check(.*)/i.exec(chunk)

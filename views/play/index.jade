@@ -1,0 +1,77 @@
+extends ../layout
+
+block content
+  .ui.content
+    .contain
+      .ui.form.box
+        if (code === 1 || code === 3)
+          h2.ui.title Create a Character
+          h5.ui.title.sub.underline #{message}
+        if (code === 0)
+          h2.ui.title.underline Character doesn't exist. Create one!
+        .field.user
+          .ui.input
+            label Character Name
+            if (code === 0)
+              input#user(type="text", name="user", value=user)
+            else
+              input#user(type="text", name="user")
+        .two.fields.password
+          .field
+            .ui.input
+              label Password
+              if (code === 0)
+                input(type="password", name="password", value=password)
+              else
+                input(type="password", name="password")
+          .field
+            .ui.input
+              label Confirm Password
+              input(type="password", name="password2")
+        .field.user
+          .ui.input
+            label Email
+            input(type="text", name="email")
+        .field.inline
+          input#male(type="radio", name="gender", value="male")
+          label(for="male") Male
+        .field.inline
+          input#female(type="radio", name="gender", value="female")
+          label(for="female") Female
+        button.ui.button.save Save
+
+
+block scripts
+  script.
+    $(function() {
+      var userInput = $("#user");
+      var formFields = $(".ui.form, .ui.form .user.field");
+      var errorMessage = $(".ui.form .error.message");
+      var getName = function() {return userInput.val()};
+      userInput.change(checkName);
+
+      function checkName() {
+        formFields.removeClass("error success");
+
+        $.get("/api/checkname/" + getName(), function(res) {
+
+          if (res.available === true) {
+            formFields.addClass("success");
+          } else {
+            formFields.addClass("error");
+
+            switch (res.status) {
+              case 1:
+                errorMessage.html("User: Bad character name");
+                break;
+              case 2:
+                errorMessage.html("User: Character already exists");
+                break;
+              default:
+                errorMessage.html("User: Bad input");
+            }
+
+          }
+        });
+      };
+    });

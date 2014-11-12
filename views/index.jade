@@ -6,6 +6,26 @@ block content
       h1.ui.title.center Welcome to Avalon, the Legend Lives
       h4.ui.sub.title.center.underline The first &amp; only game world of its kind
       p.lead Welcome to Avalon, the most detailed, original and immersive text based game on the internet. In existence for over two decades, it is also one of the oldest RPGs. It has evolved consistently over this time, boasting the highest standards; as a multiplayer online RPG text based game, it's unparalleled in its creativity and diversity. Only by your own merits can you rise above the rest and only the best ascend to the stars, becoming one of the all-powerful immortals. Are you ready to make history in this breathtaking world of legendary Avalonians and Gods?
+  
+  .ui.content
+    .contain
+      form(method="post", action="/play/").ui.form.box
+        .error.message.solid.box.compact.ui
+        .field.user
+          .ui.input
+            label Character Name
+            input#user(type="text", name="user")
+        .field
+          .ui.input
+            label Password
+            input(type="password", name="password")
+        .field.inline
+          input#lumiere(type="radio", name="client", value="lumiere", checked)
+          label(for="lumiere") Lumiere
+        .field.inline
+          input#javalon(type="radio", name="client", value="javalon")
+          label(for="javalon") Javalon
+        button.ui.button.save Save
 
   .ui.content
     .contain
