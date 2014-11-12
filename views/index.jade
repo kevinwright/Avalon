@@ -7,8 +7,12 @@ block content
   .ui.content
     .contain
       h1.ui.title.center Welcome to Avalon, the Legend Lives
-      h4.ui.sub.title.center.underline The first &amp; only game world of its kind
-      p.lead Welcome to Avalon, the most detailed, original and immersive text based game on the internet. In existence for over two decades, it is also one of the oldest RPGs. It has evolved consistently over this time, boasting the highest standards; as a multiplayer online RPG text based game, it's unparalleled in its creativity and diversity. Only by your own merits can you rise above the rest and only the best ascend to the stars, becoming one of the all-powerful immortals. Are you ready to make history in this breathtaking world of legendary Avalonians and Gods?
+      h4.ui.sub.title.center The first &amp; only game world of its kind
+
+  .ui.content
+    .contain
+      blockquote.big.center
+        p Avalon is probably the largest and most complex multi-user online RPG ever.
   
   .ui.content(style="margin-top: 75px;")
     .contain
@@ -21,10 +25,6 @@ block content
           .ui.input
             label(for="create-username") Character Name
             input#create-username(type="text", name="username", class="validate[required,custom[onlyLetter],length[3,18]]")
-        .field
-          .ui.input
-            label(for="create-email") Email
-            input#create-email(type="text", name="email")
         .two.fields
           .field
             .ui.input
@@ -34,6 +34,10 @@ block content
             .ui.input
               label(for="create-confirmpass") Confirm Password
               input#create-confirmpass(type="password", name="confirmpass", class="validate[required,confirm[create-password]] text-input")
+        .field
+          .ui.input
+            label(for="create-email") Email
+            input#create-email(type="text", name="email")
         .two.fields
           .field.inline
             label(for="create-gender") Gender
@@ -46,8 +50,8 @@ block content
         button.ui.button.save.fluid(style="margin-top: 16px;") Create a new character
   
   .ui.content.section(style="background: transparent;")
-    blockquote.big.center
-      p Avalon is probably the largest and most complex multi-user online RPG ever.
+    .contain
+      p.lead Welcome to Avalon, the most detailed, original and immersive text based game on the internet. In existence for over two decades, it is also one of the oldest RPGs. It has evolved consistently over this time, boasting the highest standards; as a multiplayer online RPG text based game, it's unparalleled in its creativity and diversity. Only by your own merits can you rise above the rest and only the best ascend to the stars, becoming one of the all-powerful immortals. Are you ready to make history in this breathtaking world of legendary Avalonians and Gods?
 
   include includes/lorem
   .ui.content.section
