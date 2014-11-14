@@ -1,11 +1,16 @@
 extends ../layout
 
 block head
-  - var title = section.title
+  - var title = section.title + " - Avalon - multiplayer game world - Help and manual section"
+  - var description = false
 
 block content
   .ui.content
     .contain
+      .bread
+        a(href="/help/") Help
+        |  &gt; 
+        b Section #{section.id}
       h1.ui.title.center Section #{section.id} - #{section.title}
       ul.ui.menu.vertical.simple
         for page in section.pages
@@ -15,3 +20,4 @@ block content
               b #{page.title}
               br
               span.small #{page.description}
+      center: a(href="/help/") Back to Index
