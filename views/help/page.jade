@@ -13,6 +13,6 @@ block content
         |  &gt; 
         b #{page.id} #{page.title}
 
-      h1.ui.title.center Help #{page.title}
+      h1.ui.title.center #{page.description}
       .text.help !{page.html}
       center: a(href="/help/sections/" + page.section) Back to Section Index

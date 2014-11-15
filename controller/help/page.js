@@ -42,6 +42,10 @@ function parsePage(content) {
       return "<b>" + p1 + "</b>";
     })
 
+    line = line.replace(/(.*[^>\"])http:\/\/([A-Za-z.-][A-Za-z.-]*)(.*)/g, function(match, p1, p2, p3) {
+      return p1 + "<a href=\"" + p2.toLowerCase() + "\">" + p2 + "</a>" + p3;
+    })
+
     // HELP XXX into hyperlink
     line = line.replace(/(.*[^>])HELP ([A-Z][A-Z]*)(.*)/g, function(match, p1, p2, p3, offset, str) {
       return p1 + "<a href=\"/help/pages/" + p2.toLowerCase() + "\">HELP " + p2 + "</a>" + p3;
