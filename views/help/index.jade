@@ -8,16 +8,26 @@ block head
 block content
   .ui.content
     .contain
-      h1.ui.title.center The Manual of Avalon
+      h1.ui.title.center.underline The Manual of Avalon
       p.lead This is the full, comprehensive Avalon manual. If you are new to Avalon, we recommend you tackle the <a href="/intro/">Introduction</a> first. The manual here contains everything a player needs to know about Avalon. <!--The number in brackets after the section title denotes number of sub-section entries.-->Enjoy!
       p There are also several <a href="/maps/">maps of Avalon</a> available.
 
-
-      ul.ui.menu.vertical.simple
-        for section in sections
-          li
-            a(href="/help/sections/" + section.id).item
-              b Section #{section.id} - 
-              | #{section.title}
-              br
-              span.small #{section.hint}
+      for section in sections
+        h2.ui.title.underline
+          | #{section.id} - 
+          a(href="/help/sections/" + section.id) #{section.title}
+        p.lead #{section.hint}
+        //- ul.ui.menu.vertical.simple
+        //-   for pagelink in section.pages
+        //-     li
+        //-       a(href="/help/pages/" + pagelink.title.toLowerCase(), title=pagelink.description).item
+        //-         | #{pagelink.id} - 
+        //-         b #{pagelink.title}
+        //-         | - #{pagelink.description}
+        table.ui.table
+          tbody
+            for page in section.pages
+              tr
+                td #{page.id}
+                td: a(href="/help/pages/" + page.title.toLowerCase()) #{page.title}
+                td #{page.description}

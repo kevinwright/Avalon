@@ -5,19 +5,19 @@ block head
   - var description = false
   link(rel="canonical", href="http://www.avalon-rpg.com/help/sections/" + section.id)
 block content
-  .ui.content
+  .ui.content.manual
     .contain
       .bread
         a(href="/help/") Help
         |  &gt; 
         b Section #{section.id}
-      h1.ui.title.center Section #{section.id} - #{section.title}
-      ul.ui.menu.vertical.simple
-        for page in section.pages
-          li
-            a(href="/help/pages/" + page.title.toLowerCase()).item
-              | #{page.id} - 
-              b #{page.title}
-              br
-              span.small #{page.description}
+      h1.ui.title.center.underline Section #{section.id} - #{section.title}
+  
+      table.ui.table
+        tbody
+          for page in section.pages
+            tr
+              td #{page.id}
+              td: a(href="/help/pages/" + page.title.toLowerCase()) #{page.title}
+              td #{page.description}
       center: a(href="/help/") Back to Index

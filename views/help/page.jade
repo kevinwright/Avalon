@@ -5,15 +5,26 @@ block head
   - var description = false
   link(rel="canonical", href="http://www.avalon-rpg.com/help/pages/" + page.title.toLowerCase())
 block content
-  .ui.content
+  .ui.content.manual
     .contain
-      .bread
-        a(href="/help/") Help
-        |  &gt; 
-        a(href="/help/sections/" + page.section) Section #{page.section}
-        |  &gt; 
-        b #{page.id} #{page.title}
-
-      h1.ui.title.center #{page.description}
-      .text.help !{page.html}
+      
+      .ui.grid.responsive
+        .column.twelve.wide
+          .bread
+            a(href="/help/") Help
+            |  &gt; 
+            a(href="/help/sections/" + page.section) Section #{page.section}
+            |  &gt; 
+            b #{page.id} #{page.title}
+          h1.ui.title.center.underline #{page.description}
+          .text.help !{page.html}
+          
+        .four.wide.column
+          h3.ui.title.center.underline #{section.id} - #{section.title}
+          ul.ui.menu.vertical.simple
+            for pagelink in section.pages
+              li
+                a(href="/help/pages/" + pagelink.title.toLowerCase(), title=pagelink.description).item
+                  | #{pagelink.id} - 
+                  b #{pagelink.title}
       center: a(href="/help/sections/" + page.section) Back to Section Index

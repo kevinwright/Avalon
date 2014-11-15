@@ -22,7 +22,8 @@ function HelpController() {
     var section = req.params["section"] || req.query["section"];
     res.render("help/section", {
       title: section,
-      section: self.sections[section]
+      section: self.sections[section],
+      sections: self.sections
     })
   }
 
@@ -48,7 +49,8 @@ function HelpController() {
       } else {
         res.render("help/page", {
           title: page,
-          page: data
+          page: data,
+          section: self.sections[data.section]
         })
       }
     })
