@@ -55,6 +55,10 @@ function HelpController() {
       }
     })
   }
+
+  this.search = function(req, res) {
+    res.redirect("/help/pages/" + req.query["page"].toLowerCase());
+  };
   
   this.sections = parseSections();
 }

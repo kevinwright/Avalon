@@ -6,7 +6,7 @@ router.get('/', function(req, res) {
 });
 
 router.get("/:section", function(req, res) {
-  res.render("intro/page", { title: "wat", page: req.params.section});
+  res.render("intro/page", { title: "Introduction - " + req.params.section, page: req.params.section});
 })
 
 module.exports = router;

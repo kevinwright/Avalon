@@ -9,8 +9,18 @@ block content
   .ui.content
     .contain
       h1.ui.title.center.underline The Manual of Avalon
-      p.lead This is the full, comprehensive Avalon manual. If you are new to Avalon, we recommend you tackle the <a href="/intro/">Introduction</a> first. The manual here contains everything a player needs to know about Avalon. <!--The number in brackets after the section title denotes number of sub-section entries.-->Enjoy!
-      p There are also several <a href="/maps/">maps of Avalon</a> available.
+
+      .ui.grid.responsive
+        .ten.column.wide
+          p.lead This is the full, comprehensive Avalon manual. If you are new to Avalon, we recommend you tackle the <a href="/intro/">Introduction</a> first. The manual here contains everything a player needs to know about Avalon. <!--The number in brackets after the section title denotes number of sub-section entries.-->Enjoy!
+          p There are also several <a href="/maps/">maps of Avalon</a> available.
+        .six.column.wide
+          .ui.box.blue.compact
+            p You may also look at a specific help page by typing its name below:
+            form(action="/help/search")
+              p HELP 
+                input(type="text" name="page" size="30", list="pages")
+                input(type="submit" value="Go")
 
       for section in sections
         h2.ui.title.underline
@@ -31,3 +41,9 @@ block content
                 td #{page.id}
                 td: a(href="/help/pages/" + page.title.toLowerCase()) #{page.title}
                 td #{page.description}
+
+block scripts
+  datalist#pages
+    for section in sections
+      for page in section.pages
+        option(value=page.title)
