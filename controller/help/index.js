@@ -3,6 +3,7 @@ var HELPDIR = "/help/help";
 var LIBRARYDIR = "/help/library";
 
 var fs = require("fs");
+var avalon = require("../avalon.js");
 
 var hints = require("./hints");
 var Section = require("./section");
@@ -14,7 +15,8 @@ function HelpController() {
   this.index = function(req, res) {
     res.render('help/index', {
       title: "Help",
-      sections: self.sections
+      sections: self.sections,
+      avalon: avalon
     });
   }
 
@@ -24,7 +26,8 @@ function HelpController() {
     res.render("help/section", {
       title: section,
       section: self.sections[section],
-      sections: self.sections
+      sections: self.sections,
+      avalon: avalon
     })
   }
 
@@ -39,19 +42,22 @@ function HelpController() {
         if (err.errno == 34) {
           return res.render('error', {
               message: "No such page: " + page,
-              error: {}
+              error: {},
+              avalon: avalon
           });
         } else {
           return res.render('error', {
               message: err.message,
-              error: {}
+              error: {},
+              avalon: avalon
           });
         }
       } else {
         res.render("help/page", {
           title: page,
           page: data,
-          section: self.sections[data.section]
+          section: self.sections[data.section],
+          avalon: avalon
         })
       }
     })
@@ -66,6 +72,7 @@ function HelpController() {
 
 
 function readPage(title, callback) {
+  title = title.toLowerCase();
   fs.readFile(AUTOHELPDIR + "/" + title + "0", "utf8", function(err, autocontent) {
     if (err) return callback(err);
     fs.readFile(LIBRARYDIR + "/" + title, "utf8", function(err, librarycontent) {
