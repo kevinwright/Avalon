@@ -17,8 +17,13 @@ block content
             |  &gt; 
             b #{page.id} #{page.title}
           h1.ui.title.center.underline #{page.description}
-          .text.help !{page.html}
+          if (page.library)
+            .text.help.markdown !{page.library.html}
+          else
+            .text.help !{page.html}
           
+
+
         .four.wide.column
           h3.ui.title.center.underline #{section.id} - #{section.title}
           ul.ui.menu.vertical.simple

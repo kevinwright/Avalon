@@ -22,28 +22,32 @@ block content
                 input(type="text" name="page" size="30", list="pages")
                 input(type="submit" value="Go")
 
-      for section in sections
-        h2.ui.title.underline
-          | #{section.id} - 
-          a(href="/help/sections/" + section.id) #{section.title}
-        p.lead #{section.hint}
-        //- ul.ui.menu.vertical.simple
-        //-   for pagelink in section.pages
-        //-     li
-        //-       a(href="/help/pages/" + pagelink.title.toLowerCase(), title=pagelink.description).item
-        //-         | #{pagelink.id} - 
-        //-         b #{pagelink.title}
-        //-         | - #{pagelink.description}
-        table.ui.table
-          tbody
-            for page in section.pages
-              tr
-                td #{page.id}
-                td: a(href="/help/pages/" + page.title.toLowerCase()) #{page.title}
-                td #{page.description}
+      .help.index
+        for section in sections
+          .help.section(id="section-"+section.id)
+            h2.ui.title.underline
+              | #{section.id} - 
+              a(href="/help/sections/" + section.id) #{section.title}
+              .right.label.expand(data-id=section.id): i.icon.triangle.down
+            p.lead #{section.hint}
+
+            table.ui.table.hidden(data-id=section.id)
+              tbody
+                for page in section.pages
+                  tr
+                    td #{page.id}
+                    td: a(href="/help/pages/" + page.title.toLowerCase()) #{page.title}
+                    td #{page.description}
 
 block scripts
   datalist#pages
     for section in sections
       for page in section.pages
         option(value=page.title)
+  script.
+    $(".help.index .expand").bind("click", function() {
+      var id = $(this).data("id");
+      var table = $("#section-"+id+" .ui.table");
+      table.toggleClass("hidden");
+      $(this).find(".icon").toggleClass("active");
+    })

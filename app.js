@@ -10,6 +10,7 @@ var api = require('./routes/api');
 var bb = require('./routes/bb');
 var help = require('./routes/help');
 var play = require('./routes/play');
+var news = require('./routes/news');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use('/api', api);
 app.use('/bb', bb);
 app.use('/help', help);
 app.use('/play', play);
+app.use('/news', news);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

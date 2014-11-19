@@ -1,5 +1,6 @@
 var AUTOHELPDIR = "/help/autohelp";
 var HELPDIR = "/help/help";
+var LIBRARYDIR = "/help/library";
 
 var fs = require("fs");
 
@@ -64,15 +65,23 @@ function HelpController() {
 }
 
 
-function readPage(page, callback) {
-  fs.readFile(HELPDIR + "/" + page, "utf8", function(err, helpcontent) {
+function readPage(title, callback) {
+  fs.readFile(AUTOHELPDIR + "/" + title + "0", "utf8", function(err, autocontent) {
     if (err) return callback(err);
+    fs.readFile(LIBRARYDIR + "/" + title, "utf8", function(err, librarycontent) {
+      if (err) {
+        // no library file
+        fs.readFile(HELPDIR + "/" + title, "utf8", function(err, helpcontent) {
+          if (err) {return callback(err)}
+          var page = new Page(page, helpcontent, autocontent);
 
-    fs.readFile(AUTOHELPDIR + "/" + page + "0", "utf8", function(err, autocontent) {
-      if (err) return callback(err);
+          callback(null, page);
+        });
+      } else {
+        var page = new Page(page, librarycontent, autocontent, true);
 
-      var page = new Page(page, helpcontent, autocontent);
-      callback(null, page);
+        callback(null, page);
+      }
     });
   });
 }

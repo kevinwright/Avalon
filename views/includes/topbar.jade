@@ -3,22 +3,12 @@
     .left.menu
       a.item(href="/") Avalon RPG
       li.item.ui.dropdown
-        a(href="/intro/") Introduction
+        a(href="/help/") Help
         i.icon.triangle.down
         .menu
-          a.item(href='/intro/beginner-handbook') Beginner's Handbook
-          a.item(href='/intro/character-building') Character Building
-          a.item(href='/intro/skills') Skills
-          a.item(href='/intro/locations-and-movement') Locations and Movement
-          a.item(href='/intro/the-continent-of-avalon') The Continent Of Avalon
-          a.item(href='/intro/the-cityports') The Cityports
-          a.item(href='/intro/communicating') Communicating
-          a.item(href='/intro/items-and-manipulating-them') Items and Manipulating Them
-          a.item(href='/intro/computer-controlled-characters') Computer Controlled Characters
-          a.item(href='/intro/guilds') Guilds
-          a.item(href='/intro/the-command-environment') The Command Environment
-          a.item(href='/intro/about-avalon') About Avalon
-          a.item(href='/intro/the-meeting-place') The Meeting Place          
+          a.item(href="/intro/") Introduction
+          a.item(href="/help") Manual
+          a.item(href="/connect") How to Connect
           
 
       li.item.ui.dropdown
@@ -30,18 +20,11 @@
           a.item(href="/world/guilds") Guilds
           a.item(href="/world/maps") Maps
           a.item(href="/world/news") News
-
-      li.item.ui.dropdown
-        a(href="/game/") Gameplay
-        i.icon.triangle.down
-        .menu
-          a.item(href="/help") Manual
-          a.item(href="/world/news") Mud Clients
-
+      li: a.item(href="/news/") News
 
     .right.menu
-      li: a.item(href="/who/") 50 Players Online
-      li: a.item(href="/help/") Manual
+      if (avalon && avalon.users)
+        li.item #{avalon.users().length} Players Online
       li: a.item(href="/contact/") Contact Us
       li: a.item(href="http://www.meetplace.net", target="_blank") Meetplace Community
       li: a.item(href="/play/").playnow Play Now

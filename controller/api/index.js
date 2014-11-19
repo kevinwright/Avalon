@@ -1,4 +1,5 @@
 var checkName = require("./checkname.js");
+var who = require("./who.js");
 
 var api = {
 	checkName : function(req, res) {
@@ -11,6 +12,12 @@ var api = {
 				status: status
 			})
 		});
+	},
+
+	who : function(req, req) {
+		res.jsonp({
+			count: who.users.length
+		})
 	}
 }
 

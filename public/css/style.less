@@ -212,6 +212,10 @@ h6 { font-size: .75em; }
 			float: none;
 			display: block;
 		}
+		&.expand {
+			cursor: pointer;
+			&.active {color: #fff;}
+		}
 	}
 }
 
@@ -382,6 +386,14 @@ body.index {
 	.text.help {
 		p {
 			margin: 0px;
+		}
+		table {
+			width: 100%;
+		}
+	}
+	.text.help.markdown {
+		p {
+			margin: 1em auto;
 		}
 	}
 	.bread {
@@ -778,6 +790,7 @@ body.index {
 	width: 100%;
 	border-collapse: collapse;
 	font-size: 1em;
+	&.hidden {display: none;}
 }
 
 /*    _    _ | _ _ 
