@@ -1,4 +1,3 @@
-var sanitizeHtml = require('sanitize-html');
 var helpParser = require("./parser");
 var marked = require("meta-marked");
 

@@ -22,6 +22,9 @@ block content
                 input(type="text" name="page" size="30", list="pages")
                 input(type="submit" value="Go")
 
+      h4.ui.title.expand.all
+        i.icon.triangle.down
+        span.text Expand All Sections
       .help.index
         for section in sections
           .help.section(id="section-"+section.id)
@@ -50,4 +53,20 @@ block scripts
       var table = $("#section-"+id+" .ui.table");
       table.toggleClass("hidden");
       $(this).find(".icon").toggleClass("active");
-    })
+    });
+
+    var expandAll = false;
+    $(".expand.all").bind("click", function() {
+      var table = $(".help.index .ui.table");
+      if (expandAll === false) {
+        table.removeClass("hidden");
+        $(".help.section .icon").addClass("active");
+        expandAll = true;
+        $(".expand.all .text").text("Compress All Sections")
+      } else {
+        table.addClass("hidden");
+        $(".help.section .icon").removeClass("active");
+        expandAll = false;
+        $(".expand.all .text").text("Expand All Sections")
+      }
+    });

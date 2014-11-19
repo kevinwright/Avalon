@@ -2,29 +2,16 @@
   .ui.menu.very.tiny.contain
     .left.menu
       a.item(href="/") Avalon RPG
-      li.item.ui.dropdown
-        a(href="/help/") Help
-        i.icon.triangle.down
-        .menu
-          a.item(href="/intro/") Introduction
-          a.item(href="/help") Manual
-          a.item(href="/connect") How to Connect
-          
-
-      li.item.ui.dropdown
-        a(href="/world/") World
-        i.icon.triangle.down
-        .menu
-          a.item(href="/world/history") History
-          a.item(href="/world/cities") Cities
-          a.item(href="/world/guilds") Guilds
-          a.item(href="/world/maps") Maps
-          a.item(href="/world/news") News
-      li: a.item(href="/news/") News
+      a.item(href="/intro/") Intro
+      a.item(href="/news/") News
+      a.item(href="/help/") Help
+      a.item(href="/history/") History
+      a.item(href="/maps/") Maps
+      a.item(href="/citguilds/") Cities &amp; Guilds
 
     .right.menu
       if (avalon && avalon.users)
         li.item #{avalon.users().length} Players Online
-      li: a.item(href="/contact/") Contact Us
       li: a.item(href="http://www.meetplace.net", target="_blank") Meetplace Community
+      li: a.item(href="/press/") Contact
       li: a.item(href="/play/").playnow Play Now

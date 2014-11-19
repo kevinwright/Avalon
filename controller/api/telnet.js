@@ -12,6 +12,7 @@ var net = require("net");
 
     var client = null;
     var evoke = null;
+    var self = this;
 
     this.connect = function() {
       client = net.connect(23, "avalon-rpg.com",function(){
@@ -21,7 +22,7 @@ var net = require("net");
           if (evoke) evoke(chunk);
         });
         client.on("error", function(err) {console.error("- API ERROR: ", err)});
-        client.on("close", function() {console.log("- API CLOSE")});
+        client.on("close", function() {self.connect();});
         client.on("end", function() {console.log("- API END")});
         client.write("###version 2\n");
         console.log("--- API Conected ---\n");

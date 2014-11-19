@@ -12,9 +12,9 @@ block content
         .column.twelve.wide
           .bread
             a(href="/help/") Help
-            |  &gt; 
+            i.icon.angle.right
             a(href="/help/sections/" + page.section) Section #{page.section}
-            |  &gt; 
+            i.icon.angle.right
             b #{page.id} #{page.title}
           h1.ui.title.center.underline #{page.description}
           if (page.library)
@@ -27,6 +27,9 @@ block content
         .four.wide.column
           h3.ui.title.center.underline #{section.id} - #{section.title}
           ul.ui.menu.vertical.simple
+            li: a(href="/help/").item
+              i.icon.triangle.left
+              | Back to Index
             for pagelink in section.pages
               li
                 a(href="/help/pages/" + pagelink.title.toLowerCase(), title=pagelink.description).item

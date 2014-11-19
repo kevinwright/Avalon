@@ -1,10 +1,11 @@
+var sanitizeHtml = require('sanitize-html');
+
 module.exports = function(content) {
   // convert http://blah into hyperlinks
   // convert HELP BLAH into hyperlinks
   // ** = highlight
   // * bold
   var lines = content.split("\n");
-  var intable = false;
 
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i];
@@ -39,35 +40,6 @@ module.exports = function(content) {
       return p1  + "." + p2;
     })
 
-    if (intable && (line.length == 0 || /^[ |-]*$/.test(line))) {
-      line = "<tr><td><hr/></td></tr>";
-      lines[i] = line;
-      continue;
-    }
-
-
-    if (line.indexOf("|") >= 0) {
-      var originalLine = line;
-      if (intable === false) {
-        var line = "<table class='ui table'><tbody>";
-      } else {
-        line = "";
-      }
-      block = true; intable = true;
-      var columns = originalLine.split("|");
-      line += "<tr>";
-      for (var colI = 0; colI < columns.length; colI++) {
-        line += "<td>" + columns[colI].trim() + "</td>";
-      }
-      line += "</tr>";
-    } else {
-      if (!block && intable === true) {
-        line = "</tbody></table><br>" + line;
-        intable = false;
-        block = true;
-      }
-    }
-
     if (!block && line.indexOf("   ") >= 0) {
       block = true;
       line = "<pre>" + line + "</pre>";
@@ -89,18 +61,16 @@ module.exports = function(content) {
     }
 
     lines[i] = line;
-    // lines[i] = sanitizeHtml(line, {
-    //     allowedTags: [ "h1", "h2", "h3", "h4", "pre", "p", "br", 'b', 'i', 'em', 'strong', 'a', "table", "tr", "td", "tbody", "thead", "th" ],
-    //     allowedAttributes: {
-    //       'a': [ 'href' ],
-    //       "h1": ["class"],
-    //       "h2": ["class"],
-    //       "h3": ["class"],
-    //       "h4": ["class"],
-    //       "table": ["class"],
-    //       "td": ["colspan"]
-    //     }
-    //   });
+    lines[i] = sanitizeHtml(line, {
+        allowedTags: [ "h1", "h2", "h3", "h4", "pre", "p", "br", 'b', 'i', 'em', 'strong', 'a' ],
+        allowedAttributes: {
+          'a': [ 'href' ],
+          "h1": ["class"],
+          "h2": ["class"],
+          "h3": ["class"],
+          "h4": ["class"],
+        }
+      });
   }
 
   return lines.join("\n");

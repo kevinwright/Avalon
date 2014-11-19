@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var avalon = require("../controller/avalon");
 var play = require("../controller/play");
 
 router.get('/', function(req, res) {
