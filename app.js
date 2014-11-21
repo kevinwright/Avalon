@@ -12,6 +12,7 @@ var help = require('./routes/help');
 var play = require('./routes/play');
 var news = require('./routes/news');
 var rollcall = require('./routes/rollcall');
+var history = require('./routes/history');
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use('/help', help);
 app.use('/play', play);
 app.use('/news', news);
 app.use('/rollcall', rollcall);
+app.use('/history', history);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
