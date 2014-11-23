@@ -10,7 +10,6 @@ Server
 Website
 -------
 
-- Moving BB work by Kandar to the new website
 - Pages:
   - Maps
   - Cities & Guild
