@@ -1,0 +1,31 @@
+Server
+------
+
+- NGINX configuration to be done
+- Porting of other Apache websites to NGINX
+- Upstart configuration
+  - NODE_ENV=production (would hide errors)
+
+
+Website
+-------
+
+- Moving BB work by Kandar to the new website
+- Pages:
+  - Maps
+  - Cities & Guild
+  - Contact / Press
+  - Vote
+  - Sitemap
+  - Connect
+    - connect/rapscal
+    - connect/avplay
+    - connect/javadownload
+  - Mythicalcreatures
+  - Rollcall
+
+
+Content
+-------
+
+- [Maud] Intro pages in library format
