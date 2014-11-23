@@ -1,0 +1,27 @@
+mixin date(avTimeStamp)
+  - var datetime = avTimeStamp.split("T");
+  - var dA = datetime[0].split("-");
+  - var tA = datetime[1].split(":");
+  - var date = new Date(dA[2], dA[1]-1, dA[0], tA[0], tA[1]);
+  if (date instanceof Date && isFinite(date))
+    time(datetime=date.toISOString(), pubdate) #{date.toDateString()} at #{date.toLocaleTimeString()}
+
+mixin pagination(board, page)
+  .pagination.ui.menu(style="text-align:center;")
+    if (page-1 > 0)
+      a(href="/bb/"+board.url+"?page="+(page-1)).item: i.icon.left.triangle
+    if (page-3 > 0)
+      a(href="/bb/"+board.url+"?page="+(page-3)).item #{page - 3}
+    if (page-2 > 0)
+      a(href="/bb/"+board.url+"?page="+(page-2)).item #{page - 2}
+    if (page-1 > 0)
+      a(href="/bb/"+board.url+"?page="+(page-1)).item #{page - 1}
+    .item #{page}
+    if (page+1 <= (Math.ceil(board.count / 20)))
+      a(href="/bb/"+board.url+"?page="+(page+1)).item #{page + 1}
+    if (page+2 <= (Math.ceil(board.count / 20)))
+      a(href="/bb/"+board.url+"?page="+(page+2)).item #{page + 2}
+    if (page+3 <= (Math.ceil(board.count / 20)))
+      a(href="/bb/"+board.url+"?page="+(page+3)).item #{page + 3}
+    if (page+2 <= (Math.ceil(board.count / 20)))
+      a(href="/bb/"+board.url+"?page="+(page+1)).item: i.icon.right.triangle

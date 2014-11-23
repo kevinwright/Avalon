@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+  .ui.content.bb
+    .contain
+      .bread
+        a(href="/bb/") BB
+        if (board)
+          i.icon.angle.right
+          a(href="/bb/" + board.url)  #{board.title}
+        if (post)
+          i.icon.angle.right
+          |  Post <b>#{post.number}</b>
+      h1.ui.title.center= message
+      p.lead(style="text-align:center;") <b>Wraith</b> must have eaten it! Go back to 
+        if (board)
+          a(href="/bb/" + board.url)  the #{board.title} bulletin board.
+        else
+          a(href="/bb/") the bulletin boards overview.
+      
