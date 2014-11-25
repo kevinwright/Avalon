@@ -41,6 +41,14 @@ block content
                     td #{page.id}
                     td: a(href="/help/pages/" + page.title.toLowerCase()) #{page.title}
                     td #{page.description}
+      .help.downloads
+        p It is also possible to download the entire manual as:
+        .ui.menu
+          a(target="_blank", href="/help/downloads/avman2h.htm") HTML file [758k]
+          a(target="_blank", href="/help/downloads/avman2h.zip") zipped HTML file [248k]
+          a(target="_blank", href="/help/downloads/avman2w.doc") Word 97 document [1578k]
+          a(target="_blank", href="/help/downloads/avman2w.zip") zipped Word 97 document [279k]
+        p However, please note that these files may become somewhat out of date (these downloads are dated 25th May 1999), so by viewing the pages here at our web site, or with the online HELP command, you are ensuring that you are reading the latest information. Avalon is a living, evolving world and tends to change regularly.
 
 block scripts
   datalist#pages
