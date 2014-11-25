@@ -45,7 +45,7 @@ Links
 * [Javascript](http://learnxinyminutes.com/docs/javascript/)
 * [Node API](http://nodejs.org/api/)
 * [Production Practices](http://www.joyent.com/developers/node)
-* [http://lesscss.org/](http://lesscss.org/)
+* [Less](http://lesscss.org/)
 * [Markdown](https://help.github.com/articles/markdown-basics/)
 * [Jade](http://jade-lang.com/)
 * [Express](http://expressjs.com/api.html)
