@@ -14,6 +14,8 @@ var news = require('./routes/news');
 var rollcall = require('./routes/rollcall');
 var history = require('./routes/history');
 
+var lumiere = require('./routes/lumiere');
+
 var app = express();
 
 // view engine setup
@@ -36,6 +38,8 @@ app.use('/play', play);
 app.use('/news', news);
 app.use('/rollcall', rollcall);
 app.use('/history', history);
+
+app.use('/lumiere', lumiere);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
