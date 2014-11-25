@@ -1,6 +1,4 @@
-     _    _ | _ ._ 
-    (_|\/(_||(_)| |
-
+![](http://avalon-rpg.com:3000/img/logo.png)
 
 Getting Started
 ---------------
@@ -17,6 +15,9 @@ You'll also need [grunt](http://gruntjs.com/) to compile lesscss and run a watch
   > bin/www
   or
   > npm start
+
+  And to compile, just run
+  > grunt
 ```
 
 Structure
