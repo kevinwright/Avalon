@@ -20,13 +20,13 @@ block content
               h2.ui.title Character doesn't exist. Create one!
             if (code === 4)
               h2.ui.title Create a character
-            .field.user
+            .field.username
               .ui.input
                 label Character Name
                 if (code === 0)
-                  input#user(type="text", name="user", value=user)
+                  input#user(type="text", name="username", value=user)
                 else
-                  input#user(type="text", name="user")
+                  input#user(type="text", name="username")
                 p 3 characters minimum, letters only. Be sure to choose a name appropriate for a fantasy game-world setting.
             .two.fields.password
               .field
@@ -72,13 +72,13 @@ block content
         .eight.column.wide
           form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box
             h3.ui.title.underline Login existing character
-            .field.user
+            .field.username
               .ui.input
                 label Character Name
                 if (code === 0)
-                  input#user(type="text", name="user", value=user)
+                  input#user(type="text", name="username", value=user)
                 else
-                  input#user(type="text", name="user")
+                  input#user(type="text", name="username")
             .field
               .ui.input
                 label Password
