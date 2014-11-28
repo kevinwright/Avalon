@@ -31,9 +31,9 @@ function WhoList() {
     console.log("- API USERS:", self.users.length);
   }
 
-  // check every 10 minutes 
-  setInterval(this.updateUsers, 5 * 1000 * 60);
-  setTimeout(this.updateUsers, 5000);
+  // check every 10 minutes
+  setInterval(this.updateUsers, 10 * 1000 * 60);
+  setTimeout(this.updateUsers, 1000);
 }
 
 
