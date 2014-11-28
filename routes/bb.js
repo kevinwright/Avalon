@@ -5,6 +5,7 @@ var avalon = require("../controller/avalon");
 var bb = require("../controller/bb");
 
 router.get('/', bb.index);
+router.get('/index.html', bb.index);
 
 router.get('/:board.html', bb.board);
 router.get('/:board', bb.board);

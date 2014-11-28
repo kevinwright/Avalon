@@ -7,6 +7,9 @@ var avalon = require("../controller/avalon");
 router.get('/', function(req, res) {
   res.render('play/index', {avalon:avalon});
 });
+router.get('/index.html', function(req, res) {
+  res.render('play/index', {avalon:avalon});
+});
 router.post('/', play.post);
 
 module.exports = router;

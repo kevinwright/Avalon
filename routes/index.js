@@ -9,5 +9,10 @@ router.get('/', function(req, res) {
     res.render('index', { title: "Avalon: The Net's First Online Text Based Roleplaying Game", avalon: avalon, recent: data.splice(0, 4) });
   })
 });
+router.get('/index.html', function(req, res) {
+  recent(function(data) {
+    res.render('index', { title: "Avalon: The Net's First Online Text Based Roleplaying Game", avalon: avalon, recent: data.splice(0, 4) });
+  })
+});
 
 module.exports = router;

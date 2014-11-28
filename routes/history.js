@@ -7,6 +7,11 @@ router.get('/', function(req, res) {
   res.render('history/index', { title: "The History of This Roleplaying World", avalon: avalon });
 });
 
+router.get('/index.html', function(req, res) {
+  res.render('history/index', { title: "The History of This Roleplaying World", avalon: avalon });
+});
+
+
 router.get('/ordinations', function(req, res) {
   res.render('history/ordinations', { title: "Ordinations - The Greatest Event in the Land", avalon: avalon });
 });

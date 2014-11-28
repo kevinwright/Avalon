@@ -5,6 +5,8 @@ var help = require("../controller/help");
 var avalon = require("../controller/avalon");
 
 router.get('/', help.index);
+router.get('/index.html', help.index);
+
 router.get('/sections/:section.html', help.section);
 router.get('/sections/:section', help.section);
 

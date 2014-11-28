@@ -5,5 +5,9 @@ var avalon = require("../controller/avalon");
 router.get('/', function(req, res) {
   res.render('news/index', { avalon:avalon, title: "The Latest news from Avalon, Online RPG Game" });
 });
+router.get('/index.html', function(req, res) {
+  res.render('news/index', { avalon:avalon, title: "The Latest news from Avalon, Online RPG Game" });
+});
+
 
 module.exports = router;
