@@ -1,9 +1,20 @@
 #!/usr/bin/env node
-var debug = require('debug')('kek');
-var app = require('../app');
+var forever = require("forever");
 
-app.set('port', process.env.PORT || 3000);
+if (process.env.NODE_ENV === "production") {
+  forever.load({
+    root: "/www/logs/illy.avalon-rpg.com"
+  })
+}
+else {
+  forever.load({
+    root: "/www/logs/illy.avalon-rpg.com/debug",
+    debug: true
+  })
+}
 
-var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port);
-});
+mon = forever.startDaemon(__dirname + "/start", {
+  env: {"PORT": process.env.PORT, "NODE_ENV": process.env.NODE_ENV}
+})
+
+forever.startServer(mon);
