@@ -12,45 +12,32 @@ block content
       .ui.grid.responsive
         .eight.column.wide
 
-          form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box
+          form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box#createForm
             h3.ui.title.underline Create a new Avalon character
-            if (code === 1 || code === 3)
-              h2.ui.title Create a Character
-              h5.ui.title.sub #{message}
-            if (code === 0)
-              h2.ui.title Character doesn't exist. Create one!
-            if (code === 4)
-              h2.ui.title Create a character
             .field.username
               .ui.input
-                label Character Name
-                if (code === 0)
-                  input#user(type="text", name="username", value=user)
-                else
-                  input#user(type="text", name="username")
+                label(for="create-username") Character Name
+                input#create-username(type="text", name="username", maxlength=18)
                 p 3 characters minimum, letters only. Be sure to choose a name appropriate for a fantasy game-world setting.
             .two.fields.password
               .field
                 .ui.input
-                  label Password
-                  if (code === 0)
-                    input(type="password", name="password", value=password)
-                  else
-                    input(type="password", name="password")
+                  label(for="create-password") Password
+                  input#create-password(type="password", name="password", maxlength=50)
               .field
                 .ui.input
-                  label Confirm Password
-                  input(type="password", name="password2")
+                  label(for="create-confirmpass") Confirm Password
+                  input#create-confirmpass(type="password", name="confirmpass", maxlength=50)
               p(style="margin-bottom: 16px;") 3 characters minimum, may include letters, numbers and punctuation, but no spaces, carets or tildes. Example: s_ecr3.t.
             .field.user
               .ui.input
-                label Email
-                input(type="text", name="email")
+                label(for="create-email") Email
+                input#create-email(type="text", name="email")
                 p Entering your e-mail address will ensure that your character is saved when you exit as we regularly delete unregistered characters to make room for new players.
             .two.fields
               p Gender
               .field.inline
-                input#male(type="radio", name="gender", value="male")
+                input#male(type="radio", name="gender", value="male", checked="checked")
                 label(for="male") Male
               .field.inline
                 input#female(type="radio", name="gender", value="female")
@@ -71,31 +58,25 @@ block content
             button.ui.button.save.fluid(style="margin-top: 16px;") Create a new character
 
         .eight.column.wide
-          form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box
+          form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box#loginForm
             h3.ui.title.underline Login existing character
             .field.username
               .ui.input
-                label Character Name
-                if (code === 0)
-                  input#user(type="text", name="username", value=user)
-                else
-                  input#user(type="text", name="username")
+                label(for="login-username") Character Name
+                input#login-username(type="text", name="username")
             .field
               .ui.input
                 label Password
-                if (code === 0)
-                  input(type="password", name="password", value=password)
-                else
-                  input(type="password", name="password")
+                input#login-password(type="password", name="password")
             .two.fields
               p Client
               .field.inline
-                input#create-run-lumiere(type="radio", name="run", value="lumiere", checked="checked")
-                label(for="create-run-lumiere") Lumiere
+                input#login-run-lumiere(type="radio", name="run", value="lumiere", checked="checked")
+                label(for="login-run-lumiere") Lumiere
                 p our new client; works for everyone
               .field.inline
-                input#create-run-applet(type="radio", name="run", value="applet")
-                label(for="create-run-applet") Javalon
+                input#login-run-applet(type="radio", name="run", value="applet")
+                label(for="login-run-applet") Javalon
                 p our original client; works for most people
               p Lumiere is a Flash application which runs in your browser. Use Lumiere for maximum compatibility with Avalon. WARNING: Lumiere is still in its testing phase and only has the essential features to play Avalon. Choose Javalon if you want to enjoy all available features.
 
@@ -104,36 +85,45 @@ block content
             button.ui.button.save.fluid(style="margin-top: 16px;") Login
 
 block scripts
+  script(src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js")
   script.
-    $(function() {
-      var userInput = $("#user");
-      var formFields = $(".ui.form, .ui.form .user.field");
-      var errorMessage = $(".ui.form .error.message");
-      var getName = function() {return userInput.val()};
-      userInput.change(checkName);
-
-      function checkName() {
-        formFields.removeClass("error success");
-
-        $.get("/api/checkname/" + getName(), function(res) {
-
-          if (res.available === true) {
-            formFields.addClass("success");
-          } else {
-            formFields.addClass("error");
-
-            switch (res.status) {
-              case 1:
-                errorMessage.html("User: Bad character name");
-                break;
-              case 2:
-                errorMessage.html("User: Character already exists");
-                break;
-              default:
-                errorMessage.html("User: Bad input");
+    $("#createForm").validate({
+      onkeyup: false,
+      rules: {
+        username: {
+          required: "required",
+          minlength: 3,
+          remote: {
+            url: "/api/checkname",
+            data: {
+              format: "boolean"
             }
-
           }
-        });
-      };
+        },
+        password: "required",
+        confirmpass: {
+          equalTo: "#create-password",
+          required: "required"
+        },
+        email: "email",
+      },
+      messages: {
+          username: {
+            required: "This field is required",
+            minlength: "Your username needs to be at least 3 characters",
+            maxlength: "Your username needs to be less than 18 characters",
+            remote: "You can't use this name, try another one."
+          }
+        }
+    });
+
+    $("#loginForm").validate({
+      rules: {
+        username: {
+          required: "required",
+          minlength: 3,
+          maxlength: 18
+        },
+        password: "required"
+      }
     });

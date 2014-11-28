@@ -7,8 +7,8 @@ block head
 block content
   .ui.content
     .contain
-      h1.ui.title.center Welcome to Avalon, the Legend Lives
-      h4.ui.sub.title.center The first &amp; only game world of its kindn
+      h1.ui.title.center Welcome to Avalon - the Legend Lives
+      h4.ui.sub.title.center first of its kind, older than the internet, over 25 years history and development, purely and simply the most challenging game in existence
   
   .ui.content(style="margin-top: 75px;")
     .contain.large
@@ -22,23 +22,23 @@ block content
             blockquote.big.center
               p Avalon is probably the largest and most complex multi-user online RPG ever.
           .eight.column.wide
-            form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box.compact
-              h3.ui.title.underline Create a new Avalon character
-                a(href="/play/").right.label Existing players
+            form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box.compact#createForm
+              h3.ui.title.underline Create New Avalon Character
+                a(href="/play/").right.label Existing Players
               .error.message.solid.box.compact.ui
               .field.user
                 .ui.input
                   label(for="create-username") Character Name
-                  input#create-username(type="text", name="username", class="validate[required,custom[onlyLetter],length[3,18]]")
+                  input#create-username(type="text", name="username", maxlength=18)
               .two.fields
                 .field
                   .ui.input
                     label(for="create-password") Password
-                    input#create-password(type="password", name="password", class="validate[required,custom[noSpace],length[3,50]] text-input")
+                    input#create-password(type="password", name="password", maxlength=50)
                 .field
                   .ui.input
                     label(for="create-confirmpass") Confirm Password
-                    input#create-confirmpass(type="password", name="confirmpass", class="validate[required,confirm[create-password]] text-input")
+                    input#create-confirmpass(type="password", name="confirmpass", maxlength=50)
               .field
                 .ui.input
                   label(for="create-email") Email
@@ -141,4 +141,37 @@ block content
            h3.ui.title And so much more...
            p The only way to know the finest text based game ever made is to plunge into the deep. Will you be the next to rise into the Pantheon?
 
-       a(style="margin-top:20px;", href="/play/").ui.button.fluid Play Now
+       a(style="margin-top:20px; box-shadow: none;", href="/play/").ui.button.fluid Play Now
+
+block scripts
+  script(src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js")
+  script.
+    $("#createForm").validate({
+      onkeyup: false,
+      rules: {
+        username: {
+          required: "required",
+          minlength: 3,
+          remote: {
+            url: "/api/checkname",
+            data: {
+              format: "boolean"
+            }
+          }
+        },
+        password: "required",
+        confirmpass: {
+          equalTo: "#create-password",
+          required: "required"
+        },
+        email: "email",
+      },
+      messages: {
+          username: {
+            required: "This field is required",
+            minlength: "Your username needs to be at least 3 characters",
+            maxlength: "Your username needs to be less than 18 characters",
+            remote: "You can't use this name, try another one."
+          }
+        }
+    });

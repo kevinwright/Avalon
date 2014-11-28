@@ -1,5 +1,5 @@
 .ui.topbar
-  .ui.menu.very.tiny.contain
+  .ui.menu.very.tiny.contain.desktop
     .left.menu
       a.item(href="/") Avalon RPG
       a.item(href="/intro/") Intro
@@ -11,7 +11,22 @@
 
     .right.menu
       if (avalon && avalon.users)
-        li.item #{avalon.users().length} Players Online
-      li: a.item(href="http://www.meetplace.net", target="_blank") Meetplace Community
-      li: a.item(href="/press/") Contact
-      li: a.item(href="/play/").playnow Play Now
+        a.item #{avalon.users().length} Players Online
+      a.item(href="http://www.meetplace.net", target="_blank") Meetplace
+      a.item(href="/press/") Contact
+      a.item(href="/play/").playnow Play Now
+  .ui.menu.mobile.very.tiny.contain
+    .left.menu
+      a.item(href="/") Avalon RPG
+      .ui.dropdown.item
+        i.icon.triangle.down
+          .menu
+            a.item(href="/intro/") Intro
+            a.item(href="/news/") News
+            a.item(href="/help/") Help
+            a.item(href="/history/") History
+            a.item(href="/maps/") Maps
+            a.item(href="/citguilds/") Cities &amp; Guilds
+            a.item(href="http://www.meetplace.net", target="_blank") Meetplace
+            a.item(href="/press/") Contact
+            a.item(href="/play/").playnow Play Now
