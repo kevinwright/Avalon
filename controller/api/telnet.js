@@ -15,6 +15,7 @@ var net = require("net");
     var self = this;
 
     this.connect = function() {
+      console.log("connecting")
       client = net.connect(23, "avalon-rpg.com",function(){
         client.setKeepAlive(true);
         client.setEncoding('utf8');
@@ -30,6 +31,7 @@ var net = require("net");
     };
 
     this.write = function(data, callback) {
+      console.log("writing")
       evoke = callback;
       console.log("- API SEND: ", data);
       client.resume();
