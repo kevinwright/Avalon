@@ -1,36 +1,30 @@
-var net = require('net');
-var name = process.argv[2];
+var telnet = require("./telnet");
 
-// Returns:
-// True if no name exists
-// False, StatusCode if bad name or name exists
-function checkName(person, callback) {
-  var client = net.connect(8080, "avalon-rpg.com",function(){
-    client.setEncoding('utf8');
-    client.on('data',function(chunk){
+function CheckName() {
+  var self = this;
+
+  this.users = {};
+
+  this.check = function(person, callback) {
+    telnet.write("###checkname " + person + "\n", function(chunk) {
       var match = /\#\#\#check(.*)/i.exec(chunk)
       if (match && match[1])
-        processAnswer(match[1], callback);
-      client.end()
+        processCheck(person, match[1], callback);
     });
-    client.write("###checkname " + person+ "\n");
-  });
-}
+  }
 
-function processAnswer(result, callback) {
-  console.log(result);
-  if (result === "ok") {
-    return callback(true);
-  } else {
-    if (result.substr(0,3) === "bad") {
-      return callback(false, parseInt(result.substr(4)));
+  function processCheck(person, result, callback) {
+    console.log("- API CHECKNAME: ", person, result);
+    self.users[person] = result;
+    if (result === "ok") {
+      return callback(true);
+    } else {
+      if (result.substr(0,3) === "bad") {
+        return callback(false, parseInt(result.substr(4)));
+      }
     }
   }
 }
 
-if (name)
-  checkName(name, function(result, code) {
-    console.log(result, code);
-  })
 
-module.exports = checkName;
+module.exports = new CheckName;
