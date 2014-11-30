@@ -14,41 +14,44 @@ var net = require("net");
     var evoke = null;
     var self = this;
     var lastData = null;
+    var isClosed = true;
 
     this.connect = function(onConnect) {
       console.log("--- API CONNECTING ---");
       client = net.connect(23, "avalon-rpg.com",function(){
-        client.setKeepAlive(true);
-        client.on("data", function(chunk) {
-          if (evoke) evoke(chunk);
-        });
-        client.on("error", function(err) {
-          console.error("- API ERROR: ", err)
-          if (err.code === "EPIPE") {
-            self.connect(function() {
-              client.write(lastData);
-            });
-          }
-        });
-        client.on("close", function() {
-          console.log("- API CLOSE");
-          //self.connect();
-        });
-        client.on("end", function() {console.log("- API END")});
-        client.write("###version 2\n");
-        console.log("--- API Conected ---\n");
-
+        isClosed = false;
         if (onConnect) onConnect();
       });
+      client.setKeepAlive(true);
+      client.on("data", function(chunk) {
+        if (evoke) evoke(chunk);
+      });
+      client.on("error", function(err) {
+        console.error("- API ERROR: ", err)
+      });
+      client.on("close", function() {
+        console.log("- API CLOSE");
+        isClosed = true;
+        //self.connect();
+      });
+      client.on("end", function() {console.log("- API END")});
+      client.write("###version 2\n");
+      console.log("--- API Conected ---\n");
     };
 
     this.write = function(data, callback) {
       console.log("writing")
       evoke = callback;
       lastData = data;
-      console.log("- API SEND: ", data);
-      client.resume();
-      client.write(data);
+      if (isClosed === true) {
+        self.connect(function() {
+          self.write(data, callback);
+        })
+      } else {
+        console.log("- API SEND: ", data);
+        client.resume();
+        client.write(data);
+      }
     }
 
     this.pause = function() {

@@ -26,13 +26,18 @@ block content
 
         .four.wide.column
           h3.ui.title.center.underline #{section.id} - #{section.title}
-          ul.ui.menu.vertical.simple
+          ul.ui.menu.vertical
             li: a(href="/help/").item
               i.icon.triangle.left
               | Back to Index
             for pagelink in section.pages
               li
-                a(href="/help/pages/" + pagelink.title.toLowerCase(), title=pagelink.description).item
-                  | #{pagelink.id} - 
-                  b #{pagelink.title}
+                if (pagelink.id == page.id)
+                  .active.item
+                    | #{pagelink.id} - 
+                    b #{pagelink.title}
+                else
+                  a(href="/help/pages/" + pagelink.title.toLowerCase(), title=pagelink.description).item
+                    | #{pagelink.id} - 
+                    b #{pagelink.title}
       center: a(href="/help/sections/" + page.section) Back to Section Index
