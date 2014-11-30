@@ -10,7 +10,7 @@ block content
       h1.ui.title.center Welcome to Avalon - the Legend Lives
       h4.ui.sub.title.center first of its kind, older than the internet, over 25 years history and development, purely and simply the most challenging game in existence
   
-  .ui.content(style="margin-top: 75px;")
+  .ui.content.margin-top
     .contain.large
       //- .ui.notice.box
       //-   i.icon.yellow.large.exclamation
@@ -24,7 +24,7 @@ block content
           .eight.column.wide
             form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box.compact#createForm
               h3.ui.title.underline Create New Avalon Character
-                a(href="/play/").right.label Existing Players
+                a(href="/play/").right.label#loginExistingLink Existing Players
               .error.message.solid.box.compact.ui
               .field.user
                 .ui.input
@@ -141,7 +141,7 @@ block content
            h3.ui.title And so much more...
            p The only way to know the finest text based game ever made is to plunge into the deep. Will you be the next to rise into the Pantheon?
 
-       a(style="margin-top:20px; box-shadow: none;", href="/play/").ui.button.fluid Play Now
+       a(href="/play/").ui.playnow.button.fluid Play Now
 
 block scripts
   script(src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js")
