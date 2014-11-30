@@ -1,0 +1,21 @@
+extends ../layout
+
+block head
+  if (page.type == "library")
+    - var title = page.library.meta.seo.title
+    - var description = page.library.meta.seo.description
+    - var keywords = page.library.meta.seo.keywords
+
+block content
+  .ui.content
+    .contain
+      if (page.type == "library")
+        if (page.library.meta.subtitle)
+          h1.ui.title.center #{page.library.meta.title}
+          h2.ui.sub.title.center.underline #{page.library.meta.subtitle}
+        else
+          h1.ui.title.center.underline #{page.library.meta.title}
+      if (page.library)
+        .text.help.markdown !{page.library.html}
+      else
+        .text.help !{page.html}

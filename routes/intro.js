@@ -10,8 +10,8 @@ router.get('/index.html', function(req, res) {
 });
 
 
-router.get("/:section", function(req, res) {
-  res.render("intro/page", { avalon:avalon, title: "Introduction - " + req.params.section, page: req.params.section});
-})
+// router.get("/:section", function(req, res) {
+//   res.render("intro/page", { avalon:avalon, title: "Introduction - " + req.params.section, page: req.params.section});
+// })
 
 module.exports = router;
