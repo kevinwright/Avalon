@@ -16,15 +16,17 @@ block content
         i.icon.angle.right
         |  Participant <b>#{participant}</b>
       h2.ui.title.center.underline #{participant} in #{board.title} Bulletin Board
-      .ui.sub.title.center Showing #{posts.length} posts out of #{posts.length} concerning #{participant}
 
-      .section.bb
-        for post in posts
-          .post.section(id="post-"+post.number)
-            h3.ui.title
-              a(href="/bb/"+board.url+"/"+post.number + "/" + encodeURIComponent(post.subject)) #{post.subject}
-              a(href="/bb/"+board.url+"/"+post.number + "/" + encodeURIComponent(post.subject)).right.label ##{post.number}
-            p Posted by 
-              a(href="/bb/" + board.url + "/participant/"+post.from.shortname) #{post.from.fullname}
-              |  on 
-              +date(post.timestamp)
+      .ui.box
+        .ui.sub.title.center Showing #{posts.length} posts out of #{posts.length} concerning #{participant}
+
+        .section.bb
+          for post in posts
+            .post.section(id="post-"+post.number)
+              h3.ui.title
+                a(href="/bb/"+board.url+"/"+post.number + "/" + encodeURIComponent(post.subject)) #{post.subject}
+                a(href="/bb/"+board.url+"/"+post.number + "/" + encodeURIComponent(post.subject)).right.label ##{post.number}
+              p Posted by 
+                a(href="/bb/" + board.url + "/participant/"+post.from.shortname) #{post.from.fullname}
+                |  on 
+                +date(post.timestamp)

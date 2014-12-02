@@ -29,11 +29,10 @@ block content
             a(style="margin-top:20px;", href="/news/") More News
               i.icon.angle.right
           .six.column.wide.sidebar
-            form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box#createForm
+            form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.block#createForm
               .content
                 h3.ui.title.underline Create New Avalon Character
                   a(href="/play/").right.label#loginExistingLink Existing Players
-                .error.message.solid.box.compact.ui
                 .field.user
                   .ui.input
                     label(for="create-username") Character Name
@@ -64,7 +63,7 @@ block content
                 input(type="hidden", name="loginkey", value="")
                 button.ui.button.save.fluid(style="margin-top: 16px;") Create a new character
   
-            .ui.box
+            .ui.block
               .content
                 h3.ui.title.underline Information
                 ul.ui.menu.social.vertical
@@ -72,14 +71,14 @@ block content
                   li: a(href="/news/").item News
                   li: a(href="/history/").item History
                   li: a(href="/bb/").item Bulletin Boards
-            .ui.box
+            .ui.block
               .content
                 p You may also look at a specific help page by typing its name below:
                 form(action="/help/search")
                   p HELP 
                     input(type="text" name="page" size="50", list="pages")
                     input(type="submit" value="Go")
-            .ui.box
+            .ui.block
               .content
                 h3.ui.title.underline Links
                 ul.ui.menu.social.vertical

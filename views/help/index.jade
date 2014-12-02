@@ -11,44 +11,49 @@ block content
       h1.ui.title.center.underline The Manual of Avalon
 
       .ui.grid.responsive
-        .ten.column.wide
+        .twelve.column.wide.main
           p.lead This is the full, comprehensive Avalon manual. If you are new to Avalon, we recommend you tackle the <a href="/intro/">Introduction</a> first. The manual here contains everything a player needs to know about Avalon. <!--The number in brackets after the section title denotes number of sub-section entries.-->Enjoy!
           p There are also several <a href="/maps/">maps of Avalon</a> available.
-        .six.column.wide
-          .ui.box.blue.compact
-            p You may also look at a specific help page by typing its name below:
-            form(action="/help/search")
-              p HELP 
-                input(type="text" name="page" size="30", list="pages")
-                input(type="submit" value="Go")
 
-      h4.ui.title.expand.all
-        i.icon.triangle.down
-        span.text Expand All Sections
-      .help.index
-        for section in sections
-          .help.section(id="section-"+section.id)
-            h2.ui.title.underline
-              | #{section.id} - 
-              a(href="/help/sections/" + section.id) #{section.title}
-              .right.label.expand(data-id=section.id): i.icon.triangle.down
-            p.lead #{section.hint}
+          h4.ui.title.expand.all
+            i.icon.triangle.down
+            span.text Expand All Sections
+          .help.index
+            for section in sections
+              .help.section(id="section-"+section.id)
+                h2.ui.title.underline
+                  | #{section.id} - 
+                  a(href="/help/sections/" + section.id) #{section.title}
+                  .right.label.expand(data-id=section.id): i.icon.triangle.down
+                p.lead #{section.hint}
 
-            table.ui.table.hidden(data-id=section.id)
-              tbody
-                for page in section.pages
-                  tr
-                    td #{page.id}
-                    td: a(href="/help/pages/" + page.title.toLowerCase()) #{page.title}
-                    td #{page.description}
-      .help.downloads
-        p It is also possible to download the entire manual as:
-        .ui.menu
-          a(target="_blank", href="/help/downloads/avman2h.htm").item HTML file [758k]
-          a(target="_blank", href="/help/downloads/avman2h.zip").item zipped HTML file [248k]
-          a(target="_blank", href="/help/downloads/avman2w.doc").item Word 97 document [1578k]
-          a(target="_blank", href="/help/downloads/avman2w.zip").item zipped Word 97 document [279k]
-        p However, please note that these files may become somewhat out of date (these downloads are dated 25th May 1999), so by viewing the pages here at our web site, or with the online HELP command, you are ensuring that you are reading the latest information. Avalon is a living, evolving world and tends to change regularly.
+                table.ui.table.hidden(data-id=section.id)
+                  tbody
+                    for page in section.pages
+                      tr
+                        td #{page.id}
+                        td: a(href="/help/pages/" + page.title.toLowerCase()) #{page.title}
+                        td #{page.description}
+
+        .four.column.wide.sidebar
+          .ui.block
+            .content
+              p You may also look at a specific help page by typing its name below:
+              form(action="/help/search")
+                p HELP 
+                  input(type="text" name="page" size="10", list="pages")
+                  input(type="submit" value="Go")
+          .ui.block.help.downloads
+            .content
+              h2.ui.title.underline Downloads
+              p It is also possible to download the entire manual as:
+              .ui.menu.vertical
+                a(target="_blank", href="/help/downloads/avman2h.htm").item HTML file [758k]
+                a(target="_blank", href="/help/downloads/avman2h.zip").item zipped HTML file [248k]
+                a(target="_blank", href="/help/downloads/avman2w.doc").item Word 97 document [1578k]
+                a(target="_blank", href="/help/downloads/avman2w.zip").item zipped Word 97 document [279k]
+              p However, please note that these files may become somewhat out of date (these downloads are dated 25th May 1999), so by viewing the pages here at our web site, or with the online HELP command, you are ensuring that you are reading the latest information. Avalon is a living, evolving world and tends to change regularly.
+
 
 block scripts
   datalist#pages

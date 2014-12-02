@@ -15,20 +15,22 @@ block content
         a(href="/bb/" + board.url)  #{board.title}
         i.icon.angle.right
         |  Post <b>#{post.number}</b>
-      h2.ui.title.underline
-        | #{post.subject}
-        .right.label ##{post.number}
 
-      .post.section(id="post-"+post.number)
-        .ui.title.underline
-          .right.label
-            +date(post.timestamp)
-          a(href="/bb/" + board.url + "/participant/"+post.from.shortname) #{post.from.fullname}
-          span.to(style="display:block;")
-            | to 
-            if (post.to.shortname == "Everyone")
-              | Everyone
-            else
-              a(href="/bb/" + board.url + "/participant/"+post.to.shortname) #{post.to.fullname}
+      .ui.box
+        h2.ui.title.underline
+          | #{post.subject}
+          .right.label ##{post.number}
 
-        .text.bb !{content}
+        .post.section(id="post-"+post.number)
+          .ui.title.underline
+            .right.label
+              +date(post.timestamp)
+            a(href="/bb/" + board.url + "/participant/"+post.from.shortname) #{post.from.fullname}
+            span.to(style="display:block;")
+              | to 
+              if (post.to.shortname == "Everyone")
+                | Everyone
+              else
+                a(href="/bb/" + board.url + "/participant/"+post.to.shortname) #{post.to.fullname}
+
+          .text.bb !{content}
