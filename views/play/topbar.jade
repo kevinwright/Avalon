@@ -1,0 +1,31 @@
+.ui.topbar
+  .ui.menu.very.tiny.contain.desktop
+    .left.menu
+      a.item(target="_blank", href="/") Avalon RPG
+      a.item(target="_blank", href="/intro/") Intro
+      a.item(target="_blank", href="/help/") Help
+
+    .right.menu
+      a.item(target="_blank", href="http://www.meetplace.net") Meetplace
+      form(action="/help/search", target="_blank").item
+        .span HELP 
+          input(type="text" name="page" size="20", list="pages")
+          input(type="submit" value="Go")
+  .ui.menu.mobile.very.tiny.contain
+    .left.menu
+      a.item(href="/") Avalon RPG
+      .ui.dropdown.item
+        i.icon.triangle.down
+          .menu
+            a.item(target="_blank", href="/intro/") Intro
+            a.item(target="_blank", href="/news/") News
+            a.item(target="_blank", href="/help/") Help
+            a.item(target="_blank", href="/history/") History
+            a.item(target="_blank", href="/maps/") Maps
+            a.item(target="_blank", href="/citguilds/") Cities &amp; Guilds
+            a.item(target="_blank", href="http://www.meetplace.net") Meetplace
+            a.item(target="_blank", href="/press/") Contact
+            form(action="/help/search", target="_blank").item
+              .span HELP 
+                input(type="text" name="page" size="20", list="pages")
+                input(type="submit" value="Go")

@@ -40,12 +40,14 @@ function HelpController() {
         res.status(err.status || 500);
         console.error(err);
         if (err.errno == 34) {
+          res.status(404);
           return res.render('error', {
               message: "No such page: " + page,
               error: {},
               avalon: avalon
           });
         } else {
+          res.status(404);
           return res.render('error', {
               message: err.message,
               error: {},

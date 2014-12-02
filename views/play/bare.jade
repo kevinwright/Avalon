@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    include ../includes/meta
+    block head
+    include ../includes/seo
+    link(rel='stylesheet', href='/css/style.css')
+    include ../includes/gtm
+  body(class=body)
+    include topbar
+    block content
+    script(type="text/javascript", src="/js/jquery.min.js")
+    block scripts

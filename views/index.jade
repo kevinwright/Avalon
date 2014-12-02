@@ -17,73 +17,76 @@ block content
       //-   | Avalon is going through some essential maintenance.
       .ui.grid.responsive
         .row
-          .eight.column.wide
+          .ten.column.wide.main
             p.lead Welcome to Avalon, the most detailed, original and immersive text based game on the internet. In existence for over two decades, it is also one of the oldest RPGs. It has evolved consistently over this time, boasting the highest standards; as a multiplayer online RPG text based game, it's unparalleled in its creativity and diversity. Only by your own merits can you rise above the rest and only the best ascend to the stars, becoming one of the all-powerful immortals. Are you ready to make history in this breathtaking world of legendary Avalonians and Gods?
             blockquote.big.center
               p Avalon is probably the largest and most complex multi-user online RPG ever.
-          .eight.column.wide
-            form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box.compact#createForm
-              h3.ui.title.underline Create New Avalon Character
-                a(href="/play/").right.label#loginExistingLink Existing Players
-              .error.message.solid.box.compact.ui
-              .field.user
-                .ui.input
-                  label(for="create-username") Character Name
-                  input#create-username(type="text", name="username", maxlength=18)
-              .two.fields
-                .field
-                  .ui.input
-                    label(for="create-password") Password
-                    input#create-password(type="password", name="password", maxlength=50)
-                .field
-                  .ui.input
-                    label(for="create-confirmpass") Confirm Password
-                    input#create-confirmpass(type="password", name="confirmpass", maxlength=50)
-              .field
-                .ui.input
-                  label(for="create-email") Email
-                  input#create-email(type="text", name="email")
-              .three.fields
-                .field Gender
-                .field.inline
-                  input#male(type="radio", name="gender", value="male", checked="checked")
-                  label(for="male") Male
-                .field.inline
-                  input#female(type="radio", name="gender", value="female")
-                  label(for="female") Female
-              input(type="hidden", name="run", value="lumiere", checked="checked")
-              input(type="hidden", name="create", value="yes")
-              input(type="hidden", name="loginkey", value="")
-              button.ui.button.save.fluid(style="margin-top: 16px;") Create a new character
-  
-        .row
-          .eight.wide.column
             h2.ui.title.underline Avalon Text Based Game: Latest Events in Society
             for update in recent
               blockquote
                 cite #{update.item}
                 p #{update.date}
-            a(style="margin-top:20px;", href="/news/").ui.button.fluid More News
-          .eight.wide.column
-            .ui.box.blue.compact
-              p You may also look at a specific help page by typing its name below:
-              form(action="/help/search")
-                p HELP 
-                  input(type="text" name="page" size="50", list="pages")
-                  input(type="submit" value="Go")
-            h3.ui.title Information
-            ul.ui.menu.social.vertical
-              li: a(href="/help/").item Help
-              li: a(href="/news/").item News
-              li: a(href="/history/").item History
-              li: a(href="/bb/").item Bulletin Boards
-            h3.ui.title Links
-            ul.ui.menu.social.vertical
-              li: a(href="http://www.meetplace.net/").item Meetplace Community
-              li: a(href="/vote.html").item Vote to Support Us
-              li: a(href="https://www.facebook.com/pages/Avalon-the-Legend-Lives-Game-Page/184129298274122").facebook.social.item Facebook
-              li: a(href="https://twitter.com/avalononlinerpg").twitter.social.item Twitter
-
+            a(style="margin-top:20px;", href="/news/") More News
+              i.icon.angle.right
+          .six.column.wide.sidebar
+            form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box#createForm
+              .content
+                h3.ui.title.underline Create New Avalon Character
+                  a(href="/play/").right.label#loginExistingLink Existing Players
+                .error.message.solid.box.compact.ui
+                .field.user
+                  .ui.input
+                    label(for="create-username") Character Name
+                    input#create-username(type="text", name="username", maxlength=18)
+                .two.fields
+                  .field
+                    .ui.input
+                      label(for="create-password") Password
+                      input#create-password(type="password", name="password", maxlength=50)
+                  .field
+                    .ui.input
+                      label(for="create-confirmpass") Confirm Password
+                      input#create-confirmpass(type="password", name="confirmpass", maxlength=50)
+                .field
+                  .ui.input
+                    label(for="create-email") Email
+                    input#create-email(type="text", name="email")
+                .three.fields
+                  .field Gender
+                  .field.inline
+                    input#male(type="radio", name="gender", value="male", checked="checked")
+                    label(for="male") Male
+                  .field.inline
+                    input#female(type="radio", name="gender", value="female")
+                    label(for="female") Female
+                input(type="hidden", name="run", value="lumiere", checked="checked")
+                input(type="hidden", name="create", value="yes")
+                input(type="hidden", name="loginkey", value="")
+                button.ui.button.save.fluid(style="margin-top: 16px;") Create a new character
+  
+            .ui.box
+              .content
+                h3.ui.title.underline Information
+                ul.ui.menu.social.vertical
+                  li: a(href="/help/").item Help
+                  li: a(href="/news/").item News
+                  li: a(href="/history/").item History
+                  li: a(href="/bb/").item Bulletin Boards
+            .ui.box
+              .content
+                p You may also look at a specific help page by typing its name below:
+                form(action="/help/search")
+                  p HELP 
+                    input(type="text" name="page" size="50", list="pages")
+                    input(type="submit" value="Go")
+            .ui.box
+              .content
+                h3.ui.title.underline Links
+                ul.ui.menu.social.vertical
+                  li: a(href="http://www.meetplace.net/").item Meetplace Community
+                  li: a(href="/vote.html").item Vote to Support Us
+                  li: a(href="https://www.facebook.com/pages/Avalon-the-Legend-Lives-Game-Page/184129298274122").facebook.social.item Facebook
+                  li: a(href="https://twitter.com/avalononlinerpg").twitter.social.item Twitter
 
   .ui.content.section
     .contain.large

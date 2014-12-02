@@ -6,12 +6,12 @@ var recent = require("../controller/news/recent.js");
 /* GET home page. */
 router.get('/', function(req, res) {
   recent(function(data) {
-    res.render('index', { title: "Avalon: The Net's First Online Text Based Roleplaying Game", avalon: avalon, recent: data.splice(0, 4) });
+    res.render('index', { title: "Avalon: The Net's First Online Text Based Roleplaying Game", avalon: avalon, recent: data.splice(0, 6) });
   })
 });
 router.get('/index.html', function(req, res) {
   recent(function(data) {
-    res.render('index', { title: "Avalon: The Net's First Online Text Based Roleplaying Game", avalon: avalon, recent: data.splice(0, 4) });
+    res.render('index', { title: "Avalon: The Net's First Online Text Based Roleplaying Game", avalon: avalon, recent: data.splice(0, 6) });
   })
 });
 
