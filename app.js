@@ -13,6 +13,7 @@ var play = require('./routes/play');
 var news = require('./routes/news');
 var rollcall = require('./routes/rollcall');
 var history = require('./routes/history');
+var world = require('./routes/world');
 var lumiere = require('./routes/lumiere');
 var dynamic = require('./routes/dynamic');
 
@@ -39,6 +40,7 @@ app.use('/play', play);
 app.use('/news', news);
 app.use('/rollcall', rollcall);
 app.use('/history', history);
+app.use('/world', world);
 app.use('/lumiere', lumiere);
 
 app.use('/', dynamic);

@@ -1,6 +1,7 @@
 extends bare
 
-block lumiere
+block head
+  - var body = "lumiere";
   - var title = "Lumiere : Avalon : Online Fantasy World Flash Game Client";
   - var keywords=  "online fantasy world, online fantasy game, fantasy world, flash game, flash client, game client, game interface, online fantasy, massive multiplayer game, massive, multiplayer, online game, role-playing game";
   - var description="Lumiere is an online fantasy world Flash game interface to the world of Avalon. It allows interaction with other real people in a massive multiplayer game of unparalleled size and beauty. Lumiere runs in any modern browser with Shockwave Flash 10 or higher and it is to become the replacement for Javalon, Avalon's former official Java Game Client.";
@@ -8,10 +9,89 @@ block lumiere
 
 block content
   .ui.content
-    .lumiere
-      object(type="application/x-shockwave-flash", id="Lumiere", name="Lumiere", align="middle", data="/lumiere2.swf", width="100%", height="100%")
+    #flashContent
+      p To view this page ensure that Adobe Flash Player version 10.0.0 or greater is installed.
+      script.
+        var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
+        document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
+                + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
+    noscript
+      object(class="lumiere", classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000", width="100%", height="100%", id="Lumiere")
+        param(name="movie", value="/swf/lumiere.swf")
         param(name="quality", value="high")
-        param(name="wmode", value="transparent")
-        param(name="allowscriptaccess", value="always")
-        param(name="allowfullscreen", value="true")
-        param(name="flashvars", value="gac=UA-1428142-1&amp;host=184.173.130.145&amp;port=23&amp;origin=213 118 91 170&amp;bounty=&amp;referrer=")
+        <param name="wmode" value="transparent" />
+        <param name="allowScriptAccess" value="always" />
+        <param name="allowFullScreen" value="true" />
+        // if !IE
+          object(type="application/x-shockwave-flash", data="/swf/lumiere.swf", width="100%", height="100%")
+            param(name="quality", value="high")
+            param(name="wmode", value="transparent")
+            param(name="allowScriptAccess", value="always")
+            param(name="allowFullScreen", value="true")
+        // if gte IE 6
+          p Either scripts and active content are not permitted to run or Adobe Flash Player version 10.0.0 or greater is not installed.
+          a(href="http://www.adobe.com/go/getflashplayer")
+            img(src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif", alt="Get Adobe Flash Player")
+      
+block scripts
+  script(src="/js/swfobject.js")
+  script.
+    var flashvars = {};
+    flashvars.gac = "UA-1428142-1";
+    flashvars.host = "184.173.130.145";
+    flashvars.port = "23";
+    flashvars.bounty = "";
+    flashvars.referrer = "";
+    flashvars.keepCommand = true;
+  if (flashvars)
+    script.
+      flashvars.origin = "#{flashvars.ip}";
+      flashvars.username = "#{flashvars.username}";
+      flashvars.password = "#{flashvars.password}";
+      flashvars.create = "#{flashvars.create}";
+      flashvars.gender = "#{flashvars.gender}";
+  script.
+    function focusClient() {
+      window.document.getElementById("Lumiere").focus();
+      return;
+    }
+
+    var LumiereSize = {};
+    LumiereSize.height = 670;
+    LumiereSize.width = 770;
+    
+
+    // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection.
+    var swfVersionStr = "10.0.0";
+    // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+    var xiSwfUrlStr = "/swf/playerProductInstall.swf";
+      
+    var params = {};
+    params.quality = "high";
+    params.wmode = "transparent";
+    params.allowscriptaccess = "always";
+    params.allowfullscreen = "true";
+
+    var attributes = {};
+    attributes.id = "Lumiere";
+    attributes.name = "Lumiere";
+    attributes.align = "middle";
+    attributes["class"] = "lumiere";
+
+    swfobject.embedSWF(
+      "/swf/lumiere2.swf", "flashContent",
+      LumiereSize.width, LumiereSize.height, // "800", "600", 
+      swfVersionStr, xiSwfUrlStr, 
+      flashvars, params, attributes
+    );
+
+    // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+    swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+  
+
+  script.
+    function javalonPage(act, lab) {
+      var base = new String("/" + ["event", "Javalon", act].join("/"));
+      if (typeof(lab) != "undefined") { return [base, lab].join("/"); }
+      return base;
+    }

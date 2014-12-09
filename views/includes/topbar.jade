@@ -2,17 +2,16 @@
   .ui.menu.very.tiny.contain.desktop
     .left.menu
       a.item(href="/") Avalon RPG
-      a.item(href="/intro/") Intro
+      a.item(href="/intro/", title="Introduction to Avalon") Intro
       a.item(href="/news/") News
       a.item(href="/help/") Help
       a.item(href="/history/") History
-      a.item(href="/maps/") Maps
-      a.item(href="/citguilds/") Cities &amp; Guilds
+      a.item(href="/world/", title="Cities, Guilds & Maps") World
 
     .right.menu
       if (avalon && avalon.users)
         a.item #{avalon.users().length} Players Online
-      a.item(href="http://www.meetplace.net", target="_blank") Meetplace
+      a.item(href="http://www.meetplace.net", target="_blank", title="Meetplace Community") Meetplace
       a.item(href="/press/") Contact
       a.item(href="/play/").playnow Play Now
   .ui.menu.mobile.very.tiny.contain
@@ -21,12 +20,11 @@
       .ui.dropdown.item
         i.icon.triangle.down
           .menu
-            a.item(href="/intro/") Intro
+            a.item(href="/intro/", title="Introduction to Avalon") Intro
             a.item(href="/news/") News
             a.item(href="/help/") Help
             a.item(href="/history/") History
-            a.item(href="/maps/") Maps
-            a.item(href="/citguilds/") Cities &amp; Guilds
+            a.item(href="/world/", title="Cities, Guilds & Maps") World
             a.item(href="http://www.meetplace.net", target="_blank") Meetplace
             a.item(href="/press/") Contact
             a.item(href="/play/").playnow Play Now

@@ -12,7 +12,7 @@ block content
       .ui.grid.responsive
         .eight.column.wide
 
-          form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box#createForm
+          form(method="post", action="/lumiere").ui.form.box#createForm
             h3.ui.title.underline Create a new Avalon character
             .field.username
               .ui.input
@@ -58,7 +58,7 @@ block content
             button.ui.button.save.fluid(style="margin-top: 16px;") Create a new character
 
         .eight.column.wide
-          form(method="post", action="http://www.avalon-rpg.com/lumiere/index.html").ui.form.box#loginForm
+          form(method="post", action="/lumiere").ui.form.box#loginForm
             h3.ui.title.underline Login existing character
             .field.username
               .ui.input

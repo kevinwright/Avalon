@@ -1,4 +1,4 @@
-![](http://avalon-rpg.com:3000/img/logo.png)
+![](http://avalon-rpg.com:3000/img/logo_black.png)
 
 Getting Started
 ---------------
