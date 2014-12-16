@@ -15,7 +15,7 @@ function parsePage(content) {
       pages.push( new PageLink(pageArr[1], pageArr[2], pageArr[3]) )
     } else {
       pageArr = /(\d+\.\d+)\s+(\w+\'s)\s+(.*)/.exec(pagesArr[i]);
-      pages.push( new PageLink(pageArr[1], pageArr[2], pageArr[3]) )
+      if (pageArr) pages.push( new PageLink(pageArr[1], pageArr[2], pageArr[3]) )
     }
   }
   return pages;
