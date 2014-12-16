@@ -15,14 +15,24 @@ router.get('/index.html', function(req, res) {
 router.get('/ordinations', function(req, res) {
   res.render('history/ordinations', { title: "Ordinations - The Greatest Event in the Land", avalon: avalon });
 });
+router.get('/ordinations.html', function(req, res) {
+  res.render('history/ordinations', { title: "Ordinations - The Greatest Event in the Land", avalon: avalon });
+});
 
 router.get('/modernhistory', function(req, res) {
+  res.render('history/modernhistory', { title: "Modern History", avalon: avalon });
+});
+router.get('/modernhistory.html', function(req, res) {
   res.render('history/modernhistory', { title: "Modern History", avalon: avalon });
 });
 
 router.get('/ancienthistory', function(req, res) {
   res.render('history/ancienthistory', { title: "Ancient History", avalon: avalon });
 });
+router.get('/ancienthistory.html', function(req, res) {
+  res.render('history/ancienthistory', { title: "Ancient History", avalon: avalon });
+});
+
 
 
 module.exports = router;
