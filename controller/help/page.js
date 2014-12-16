@@ -19,6 +19,7 @@ var Page = function(title, helpcontent, autocontent, isLibrary) {
   this.auto = autocontent;
 
   var pageArr = /(\d+\.\d+)\s+(\w+)\s+(.*)/.exec(this.auto);
+  if (!pageArr) pageArr = /(\d+\.\d+)\s+(\w+\'s)\s+(.*)/.exec(this.auto);
   if (pageArr) {
     this.id = pageArr[1];
     this.title = pageArr[2];

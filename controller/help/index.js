@@ -6,6 +6,7 @@ var fs = require("fs");
 var avalon = require("../avalon.js");
 
 var hints = require("./hints");
+var synonym = require("./synonym");
 var Section = require("./section");
 var Page = require("./page");
 
@@ -75,6 +76,8 @@ function HelpController() {
 
 function readPage(title, callback) {
   title = title.toLowerCase();
+  var isSynonym = synonym(title);
+  if (isSynonym) title = isSynonym;
   fs.readFile(AUTOHELPDIR + "/" + title + "0", "utf8", function(err, autocontent) {
     if (err) return callback(err);
     fs.readFile(LIBRARYDIR + "/" + title, "utf8", function(err, librarycontent) {
@@ -82,12 +85,12 @@ function readPage(title, callback) {
         // no library file
         fs.readFile(HELPDIR + "/" + title, "utf8", function(err, helpcontent) {
           if (err) {return callback(err)}
-          var page = new Page(page, helpcontent, autocontent);
+          var page = new Page(title, helpcontent, autocontent);
 
           callback(null, page);
         });
       } else {
-        var page = new Page(page, librarycontent, autocontent, true);
+        var page = new Page(title, librarycontent, autocontent, true);
 
         callback(null, page);
       }
