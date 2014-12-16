@@ -1,32 +1,20 @@
 #!/usr/bin/env node
 var forever = require("forever");
 
-
-function run() {
-  child = new(forever.Monitor)('start', { // start is bin/start
-      'silent': false,
-      'watch': true,
-      'watchDirectory': '..', 
-      'watchIgnoreDotFiles': true,
-      "watchIgnorePatterns": "**/.git/**"
-  });
-  child.on('watch:restart', function(info) {
-      console.error('Restaring script because ' + info.file + ' changed');
-  });
-
-  child.on('restart', function() {
-      console.error('Forever restarting script for ' + child.times + ' time');
-  });
-
-  child.on('exit:code', function(code) {
-      console.error('Forever detected script exited with code ' + code);
-  });
-  child.start();
-  forever.startServer(child);
+if (process.env.NODE_ENV === "production") {
+  forever.load({
+    root: "/www/logs/illy.avalon-rpg.com"
+  })
+}
+else {
+  forever.load({
+    root: "/www/logs/illy.avalon-rpg.com/debug",
+    debug: true
+  })
 }
 
-if (process.argv[2] === "restart") {
-  forever.restartAll();
-} else {
-  run();
-}
+mon = forever.startDaemon(__dirname + "/start", {
+  env: {"PORT": process.env.PORT, "NODE_ENV": process.env.NODE_ENV}
+})
+
+forever.startServer(mon);
