@@ -5,7 +5,7 @@ var avalon = require("../controller/avalon");
 var city = require("../controller/world/city.js");
 var guild = require("../controller/world/guild.js");
 
-router.get('/world/', function(req, res) {
+router.get(['/world/', "/cities/", "/guilds/"], function(req, res) {
   res.render('world/index', { avalon:avalon, title: "The world of Avalon, Online RPG Game" });
 });
 router.get('/world/index.html', function(req, res) {
