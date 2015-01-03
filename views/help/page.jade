@@ -103,13 +103,13 @@ block content
                   for pagelink in page.library.meta.rel
                     li
                       a(href="/help/pages/" + pagelink.toLowerCase()).item #{pagelink}
-          if (page.library && page.library.meta && page.library.meta.keywords)
-            .ui.block
-              .content
-                h3.ui.title.center.underline Keywords
-                ui.ui.menu.vertical
-                  for keyword in page.library.meta.keywords
-                    li
-                      a(href="/help/keywords/" + keyword.toLowerCase()).item #{keyword}
+          //- if (page.library && page.library.meta && page.library.meta.keywords)
+          //-   .ui.block
+          //-     .content
+          //-       h3.ui.title.center.underline Keywords
+          //-       ui.ui.menu.vertical
+          //-         for keyword in page.library.meta.keywords
+          //-           li
+          //-             a(href="/help/keywords/" + keyword.toLowerCase()).item #{keyword}
 
        
