@@ -1,8 +1,16 @@
 extends ../layout
 
 block head
-  - var title = page.description + " - Avalon - multiplayer game world - Help and manual section"
-  - var description = false
+  if (page.library && page.library.meta && page.library.meta.title)
+    - var title = page.library.meta.title + " - Avalon - multiplayer game world - Help and manual section"
+  else
+    - var title = page.description + " - Avalon - multiplayer game world - Help and manual section"
+  if (page.library && page.library.meta && page.library.meta.summary)
+    - var description = page.library.meta.summary
+  else
+    - var description = false
+  if (page.library && page.library.meta && page.library.meta.keywords)
+    - var keywords = page.library.meta.keywords.toString()
   link(rel="canonical", href="http://www.avalon-rpg.com/help/pages/" + page.title.toLowerCase())
 block content
   .ui.content.manual
@@ -17,31 +25,91 @@ block content
               a(href="/help/sections/" + page.section) Section #{page.section}
             i.icon.angle.right
             b #{page.id} #{page.title}
-          h1.ui.title.center.underline #{page.description}
+          if (page.library && page.library.meta && page.library.meta.title)
+            h1.ui.title.center.underline #{page.library.meta.title}
+          else
+            h1.ui.title.center.underline #{page.description}
           if (page.library)
             .text.help.markdown !{page.library.html}
+            if (page.advanced)
+              .ui.box
+                h3.ui.title Advanced
+                != page.advanced.html
+            if (page.library.meta && (page.library.meta.commands || page.library.meta.refs))
+              .ui.box
+                if (page.library.meta.commands)
+                  h4.ui.title Commands
+                  ul.ui.menu.simple
+                    for command in page.library.meta.commands
+                     .item #{command}
+                if (page.library.meta.refs)
+                  h4.ui.title References
+                  ul.ui.menu.simple
+                    for ref in page.library.meta.refs
+                     .item #{ref}
+              
           else
             .text.help !{page.html}
-            
 
-
+        
         .four.wide.column.sidebar
-          .ui.block
-            .content
-              if (section)
-                h3.ui.title.center.underline #{section.id} - #{section.title}
-                ul.ui.menu.vertical
-                  li: a(href="/help/").item
-                    i.icon.triangle.left
-                    | Back to Index
-                  for pagelink in section.pages
+          if (page.library && page.library.meta && page.library.meta.rel)
+            ui.block
+              .content
+                if (section)
+                  h3.ui.title.center.underline #{section.id} - #{section.title}
+                  ul.ui.menu.vertical
+                    li: a(href="/help/").item
+                      i.icon.triangle.left
+                      | Back to Index
+                    li.ui.dropdown.item
+                      i.icon.triangle.down
+                      | #{page.id} - 
+                      b #{page.title}
+                      .menu.limited
+                        for pagelink in section.pages
+                          if (pagelink.id == page.id)
+                            .active.item
+                              | #{pagelink.id} - 
+                              b #{pagelink.title}
+                          else
+                            a(href="/help/pages/" + pagelink.title.toLowerCase(), title=pagelink.description).item
+                              | #{pagelink.id} - 
+                              b #{pagelink.title}
+          else
+            .ui.block
+              .content
+                if (section)
+                  h3.ui.title.center.underline #{section.id} - #{section.title}
+                  ul.ui.menu.vertical
+                    li: a(href="/help/").item
+                      i.icon.triangle.left
+                      | Back to Index
+                    for pagelink in section.pages
+                      li
+                        if (pagelink.id == page.id)
+                          .active.item
+                            | #{pagelink.id} - 
+                            b #{pagelink.title}
+                        else
+                          a(href="/help/pages/" + pagelink.title.toLowerCase(), title=pagelink.description).item
+                            | #{pagelink.id} - 
+                            b #{pagelink.title}
+          if (page.library && page.library.meta && page.library.meta.rel)
+            .ui.block
+              .content
+                h3.ui.title.center.underline Related Articles
+                ui.ui.menu.vertical
+                  for pagelink in page.library.meta.rel
                     li
-                      if (pagelink.id == page.id)
-                        .active.item
-                          | #{pagelink.id} - 
-                          b #{pagelink.title}
-                      else
-                        a(href="/help/pages/" + pagelink.title.toLowerCase(), title=pagelink.description).item
-                          | #{pagelink.id} - 
-                          b #{pagelink.title}
-      center: a(href="/help/sections/" + page.section) Back to Section Index
+                      a(href="/help/pages/" + pagelink.toLowerCase()).item #{pagelink}
+          if (page.library && page.library.meta && page.library.meta.keywords)
+            .ui.block
+              .content
+                h3.ui.title.center.underline Keywords
+                ui.ui.menu.vertical
+                  for keyword in page.library.meta.keywords
+                    li
+                      a(href="/help/keywords/" + keyword.toLowerCase()).item #{keyword}
+
+       

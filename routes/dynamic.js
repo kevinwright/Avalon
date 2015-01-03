@@ -15,15 +15,30 @@ function render(page) {
   }
 }
 
+function addPage(page) {
+  fs.readFile(page.file, "utf8", function(err, content) {
+    if (err) return console.error(err);
+    page.library = marked(content)
+    router.get(page.url, render(page));
+    console.log("Page added: "+page.url);
+  });
+}
+
+function addHtml(page) {
+  fs.readFile(page.file, "utf8", function(err, content) {
+    if (err) return console.error(err);
+    page.html = content
+    router.get(page.url, render(page));
+    console.log("Page added: "+page.url);
+  });
+}
+
 for (var i = 0; i<pages.length; i++) {
   var page = pages[i];
   if (page.type == "library") {
-    console.log(page);
-    fs.readFile(page.file, "utf8", function(err, content) {
-      if (err) return console.error(err);
-      page.library = marked(content)
-      router.get(page.url, render(page));
-    });
+    addPage(page);
+  } else if (page.type == "html") {
+    addHtml(page);
   }
 }
 

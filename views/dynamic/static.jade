@@ -5,9 +5,12 @@ block head
     - var title = page.library.meta.seo.title
     - var description = page.library.meta.seo.description
     - var keywords = page.library.meta.seo.keywords
-
+  if (page.canonical)
+    link(rel="canonical", href=page.canonical)
+  else if (page.library.meta.canonical)
+    link(rel="canonical", href=page.library.meta.canonical)
 block content
-  .ui.content
+  .ui.content.page.static
     .contain
       if (page.type == "library")
         if (page.library.meta.subtitle)

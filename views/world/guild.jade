@@ -1,0 +1,69 @@
+extends ../layout
+
+block head
+  - var title = "The " + guild.title + " Guild | World | Online RPG, Avalon - Multiuser Gameworld";
+  - var description = guild.info.outlook
+  - var keywords = guild.title + " guild, online rpg, Avalon, text, based, adventure";
+  link(rel="canonical", href="http://www.avalon-rpg.com/guilds/" + guild.name)
+
+block content
+  .ui.content.guild
+    .contain
+      h1.ui.title The #{guild.title}
+
+      .ui.grid.responsive
+        .twelve.column.wide.main
+          p.lead #{guild.info.outlook}
+          p
+            | Founded on the #{guild.info.founded} by #{guild.info.foundedby}, 
+            | the #{guild.title} are located in 
+            a(href="#location") #{guild.info.location}
+            | . They have the profession of #{guild.info.profession} and the guild alignment of #{guild.info.alignment}
+
+          a(name="intro")
+          h2.ui.title.underline Introduction
+          != guild.get("intro")
+
+          a(name="first")
+          h2.ui.title.underline Words of #{guild.info.foundedby}, first guildmaster
+          != guild.get("firstwords")
+
+          .ui.manual
+            a(name="current")
+            h2.ui.title.underline #{guild.info.guildmaster}, current guildmaster says the following about the guild
+            .text.help!= guild.help(guild.name)
+
+          a(name="skills")
+          h2.ui.title.underline Guild specialist skills
+          - var skills = guild.get("skills")
+          for skill in skills
+            h4.ui.title #{skill.title}
+            p #{skill.description}
+
+          a(name="location")
+          h2.ui.title.underline Location
+          != guild.get("location")
+
+
+        .four.column.wide.sidebar
+          .ui.block.image
+            .content
+              img(src="http://www.avalon-rpg.com/images/wingart/pages/professions/"+guild.info.profession.toLowerCase()+".gif").ui.image.fluid
+          .ui.block
+            .content
+              .ui.menu.vertical
+                a.item(href="#intro") Introduction
+                a.item(href="#first") First Guildmaster's words
+                a.item(href="#current") Current Guildmaster's words
+                a.item(href="#skills") Professional Skills
+                a.item(href="#location") Location
+              
+          .ui.block
+            .content
+              a(href="/rollcall/list.html?guild=" + guild.name) See prominent active members
+
+          .ui.block
+            .content
+              a(href="/world/")
+                i.icon.left.triangle
+                | Back to World

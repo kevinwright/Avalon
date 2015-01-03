@@ -1,0 +1,37 @@
+extends ../layout
+
+block head
+  - var title = page.info.title + " | World | Avalon RPG";
+  - var description = false
+  - var keywords = false
+  if (page.canonical)
+    link(rel="canonical", href=page.canonical)
+block content
+  .ui.content.page.academy
+    .contain
+      h1.ui.title #{page.info.title}
+      .ui.grid.responsive
+        .twelve.column.wide.main
+          .text.help !{page.html}
+
+        .four.column.wide.sidebar
+          .ui.block.image
+            .content
+              img(src="/img/cities/"+page.info.city.toLowerCase()+ ".png").ui.image.fluid
+              
+          .ui.block
+            .content
+              .ui.menu.vertical
+                a.item(href="#introduction") Introduction
+                a.item(href="#purpose") Purpose
+                a.item(href="#skills") Skills
+                a.item(href="#headtutor") Head Tutor
+                a.item(href="#accolades") Accolades
+
+          .ui.block
+            .content
+              .ui.menu.vertical
+                a.item(href="/cities/" + page.info.city.toLowerCase()) #{page.info.city}
+                a.item(href="/world/")
+                  i.icon.left.triangle
+                  | Back to World

@@ -6,6 +6,7 @@ module.exports = function(content) {
   // ** = highlight
   // * bold
   var lines = content.split("\n");
+  var finalLines = "";
 
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i];
@@ -47,12 +48,13 @@ module.exports = function(content) {
 
     if (line.trim() === "") {
       block = true;
-      line = "<br>";
+      if (i != 0 && i != lines.length - 1) line = "<br>";
     }
 
     if (line == "!") {
       block = true;
       line = "";
+      break;
     }
 
 
@@ -71,7 +73,8 @@ module.exports = function(content) {
           "h4": ["class"],
         }
       });
+    finalLines += lines[i] + "\n";
   }
 
-  return lines.join("\n");
+  return finalLines;//lines.join("\n");
 }

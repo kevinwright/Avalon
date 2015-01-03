@@ -78,22 +78,34 @@ function readPage(title, callback) {
   title = title.toLowerCase();
   var isSynonym = synonym(title);
   if (isSynonym) title = isSynonym;
-  fs.readFile(AUTOHELPDIR + "/" + title + "0", "utf8", function(err, autocontent) {
-    if (err) return callback(err);
-    fs.readFile(LIBRARYDIR + "/" + title, "utf8", function(err, librarycontent) {
-      if (err) {
-        // no library file
-        fs.readFile(HELPDIR + "/" + title, "utf8", function(err, helpcontent) {
-          if (err) {return callback(err)}
+  console.log("HELP " + title);
+  fs.readFile(LIBRARYDIR + "/" + title, "utf8", function(libErr, librarycontent) {
+    console.log(" - library");
+    fs.readFile(AUTOHELPDIR + "/" + title + "0", "utf8", function(autoErr, autocontent) {
+      console.log(" - loaded", libErr, autoErr);
+      if (libErr && autoErr) // no file in library and autohelp
+        return callback(autoErr);
+      console.log(" - either library or autohelp");
+      if (!libErr && autoErr) {
+        // there is a library but no autohelp file
+        var page = new Page(title, librarycontent, null, true);
+        return callback(null, page);
+      }
+      console.log(" - no library");
+      if (libErr && !autoErr) {
+        // there is no library but there is an autohelp file
+        return fs.readFile(HELPDIR + "/" + title, "utf8", function(err, helpcontent) {
+          console.log(" - help");
+          if (err) {return callback(err)} // autohelp, but no help
           var page = new Page(title, helpcontent, autocontent);
 
-          callback(null, page);
+          return callback(null, page);
         });
-      } else {
-        var page = new Page(title, librarycontent, autocontent, true);
-
-        callback(null, page);
       }
+      console.log(" - all ok")
+      // there is a library and autohelp
+      var page = new Page(title, librarycontent, autocontent, true);
+      return callback(null, page);
     });
   });
 }
