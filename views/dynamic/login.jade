@@ -1,0 +1,97 @@
+extends ../layout
+
+block head
+  if (page.type == "library")
+    - var title = page.library.meta.seo.title
+    - var description = page.library.meta.seo.description
+    - var keywords = page.library.meta.seo.keywords
+  if (page.canonical)
+    link(rel="canonical", href=page.canonical)
+  else if (page.library.meta.canonical)
+    link(rel="canonical", href=page.library.meta.canonical)
+block content
+  .ui.content.page.login
+    .contain
+      if (page.type == "library")
+        if (page.library.meta.subtitle)
+          h1.ui.title.center #{page.library.meta.title}
+          h2.ui.sub.title.center.underline #{page.library.meta.subtitle}
+        else
+          h1.ui.title.center.underline #{page.library.meta.title}
+      .ui.grid.responsive
+        .twelve.column.wide.main
+          if (page.library)
+            .text.help.markdown !{page.library.html}
+          else
+            .text.help !{page.html}
+
+        .four.column.wide.sidebar
+          
+          form(method="post", action="/lumiere/").ui.form.block#createForm
+            .content
+              h3.ui.title.underline Create Character
+              .field.user
+                .ui.input
+                  label(for="create-username") Character Name
+                  input#create-username(type="text", name="username", maxlength=18)
+              .field
+                .ui.input
+                  label(for="create-password") Password
+                  input#create-password(type="password", name="password", maxlength=50)
+              .field
+                .ui.input
+                  label(for="create-confirmpass") Confirm Password
+                  input#create-confirmpass(type="password", name="confirmpass", maxlength=50)
+              .field
+                .ui.input
+                  label(for="create-email") Email
+                  input#create-email(type="text", name="email")
+              .three.fields
+                .field Gender
+                .field.inline
+                  input#male(type="radio", name="gender", value="male", checked="checked")
+                  label(for="male") Male
+                .field.inline
+                  input#female(type="radio", name="gender", value="female")
+                  label(for="female") Female
+              input(type="hidden", name="run", value="lumiere", checked="checked")
+              input(type="hidden", name="create", value="yes")
+              input(type="hidden", name="loginkey", value="")
+              button.ui.button.save.fluid(style="margin-top: 16px;") Create a new character
+          
+          .ui.block
+            .content
+              .ui.menu.vertica
+                a(href="/play/").item#loginExistingLink Existing Players
+block scripts
+  script(src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js")
+  script.
+    $("#createForm").validate({
+      onkeyup: false,
+      rules: {
+        username: {
+          required: "required",
+          minlength: 3,
+          remote: {
+            url: "/api/checkname",
+            data: {
+              format: "boolean"
+            }
+          }
+        },
+        password: "required",
+        confirmpass: {
+          equalTo: "#create-password",
+          required: "required"
+        },
+        email: "email",
+      },
+      messages: {
+          username: {
+            required: "This field is required",
+            minlength: "Your username needs to be at least 3 characters",
+            maxlength: "Your username needs to be less than 18 characters",
+            remote: "You can't use this name, try another one."
+          }
+        }
+    });
