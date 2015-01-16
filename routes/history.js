@@ -3,35 +3,31 @@ var router = express.Router();
 
 var avalon = require("../controller/avalon");
 
-router.get('/', function(req, res) {
-  res.render('history/index', { title: "The History of This Roleplaying World", avalon: avalon });
-});
+// Routes
+  router.get(['/', "/index.html"], getIndex);
+  router.get(['/ordinations', "/ordinations.html"], getOrdinations);
+  router.get(['/modernhistory', "/modernhistory.html"], getModernHistory);
+  router.get(['/ancienthistory', "/ancienthistory.html"], getAncientHistory);
 
-router.get('/index.html', function(req, res) {
-  res.render('history/index', { title: "The History of This Roleplaying World", avalon: avalon });
-});
+// Methods
+  function getIndex(req, res) {
+    avalon.info("history.md", function(err, meta, extra) {
+      if (err) return console.log(err);
+      res.render('history/index', { meta:meta.meta, extra:extra, avalon: avalon });
+    })
+  }
 
+  function getOrdinations(req, res) {
+    res.render('history/ordinations', { title: "Ordinations - The Greatest Event in the Land", avalon: avalon });
+  }
 
-router.get('/ordinations', function(req, res) {
-  res.render('history/ordinations', { title: "Ordinations - The Greatest Event in the Land", avalon: avalon });
-});
-router.get('/ordinations.html', function(req, res) {
-  res.render('history/ordinations', { title: "Ordinations - The Greatest Event in the Land", avalon: avalon });
-});
+  function getModernHistory(req, res) {
+    res.render('history/modernhistory', { title: "Modern History", avalon: avalon });
+  }
 
-router.get('/modernhistory', function(req, res) {
-  res.render('history/modernhistory', { title: "Modern History", avalon: avalon });
-});
-router.get('/modernhistory.html', function(req, res) {
-  res.render('history/modernhistory', { title: "Modern History", avalon: avalon });
-});
-
-router.get('/ancienthistory', function(req, res) {
-  res.render('history/ancienthistory', { title: "Ancient History", avalon: avalon });
-});
-router.get('/ancienthistory.html', function(req, res) {
-  res.render('history/ancienthistory', { title: "Ancient History", avalon: avalon });
-});
+  function getAncientHistory(req, res) {
+    res.render('history/ancienthistory', { title: "Ancient History", avalon: avalon });
+  }
 
 
 
