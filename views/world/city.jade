@@ -10,30 +10,33 @@ block content
   .ui.content.city
     .contain
       h1.ui.title #{city.title}
-
       .ui.grid.responsive
-        .twelve.column.wide.main
+        .twelve.column.wide.main.breadcrumbed
+          .ui.breadcrumb
+            a(href="/world/#cities") Cities
+            i.icon.angle.right
+            b  #{city.title}
           a(name="found")
           p.lead #{city.get("intro", true)}
           p #{city.get("founding", true)}
 
-          h2.ui.title.underline Founding History
+          h2.ui.title.overline Founding History
           != city.get("foundhistory")
 
           a(name="intro")
-          h2.ui.title.underline Introduction
+          h2.ui.title.overline Introduction
           != city.get("fullintro")
 
           a(name="history")
-          h2.ui.title.underline History
+          h2.ui.title.overline History
           != city.get("history")
 
           a(name="war")
-          h2.ui.title.underline War Record
+          h2.ui.title.overline War Record
           != city.get("war")
 
           a(name="temples")
-          h2.ui.title.underline Temples
+          h2.ui.title.overline.underline Temples
           - var temples = city.get("temples")
           for temple in temples
             h4.ui.title #{temple.deity}
@@ -41,7 +44,7 @@ block content
 
           .ui.manual
             a(name="avintro")
-            h2.ui.title.underline Words from the Barony
+            h2.ui.title.overline Words from the Barony
             .text.help!= city.help(city.name)
 
 

@@ -1,37 +1,32 @@
 extends ../layout
 
 block head
-  - var description = "Avalon - Multiuser Online Game World. The home of Avalon, premier multiplayer roleplaying world. Windows and Java clients. The most complex, atmospheric online RPG on the net.";
-  - var keywords = "Online Game, Online RPG, RPG, Roleplaying Games, RPGS, MUD, MUDs, Online Games, Interactive Games, Multiplayer Games, Multiuser Games, Internet Games, Fantasy Games, Magic, Adventure, Java, Telnet Client, Online, Knight, Sorcerer, Sorcery, Poisons, Potions, Mage, Mystic, Thief, Guild, Bard, Battle, Army, Strategy";
+  - var title = meta.seo.title
+  - var description = meta.seo.description
+  - var keywords = meta.seo.keywords
   link(rel="canonical", href="http://www.avalon-rpg.com/world/")
 
 block content
   .ui.content.world
     .contain
-      h1.ui.title.center.underline The World of Avalon
+      h1.ui.title.center.underline #{meta.title}
+      p.lead #{meta.summary}
+      
 
-      p.lead All new Avalonians are born into one of four cities; Mercinae, Thakria, Parrius and Silverfalls. They are then invited to complete a novicehood at an academic institution. Each city has one. The novice must, in order to graduate onward, complete eight accolade quests - quests designed to gently introduce a new player to the land. Upon completion, the novice graduates and is free to begin their true career - to join a guild, to seek a patron, to rise in power and prestige, to make his or her mark on Avalon forever.
-      
+      mixin city(title, description)
+        .column
+          img(src="http://www.avalon-rpg.com/images/wingart/citythumbs/"+title.toLowerCase()+".jpg").left.floated.ui.image
+          h4.ui.title: a(href="/cities/"+title.toLowerCase()) #{title}
+          p #{description}
+
       .section.cities.box.ui
-        h2.ui.title.underline Cities
+        a(name="cities")
+        h2.ui.title.underline #{meta.cities.title}
         .ui.grid.responsive.two.columns
-          .column
-            img(src="http://www.avalon-rpg.com/images/wingart/citythumbs/mercinae.jpg").left.floated.ui.image
-            h4.ui.title: a(href="/cities/mercinae") Mercinae
-            p Mercinae has always stood as a bastion for the ideals of truth and justice. Mercinae's history has remained relatively unaggressive though recently its warlike ambitions against old enemies have come to the fore.
-          .column
-            img(src="http://www.avalon-rpg.com/images/wingart/citythumbs/thakria.jpg").left.floated.ui.image
-            h4.ui.title: a(href="/cities/thakria") Thakria
-            p Thakria is home to perhaps the most extreme people; evil, cunning, self-reliance, belligerence - these are the prime traits of many a Thakrian. Thakria's history is one of aggressive conflict, military success, and strong leadership.
-          .column
-            img(src="http://www.avalon-rpg.com/images/wingart/citythumbs/parrius.jpg").left.floated.ui.image
-            h4.ui.title: a(href="/cities/parrius") Parrius
-            p Parrius was one of the earliest colonized settlements in the Avalon continent as a cut-and-thrust sea port on the Eastern Sea. Its founding ideals stem from its love of freedom.
-          .column
-            img(src="http://www.avalon-rpg.com/images/wingart/citythumbs/silverfalls.jpg").left.floated.ui.image
-            h4.ui.title: a(href="/cities/silverfalls") Silverfalls
-            p Located on the banks of the river Silverlight amongst the central plains of Avalon, Silverfalls has risen from the crumbled remains of its former glory, Springdale.
+          for city in meta.cities.cities
+            +city(city.title, city.description)
       
+
       mixin profession(title, guilds, description)
         .row
           h4.ui.title.underline
@@ -41,54 +36,36 @@ block content
                 a.item(href="/guilds/" + guild.toLowerCase()) #{guild}
           img(src="http://www.avalon-rpg.com/images/wingart/profthumbs/" + title.toLowerCase() + ".gif").left.floated.ui.image
           p= description
-          
-      .section.academies.box.ui
-        h2.ui.title.underline The Guilds and Professions
-        +profession("Knight", ["Knights", "Warriors", "Cavaliers", "Templars"], "The Knight is a physical combatant. He or she is concerned with the study of physical prowess (weapons, melee, swordplay, endurance) rather than over the airy magical realms. Consider the Knight profession if you are fast, quick-witted or aggressive, but keen to keep simple and effective. They are strong in combat both offensively and defensively though rely on good maintenance of weapons, armour and equipment.")
-        +profession("Mage", ["Mages", "Wizards", "Enchanters", "Warlocks"], "The Mage is the most traditional of magic users. He learns the potent skills of charming and magical rituals, in addition to a healthy mix of musical, spiritual and herbalist abilities. The Mage profession encourages good planning and methodical preparation. It is one of the strongest defensive professions, even against many foes, but good attack is an art few master.")
-        +profession("Sorcerer", ["Sorcerers", "Necromancers"], "Those who choose to follow the profession of the Sorcerer are making a powerful, life-long choice. They are choosing personal ambition, domination of others, strength through aggressive destruction of their enemies. Confrontation is the ideal for a Sorcerer, the profession favours the aggressive. It is potent in attack and agile in defence.")
-        +profession("Thief", ["Thieves", "Assassins"], "The Thief is perhaps the most mysterious of the professions since it encompasses many branches of specialisation, from the assassin to the stealthy burglar. Thieves are unsurpassed at lurking about unseen, sliding out of view, away into the shadows. The Thief profession favours indirect combat, well-planned attacks and nimble-footed flight in defence.")
-        +profession("Ranger", ["Rangers", "Brigands"], "Rangers are sturdy, physically tough, rural folk. They make their home often outside the large cities (e.g. in the Greenwood forest) and live off the land. Rangers are skilled in the arts of herbalism, archery, forestry, herbs and poisons. They fight and move best within the forests or the wilderness, a good all-round guild, fairly self-sufficient and capable in combat and subterfuge.")
-        +profession("Seer", ["Seers", "Mystics", "Astrologers", "Apostles"], "Seers are a rather unique profession. Their power is drawn directly from the stars, and they operate mostly from a distance - from within darkened rooms using brightly flashing seeing-stones, affecting friend and foe from afar. Seers are trained in the arts of farsight through seeing stones, mysticism, fatalist curses and a smattering of stealth. The Seer profession favours patient planning, distant execution and methodical defence. It is able to have an effect from afar, from relative safety, dipping into the melee only when unavoidable.")
-        +profession("Loremaster", ["Loremasters", "Craftmasters", "Alchemists", "Artisans"], "Those who choose to become a Loremaster tend to be the creators, the makers and the practical folk. The profession learns the skills of forging armour and weapons, of creating magical items, of fashioning runes of power, and of mixing up elixirs of enchantment. The Loremaster tends to attract the more peaceful individual. Their skills in battle are strongly defence, more an invaluable supplier profession than a direct combatant.")
-        +profession("Animist", ["Animists", "Druids"], "The Druids and Animists are alone among the Avalon professions in that they shun violence utterly. They embrace the pacifist, altruistic teachings of the god of life. The Druid profession attracts those who do not wish to be embroiled in the hurly burly of combat or competitive conflict. Within the forest the Animist is virtually inviolate, often both protected and aloof.")
-        +profession("Bard", ["Bards"], "The Bard is an enigmatic character, skilled in the arts of songs, story-telling, dramatics and music. Bards are powerful public speakers, and have the ability to command an audience to action with the power of their word, song and deed. The Bard profession is effective both offensively and defensively, though it requires great timing, co-ordinations of skills and devious planning. It is a profession with great potential that few master.")
+         
+      .section.guilds.box.ui
+        a(name="guilds")
+        h2.ui.title.underline #{meta.guilds.title}
+        for prof in meta.guilds.professions
+          +profession(prof.profession, prof.guilds, prof.description)
 
 
+
+      mixin academy(name, title, description)
+        .column
+          h4.ui.title: a(href="/academies/"+name.toLowerCase()) #{title}
+          p #{description}
+
       .section.academies.box.ui
-        h2.ui.title.underline Academies
+        a(name="academies")
+        h2.ui.title.underline #{meta.academies.title}
         .ui.grid.responsive.two.columns
-          .column
-            h4.ui.title: a(href="/academies/academy") Mercinae's Academy
-            p The oldest academy of all, the Mercinean Academy is where many of the finest players have begun their mortal lives.
-          .column
-            h4.ui.title: a(href="/academies/institute") Thakria's Institute
-            p Many of those players of a more evil, self-centred or self-reliant disposition have begun their lives in this fine learning academy, the pride of the City of Miracles.
-          .column
-            h4.ui.title: a(href="/academies/college") Parrius' College
-            p A more recent construction is Parrius' fine College, where many of the more individualist and free-thinking were first educated and cared for.
-          .column
-            h4.ui.title: a(href="/academies/orphanage") Silverfalls Orphanage
-            p The newest of all the academies, many of the youngest and upcoming players have been educated at the Orphanage of Silverfalls.
+          for aca in meta.academies.academies
+            +academy(aca.name, aca.title, aca.description)
+
+
+      mixin map(title, maps)
+        h3.ui.title #{title}
+        .ui.menu
+          for map in maps
+            a.item(href="http://www.avalon-rpg.com/maps/viewmap.php?map="+map.file) #{map.title}
 
       .section.academies.box.ui
-        h2.ui.title.underline Maps
-        p This section contains a list of the assembled maps and location guides available for the Avalon player. Some of these are fairly large and will take a while to download, so be patient. The accuracy of the maps can be taken as almost certain, though natural disaster or divine whim may periodically change the lay of the land.
-        
-        h3.ui.title The Land
-        .ui.menu
-          a.item(href="http://www.avalon-rpg.com/maps/viewmap.php?map=worldmap") The Avalon World
-          a.item(href="http://www.avalon-rpg.com/maps/viewmap.php?map=painting") Painting of the land
-
-        h3.ui.title The Cities
-        .ui.menu
-          a.item(href="http://www.avalon-rpg.com/maps/viewmap.php?map=mercinae") Mercinae
-          a.item(href="http://www.avalon-rpg.com/maps/viewmap.php?map=thakria") Thakria
-          a.item(href="http://www.avalon-rpg.com/maps/viewmap.php?map=parrius") Parrius
-          a.item(href="http://www.avalon-rpg.com/maps/viewmap.php?map=springdale") Springdale (destroyed)
-          a.item(href="http://www.avalon-rpg.com/maps/viewmap.php?map=oldmercinae") Old Mercinae
-
-        h3.ui.title Specialist Maps
-        .ui.menu
-          a.item(href="http://www.avalon-rpg.com/maps/viewmap.php?map=rivers") The Main Rivers
-          a.item(href="http://www.avalon-rpg.com/maps/viewmap.php?map=skies") The Skies over Avalon
+        h2.ui.title.underline #{meta.maps.title}
+        p #{meta.maps.description}
+        for cat in meta.maps.categories
+          +map(cat.title, cat.maps)

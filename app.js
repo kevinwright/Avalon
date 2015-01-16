@@ -20,6 +20,7 @@ global.avalon = {
         autohelp: "/help/autohelp",
         bb: "/help/bb",
         library: "/library",
+        library_pages: "/library/pages",
         library_help: "/library/help"
     },
     files: {

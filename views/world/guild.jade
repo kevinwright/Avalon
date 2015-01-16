@@ -12,7 +12,11 @@ block content
       h1.ui.title The #{guild.title}
 
       .ui.grid.responsive
-        .twelve.column.wide.main
+        .twelve.column.wide.main.breadcrumbed
+          .ui.breadcrumb
+            a(href="/world/#guilds") Guilds
+            i.icon.angle.right
+            b  The #{guild.title} Guild
           p.lead #{guild.info.outlook}
           p
             | Founded on the #{guild.info.founded} by #{guild.info.foundedby}, 
@@ -21,27 +25,27 @@ block content
             | . They have the profession of #{guild.info.profession} and the guild alignment of #{guild.info.alignment}
 
           a(name="intro")
-          h2.ui.title.underline Introduction
+          h2.ui.title.overline Introduction
           != guild.get("intro")
 
           a(name="first")
-          h2.ui.title.underline Words of #{guild.info.foundedby}, first guildmaster
+          h2.ui.title.overline Words of #{guild.info.foundedby}, first guildmaster
           != guild.get("firstwords")
 
           .ui.manual
             a(name="current")
-            h2.ui.title.underline #{guild.info.guildmaster}, current guildmaster says the following about the guild
+            h2.ui.title.overline #{guild.info.guildmaster}, current guildmaster says the following about the guild
             .text.help!= guild.help(guild.name)
 
           a(name="skills")
-          h2.ui.title.underline Guild specialist skills
+          h2.ui.title.overline.underline Guild specialist skills
           - var skills = guild.get("skills")
           for skill in skills
             h4.ui.title #{skill.title}
             p #{skill.description}
 
           a(name="location")
-          h2.ui.title.underline Location
+          h2.ui.title.overline Location
           != guild.get("location")
 
 
