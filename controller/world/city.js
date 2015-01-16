@@ -1,4 +1,6 @@
-var HELPDIR = "/help/help";
+var HELPDIR = global.avalon.dir.help;
+var WORLDDIR = global.avalon.dir.world;
+
 var fs = require("fs");
 var parser = require("../help/parser");
 
@@ -23,7 +25,7 @@ module.exports = function (cityName) {
   this.name = cityName;
   this.title = cap(this.name);
 
-  this.baseLocation = "/help/library/world/" + this.title + "/";
+  this.baseLocation = WORLDDIR + this.title + "/";
 
   this.get = function(item, isSingleString) {
     if (item == "temples") return parseTemple(this.baseLocation + item);

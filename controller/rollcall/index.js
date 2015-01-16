@@ -1,4 +1,4 @@
-var ROLLCALLDIR = "/help/rollcall";
+var ROLLCALLDIR = global.avalon.dir.rollcall;
 
 var fs = require("fs");
 

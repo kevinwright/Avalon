@@ -1,3 +1,4 @@
+var LIBRARYDIR = global.avalon.dir.library;
 var express = require('express');
 var router = express.Router();
 var avalon = require("../controller/avalon");
@@ -5,6 +6,8 @@ var fs = require("fs");
 
 var marked = require("meta-marked");
 var pages = [];
+
+var files = require(global.avalon.files.pages);
 
 function render(page) {
   return function (req, res) {
@@ -55,17 +58,14 @@ function addHtml(page) {
   });
 }
 
-function init() {
-  var files = require("/help/library/pages");
-  for (var i = 0; i<files.length; i++) {
-    var page = files[i];
-    if (page.type == "library") {
-      addPage(page);
-    } else if (page.type == "html") {
-      addHtml(page);
-    }
+
+for (var i = 0; i<files.length; i++) {
+  var page = files[i];
+  if (page.type == "library") {
+    addPage(page);
+  } else if (page.type == "html") {
+    addHtml(page);
   }
 }
 
-init();
 module.exports = router;

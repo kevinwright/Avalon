@@ -1,21 +1,32 @@
+
+//     ______                              
+//    / ____/  ______  ________  __________
+//   / __/ | |/_/ __ \/ ___/ _ \/ ___/ ___/
+//  / /____>  </ /_/ / /  /  __(__  |__  ) 
+// /_____/_/|_/ .___/_/   \___/____/____/  
+//           /_/                           
+
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var intro = require('./routes/intro');
-var api = require('./routes/api');
-var bb = require('./routes/bb');
-var help = require('./routes/help');
-var play = require('./routes/play');
-var news = require('./routes/news');
-var rollcall = require('./routes/rollcall');
-var history = require('./routes/history');
-var lumiere = require('./routes/lumiere');
-var world = require('./routes/world');
-var dynamic = require('./routes/dynamic');
+global.avalon = {
+    dir: {
+        help: "/help/help",
+        world: "/library/world/",
+        rollcall: "/help/rollcall",
+        autohelp: "/help/autohelp",
+        bb: "/help/bb",
+        library: "/library",
+        library_help: "/library/help"
+    },
+    files: {
+        synonyms: "/library/synonyms.js",
+        pages: "/library/pages.js"
+    }
+}
 
 var app = express();
 
@@ -23,27 +34,48 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(logger('dev'));
+if (app.get('env') === 'development')
+    app.use(logger('dev'));
+else
+    app.use(logger("combined"));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
+// static folders
+app.use(express.static(path.join(__dirname, 'public')));
 app.use("/help/downloads", express.static(path.join(__dirname, 'downloads')));
 
-app.use('/', routes);
-app.use('/intro', intro);
-app.use('/api', api);
-app.use('/bb', bb);
-app.use('/help', help);
-app.use('/play', play);
-app.use('/news', news);
-app.use('/rollcall', rollcall);
-app.use('/history', history);
-app.use('/lumiere', lumiere);
 
-app.use('/', world);
-app.use('/', dynamic);
+
+//     ____              __           
+//    / __ \____  __  __/ /____  _____
+//   / /_/ / __ \/ / / / __/ _ \/ ___/
+//  / _, _/ /_/ / /_/ / /_/  __(__  ) 
+// /_/ |_|\____/\__,_/\__/\___/____/  
+
+
+app.use('/', require('./routes/index'));
+app.use('/intro', require('./routes/intro'));
+app.use('/api', require('./routes/api'));
+app.use('/bb', require('./routes/bb'));
+app.use('/help', require('./routes/help'));
+app.use('/play', require('./routes/play'));
+app.use('/news', require('./routes/news'));
+app.use('/rollcall', require('./routes/rollcall'));
+app.use('/history', require('./routes/history'));
+app.use('/lumiere', require('./routes/lumiere'));
+
+app.use('/', require('./routes/world'));
+app.use('/', require('./routes/dynamic'));
+
+
+//     ______                         
+//    / ____/_____________  __________
+//   / __/ / ___/ ___/ __ \/ ___/ ___/
+//  / /___/ /  / /  / /_/ / /  (__  ) 
+// /_____/_/  /_/   \____/_/  /____/  
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -51,8 +83,6 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-
-// error handlers
 
 // development error handler
 // will print stacktrace

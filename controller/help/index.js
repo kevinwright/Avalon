@@ -1,6 +1,6 @@
-var AUTOHELPDIR = "/help/autohelp";
-var HELPDIR = "/help/help";
-var LIBRARYDIR = "/help/library";
+var AUTOHELPDIR = global.avalon.dir.autohelp,
+    HELPDIR = global.avalon.dir.help,
+    LIBRARYHELPDIR = global.avalon.dir.library_help;
 
 var fs = require("fs");
 var avalon = require("../avalon.js");
@@ -10,7 +10,7 @@ var synonym = require("./synonym");
 var Section = require("./section");
 var Page = require("./page");
 
-function HelpController() {
+function Controller() {
   var self = this;
 
   this.index = function(req, res) {
@@ -79,7 +79,7 @@ function readPage(title, callback) {
   var isSynonym = synonym(title);
   if (isSynonym) title = isSynonym;
   console.log("HELP " + title);
-  fs.readFile(LIBRARYDIR + "/" + title, "utf8", function(libErr, librarycontent) {
+  fs.readFile(LIBRARYHELPDIR + "/" + title, "utf8", function(libErr, librarycontent) {
     console.log(" - library");
     fs.readFile(AUTOHELPDIR + "/" + title + "0", "utf8", function(autoErr, autocontent) {
       console.log(" - loaded", libErr, autoErr);
@@ -128,4 +128,4 @@ function parseSections(callback) {
 }
 
 
-module.exports = new HelpController();
+module.exports = new Controller();

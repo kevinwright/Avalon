@@ -1,4 +1,4 @@
-var words = require("//help/library/pages/synonyms.js");
+var words = require(global.avalon.files.synonyms);
 
 module.exports = function(title) {
   if (title in words) return words[title];

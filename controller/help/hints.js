@@ -1,4 +1,5 @@
-module.exports = {
+module.exports =
+{
   "1": "About life inside the game and basic character development.",
   "2": "How to complete your novicehood and benefit greatly from the experience.",
   "3": "An overview of the different areas of the world.",

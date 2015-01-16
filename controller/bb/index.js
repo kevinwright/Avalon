@@ -1,11 +1,11 @@
-var BBDIR = "/help/bb/";
+var BBDIR = global.avalon.dir.bb;
 var avalon = require("../avalon");
 var fs = require("fs");
 var parser = require("../help/parser");
 
 var Board = require("./board.js");
 
-function BBController() {
+function Controller() {
   var self = this;
   this.boards = parseSections();
   
@@ -112,10 +112,10 @@ function findParticipant(board, person) {
 function parseSections() {
   var boards = {};
 
-  var data = require(BBDIR + "boards.json").boards;
+  var data = require(BBDIR + "/boards.json").boards;
   for (var i = 0; i<data.length;i++) {
     try {
-      var board = require(BBDIR + data[i].href);
+      var board = require(BBDIR + "/" + data[i].href);
     } catch(err) {continue;}
     
     var parseBoard = new Board(data[i], board.posts);
@@ -126,11 +126,11 @@ function parseSections() {
 }
 
 function readPost(boardId, postHref, callback) {
-  console.log(BBDIR + boardId + "/" + postHref);
-  fs.readFile(BBDIR + boardId + "/" + postHref, "utf8", function(err, content) {
+  console.log(BBDIR + "/" + boardId + "/" + postHref);
+  fs.readFile(BBDIR + "/" + boardId + "/" + postHref, "utf8", function(err, content) {
     if (err) return callback(err);
     callback(null, content);
   });
 }
 
-module.exports = new BBController();
+module.exports = new Controller();

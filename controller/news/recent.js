@@ -1,4 +1,4 @@
-var HELPDIR = "/help/help";
+var HELPDIR = global.avalon.dir.help;
 var fs = require("fs");
 
 var recent = function(callback) {

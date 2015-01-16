@@ -1,4 +1,6 @@
-var HELPDIR = "/help/help";
+var HELPDIR = global.avalon.dir.help;
+var WORLDDIR = global.avalon.dir.world;
+
 var fs = require("fs");
 var parser = require("../help/parser");
 
@@ -34,7 +36,7 @@ module.exports = function (guildName) {
   this.name = guildName;
   this.title = cap(this.name);
 
-  this.baseLocation = "/help/library/world/" + this.title + "/";
+  this.baseLocation = WORLDDIR + this.title + "/";
 
   try {
     this.infoContent = fs.readFileSync(this.baseLocation + "basicinfo", "utf8");
