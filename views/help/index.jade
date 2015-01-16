@@ -13,7 +13,6 @@ block content
       .ui.grid.responsive
         .twelve.column.wide.main
           p.lead This is the full, comprehensive Avalon manual. If you are new to Avalon, we recommend you tackle the <a href="/intro/">Introduction</a> first. The manual here contains everything a player needs to know about Avalon. <!--The number in brackets after the section title denotes number of sub-section entries.-->Enjoy!
-          p There are also several <a href="/maps/">maps of Avalon</a> available.
 
           h4.ui.title.expand.all
             i.icon.triangle.down
@@ -48,11 +47,22 @@ block content
               h2.ui.title.underline Downloads
               p It is also possible to download the entire manual as:
               .ui.menu.vertical
-                a(target="_blank", href="/help/downloads/avman2h.htm").item HTML file [758k]
-                a(target="_blank", href="/help/downloads/avman2h.zip").item zipped HTML file [248k]
-                a(target="_blank", href="/help/downloads/avman2w.doc").item Word 97 document [1578k]
-                a(target="_blank", href="/help/downloads/avman2w.zip").item zipped Word 97 document [279k]
-              p However, please note that these files may become somewhat out of date (these downloads are dated 25th May 1999), so by viewing the pages here at our web site, or with the online HELP command, you are ensuring that you are reading the latest information. Avalon is a living, evolving world and tends to change regularly.
+                a(target="_blank", href="/help/downloads/avman2h.htm").item
+                  i.icon.file
+                  | HTML
+                a(target="_blank", href="/help/downloads/avman2h.zip").item
+                  i.icon.file
+                  | HTML (Zipped)
+                a(target="_blank", href="/help/downloads/avman2w.doc").item
+                  i.icon.file
+                  | Word Document
+                a(target="_blank", href="/help/downloads/avman2w.zip").item
+                  i.icon.file
+                  | Word Document (Zipped)
+          .ui.block.help.downloads
+            .content
+              h2.ui.title.underline Maps
+              p There are also several <a href="/maps/">maps of Avalon</a> available.
 
 
 block scripts
@@ -64,7 +74,8 @@ block scripts
     $(".help.index .expand").bind("click", function() {
       var id = $(this).data("id");
       var table = $("#section-"+id+" .ui.table");
-      table.toggleClass("hidden");
+      if (table.is(":visible")) table.hide("fast");
+      else table.show("fast");
       $(this).find(".icon").toggleClass("active");
     });
 
@@ -72,12 +83,12 @@ block scripts
     $(".expand.all").bind("click", function() {
       var table = $(".help.index .ui.table");
       if (expandAll === false) {
-        table.removeClass("hidden");
+        table.show("fast");
         $(".help.section .icon").addClass("active");
         expandAll = true;
         $(".expand.all .text").text("Compress All Sections")
       } else {
-        table.addClass("hidden");
+        table.hide("fast");
         $(".help.section .icon").removeClass("active");
         expandAll = false;
         $(".expand.all .text").text("Expand All Sections")
