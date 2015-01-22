@@ -610,65 +610,100 @@
 
  .ui.dropdown {
   position: relative;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+  tap-highlight-color: rgba(0, 0, 0, 0);
+
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+
+  line-height: 1;
+
   .menu {
+    // border-bottom: 1px solid fade(@col_primary, 50%);    
     cursor: auto;
     position: absolute;
-    display: none;
-    top: 100%;
-    margin: 0;
-    background-color: rgba(0, 0, 0, 0.9);
-    border-bottom: 1px solid fade(@col_primary, 50%);
-    min-width: 100%;
-    white-space: nowrap;
-    font-size: .875em;
-    text-shadow: none;
-    -webkit-box-shadow: 0 0 1px 1px rgba(0,0,0,.9);
-    box-shadow: 0 0 1px 1px rgba(0,0,0,.9);
-    border-radius: 0 0 .325em .325em;
-    -webkit-transition: opacity .2s ease;
-    -moz-transition: opacity .2s ease;
-    transition: opacity .2s ease;
-    z-index: 50000;
-
     display: block;
+    top: -9999px !important;
     overflow: hidden;
-    top: -9999px!important;
-    position: absolute;
+
+    margin: 0em;
+    background-color: #000;
+    min-width: 100%;
     opacity: 0;
     width: 0;
     height: 0;
-    -webkit-transition: opacity .2s ease-out;
-    -moz-transition: opacity .2s ease-out;
-    transition: opacity .2s ease-out;
-    left: 0px;
+
+    white-space: nowrap;
+    font-size: 0.875em;
+    text-shadow: none;
+
+    -webkit-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+
+    -moz-border-radius: 0px 0px 0.325em 0.325em;
+    -webkit-border-radius: 0px 0px 0.325em 0.325em;
+    border-radius: 0px 0px 0.325em 0.325em;
+
+    -webkit-transition: opacity 0.2s ease-out;
+    -moz-transition: opacity 0.2s ease-out;
+    -o-transition: opacity 0.2s ease-out;
+    -ms-transition: opacity 0.2s ease-out;
+    transition: opacity 0.2s ease-out;
+    z-index: 11;
+    
+    &:after, &:before {display: none;}
+
+    .menu {
+      top: 0% !important;
+      left: 100% !important;
+      margin: 0em !important;
+      border-radius: 0 0.325em 0.325em 0em !important;
+    }
 
     .item {
-      width: 100%;
-      color: rgba(255,255,255,.8);
+
       cursor: pointer;
       border: none;
       border-top: 1px solid rgba(0,0,0,.1);
       height: auto;
+
+      font-size: 0.875em;
       display: block;
-      padding: .85em 1em!important;
-      font-size: .875rem;
+      color: rgba(255,255,255,.8);
+
+      padding: 0.85em 1em !important;
+      font-size: 0.875rem;
       text-transform: none;
-      font-weight: 400;
+      font-weight: normal;
       text-align: left;
-      -webkit-touch-callout: none;
+
+      &:hover > .menu {
+        overflow: visible;
+        width: auto;
+        height: auto;
+        top: 0% !important;
+        left: 100% !important;
+        opacity: 1;
+      }
+
       &.active {
         color: rgba(255,255,255,1);
         background: #000;
       }
+
     }
   }
 
-  &:hover .menu {
+  &.active > .menu, &:hover > .menu {
     overflow: visible;
     width: auto;
     height: auto;
-    top: 100%!important;
+    top: 100% !important;
     opacity: 1;
+
     &.limited {
       overflow-y: scroll;
       height: 130px;

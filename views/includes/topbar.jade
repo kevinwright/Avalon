@@ -1,30 +1,53 @@
+mixin item(item)
+  a.item(href=item.url, title=item.title, target=item.target, class=item.css) #{item.content}
+
 .ui.topbar
   .ui.menu.very.tiny.contain.desktop
     .left.menu
-      a.item(href="/") Avalon RPG
-      a.item(href="/intro/", title="Introduction to Avalon") Intro
-      a.item(href="/news/") News
-      a.item(href="/help/") Help
-      a.item(href="/history/") History
-      a.item(href="/world/", title="Cities, Guilds & Maps") World
+      if avalon && avalon.menu
+        for item in avalon.menu.left
+          if item.items
+            .ui.dropdown.item
+              a(href=item.url, title=item.title, target=item.target, class=item.css) #{item.content}
+              i.icon.triangle.down
+              .menu
+                for subitem in item.items
+                  if subitem.items
+                    .ui.dropdown.item
+                      a(href=subitem.url, title=subitem.title, target=subitem.target, class=subitem.css) #{subitem.content}
+                      i.icon.triangle.down
+                      .menu
+                        for subsubitem in subitem.items
+                          +item(subsubitem)
+                  else
+                    +item(subitem)
+
+          else
+            +item(item)
+      else
+        +item({url: "/", content: "Avalon RPG"})
 
     .right.menu
       if (avalon && avalon.users)
         a.item #{avalon.users().length} Players Online
-      a.item(href="http://www.meetplace.net", target="_blank", title="Meetplace Community") Meetplace
-      a.item(href="/press/") Contact
-      a.item(href="/play/").playnow Play Now
+      if avalon && avalon.menu
+        for item in avalon.menu.right
+          +item(item)
+
   .ui.menu.mobile.very.tiny.contain
     .left.menu
       a.item(href="/") Avalon RPG
       .ui.dropdown.item
         i.icon.triangle.down
           .menu
-            a.item(href="/intro/", title="Introduction to Avalon") Intro
-            a.item(href="/news/") News
-            a.item(href="/help/") Help
-            a.item(href="/history/") History
-            a.item(href="/citguilds/", title="Cities, Guilds & Maps") Cities &amp; Guilds
-            a.item(href="http://www.meetplace.net", target="_blank") Meetplace
-            a.item(href="/press/") Contact
-            a.item(href="/play/").playnow Play Now
+            if avalon && avalon.menu
+              for item in avalon.menu.left
+                +item(item)
+                if item.items
+                  for subitem in item.items
+                    +item(subitem)
+              for item in avalon.menu.right
+                +item(item)
+                if item.items
+                  for subitem in item.items
+                    +item(subitem)

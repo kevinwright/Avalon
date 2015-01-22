@@ -24,10 +24,13 @@ global.avalon = {
         library_help: "/library/help"
     },
     files: {
+        menu: "/library/menu.js",
         synonyms: "/library/synonyms.js",
         pages: "/library/pages.js"
     }
 }
+
+var avalon = require("./controller/avalon");
 
 var app = express();
 
@@ -91,6 +94,7 @@ if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
+            avalon: avalon,
             message: err.message,
             error: err
         });
@@ -102,6 +106,7 @@ if (app.get('env') === 'development') {
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
+        avalon: avalon,
         message: err.message,
         error: {}
     });

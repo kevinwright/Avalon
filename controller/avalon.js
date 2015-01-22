@@ -23,6 +23,7 @@ var catchBlock = function(content) {
 }
 
 module.exports = {
+  menu: require(global.avalon.files.menu),
   users: function() { return who.users;},
   info: function(file, callback) {
     if (callback) {
