@@ -3,16 +3,18 @@ var router = express.Router();
 var avalon = require("../controller/avalon");
 var recent = require("../controller/news/recent.js");
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  recent(function(data) {
-    res.render('index', { title: "Avalon: The Net's First Online Text Based Roleplaying Game", avalon: avalon, recent: data.splice(0, 6) });
-  })
-});
-router.get('/index.html', function(req, res) {
-  recent(function(data) {
-    res.render('index', { title: "Avalon: The Net's First Online Text Based Roleplaying Game", avalon: avalon, recent: data.splice(0, 6) });
-  })
-});
+// Routes
+  router.get(['/', "/index.html"], getIndex);
+
+// Methods
+  function getIndex(req, res) {
+    recent(function(data) {
+      avalon.info("front.md", function(err, meta, extra) {
+        if (err) return console.error(err);
+        res.render('index', { avalon: avalon, meta: meta.meta, extra:extra, recent: data });
+      });
+    })
+  }
+
 
 module.exports = router;

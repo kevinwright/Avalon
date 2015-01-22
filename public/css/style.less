@@ -312,6 +312,9 @@
     &.right {
       box-shadow: 10px 0px 8px rgba(0, 0, 0, 0.5);
     }
+    &.small {
+      margin-bottom: 10px;
+    }
   }
 
 
@@ -932,6 +935,28 @@
 // /___/_/ /_/\__,_/\___/_/|_|  
                              
   body.index {
+    .event.box {
+      position: relative;
+      .date {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        font-size: 14px;
+        background: rgba(255,255,255,.05);
+        padding: 10px 20px;
+        border: 1px solid rgba(255,255,255,0);
+        border-bottom-color: rgba(255,255,255,.1);
+        border-radius: 5px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        box-shadow: 0 2px 2px rgba(0,0,0,.5);
+        height: 40px;
+      }
+      .text {
+        padding-top: 40px;
+      }
+    }
     .ui.footer {
        margin-top: 0px;
     }

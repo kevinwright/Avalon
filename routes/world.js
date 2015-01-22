@@ -17,7 +17,6 @@ var guild = require("../controller/world/guild.js");
   function getIndex(req, res) {
     avalon.info("world.md", function(err, meta) {
       if (err) return console.log(err);
-      console.log(err, meta);
       res.render('world/index', { avalon:avalon, meta: meta.meta, title: "The world of Avalon, Online RPG Game" });
     })
   }
@@ -41,7 +40,6 @@ var guild = require("../controller/world/guild.js");
   var academies = ["Orphanage", "Academy", "Institute", "College"];
   function redirectCityGuilds(req, res) {
     var par = req.params["page"];
-    console.log(cap(par), academies);
     if (cities.indexOf(cap(par)) >= 0) return res.redirect("/cities/" + par.toLowerCase());
     if (academies.indexOf(cap(par)) >= 0) return res.redirect("/academies/" + par.toLowerCase());
 
