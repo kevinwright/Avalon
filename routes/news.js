@@ -2,12 +2,16 @@ var express = require('express');
 var router = express.Router();
 var avalon = require("../controller/avalon");
 
-router.get('/', function(req, res) {
-  res.render('news/index', { avalon:avalon, title: "The Latest news from Avalon, Online RPG Game" });
-});
-router.get('/index.html', function(req, res) {
-  res.render('news/index', { avalon:avalon, title: "The Latest news from Avalon, Online RPG Game" });
-});
+// Routes
+  router.get(['/', "/index.html"], getIndex);
+
+// Methods
+  function getIndex(req, res) {
+    avalon.info("news.md", function(err, meta, extra) {
+      if (err) return console.error(err);
+      res.render('news/index', { meta: meta.meta, avalon:avalon });
+    });
+  }
 
 
 module.exports = router;
