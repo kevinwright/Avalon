@@ -13,11 +13,11 @@ block content
 
       .section.history.ui.box
         .ui.grid.responsive.two.columns
-          for link in links
+          for link in meta.links
             .column
-              h4.ui.title: a(href=link.url) link.title
-              |= link.description
-              
+              h4.ui.title: a(href=link.url) #{link.title}
+              | #{link.description}
+
       .ui.box
         != extra.normal.html
 

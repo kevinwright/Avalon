@@ -1,18 +1,18 @@
 extends ../layout
 
 block head
-  - var title = "Online Rpg. Avalon- The Legend Lives - Help and manual section"
-  - var description = "Avalon - Online RPG. The home of Avalon, text based game, premier multiplayer roleplaying world. Windows and Java clients. The most complex, atmospheric RPG on the net."
-  - var keywords = "RPG, text, based, Roleplaying, Games, RPGS, MUDs, Interactive, Multiplayer, Multiuser, Avalon, Fantasy, Magic, Adventure, Java, Telnet, Online, Knight, Sorcerer, Sorcery, Poisons, Potions, Mage, Mystic, Thief, Guild, Bard, Battle, Army, Strategy"
+  - var title = meta.seo.title
+  - var description = meta.seo.description
+  - var keywords = meta.seo.keywords
   link(rel="canonical", href="http://www.avalon-rpg.com/help/")
 block content
   .ui.content
     .contain
-      h1.ui.title.center.underline The Manual of Avalon
+      h1.ui.title.center.underline #{meta.title}
 
       .ui.grid.responsive
         .twelve.column.wide.main
-          p.lead This is the full, comprehensive Avalon manual. If you are new to Avalon, we recommend you tackle the <a href="/intro/">Introduction</a> first. The manual here contains everything a player needs to know about Avalon. <!--The number in brackets after the section title denotes number of sub-section entries.-->Enjoy!
+          p.lead !{meta.summary}
 
           h4.ui.title.expand.all
             i.icon.triangle.down
@@ -37,32 +37,24 @@ block content
         .four.column.wide.sidebar
           .ui.block
             .content
-              p You may also look at a specific help page by typing its name below:
+              p #{meta.search}
               form(action="/help/search")
                 p HELP 
                   input(type="text" name="page" size="10", list="pages")
                   input(type="submit" value="Go")
           .ui.block.help.downloads
             .content
-              h2.ui.title.underline Downloads
-              p It is also possible to download the entire manual as:
+              h2.ui.title.underline #{meta.downloads.title}
+              p #{meta.downloads.description}
               .ui.menu.vertical
-                a(target="_blank", href="/help/downloads/avman2h.htm").item
-                  i.icon.file
-                  | HTML
-                a(target="_blank", href="/help/downloads/avman2h.zip").item
-                  i.icon.file
-                  | HTML (Zipped)
-                a(target="_blank", href="/help/downloads/avman2w.doc").item
-                  i.icon.file
-                  | Word Document
-                a(target="_blank", href="/help/downloads/avman2w.zip").item
-                  i.icon.file
-                  | Word Document (Zipped)
+                for item in meta.downloads.links
+                  a(target="_blank", href=item.file).item
+                    i.icon.file
+                    | #{item.text}
           .ui.block.help.downloads
             .content
-              h2.ui.title.underline Maps
-              p There are also several <a href="/maps/">maps of Avalon</a> available.
+              h2.ui.title.underline #{meta.maps.title}
+              p !{meta.maps.description}
 
 
 block scripts

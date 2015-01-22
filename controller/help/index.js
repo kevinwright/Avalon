@@ -14,10 +14,14 @@ function Controller() {
   var self = this;
 
   this.index = function(req, res) {
-    res.render('help/index', {
-      title: "Help",
-      sections: self.sections,
-      avalon: avalon
+    avalon.info("help.md", function(err, meta, extra) {
+      if (err) return console.log(err);
+      res.render('help/index', {
+        title: "Help",
+        meta: meta.meta,
+        sections: self.sections,
+        avalon: avalon
+      });
     });
   }
 
