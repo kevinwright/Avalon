@@ -10,6 +10,6 @@ router.get('/', function(req, res) {
 
 
 router.get("/checkname/", api.checkName);
-router.get("/checkname/:name", api.checkName);
+router.get("/checkname/:username", api.checkName);
 
 module.exports = router;

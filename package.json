@@ -20,6 +20,7 @@
     "jade": "^1.7.0",
     "meta-marked": "^0.3.3",
     "morgan": "^1.5.1",
+    "node-cache": "^1.1.0",
     "sanitize-html": "^1.4.3"
   }
 }

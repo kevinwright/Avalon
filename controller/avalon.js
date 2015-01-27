@@ -2,6 +2,9 @@ var who = require("./api/who.js");
 var marked = require("meta-marked");
 var fs = require("fs");
 
+var NodeCache = require( "node-cache" );
+var libCache = new NodeCache( { stdTTL: 600, checkperiod: 1200 } );
+
 var catchBlock = function(content) {
   var blockType = "normal";
   var lines = content.split("\n");
@@ -25,20 +28,38 @@ var catchBlock = function(content) {
 module.exports = {
   menu: require(global.avalon.files.menu),
   users: function() { return who.users;},
+  stats: function(req, res) {
+    res.render("stats.jade", {
+      stats: libCache.getStats()
+    });
+  },
   info: function(file, callback) {
     if (callback) {
-      fs.readFile(global.avalon.dir.library_pages + "/" + file, "utf8", function(libErr, librarycontent) {
-        if (libErr) return callback(libErr);
+      libCache.get( file, function( err, hit ){
+        if( !err && hit[file] ){
+          var blocks = hit[file];
+          callback(null, blocks.normal, blocks);
+        } else {
+          fs.readFile(global.avalon.dir.library_pages + "/" + file, "utf8", function(libErr, librarycontent) {
+            if (libErr) return callback(libErr);
 
-        var blocks = catchBlock(librarycontent);
-        for(var key in blocks) {
-            if(blocks.hasOwnProperty(key)) {
-                blocks[key] = marked(blocks[key]);
+            var blocks = catchBlock(librarycontent);
+            for(var key in blocks) {
+                if(blocks.hasOwnProperty(key)) {
+                    blocks[key] = marked(blocks[key]);
+                }
             }
+            
+            libCache.set( file, blocks, function( err, success ){
+              if( !err && success ){
+                console.log( success );
+              }
+            });
+            callback(null, blocks.normal, blocks);
+          });
         }
-        
-        callback(null, blocks.normal, blocks);
       });
+
     }
   }
 }

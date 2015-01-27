@@ -73,6 +73,7 @@ app.use('/lumiere', require('./routes/lumiere'));
 
 app.use('/', require('./routes/world'));
 app.use('/', require('./routes/dynamic'));
+app.get("/stats/", avalon.stats);
 
 
 //     ______                         

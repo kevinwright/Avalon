@@ -7,23 +7,21 @@ function CheckName() {
 
   this.check = function(person, callback) {
     telnet.write("###checkname " + person + "\n", function(chunk) {
-      var match = /\#\#\#check(.*)/i.exec(chunk)
-      if (match && match[1])
-        processCheck(person, match[1], callback);
+      var matchBad = /\#\#\#checkbad (\d+)/i.exec(chunk)
+      var matchOk = /\#\#\#checkok/i.test(chunk)
+      if (matchBad && matchBad[1])
+        processBad(person, matchBad[1], callback);
+      else if (matchOk)
+        return callback(true);
     });
   }
 
-  function processCheck(person, result, callback) {
-    console.log("- API CHECKNAME: ", person, result);
+  function processBad(person, result, callback) {
+    console.log("- API CHECKBAD: ", person, result);
     self.users[person] = result;
-    if (result === "ok") {
-      return callback(true);
-    } else {
-      if (result.substr(0,3) === "bad") {
-        return callback(false, parseInt(result.substr(4)));
-      }
-    }
+    return callback(false, parseInt(result));
   }
+
 }
 
 

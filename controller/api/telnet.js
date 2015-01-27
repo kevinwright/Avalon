@@ -24,7 +24,8 @@ var net = require("net");
       });
       client.setKeepAlive(true);
       client.on("data", function(chunk) {
-        if (evoke) evoke(chunk);
+        // console.log("- API RECEIVE: ", chunk.toString("utf8"));
+        if (evoke) evoke(chunk.toString("utf8"));
       });
       client.on("error", function(err) {
         console.error("- API ERROR: ", err)

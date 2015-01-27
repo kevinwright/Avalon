@@ -468,8 +468,14 @@
       border-bottom: 1px solid rgba(255, 255, 255, .1);
     }
     .head {
-      margin: 1em auto .5em;
-      color: #000;
+      margin: 1em auto 0;
+      padding-bottom: 0px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      &:before, &:after {
+        display: none;
+      }
     }
     &.dotted {
       .item {
@@ -723,7 +729,60 @@
     border-collapse: collapse;
     font-size: 1em;
     &.hidden {display: none;}
+    th, tr, td {
+      border-collapse: collapse;
+
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      box-sizing: border-box;
+
+      -webkit-transition: all 0.1s ease-out;
+      -moz-transition: all 0.1s ease-out;
+      -o-transition: all 0.1s ease-out;
+      -ms-transition: all 0.1s ease-out;
+      transition: all 0.1s ease-out;
+    }
+    th {
+      cursor: auto;
+      background-color: rgba(255, 255, 255, 0.05);
+
+      text-align: left;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 0.5em 0.7em;
+      vertical-align: middle;
+    }
+    td {
+      padding: 0.40em 0.7em;
+      vertical-align: middle;
+    }
+    tbody tr:nth-child(2n) {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
   }
+
+  .ui.celled.table {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .ui.celled.table tbody tr,
+  .ui.celled.table tfoot tr {
+    border: none;
+  }
+  .ui.celled.table th,
+  .ui.celled.table td {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Coupling with segment */
+  .ui.celled.table.segment th:first-child,
+  .ui.celled.table.segment td:first-child {
+    border-left: none;
+  }
+  .ui.celled.table.segment th:last-child,
+  .ui.celled.table.segment td:last-child {
+    border-right: none;
+  }
+
 
 
 //     __                    _              

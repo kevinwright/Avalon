@@ -11,7 +11,7 @@ var api = {
     try {
       var name = req.params["username"] || req.query["username"];
       var format = req.query["format"];
-      if (name == false) {
+      if (!name) {
         if (format === "text") return res.send("BAD");
         else return res.jsonp({username: false, message: "Please fill in a name", status: -1});
       }
