@@ -88,63 +88,19 @@ block content
                   else
                     li: a(href=item.url).item #{item.title}
 
-  .ui.content.section
-    .contain.large
-      .ui.grid.responsive
-        .eight.column.wide
-          h3.ui.title Over Twenty-Five Years of Development
-          p Text based games started with MUD and just after, in 1989, Avalon came online as the first multiplayer text based game. Its innovation, sophistication, ease of play and beauty are even acknowledged as a novel by UK Copyright law.
-        .eight.column.wide
-          h3.ui.title The First Online Text Based Game with guilds, cities:<br/> total world simulation
-          p Avalon is the first text based game to invent the idea of player control, cities, guilds, unique skills and a sense of 'better than life' simulation of reality. Everything follows the rule of credibility.
-   .ui.content.section
-     .contain.large
-       .ui.grid.responsive
-         .eight.column.wide
-           h3.ui.title Over Four Thousand Unique Abilities
-           p Avalon remains since 1989 the most sophisticated online text based RPG, well beyond any graphical variation, to have so hundreds of abilities shared, hundreds for each profession, many professions to choose, each with their own style of play, all finely balanced. To list them would be as large as a dictionary of Sindarin by J.R.R. Tolkien.
-         .eight.column.wide
-           h3.ui.title Real World Economics &amp; Player Governance
-           p Economics are both player, warfare and village produced, creating a real economic system of fluctuating price in which players may become merchants of incredible wealth.
-   .ui.content.section
-     .contain.large
-       .ui.grid.responsive
-         .eight.column.wide
-           h3.ui.title Complex, Original Combat of genre-defining intricacy
-           p Players may master combat between each other for pride and city! Avalon invented and continues to sophisticate its crowning beauty, equilibrium and balance based combat between professions, incredibly fine tuned such that there is no more powerful, only the more imaginative and adept.
-         .eight.column.wide
-           h3.ui.title Dozens Of Professions, such as Druids, Paladins &amp; Seers
-           p Players may become masters of their class! Avalon created the idea of professions equally matched and in the last five years further expanded this original concept to specialisations, where a player may choose within a profession distinct paths different in their playing style and gaming experience.
-
-   .ui.content.section
-     .contain.large
-       .ui.grid.responsive
-         .eight.column.wide
-           h3.ui.title Warring City States &amp; Thrilling Military Strategy
-           p Players may become master generals. Avalon first introduced before graphics existed simple warfare, that has now become infinitely varied, simple to master but worldwide and intensely vicious between cities. There are legion abilities based on their type, skill training, marching, 3D depth, trenches, tunnels, mines, mortars and archers, formations and far more against which no other warfare game online text based or graphical could compare.
-         .eight.column.wide
-           h3.ui.title Real Weather Systems and Unique Ecosystems
-           p Avalon invented sophisticated ecosystems of many dimensions with skies, air densities, gravity, flora of great variety, many types of trees and forestal implications.
-   .ui.content.section
-     .contain.large
-       .ui.grid.responsive
-         .eight.column.wide
-           h3.ui.title Thousands of Quests, Puzzles and Personal Goals
-           p Not only are there thousands of quests, puzzles and personal goals since Avalon began, players may create in this text based game their own quests with a simple system to share ideas of adventure.
-         .eight.column.wide
-           h3.ui.title Dramatic Events, Heroic Personae:<br/> the ultimate text based game
-           p With over 25 years of history, Avalon has no parallel: great warlords, merchants, labourers, thieves, princes, barons, politicians, healing druids of legend, and the pinnacle of all mortals, those who have so mastered the realm to have become gods!
-   .ui.content.section
-     .contain.large
-       .ui.grid.responsive
-         .eight.column.wide
-           h3.ui.title A Free Environment for Roleplay and Making History
-           p Avalon is a text based RPG beloved of its long-playing members who are free to make history as they choose. The only limit is oneself: you cannot buy advantage or expect from the gods favouritism. Passions run high in this world of mortals and gods, there are no limits to what can be done!
-         .eight.column.wide
-           h3.ui.title And so much more...
-           p The only way to know the finest text based game ever made is to plunge into the deep. Will you be the next to rise into the Pantheon?
-
-       a(href="/play/").ui.playnow.button.fluid Play Now
+  .ui.scroll
+    ul.top
+      for blurb,i in meta.blurbs
+        li.dot(data-id=i)
+    for blurb, i in meta.blurbs
+      .content(data-id=i)
+        .contain.large
+          h3.ui.title= blurb.title
+          if (blurb.subtitle)
+            h4.ui.title.subtitle= blurb.subtitle
+          p= blurb.description
+          if (blurb.link)
+            a(href=blurb.link.url).ui.button= blurb.link.text
 
 block scripts
   script(src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js")
@@ -178,3 +134,44 @@ block scripts
           }
         }
     });
+
+    $(document).ready(function() {
+      var current = 0;
+      var slides = $(".ui.scroll .content");
+      var dots = $(".ui.scroll .top .dot");
+
+      function next() {
+        $(slides.get(current)).removeClass("active").addClass("prev");
+        $(dots.get(current)).removeClass("active").addClass("prev");
+        current++;
+        $(dots.get(current)).removeClass("prev").addClass("active");
+        $(slides.get(current)).removeClass("prev").addClass("active");
+        if (current >= slides.length) {
+          current = 0;
+          dots.removeClass("prev active");
+          slides.removeClass("prev active");
+          $(dots.get(current)).addClass("active"); 
+          $(slides.get(current)).addClass("active"); 
+        }
+      }
+
+      dots.click(function(e) {
+        var target = $(e.currentTarget);
+        var id = target.data("id");
+        current = parseInt(id);
+
+        dots.removeClass("prev active");
+        slides.removeClass("prev active");
+        $(dots.get(current)).addClass("active"); 
+        $(slides.get(current)).addClass("active"); 
+
+        interval = clearInterval(interval);
+      })
+
+      $(slides.get(current)).addClass("active"); 
+      $(dots.get(current)).addClass("active"); 
+
+      var interval = setInterval(function () {
+        next();
+      }, 10000);
+    })

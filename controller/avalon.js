@@ -28,11 +28,6 @@ var catchBlock = function(content) {
 module.exports = {
   menu: require(global.avalon.files.menu),
   users: function() { return who.users;},
-  stats: function(req, res) {
-    res.render("stats.jade", {
-      stats: libCache.getStats()
-    });
-  },
   info: function(file, callback) {
     if (callback) {
       libCache.get( file, function( err, hit ){
@@ -46,7 +41,11 @@ module.exports = {
             var blocks = catchBlock(librarycontent);
             for(var key in blocks) {
                 if(blocks.hasOwnProperty(key)) {
+                  try {
                     blocks[key] = marked(blocks[key]);
+                  } catch(err) {
+                    callback(err);
+                  }
                 }
             }
             
@@ -59,7 +58,6 @@ module.exports = {
           });
         }
       });
-
     }
   }
 }

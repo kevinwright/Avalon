@@ -1,8 +1,12 @@
 extends layout
 
+block head
+  - var title = "Error"
+
 block content
   .ui.content
     .contain
       h2.ui.title= message
       h4.ui.sub.title.center.underline= error.status
       p: pre #{error.stack}
+      p: pre #{JSON.stringify(error, null,2)}

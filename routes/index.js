@@ -7,10 +7,10 @@ var recent = require("../controller/news/recent.js");
   router.get(['/', "/index.html"], getIndex);
 
 // Methods
-  function getIndex(req, res) {
+  function getIndex(req, res, next) {
     recent(function(data) {
       avalon.info("front.md", function(err, meta, extra) {
-        if (err) return console.error(err);
+        if (err) return next(err);
         res.render('index', { avalon: avalon, meta: meta.meta, extra:extra, recent: data });
       });
     })

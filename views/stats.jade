@@ -3,22 +3,23 @@ extends layout
 block content
   .ui.content
     .contain
-      .ui.box
-        h2.ui.title.underline Statistics
-        table.ui.table.celled
-          tbody
-            tr
-              th(width="10%") Hits
-              td= stats.hits
-            tr
-              th Misses
-              td= stats.misses
-            tr
-              th Keys
-              td= stats.keys
-            tr
-              th ksize
-              td= stats.ksize
-            tr
-              th vsize
-              td= stats.vsize
+      .ui.grid.responsive.two.columns.wide
+        .column: .ui.box
+            h2.ui.title.underline Cache Statistics
+            table.ui.table.celled
+              tbody
+                tr
+                  th(width="10%") Hits
+                  td= stats.hits
+                tr
+                  th Misses
+                  td= stats.misses
+                tr
+                  th Keys
+                  td= stats.keys
+                tr
+                  th ksize
+                  td= stats.ksize
+                tr
+                  th vsize
+                  td= stats.vsize
