@@ -472,9 +472,14 @@
       padding-bottom: 0px;
       font-size: 16px;
       font-weight: 600;
-      color: #fff;
+      color: #fff !important;
+      background:  transparent !important;
+      a {
+        color: #fff !important;
+        background:  transparent !important;
+      }
       &:before, &:after {
-        display: none;
+        display: none !important;
       }
     }
     &.dotted {
@@ -485,7 +490,7 @@
           margin-right: .2em;
           color: rgba(255, 255, 255, .5);
         }
-        &:hover {
+        &:hover, &.active {
           background: inherit;
           &:before {
             content: " • ";
@@ -1209,7 +1214,7 @@
 //
 //                         Markdown and Avalon files
 
-  .ui.manual, .ui.bb {
+  .ui.manual, .ui.bb, .ui.intro {
     span.to {
       color: #ccc;
       a {color: #ccc;}

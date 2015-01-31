@@ -9,4 +9,5 @@ block content
       h2.ui.title= message
       h4.ui.sub.title.center.underline= error.status
       p: pre #{error.stack}
-      p: pre #{JSON.stringify(error, null,2)}
+      if error && Object.keys(error).length > 0
+        p: pre #{JSON.stringify(error, null,2)}

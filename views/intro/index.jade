@@ -1,14 +1,26 @@
 extends ../layout
 
+block head
+  - var title = meta.seo.title
+  - var description = meta.seo.description
+  - var keywords = meta.seo.keywords
+  link(rel="canonical", href="http://www.avalon-rpg.com/intro/")
+
 block content
-  .ui.content
+  .ui.content.intro
     .contain
-      h1.ui.title.center Introduction to Avalon
-      p.lead From the first moment you enter Avalon, you embark upon a journey into the imagination. To help you along, a table of contents has been put together for newbie convenience. Read through these sections carefully, young padawan. It is a summary of all things a new player needs to know and will <em>immeasurably</em> aid your first steps in Avalon.
-      include list
-      p These few introductory pages are not intended as a full introduction to Avalon, only experiencing the land for yourself can fully prepare you for what is in store. Instead, it is hoped they will help those new to the land by supplementing the on-line 
-        a(href='/help/') HELP
-        |  that is constantly available and by providing a glimpse of the possibilities open to all players.
-      p After reading through these sections, you have now concluded the Avalon Intro section and adventure awaits you in-game! There is no time to waste, 
-        a(href='/play/') PLAY NOW
-        |  in our web-based browser!
+
+      .ui.grid.responsive
+        .twelve.column.wide.main
+          h1.ui.title.center.underline #{meta.title}
+          p.lead !{meta.summary}
+          .text.help.markdown !{extra.normal.html}
+
+        .four.column.wide.sidebar
+          .ui.block
+            .content
+              ul.ui.menu.vertical
+                for item in toc
+                  a(href="/intro" + item.items[0].url).item.head
+                    i.icon.circle.blank
+                    |  #{item.content}

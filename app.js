@@ -21,12 +21,14 @@ global.avalon = {
         bb: "/help/bb",
         library: "/library",
         library_pages: "/library/pages",
-        library_help: "/library/help"
+        library_help: "/library/help",
+        intro: "/library/intro"
     },
     files: {
         menu: "/library/menu.js",
         synonyms: "/library/synonyms.js",
-        pages: "/library/pages.js"
+        pages: "/library/pages.js",
+        toc: "/library/intro/toc.js"
     }
 }
 

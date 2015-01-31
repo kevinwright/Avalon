@@ -1,44 +1,37 @@
 extends ../layout
 
+block head
+  - var title = meta.title
+  - var description = meta.summary
+  - var keywords =  meta.keywords.toString()
+  link(rel="canonical", href="http://www.avalon-rpg.com/intro/" + page.url)
+
 block content
-  .ui.content
+  .ui.content.intro
     .contain
+
       .ui.grid.responsive
-        .twelve.wide.column
-          h1.ui.title.center Beginner's Handbook
-          .ui.box
-            h3.ui.title Contents
-            ul
-              li <a href="#environment">Environment</a>: The World Around You
-              li <a href="#academy">Academy</a>: For The Complete Newbie (players who haven't played MUDs)
-              li <a href="#school">School</a>: Introduction To Avalon
-              li <a href="#apprenticeship">Apprenticeship</a>: Junior Exploration
+        .twelve.column.wide.main
+          h1.ui.title.center.underline #{meta.title}
+          p.lead !{meta.summary}
+          .text.help.markdown !{extra.normal.html}
 
-          
-          .ui.box
-            h2#environment The Avalon Environment
-            p Avalon is an ever evolving, role playing world (often called an <abbr title="Role-Playing Game"><u>RPG</u></abbr>, <abbr title="Multi-User Dungeon"><u>MUD</u></abbr>, or text-based game), a mythological environment in which you can develop your own character and interact with other real-life and imaginary beings. It is a continent of legends and detailed <a href="/history/index.html" target="_blank">histories</a>, both past and in the making. Step into this world and you may become an integral part, a major character in an unfolding tale, a great figure in the next noteworthy event in Avalon's illustrious <a href="/history/index.html" target="_blank">history</a>. Keep in mind that Avalon is played in real time. This means that as you are thinking and acting, events will continue to progress around your character. Avalon is also a multiuser world which means there are many other real-life players who you will meet during your time within the land.
-            p Avalon is a mystical land before the age of humanity, when strange and wonderful <a href="/help/pages/creatures.html" target="_blank">creatures</a> walked through the tangled forests and broad river-valleys of the earth. Great <a href="/citguilds/index.html#cities" target="_blank">cities</a> exist, but beyond the stone walls of humans, arcane forces of magic move through the land. Your objective is to experience life in Avalon, for only through experience and competence at your <a href="/help/sections/17.html" target="_blank">skills</a> can you elevate your mortal spirit into the form of a deity and become one of the <a href="/help/pages/gods.html" target="_blank">gods</a>; immortal souls, overseeing the continent from their Olympian thrones. Material <a href="/help/pages/shop.html" target="_blank">goods</a> and <a href="/help/pages/artifacts.html" target="_blank">magical artifacts</a> you will doubtless encounter, and many will help you in <a href="/help/pages/quests.html" target="_blank">quests</a> and future <a href="/help/pages/combat.html" target="_blank">battles</a>, though <a href="/help/pages/wealth.html" target="_blank">wealth</a> is a poor substitute for the true essence of perseverence, competence and - it is hoped - the reawakening of an ancient heroism.
-
-          .ui.box
-            h2#academy PHASE ONE: The Academy
-            p Upon creation of a newborn character in Avalon, you will find yourself born in either the northern city of <a href="/citguilds/Thakria/" target="_blank">Thakria</a>, the eastern city of <a href="/citguilds/Parrius/" target="_blank">Parrius</a>, the southern cityport of <a href="/citguilds/Mercinae/" target="_blank">Mercinae</a>, or the newest city which lies upon the banks of River Silverlight, <a href="/citguilds/Silverfalls/" target="_blank">Silverfalls</a>. All cities boast fine learning centres where you will learn a core of skills. It is advised that you know know what each city stands for, simply for the encouragement of <a href="/help/pages/roleplay.html" target="_blank">roleplay</a>, and preparing yourself for a more immersive experience in-game.
-            p All newly born adventurers in Avalon begin life with only an insubstantial taste of the <a href="/help/sections/17.html" target="_blank">skills</a> which they might one day learn. The <a href="/citguilds/index.html#academies" target="_blank">Academies</a> are charitable institutions set up by city councils that invite all novices to join so that they may be trained in a few more of the basic adventuring <a href="/help/sections/17.html" target="_blank">skills</a>. Indeed, before you can progress to a fully-fledged <a href="/help/sections/11.html" target="_blank">guild</a> you must have graduated from an <a href="/citguilds/index.html#academies" target="_blank">Academy</a> of some sort. This means that you must acquire a level of competency sufficient to warrant your progression to a more specialised <a href="/help/sections/11.html" target="_blank">guild</a>.
-            p The time you spend within an <a href="/citguilds/index.html#academies" target="_blank">Academy</a> before you come to graduate is a crucial one. You are well advised to spend time thinking about the possible future for your character; where your goals are to lie. Soon you will have graduated and it is better to have decided early on which <a href="/help/sections/11.html" target="_blank">guild</a> you would prefer to take a look at, rather than dallying about aimlessly. During this important stopgap, discuss matters of a future <a href="/help/sections/11.html" target="_blank">guild</a> with as many people as you can so that when the time comes to decide, you have already eliminated those that you feel are not appropriate for your character. You should also be aware of the <a href="/help/pages/dreams.html" target="_blank">dreams</a> for each profession and city...
-
-          .ui.box
-            h2#school PHASE TWO: The School
-            p The schools offer four distinct <a href="/help/pages/courses.html" target="_blank">courses</a> to aid the budding apprentice in his or her first steps into Avalon proper. The school courses bestow access, temporarily, to a range of low-level specialist skills to better help the youngster adapt to the rigours of Avalon life and, later on, have some insight into the choice of apprenticeship in a <a href="/citguilds/index.html#guilds" target="_blank">guild</a>. These specialist <a href="/help/sections/17.html" target="_blank">skills</a> are held only for the duration of the course. Permanent skill acquisition (and advancement) comes from a guild apprenticeship but the school should provide a taste and a better insight into Avalon. Choice of <a href="/citguilds/index.html#guilds" target="_blank">guild</a> is one of the singlemost most important decisions any Avalon character can make and the school is a buffer, to allow you breathing space and exploration time before making any lifelong commitments. The schools are located close to the academies in all the great cities.
-            p It is mandatory to graduate from at least two of the four courses. Completing a course requires a bare minimum number of successes and thus you are able to rush through courses or stay longer and perform a greater number of course missions, <a href="/help/pages/quests.html" target="_blank">quests</a> and disciplines. You will be informed of the minimum standards necessary to complete a course at the point of enrollment and, subsequently, after each mission or quest or deed you perform successfully. It is possible to accumulate an apprentice's dowry by excelling at the scholastic courses - more missions, more quests, more successful disciplines in a single course. The extent of your success beyond the minimum requirements translates into an apprentice's dowry after you graduate; faster early progress in your apprentice skills and a purse of gold. How much gold and how many skills are in the dowry depend entirely on how far in excess of minimum course requirements you elect to go.
-            p IMPORTANT: click <a href="/help/pages/schoolcom.html" target="_blank">HERE</a> to view important schoolastic commands relevant to each course.
-
-          .ui.box
-            h2#transition PHASE THREE: The Transition 
-            p After joining a guild, during the apprenticeship or <abbr title="Little Who"><a href="/help/pages/junior.html" target="_blank">LW</a></abbr> phase, there are numerous '<a href="/help/pages/badges.html" target="_blank">badges</a>' of knowledge that all Avalonians should aspire to attain. These badges are bestowed by guildmasters, barons, public relations minister, guild elders, or deities. They represent the successful acquisition of a slice of important knowledge, whether that be the ability to equip oneself with armour and weapons, or the successful witnessing of the sunrise in the vale of Azrili. It is not necessary to attain all possible badges but to do so signifies, in the minds of the great of this land, the establishment of an independent, self-assured character ready to meet his or her future. Many guilds use the badges as a gauge of a youngster's readiness to move from apprenticeship to full initiate.
-            p To review your own acquired badges type BADGES. Each badge brings with it rewards, whether gold, experience or lessons. Some are relatively simple, some more complex. The collection of all possible badges gains the neophyte guildmember great prestige in the eyes of the Gods. There is a prize available to those who are diligent enough to complete all of their guild badges. This prize is obtained from senior members of the guild (or city barons or public relations minister) and if you feel yourself ready (having succeeded in all badges) type REQUEST PRIZE FROM followed by the name of the fellow guildmember/city leader, while in his or her presence. Your fellow will have to give assent to your declaration and, providing this is done, you will receive the prize: across-the-board boost of your skills to the level of Respected. Depending on your guild's profession you will also be eligible for a boost of certain skills, if they are already AT the level of Respected, up to the level of Renowned.
-          
-          center: p Return to <a href="/intro/index.html">Avalon RPG's Intro</a> or carry on to examine <a href="/intro/minman2.html">Character Building</a>.
-
-        .four.wide.column
-          .ui.box.compact
-            include list
+        .four.column.wide.sidebar
+          .ui.block
+            .content
+              .ui.menu.vertical.dotted
+                for item in toc
+                  if (item.short == cat.short)
+                    a(href="/intro" + item.items[0].url).item.head
+                      i.icon.circle
+                      |  #{item.content}
+                    .menu
+                      for sub in item.items
+                        if (sub.content == page.content)
+                          a(href="/intro" + sub.url).item.active #{sub.content}
+                        else
+                          a(href="/intro" + sub.url).item #{sub.content}
+                  else
+                    a(href="/intro" + item.items[0].url).item.head
+                      i.icon.circle.blank
+                      |  #{item.content}
