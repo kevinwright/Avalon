@@ -1,14 +1,21 @@
 extends ../layout
 
 block head
-  - var title = "Play Avalon Now - Creation & Login. Javalon, java client or Lumiere, flash client."
-  - var description = "Adventure Game, Avalon - Online RPG games multiuser world. Premier online RPG adventure multiplayer world. Online RPG adventure (Roleplaying Games or RPGs) with Windows and java game clients for instant RPG games play. Avalon is an online multiplayer role playing world which caters for those who know: the book is always better than the movie.";
-  - var keywords = "Adventure Game, Online RPGs, Online RPG, Online RPG Games, role playing games, multiuser games, internet, telnet clients, java games";
+  - var title = meta.seo.title
+  - var description = meta.seo.description
+  - var keywords = meta.seo.keywords
   link(rel="canonical", href="http://www.avalon-rpg.com/play/")
     
 block content
-  .ui.content
+  .ui.content.play
     .contain
+      .ui.box.small.tablet-only
+        h3.ui.title.underline #{meta.umbra.title}
+        p #{meta.umbra.description}
+        a(href="http://umbra.avalon-rpg.com", target="_blank").ui.button
+          i(class="icon large tablet")
+          | #{meta.umbra.button}
+
       .ui.grid
         .eight.column.wide
 
@@ -18,7 +25,7 @@ block content
               .ui.input
                 label(for="create-username") Character Name
                 input#create-username(type="text", name="username", maxlength=18)
-                p 3 characters minimum, letters only. Be sure to choose a name appropriate for a fantasy game-world setting.
+                p #{meta.form.username}
             .two.fields.password
               .field
                 .ui.input
@@ -28,12 +35,12 @@ block content
                 .ui.input
                   label(for="create-confirmpass") Confirm Password
                   input#create-confirmpass(type="password", name="confirmpass", maxlength=50)
-              p(style="margin-bottom: 16px;") 3 characters minimum, may include letters, numbers and punctuation, but no spaces, carets or tildes. Example: s_ecr3.t.
+              p(style="margin-bottom: 16px;") #{meta.form.password}
             .field.user
               .ui.input
                 label(for="create-email") Email
                 input#create-email(type="text", name="email")
-                p Entering your e-mail address will ensure that your character is saved when you exit as we regularly delete unregistered characters to make room for new players.
+                p #{meta.form.email}
             .two.fields
               p Gender
               .field.inline
@@ -47,12 +54,12 @@ block content
               .field.inline
                 input#create-run-lumiere(type="radio", name="run", value="lumiere", checked="checked")
                 label(for="create-run-lumiere") Lumiere
-                p our new client; works for everyone
+                p #{meta.form.lumiere}
               .field.inline
                 input#create-run-applet(type="radio", name="run", value="applet")
                 label(for="create-run-applet") Javalon
-                p our original client; works for most people
-              p Lumiere is a Flash application which runs in your browser. Use Lumiere for maximum compatibility with Avalon. WARNING: Lumiere is still in its testing phase and only has the essential features to play Avalon. Choose Javalon if you want to enjoy all available features.
+                p #{meta.form.lumiere}
+              p #{meta.form.clients}
             input(type="hidden", name="create", value="yes")
             input(type="hidden", name="loginkey", value="")
             button.ui.button.save.fluid(style="margin-top: 16px;") Create a new character
@@ -73,27 +80,24 @@ block content
               .field.inline
                 input#login-run-lumiere(type="radio", name="run", value="lumiere", checked="checked")
                 label(for="login-run-lumiere") Lumiere
-                p our new client; works for everyone
+                p #{meta.form.lumiere}
               .field.inline
                 input#login-run-applet(type="radio", name="run", value="applet")
                 label(for="login-run-applet") Javalon
-                p our original client; works for most people
-              p Lumiere is a Flash application which runs in your browser. Use Lumiere for maximum compatibility with Avalon. WARNING: Lumiere is still in its testing phase and only has the essential features to play Avalon. Choose Javalon if you want to enjoy all available features.
+                p #{meta.form.javalon}
+              p #{meta.form.clients}
 
             input(type="hidden", name="create", value="no")
             input(type="hidden", name="loginkey", value="0")
             button.ui.button.save.fluid(style="margin-top: 16px;") Login
           .ui.box
-            ul.ui.menu.vertical.dotted
-              .head.item Mud Clients
-              a(target="_blank", href="http://www.meetplace.net/forum/topic/91").item Mudlet
-              a(target="_blank", href="http://www.meetplace.net/forum/topic/119").item CMud
-              a(target="_blank", href="http://www.gammon.com.au/downloads/dlmushclient.htm").item MUSHClient
-
-              .head.item Mobile Clients
-              a(target="_blank", href="http://bt.happygoatstudios.com/").item Blowtorch
-              a(target="_blank", href="https://itunes.apple.com/us/app/mudmaster/id341160033?mt=8").item MUDMaster
-            h4.ui.title.overline.center: a(href="/connect/") More Information
+            for group in meta.clients
+              .head.item #{group.title}
+              ul.ui.menu.vertical.dotted
+                for item in group.items
+                  a(target="_blank", href=item.link).item #{item.title}
+              hr
+            h4.ui.title.center: a(href="/connect/") More Information
 
 block scripts
   script(src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js")
