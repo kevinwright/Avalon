@@ -63,6 +63,8 @@ app.use("/help/downloads", express.static(path.join(__dirname, 'downloads')));
 
 
 app.use('/', require('./routes/index'));
+app.use('/', require('./routes/dynamic'));
+
 app.use('/intro', require('./routes/intro'));
 app.use('/api', require('./routes/api'));
 app.use('/bb', require('./routes/bb'));
@@ -75,7 +77,6 @@ app.use('/lumiere', require('./routes/lumiere'));
 app.get("/stats", require('./routes/stats'));
 
 app.use('/', require('./routes/world'));
-app.use('/', require('./routes/dynamic'));
 
 
 //     ______                         
