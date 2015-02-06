@@ -66,27 +66,26 @@ block content
           .ui.block
             .content
               h3.ui.title.underline #{meta.information.title}
-              ul.ui.menu.social.vertical
+              ul.ui.menu
                 for item in meta.information.items
                   li: a(href=item.url).item #{item.title}
 
           .ui.block
             .content
               p #{meta.search.title}
-              form(action="/help/search")
-                p HELP 
-                  input(type="text" name="page" size="50", list="pages")
-                  input(type="submit" value="Go")
+              form(action="/help/search").helpform
+                .ui.fluid.icon.input
+                  label HELP
+                  input(type="text", name="page", list="pages")
+                  i.search.icon
                     
           .ui.block
             .content
-              h3.ui.title.underline #{meta.links.title}
-              ul.ui.menu.social.vertical
+              ul.ui.menu.social.center
                 for item in meta.links.items
                   if item.social
-                    li: a(href=item.url, class="item social " + item.social) #{item.title}
-                  else
-                    li: a(href=item.url).item #{item.title}
+                    a(href=item.url, class="item social " + item.social, title=item.title)
+                      i.icon.large(class=item.social)
 
   .ui.scroll
     ul.top

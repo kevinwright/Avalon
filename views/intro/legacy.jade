@@ -1,0 +1,30 @@
+extends ../layout
+
+block head
+  - var title = meta.seo.title
+  - var description = meta.seo.description
+  - var keywords =  meta.seo.keywords
+  link(rel="canonical", href="http://www.avalon-rpg.com/intro/" + page.url)
+
+block content
+  .ui.content.intro
+    .contain
+
+      .ui.grid.responsive
+        .twelve.column.wide.main
+          h1.ui.title.center.underline #{meta.title}
+          .text.help.markdown !{extra.normal.html}
+
+        .four.column.wide.sidebar
+          .ui.block
+            .content
+              .ui.menu.vertical.dotted
+                for item in legacy
+                  if (item.url == page.url)
+                    a(href="/intro" + item.url).item.active
+                      i.icon.circle
+                      |  #{item.content}
+                  else
+                    a(href="/intro" + item.url).item
+                      i.icon.circle.blank
+                      |  #{item.content}

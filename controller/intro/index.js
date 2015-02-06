@@ -9,6 +9,7 @@ var NodeCache = require( "node-cache" );
 var libCache = new NodeCache( { stdTTL: 10, checkperiod: 10 } );
 
 var toc = require(TOCFILE);
+var legacy = require(INTRODIR + "/legacy.js");
 
 function NoPageError(page, cat, result) {
   this.name = "NoPageError"
@@ -29,6 +30,25 @@ function Controller() {
         avalon: avalon
       });
     });
+  }
+
+  this.legacy = function(req, res, next) {
+    var url = req.params["page"] || req.query["page"];
+    var result = legacy.filter(function(item) {
+      return (item.url == "/" + url) && item.file;
+    })
+    if (result.length == 0) return next(new NoPageError(url, "legacy", result));
+    
+    readLib(result[0].file, function(err, meta, extra) {
+      if (err) return next(err);
+      res.render("intro/legacy", {
+        meta: meta.meta,
+        extra: extra,
+        legacy: legacy,
+        avalon: avalon,
+        page: result[0],
+      })
+    })
   }
 
   this.page = function(req, res, next) {

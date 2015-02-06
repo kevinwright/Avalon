@@ -6,7 +6,7 @@ var NodeCache = require( "node-cache" );
 var libCache = new NodeCache( { stdTTL: 600, checkperiod: 1200 } );
 
 // Routes
-  router.get(['/', "/index.html"], getIndex);
+  router.get("/", getIndex);
 
 // Methods
   function getIndex(req, res) {
@@ -15,6 +15,5 @@ var libCache = new NodeCache( { stdTTL: 600, checkperiod: 1200 } );
       stats: libCache.getStats()
     });
   }
-
 
 module.exports = router;

@@ -29,7 +29,8 @@ mixin item(item)
 
     .right.menu
       if (avalon && avalon.users)
-        a.item #{avalon.users().length} Players Online
+        if (avalon.users().length != 0)
+          a.item #{avalon.users().length} Players Online
       if avalon && avalon.menu
         for item in avalon.menu.right
           +item(item)
@@ -39,15 +40,11 @@ mixin item(item)
       a.item(href="/") Avalon RPG
       .ui.dropdown.item
         i.icon.triangle.down
-          .menu
-            if avalon && avalon.menu
-              for item in avalon.menu.left
+        .menu
+          if avalon && avalon.menu
+            for item in avalon.menu.left
+              if (item.url)
                 +item(item)
-                if item.items
-                  for subitem in item.items
-                    +item(subitem)
-              for item in avalon.menu.right
+            for item in avalon.menu.right
+              if (item.url)
                 +item(item)
-                if item.items
-                  for subitem in item.items
-                    +item(subitem)

@@ -39,10 +39,11 @@ block content
           .ui.block
             .content
               p #{meta.search}
-              form(action="/help/search")
-                p HELP 
-                  input(type="text" name="page" size="10", list="pages")
-                  input(type="submit" value="Go")
+              form(action="/help/search").helpform
+                .ui.fluid.icon.input
+                  label HELP
+                  input(type="text", name="page", list="pages")
+                  i.search.icon
           .ui.block.help.downloads
             .content
               h2.ui.title.underline #{meta.downloads.title}
