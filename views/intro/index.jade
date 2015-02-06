@@ -19,8 +19,15 @@ block content
         .four.column.wide.sidebar
           .ui.block
             .content
-              ul.ui.menu.vertical
-                for item in toc
-                  a(href="/intro" + item.items[0].url).item.head
-                    i.icon.circle.blank
+              .ui.menu.vertical.dotted
+                for item in legacy
+                  a(href="/intro" + item.url).item
                     |  #{item.content}
+        //- .four.column.wide.sidebar
+        //-   .ui.block
+        //-     .content
+        //-       ul.ui.menu.vertical
+        //-         for item in toc
+        //-           a(href="/intro" + item.items[0].url).item.head
+        //-             i.icon.circle.blank
+        //-             |  #{item.content}

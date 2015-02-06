@@ -26,7 +26,8 @@ function Controller() {
       res.render('intro/index', {
         meta: meta.meta,
         extra: extra,
-        toc: toc,
+        // toc: toc,
+        legacy: legacy,
         avalon: avalon
       });
     });
