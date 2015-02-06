@@ -4,7 +4,7 @@ var intro = require("../controller/intro");
 
 // Routes
   router.get(['/', "/index.html"], intro.index);
-  router.get(["/:page.html", "/:page"], intro.legacy);
+  router.get(["/:page"], intro.legacy);
   router.get("/:category/:page", intro.page);
 
 module.exports = router;
