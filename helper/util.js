@@ -169,5 +169,9 @@ module.exports = {
   marked: metaMarked,
   render: render,
   renderFile: renderFile,
-  cap: cap
+  cap: cap,
+  cache: {
+    file: fileCache,
+    library: markCache
+  }
 }

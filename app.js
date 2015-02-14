@@ -77,7 +77,6 @@ app.use('/news', require('./routes/news'));
 app.use('/rollcall', require('./routes/rollcall'));
 app.use('/history', require('./routes/history'));
 app.use('/lumiere', require('./routes/lumiere'));
-app.get("/stats", require('./routes/stats'));
 
 app.use('/', require('./routes/world'));
 

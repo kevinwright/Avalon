@@ -32,5 +32,7 @@ block content
                 th(width="10%") ID
                 th Name
             tbody
-              for user in avalon.users
-                tr: td #{user}
+              for user,i in avalon.users()
+                tr
+                  td #{i}
+                  td #{user}
