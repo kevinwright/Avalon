@@ -100,13 +100,13 @@ block content
             h4.ui.title.center: a(href="/connect/") More Information
 
 block scripts
-  script(src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js")
+  script(src="/js/jquery.validate.min.js")
   script.
     $("#createForm").validate({
       onkeyup: false,
       rules: {
         username: {
-          required: "required",
+          required: true,
           minlength: 3,
           remote: {
             url: "/api/checkname",
@@ -118,7 +118,7 @@ block scripts
         password: "required",
         confirmpass: {
           equalTo: "#create-password",
-          required: "required"
+          required: true
         },
         email: "email",
       },
@@ -135,7 +135,7 @@ block scripts
     $("#loginForm").validate({
       rules: {
         username: {
-          required: "required",
+          required: true,
           minlength: 3,
           maxlength: 18
         },

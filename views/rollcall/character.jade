@@ -1,0 +1,66 @@
+extends ../layout
+
+block head
+  if (list.length > 0)
+    - var person = list[0]
+  else
+    - var error = title = "No such character #{character}!"
+  if !error
+    - var title = person.title
+    link(rel="canonical", href="http://www.avalon-rpg.com/rollcall/characters/"+person.name.toLowerCase())
+
+block content
+  .ui.content.rollcall
+    .contain
+      h1.ui.title #{person.title}
+      .ui.grid.responsive
+        .twelve.column.wide.main.breadcrumbed
+          .ui.breadcrumb
+            a(href="/rollcall/") Characters
+            i.icon.angle.right
+            b  #{person.name}
+
+          if (person.city != "god")
+            table.ui.table.celled.center
+              tbody
+                tr
+                  td: a(href="/rollcall/cities/"+person.city)
+                    if person.city != "No Citizenship"
+                      | Citizen of 
+                    | #{person.city}
+                  td: a(href="/rollcall/guilds/"+person.guild)
+                    | #{person.guild}
+                    if person.guild != "No Guild"
+                      |  Guild
+                  td: a(href="/rollcall/orders/"+person.order)
+                    if person.order != "No Order"
+                      | #{person.orderlevel} in the Order of  
+                    | #{person.order}
+
+          if (person.city != "god")
+            h2.ui.title.overline History
+          .text.help!= help
+
+        .four.column.wide.sidebar
+          .ui.block
+            .content
+              if (person.city != "god")
+                .ui.menu.vertical
+                  a.item(href="/rollcall/cities/"+person.city)
+                    if person.city != "No Citizenship"
+                      | Citizens of 
+                    | #{person.city}
+                  a.item(href="/rollcall/guilds/"+person.guild)
+                    | #{person.guild}
+                    if person.guild != "No Guild"
+                      |  Guild
+                  a.item(href="/rollcall/orders/"+person.order)
+                    if person.order != "No Order"
+                      | Order of 
+                    | #{person.order}
+              
+          .ui.block
+            .content
+              a(href="/rollcall/")
+                i.icon.left.triangle
+                | Back to Rollcall

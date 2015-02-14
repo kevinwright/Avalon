@@ -2,7 +2,8 @@ var AUTOHELPDIR = global.avalon.dir.autohelp,
     HELPDIR = global.avalon.dir.help,
     LIBRARYHELPDIR = global.avalon.dir.library_help;
 
-var fs = require("fs");
+var util = require("../../helper/util.js");
+var path = require("path");
 var avalon = require("../avalon.js");
 
 var hints = require("./hints");
@@ -74,7 +75,11 @@ function Controller() {
     res.redirect("/help/pages/" + req.query["page"].toLowerCase());
   };
   
-  this.sections = parseSections();
+
+  parseSections(function(err, sections) {
+    if (err) return self.sections = {};
+    self.sections = sections;
+  });
 }
 
 
@@ -82,53 +87,60 @@ function readPage(title, callback) {
   title = title.toLowerCase();
   var isSynonym = synonym(title);
   if (isSynonym) title = isSynonym;
-  console.log("HELP " + title);
-  fs.readFile(LIBRARYHELPDIR + "/" + title, "utf8", function(libErr, librarycontent) {
-    console.log(" - library");
-    fs.readFile(AUTOHELPDIR + "/" + title + "0", "utf8", function(autoErr, autocontent) {
-      console.log(" - loaded", libErr, autoErr);
+
+  util.renderFile(LIBRARYHELPDIR + "/" + title, function(libErr, librarycontent) {
+    util.readFile(AUTOHELPDIR + "/" + title + "0", function(autoErr, autocontent) {
       if (libErr && autoErr) // no file in library and autohelp
         return callback(autoErr);
-      console.log(" - either library or autohelp");
       if (!libErr && autoErr) {
         // there is a library but no autohelp file
-        var page = new Page(title, librarycontent, null, true);
-        return callback(null, page);
+        return Page({
+          title: title,
+          content: { library: librarycontent}
+        }, callback);
       }
-      console.log(" - no library");
       if (libErr && !autoErr) {
         // there is no library but there is an autohelp file
-        return fs.readFile(HELPDIR + "/" + title, "utf8", function(err, helpcontent) {
-          console.log(" - help");
+        return util.readFile(HELPDIR + "/" + title, function(err, helpcontent) {
           if (err) {return callback(err)} // autohelp, but no help
-          var page = new Page(title, helpcontent, autocontent);
-
-          return callback(null, page);
+          return Page({
+            title: title,
+            content: {
+              help: helpcontent,
+              auto: autocontent
+            }
+          }, callback);
         });
       }
-      console.log(" - all ok")
       // there is a library and autohelp
-      var page = new Page(title, librarycontent, autocontent, true);
-      return callback(null, page);
+      return Page({
+        title: title,
+        content: {
+          library: librarycontent,
+          auto: autocontent
+        }
+      }, callback);
     });
   });
 }
 
 // Parses the /help/autohelp/0 file and returns the sections.
 function parseSections(callback) {
-  var data = fs.readFileSync(AUTOHELPDIR + "/0", "utf8");
+  util.readFile(AUTOHELPDIR + "/0", function(err, data) {
+    if (err) return callback(err);
 
-  var sectionContents = data.split(/Section #\d+ - .*/g); // get the content in between the headers
-  var sectionHeaders = data.match(/Section #\d+ - (.*)/g); // get the headers
-  var sectionHints = hints; // get the hints file
+    var sectionContents = data.split(/Section #\d+ - .*/g); // get the content in between the headers
+    var sectionHeaders = data.match(/Section #\d+ - (.*)/g); // get the headers
+    var sectionHints = hints; // get the hints file
 
-  var sections = {};
-  // make a Section object for each section.
-  for (var i = 1; i<sectionContents.length; i++) {
-    sections[i] = new Section(sectionHeaders[i-1], sectionHints[i], sectionContents[i]);
-  }
+    var sections = {};
+    // make a Section object for each section.
+    for (var i = 1; i<sectionContents.length; i++) {
+      sections[i] = new Section(sectionHeaders[i-1], sectionHints[i], sectionContents[i]);
+    }
 
-  return sections;
+    callback(null, sections)
+  });
 }
 
 
