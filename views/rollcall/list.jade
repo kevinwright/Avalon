@@ -1,0 +1,64 @@
+extends ../layout
+
+block head
+  if status == "god"
+    - var title = "Deities of Avalon"
+    link(rel="canonical", href="http://www.avalon-rpg.com/rollcall/deities/")
+  else if city
+    if city != "No Citizenship"
+      - var title = "Citizens of " + city
+    else
+      - var title = "Stateless Avalonians";
+    link(rel="canonical", href="http://www.avalon-rpg.com/rollcall/city/"+city.toLowerCase())
+  else if guild
+    if guild != "No Guild"
+     - var title = "Members of the " + guild + " Guild"
+    else
+      - var title = "Guildless Avalonians"
+    link(rel="canonical", href="http://www.avalon-rpg.com/rollcall/guild/"+guild.toLowerCase())
+  else if order
+    if order != "No Order"
+     - var title = "Order of " + order
+    else
+      - var title = "Orderless Avalonians"
+    link(rel="canonical", href="http://www.avalon-rpg.com/rollcall/order/"+order.toLowerCase())
+  else
+    - var title = "Avalon's cast of characters"
+    link(rel="canonical", href="http://www.avalon-rpg.com/rollcall/list")
+
+block content
+  .ui.content.rollcall
+    .contain
+      h2.ui.title.center.underline #{title}
+      h4.ui.title.center: a(href="/rollcall") Back to Rollcall
+
+      table.ui.table.box
+        thead
+          tr
+            th Title
+            if !status
+              if !city
+                th City
+              if !guild
+                th Guild
+              if !order
+                th Order
+              if order
+                th Order Status
+        tbody
+          for person in list
+            tr
+              - var title = person.title.replace(person.name, "<a href='/rollcall/characters/"+person.name.toLowerCase()+"''>"+person.name+"</a>")
+              td !{title}
+              if !status
+                if !city
+                  if (person.city != "god")
+                    td: a(href="/rollcall/cities/"+person.city)= person.city
+                  else
+                    td: a(href="/rollcall/deities") God
+                if !guild
+                  td: a(href="/rollcall/guilds/"+person.guild)= person.guild
+                if !order
+                  td: a(href="/rollcall/orders/"+person.order)= person.order
+                if order
+                  td= person.orderlevel

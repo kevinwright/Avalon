@@ -3,9 +3,9 @@ html
   head
     include includes/meta
     block head
+    include includes/inlinecss
     include includes/seo
     link(rel='stylesheet', href='/css/style.css')
-    include includes/gtm
   body(class=body)
     include includes/topbar
     .ui.header
@@ -15,3 +15,4 @@ html
     include includes/footer
     script(type="text/javascript", src="/js/jquery.min.js")
     block scripts
+    include includes/gtm

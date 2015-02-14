@@ -1,16 +1,16 @@
 extends ../layout
 
 block head
-  if (page.library && page.library.meta && page.library.meta.title)
-    - var title = page.library.meta.title + " - Avalon - multiplayer game world - Help and manual section"
+  if (page.content.library && page.content.library.meta && page.content.library.meta.title)
+    - var title = page.content.library.meta.title + " - Avalon - multiplayer game world - Help and manual section"
   else
     - var title = page.description + " - Avalon - multiplayer game world - Help and manual section"
-  if (page.library && page.library.meta && page.library.meta.summary)
-    - var description = page.library.meta.summary
+  if (page.content.library && page.content.library.meta && page.content.library.meta.summary)
+    - var description = page.content.library.meta.summary
   else
     - var description = false
-  if (page.library && page.library.meta && page.library.meta.keywords)
-    - var keywords = page.library.meta.keywords.toString()
+  if (page.content.library && page.content.library.meta && page.content.library.meta.keywords)
+    - var keywords = page.content.library.meta.keywords.toString()
   link(rel="canonical", href="http://www.avalon-rpg.com/help/pages/" + page.title.toLowerCase())
 block content
   .ui.content.manual
@@ -25,27 +25,27 @@ block content
               a(href="/help/sections/" + page.section) Section #{page.section}
             i.icon.angle.right
             b #{page.id} #{page.title}
-          if (page.library && page.library.meta && page.library.meta.title)
-            h1.ui.title.center.underline #{page.library.meta.title}
+          if (page.content.library && page.content.library.meta && page.content.library.meta.title)
+            h1.ui.title.center.underline #{page.content.library.meta.title}
           else
             h1.ui.title.center.underline #{page.description}
-          if (page.library)
-            .text.help.markdown !{page.library.html}
-            if (page.advanced)
+          if (page.content.library)
+            .text.help.markdown !{page.content.library.html}
+            if (page.content.library.advanced)
               .ui.box
                 h3.ui.title Advanced
-                != page.advanced.html
-            if (page.library.meta && (page.library.meta.commands || page.library.meta.refs))
+                != page.content.library.advanced.html
+            if (page.content.library.meta && (page.content.library.meta.commands || page.content.library.meta.refs))
               .ui.box
-                if (page.library.meta.commands)
+                if (page.content.library.meta.commands)
                   h4.ui.title Commands
                   ul.ui.menu.simple
-                    for command in page.library.meta.commands
+                    for command in page.content.library.meta.commands
                      .item #{command}
-                if (page.library.meta.refs)
+                if (page.content.library.meta.refs)
                   h4.ui.title References
                   ul.ui.menu.simple
-                    for ref in page.library.meta.refs
+                    for ref in page.content.library.meta.refs
                      .item #{ref}
               
           else
@@ -53,7 +53,7 @@ block content
 
         
         .four.wide.column.sidebar
-          if (page.library && page.library.meta && page.library.meta.rel)
+          if (page.content.library && page.content.library.meta && page.content.library.meta.rel)
             ui.block
               .content
                 if (section)
@@ -95,20 +95,20 @@ block content
                           a(href="/help/pages/" + pagelink.title.toLowerCase(), title=pagelink.description).item
                             | #{pagelink.id} - 
                             b #{pagelink.title}
-          if (page.library && page.library.meta && page.library.meta.rel)
+          if (page.content.library && page.content.library.meta && page.content.library.meta.rel)
             .ui.block
               .content
                 h3.ui.title.center.underline Related Articles
                 ui.ui.menu.vertical
-                  for pagelink in page.library.meta.rel
+                  for pagelink in page.content.library.meta.rel
                     li
                       a(href="/help/pages/" + pagelink.toLowerCase()).item #{pagelink}
-          //- if (page.library && page.library.meta && page.library.meta.keywords)
+          //- if (page.content.library && page.content.library.meta && page.content.library.meta.keywords)
           //-   .ui.block
           //-     .content
           //-       h3.ui.title.center.underline Keywords
           //-       ui.ui.menu.vertical
-          //-         for keyword in page.library.meta.keywords
+          //-         for keyword in page.content.library.meta.keywords
           //-           li
           //-             a(href="/help/keywords/" + keyword.toLowerCase()).item #{keyword}
 

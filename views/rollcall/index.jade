@@ -1,7 +1,43 @@
 extends ../layout
 
+block head
+  - var title = meta.seo.title
+  - var description = meta.seo.description
+  - var keywords = meta.seo.keywords
+  link(rel="canonical", href="http://www.avalon-rpg.com/rollcall/")
+
 block content
-  .ui.content
+  .ui.content.rollcall
     .contain
-      h2.ui.title.center.underline Rollcall
-      p.lead Here you may find a roll-call of Avalon's cast of characters; both the illustrious and the unknown.
+      h2.ui.title.center.underline #{meta.title}
+      p.lead: center #{meta.summary}
+
+      .ui.box
+        .ui.grid.responsive.two.columns
+          for link in meta.links
+            .column
+              h4.ui.title: a(href=link.url) #{link.title}
+              | #{link.description}
+
+      .cities.box.ui
+        a(name="cities")
+        h2.ui.title #{meta.cities.title}
+        .ui.menu
+          for city in meta.cities.cities
+            a.item(href="/rollcall/cities/"+city.toLowerCase()) #{city}
+                    
+               
+      .guilds.box.ui
+        a(name="guilds")
+        h2.ui.title #{meta.guilds.title}
+        .ui.menu
+          for guild in meta.guilds.guilds
+            a.item(href="/rollcall/guilds/"+guild.toLowerCase()) #{guild}
+      
+      .order.box.ui
+        a(name="orders")
+        h2.ui.title #{meta.orders.title}
+        .ui.menu
+          for order in meta.orders.orders
+            a.item(href="/rollcall/orders/"+order.toLowerCase()) #{order}
+            

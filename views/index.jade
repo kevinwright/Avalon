@@ -20,7 +20,6 @@ block content
       .ui.grid.responsive
         .ten.column.wide.main
           !{extra.intro.html}
-
           h2.ui.title.underline #{meta.events.title}
           for update in recent.splice(0, meta.events.max)
             .event.ui.box.small
@@ -102,13 +101,13 @@ block content
             a(href=blurb.link.url).ui.button= blurb.link.text
 
 block scripts
-  script(src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js")
+  script(src="/js/jquery.validate.min.js")
   script.
     $("#createForm").validate({
       onkeyup: false,
       rules: {
         username: {
-          required: "required",
+          required: true,
           minlength: 3,
           remote: {
             url: "/api/checkname",
@@ -120,7 +119,7 @@ block scripts
         password: "required",
         confirmpass: {
           equalTo: "#create-password",
-          required: "required"
+          required: true
         },
         email: "email",
       },

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var avalon = require("../controller/avalon");
+var util = require("../helper/util");
 
 var city = require("../controller/world/city.js");
 var guild = require("../controller/world/guild.js");
@@ -21,15 +22,17 @@ var guild = require("../controller/world/guild.js");
     })
   }
 
-  function getCity(req, res) {
-    var cityPage = new city(req.params["city"]);
-    res.render('world/city', { avalon:avalon, city: cityPage });
+  function getCity(req, res, next) {
+    city(req.params["city"], function(err, cityPage) {
+      if (err) return next(err);
+      res.render('world/city', { avalon:avalon, city: cityPage });
+    });
   }
 
   function getGuild(req, res) {
-    var guildPage = new guild(req.params["guild"]);
-    if (guildPage.error) return res.redirect("/world/");
-    res.render('world/guild', { avalon:avalon, guild: guildPage });
+    guild(req.params["guild"], function(err, guildPage) {
+      res.render('world/guild', { avalon:avalon, guild: guildPage });
+    });
   }
 
   function redirectIndex(req, res) {
@@ -40,16 +43,10 @@ var guild = require("../controller/world/guild.js");
   var academies = ["Orphanage", "Academy", "Institute", "College"];
   function redirectCityGuilds(req, res) {
     var par = req.params["page"];
-    if (cities.indexOf(cap(par)) >= 0) return res.redirect("/cities/" + par.toLowerCase());
-    if (academies.indexOf(cap(par)) >= 0) return res.redirect("/academies/" + par.toLowerCase());
+    if (cities.indexOf(util.cap(par)) >= 0) return res.redirect("/cities/" + par.toLowerCase());
+    if (academies.indexOf(util.cap(par)) >= 0) return res.redirect("/academies/" + par.toLowerCase());
 
     res.redirect("/guilds/" + par.toLowerCase());
-  }
-
-// Helpers
-
-  function cap(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
 module.exports = router;

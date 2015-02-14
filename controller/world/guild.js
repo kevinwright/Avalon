@@ -1,12 +1,9 @@
 var HELPDIR = global.avalon.dir.help;
 var WORLDDIR = global.avalon.dir.world;
 
+var util = require("../../helper/util");
 var fs = require("fs");
 var parser = require("../help/parser");
-
-function cap(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
 
 function parseInfo(content) {
   var result = {};
@@ -32,9 +29,9 @@ function parseSkill(loc) {
 }
 
 
-module.exports = function (guildName) {
+module.exports = function (guildName, callback) {
   this.name = guildName;
-  this.title = cap(this.name);
+  this.title = util.cap(this.name);
 
   this.baseLocation = WORLDDIR + this.title + "/";
 
@@ -42,7 +39,7 @@ module.exports = function (guildName) {
     this.infoContent = fs.readFileSync(this.baseLocation + "basicinfo", "utf8");
   } catch(err) {
     this.error = true;
-    return null;
+    return callback(err);
   }
   this.info = parseInfo(this.infoContent);
 
@@ -58,4 +55,6 @@ module.exports = function (guildName) {
   this.help = function(title) {
     return parser(fs.readFileSync(HELPDIR + "/" + title, "utf8"));
   }
+
+  callback(null, this);
 }

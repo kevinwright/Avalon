@@ -1,70 +1,42 @@
 var LIBRARYDIR = global.avalon.dir.library;
-var express = require('express');
-var router = express.Router();
+var router = require('express').Router();
 var avalon = require("../controller/avalon");
-var fs = require("fs");
-
-var marked = require("meta-marked");
-var pages = [];
+var util = require("../helper/util");
 
 var files = require(global.avalon.files.pages);
 
-function render(page) {
-  return function (req, res) {
-    res.render("dynamic/"+page.template, {
-      avalon: avalon,
-      page: page
+function renderPage(page) {
+  return function (req, res, next) {
+    util.renderFile(page.file, function(err, blocks) {
+      if (err) return next(err);
+      page.library = blocks.normal;
+      res.render("dynamic/"+page.template, {
+        avalon: avalon,
+        page: page
+      })
     })
   }
 }
 
-function watchChange(page) {
-  fs.watchFile(page.file, function(curr, prev) {
-    if (page.type == "library") {
-      fs.readFile(page.file, "utf8", function(err, content) {
-        if (err) return console.error(err);
-        page.library = marked(content)
-        console.log("text changed " + page.file);
-      });
-    } else if (page.type == "html") {
-      fs.readFile(page.file, "utf8", function(err, content) {
-        if (err) return console.error(err);
-        page.html = content
-        console.log("text changed " + page.file);
-      });
-    }
-  })
+function renderHTML(page) {
+  return function (req, res) {
+    util.readFile(page.file, function(err, content) {
+      if (err) return next(err);
+      page.html = content;
+      res.render("dynamic/"+page.template, {
+        avalon: avalon,
+        page: page
+      })
+    })
+  }
 }
-
-function addPage(page) {
-  fs.readFile(page.file, "utf8", function(err, content) {
-    if (err) return console.error(err);
-    page.library = marked(content)
-    router.get(page.url, render(page));
-    console.log("Page added: "+page.url);
-    pages.push(page);
-    watchChange(page);
-  });
-}
-
-function addHtml(page) {
-  fs.readFile(page.file, "utf8", function(err, content) {
-    if (err) return console.error(err);
-    page.html = content
-    router.get(page.url, render(page));
-    console.log("Page added: "+page.url);
-    pages.push(page);
-    watchChange(page);
-  });
-}
-
 
 for (var i = 0; i<files.length; i++) {
   var page = files[i];
   if (page.type == "library") {
-    addPage(page);
+    router.get(page.url, renderPage(page));
   } else if (page.type == "html") {
-    addHtml(page);
+    router.get(page.url, renderHTML(page));
   }
 }
 

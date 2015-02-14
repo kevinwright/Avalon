@@ -1,6 +1,7 @@
 var BBDIR = global.avalon.dir.bb;
 var avalon = require("../avalon");
-var fs = require("fs");
+var util = require("../../helper/util.js");
+var path = require("path");
 var parser = require("../help/parser");
 
 var Board = require("./board.js");
@@ -126,11 +127,8 @@ function parseSections() {
 }
 
 function readPost(boardId, postHref, callback) {
-  console.log(BBDIR + "/" + boardId + "/" + postHref);
-  fs.readFile(BBDIR + "/" + boardId + "/" + postHref, "utf8", function(err, content) {
-    if (err) return callback(err);
-    callback(null, content);
-  });
+  var fileLocation = path.resolve(BBDIR, boardId.toString(), postHref.toString());
+  util.readFile(fileLocation, callback);
 }
 
 module.exports = new Controller();

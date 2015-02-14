@@ -39,11 +39,14 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.set("x-powered-by", false);
 
 if (app.get('env') === 'development')
     app.use(logger('dev'));
-else
-    app.use(logger("combined"));
+else {
+    
+    app.use(logger("dev"));
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
