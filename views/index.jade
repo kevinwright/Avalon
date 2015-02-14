@@ -2,6 +2,9 @@ extends layout
 
 block head
   - var body = "index"
+  - var title = meta.seo.title
+  - var description = meta.seo.description
+  - var keywords = meta.seo.keywords
   link(rel="canonical", href="http://www.avalon-rpg.com/")
 
 block content
@@ -19,7 +22,7 @@ block content
           | #{meta.notice.text}
       .ui.grid.responsive
         .ten.column.wide.main
-          !{extra.intro.html}
+          | !{extra.intro.html}
           h2.ui.title.underline #{meta.events.title}
           for update in recent.splice(0, meta.events.max)
             .event.ui.box.small

@@ -22,8 +22,8 @@ block content
           for post in posts
             .post.section(id="post-"+post.number)
               h3.ui.title
-                a(href="/bb/"+board.url+"/"+post.number + "/" + encodeURIComponent(post.subject)) #{post.subject}
-                a(href="/bb/"+board.url+"/"+post.number + "/" + encodeURIComponent(post.subject)).right.label ##{post.number}
+                a(href="/bb/"+board.url+"/"+post.number + "/" + encodeURIComponent(post.subject.split(" ").join("-"))) #{post.subject}
+                a(href="/bb/"+board.url+"/"+post.number + "/" + encodeURIComponent(post.subject.split(" ").join("-"))).right.label ##{post.number}
               p Posted by 
                 a(href="/bb/" + board.url + "/participant/"+post.from.shortname) #{post.from.fullname}
                 |  on 
