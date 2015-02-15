@@ -8,7 +8,7 @@ var recent = require("../controller/news/recent.js");
 
 // Methods
   function getIndex(req, res, next) {
-    recent(function(data) {
+    recent(function(err, data) {
       avalon.info("front.md", function(err, meta, extra) {
         if (err) return next(err);
         res.render('index', { avalon: avalon, meta: meta.meta, extra:extra, recent: data });

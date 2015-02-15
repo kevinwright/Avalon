@@ -3,7 +3,7 @@ var util = require("../../helper/util");
 
 var recent = function(callback) {
   util.readFile(HELPDIR + "/site-recent", function(err, data) {
-    if (err) return console.error(err);
+    if (err) return callback(err);
 
     var m = data.trim().split(/\s*(\d{1,2}[a-z]{0,2} of [A-Z][a-z]+ \d{2,4})\s*/i);
     var items = [];
@@ -13,7 +13,7 @@ var recent = function(callback) {
         item: m[i+1]
       });
     }
-    callback(items);
+    callback(null, items);
   });
 }
 
