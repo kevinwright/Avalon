@@ -887,6 +887,14 @@
 // | | /| / / __ \/ ___/ / __  / 
 // | |/ |/ / /_/ / /  / / /_/ /  
 // |__/|__/\____/_/  /_/\__,_/   
+
+  .ui.content.maps {
+    .image-wrap {
+      text-align: center;
+      background: white;
+      line-height: 0;
+    }
+  }
                               
   .ui.content.world {
     .section .row {
@@ -932,6 +940,13 @@
     &.fluid {
       width: 100%;
       height: auto;
+    }
+    &.maxed {
+      max-width: 100%;
+      height: auto;
+    }
+    &.border {
+      box-shadow: 0px 0px 0px 5px #000, 0px 0px 0px 6px #a77527;
     }
  }
 

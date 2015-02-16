@@ -76,6 +76,7 @@ app.use('/play', require('./routes/play'));
 app.use('/news', require('./routes/news'));
 app.use('/rollcall', require('./routes/rollcall'));
 app.use('/history', require('./routes/history'));
+app.use('/maps', require('./routes/maps'));
 app.use('/lumiere', require('./routes/lumiere'));
 
 app.use('/', require('./routes/world'));

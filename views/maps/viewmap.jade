@@ -1,0 +1,29 @@
+extends ../layout
+
+block head
+  - var title = map.title + " | " + meta.seo.title
+  - var description = meta.seo.description
+  - var keywords = meta.seo.keywords
+  link(rel="canonical", href="http://www.avalon-rpg.com/maps/" + map.url)
+block content
+  .ui.content.maps
+    .contain.large
+      .ui.grid.responsive
+        .thirteen.column.wide.main.breadcrumbed
+          .ui.breadcrumb
+            a(href="/maps/") Maps
+            i.icon.angle.right
+            b  #{map.title}
+          .image-wrap
+            a(href="/img/maps/"+map.file)
+              img(src="/img/maps/" + map.file, class={fluid: map.full == true}).ui.image.maxed
+
+
+        .three.column.wide.sidebar
+          for section in meta.maps
+            .ui.block
+              .content
+                h4.ui.title #{section.title}
+                ul.ui.menu.vertical
+                  for item in section.maps
+                    a.item(href="/maps/" + item.url, class={active: item.url === map.url}) #{item.title}

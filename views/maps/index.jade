@@ -1,0 +1,23 @@
+extends ../layout
+
+block head
+  - var title = meta.seo.title
+  - var description = meta.seo.description
+  - var keywords = meta.seo.keywords
+  link(rel="canonical", href="http://www.avalon-rpg.com/maps/")
+block content
+  .ui.content
+    .contain
+      .ui.grid.responsive
+        .eleven.column.wide.main
+          h1.ui.title.underline #{meta.title}
+          p.lead #{meta.summary}
+
+          for section in meta.maps
+            h2.ui.title.overline #{section.title}
+            ul.ui.menu
+              for map in section.maps
+                a.item(href="/maps/" + map.url) #{map.title}
+
+        .five.column.wide.sidebar
+          img(src="/img/compass.jpg").ui.image.fluid

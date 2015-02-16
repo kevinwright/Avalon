@@ -10,9 +10,9 @@ var avalon = require("../controller/avalon");
   router.get(['/ancienthistory', "/ancienthistory.html"], getAncientHistory);
 
 // Methods
-  function getIndex(req, res) {
+  function getIndex(req, res, next) {
     avalon.info("history.md", function(err, meta, extra) {
-      if (err) return console.log(err);
+      if (err) return next(err);
       res.render('history/index', { meta:meta.meta, extra:extra, avalon: avalon });
     })
   }
