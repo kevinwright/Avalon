@@ -13,11 +13,18 @@ block content
       p.lead: center #{meta.summary}
 
       .ui.box
-        .ui.grid.responsive.two.columns
+        .ui.grid.responsive.three.columns
           for link in meta.links
             .column
               h4.ui.title: a(href=link.url) #{link.title}
               | #{link.description}
+          .column
+            h4.ui.title #{meta.search}
+            form(action="/rollcall/search").historyform
+              .ui.fluid.icon.input
+                label HISTORY
+                input(type="text", name="character", list="characters")
+                i.search.icon
 
       .cities.box.ui
         a(name="cities")
@@ -40,4 +47,7 @@ block content
         .ui.menu
           for order in meta.orders.orders
             a.item(href="/rollcall/orders/"+order.toLowerCase()) #{order}
-            
+block scripts
+  datalist#characters
+    for char in characters
+      option(value=char.name)

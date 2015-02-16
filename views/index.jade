@@ -81,6 +81,14 @@ block content
                   label HELP
                   input(type="text", name="page", list="pages")
                   i.search.icon
+
+            .content
+              p #{meta.search.rollcall}
+              form(action="/rollcall/search").historyform
+                .ui.fluid.icon.input
+                  label HISTORY
+                  input(type="text", name="character")
+                  i.search.icon
                     
           .ui.block
             .content

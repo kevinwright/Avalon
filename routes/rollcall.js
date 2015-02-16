@@ -11,5 +11,6 @@ router.get('/characters/:character.html', rollcall.character);
 router.get(['/characters/:character', '/character/:character'], rollcall.character);
 router.get('/deities', rollcall.deities);
 router.get(['/list', "/list.html"], rollcall.redirect);
+router.get("/search", rollcall.search);
 
 module.exports = router;

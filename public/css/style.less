@@ -958,10 +958,6 @@
         cursor: pointer;
       }
     }
-    .logo-wrap {
-      background: url("/img/pattern/logobg.png") no-repeat center;
-      margin-top: -2px;
-    }
     .logo {
       height: 150px;
       max-width: 100%;
@@ -1248,7 +1244,7 @@
 //
 //                         Markdown and Avalon files
   
-  form.helpform {
+  form.helpform, form.historyform {
     .ui.input {
       label {
         cursor: default;
@@ -1275,6 +1271,16 @@
         opacity: 1;
         padding-top: .7em;
         color: black;
+      }
+    }
+  }
+  form.historyform {
+    .ui.input {
+      label {
+        width: 5em;
+      }
+      input {
+        padding-left: 5em!important;
       }
     }
   }

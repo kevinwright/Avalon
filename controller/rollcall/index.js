@@ -64,7 +64,10 @@ function RollCallController() {
   this.index = function(req, res, next) {
     avalon.info("rollcall.md", function(err, meta) {
       if (err) return next(err);
-      res.render('rollcall/index', { avalon:avalon, meta: meta.meta});
+      self.get(null, function(err, list) {
+        if (err) return next(err);
+        res.render('rollcall/index', { characters: list, avalon:avalon, meta: meta.meta});
+      })
     })
   }
 
@@ -101,6 +104,10 @@ function RollCallController() {
 
     })
   }
+
+  this.search = function(req, res) {
+    res.redirect("/rollcall/characters/" + req.query["character"].toLowerCase());
+  };
 
   this.redirect = function(req, res, next) {
     var city = req.params["city"] || req.query["city"];
