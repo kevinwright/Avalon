@@ -60,6 +60,18 @@ function RollCallController() {
     }, callback);
   }
 
+  this.sortPatron = function(a, b) {
+    if (a.city == "god") return -1;
+    if (b.city == "god") return 1;
+    if (a.order == "No Order" && b.order == "No Order") {
+      return 0;
+    }
+    if (a.order == "No Order") {
+      return 1;
+    }
+    return -1;
+  }
+
 
   this.index = function(req, res, next) {
     avalon.info("rollcall.md", function(err, meta) {
@@ -86,10 +98,12 @@ function RollCallController() {
         })
       } else if (city) {
         self.getCity(city, function(err, list) {
+          list = list.sort(self.sortPatron);
           res.render('rollcall/list', { city: util.cap(city), list: list, avalon:avalon, meta: meta.meta});
         })
       } else if (guild) {
         self.getGuild(guild, function(err, list) {
+          list = list.sort(self.sortPatron);
           res.render('rollcall/list', { guild: util.cap(guild), list: list, avalon:avalon, meta: meta.meta});
         })
       } else if (order) {
@@ -98,6 +112,7 @@ function RollCallController() {
         })
       } else {
         self.get(null, function(err, list) {
+          list = list.sort(self.sortPatron);
           res.render('rollcall/list', { list: list, avalon:avalon, meta: meta.meta});
         })
       }
