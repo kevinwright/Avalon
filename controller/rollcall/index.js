@@ -156,7 +156,7 @@ function RollCallController() {
         })
       } else {
         util.readFile(ROLLCALLDIR + "/" + character, function(err, help) {
-          if (err.code = "ENOENT") {
+          if (err.code == "ENOENT") {
             return res.redirect("/rollcall");
           }
           if (err) return next(err);

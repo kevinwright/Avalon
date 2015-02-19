@@ -11,6 +11,16 @@ module.exports = function(grunt) {
         dest: 'public/css/style.css'
       },
     },
+    markade: {
+      def: {
+        options: {
+          "template": "views/emails/default.jade"
+        },
+        files: {
+          "public/emails": "/library/emails/*.md"
+        }
+      }
+    },
     watch: {
       less: {
         files: ['public/css/*.less'],
@@ -25,5 +35,8 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks("grunt-contrib-less");
   grunt.loadNpmTasks("grunt-contrib-watch");
+  grunt.loadNpmTasks("grunt-markade");
+
   grunt.registerTask('default', ["less", 'watch']);
+  grunt.registerTask('email', ["markade"]);
 };
