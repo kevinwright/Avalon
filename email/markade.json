@@ -1,9 +1,0 @@
-{
-  "name": "Avalon Emails",
-  "directories": {
-    "output": "public",
-    "template": "templates",
-    "data": "data"
-  },
-  "templates": {}
-}
