@@ -6,7 +6,8 @@ var util = require("../helper/util");
 
 // Routes
   router.get(['/', "/index.html"], getIndex);
-  router.get(['/:map', "/viewmap.php"], getMap);
+  router.get(['/viewmap.php'], getMap);
+  router.get(['/:map'], getMap);
 
 // Methods
   function getIndex(req, res, next) {
@@ -29,7 +30,8 @@ var util = require("../helper/util");
         return memo;
       }, null);
 
-      if (!map) return next("No map found!");
+
+      if (!map) return next(new Error("No map found!"));
       res.render('maps/viewmap', { map: map, meta:meta.meta, extra:extra, avalon: avalon });
     })
   }
