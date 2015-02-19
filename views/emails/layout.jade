@@ -6,6 +6,120 @@ html(xmlns='http://www.w3.ord/1999/xhtml')
     meta(name='format-detection', content='date=no')
     meta(name='format-detection', content='address=no')
     meta(name='format-detection', content='telephone=no')
+    style: include style.css
     title= $.title
+    include mixins
   body
-    block content
+    if $.url
+      center(style="padding: 5px;")
+        a(href=$.url) Can't view this? View in the browser.
+    table.body
+      tbody
+        tr
+          td.center(align="center", valign="top")
+            center
+              table.row.header
+                tbody
+                  tr
+                    td.center(align="center")
+                      center
+                        table.container
+                          tbody
+                            tr
+                              td.wrapper.last
+                                table.twelve.columns
+                                  tbody
+                                    tr
+                                      td.overlay
+                                        a(href="http://www.avalon-rpg.com")
+                                          img(height="200", src="http://www.avalon-rpg.com/img/logo.png")
+                                        span.template-label #{$.title}
+                                      td.expander
+              table.container
+                tbody
+                  tr
+                    td
+                      if $.callout
+                        table.row.ui.box
+                          tbody
+                            tr
+                              td.wrapper.last
+                                table.twelve.columns
+                                  tbody
+                                    tr
+                                      td
+                                        ul
+                                          for item in $.callout
+                                            li #{item}
+                      for block in blocks
+                        table.row.ui.box
+                          tbody
+                            tr
+                              td.wrapper.last
+                                table.twelve.columns
+                                  tbody
+                                    tr
+                                      td !{block.html}
+                                      td.expander
+              table.row.footer(style="overflow: hidden;")
+                tbody
+                  tr
+                    td.center(align="center")
+                      center
+                        table.container
+                          tbody
+                            tr
+                              td.wrapper.last
+                                table.twelve.columns
+                                  tbody
+                                    tr
+                                      td
+                                        table.five.sub-columns
+                                          tbody
+                                            tr
+                                              td.left-text-pad
+                                                h5 Connect With Us
+                                                if $.social
+                                                  for item in $.social
+                                                    table.tiny-button(class=item.title.toLowerCase())
+                                                      tbody: tr: td: a(href=item.url, style="color: #fff;") #{item.title}
+                                      td
+                                        table.five.sub-columns.last(style="vertical-align:middle")
+                                          tbody: tr: td.last.right-text-pad.center
+                                            if $.links
+                                              for item in $.links
+                                                h5 #{item.title}
+                                                a(href=item.url) #{item.description}
+                                                br
+                                      td.banner-img
+                                        table.two.sub-columns.last(style="vertical-align: middle")
+                                          tbody: tr: td.last.right-text-pad.center
+                                            img(src="http://www.avalon-rpg.com/img/wax.png")
+                                      td.expander
+                            tr
+                              td.wrapper
+                                table.twelve.columns
+                                  tbody
+                                    tr
+                                      td
+                                        p.tiny
+                                          a(href="<% unsubscribe %>") Unsubscribe
+                                          |   if you do not wish to receive any of the Avalon newsletters, journals or mailshots.
+                             
+                                    tr
+                                      td
+                                        p.tiny
+                                          a(href="http://www.meetplace.net/forum/48") History in the Making: Modern Avalon in the 14th Century
+                                          |  • 
+                                          a(href="http://www.avalon-rpg.com/play/") Play Now
+                                          |  • 
+                                          a(href="http://umbra.avalon-rpg.com/") Umbra Mobile Client
+
+                                    tr
+                                      td
+                                        p.tiny
+                                          a(href="http://www.avalon-rpg.com/help/pages/privacy.html") Privacy Policy
+                                          |  •  
+                                          a(href="http://www.avalon-rpg.com/help/pages/terms.html") Terms &amp; Conditions
+                                          |  • 
+                                          a(href="http://www.avalon-rpg.com/help/pages/contact.html") Contact Us

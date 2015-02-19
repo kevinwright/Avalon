@@ -1,0 +1,14 @@
+mixin feature(title, text)
+  table.featured-story
+    tr
+      td.col
+        img(src="#", alt="")
+      td.col
+        table
+          tr
+            td.title #{title}
+          tr
+            td.abstract #{text}
+          tr
+            td.cta
+              a(href="#") CTA

@@ -4,11 +4,18 @@ module.exports = function(grunt) {
       dev: {
         options: {
           compress: true,
-          report: "gzip",
           cleancss: true
         },
         src: ['public/css/style.less'],
         dest: 'public/css/style.css'
+      },
+      email: {
+        options: {
+          compress: true,
+          cleancss: true
+        },
+        src: ['views/emails/style.less'],
+        dest: 'views/emails/style.css'
       },
     },
     markade: {
@@ -17,8 +24,21 @@ module.exports = function(grunt) {
           "template": "views/emails/default.jade"
         },
         files: {
-          "public/emails": "/library/emails/*.md"
+          "tmp/emails": "/library/emails/default/*.md"
         }
+      }
+    },
+    emailBuilder: {
+      test: {
+        options: {
+          applyStyleTags: true,
+          removeStyleTags: true
+        },
+        files : [{
+          expand: true,
+          src: ['tmp/emails/*.html'],
+          dest: 'public/emails',
+        }]
       }
     },
     watch: {
@@ -36,7 +56,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-less");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-markade");
+  grunt.loadNpmTasks('grunt-email-builder');
 
   grunt.registerTask('default', ["less", 'watch']);
-  grunt.registerTask('email', ["markade"]);
+  grunt.registerTask('email', ["less:email", "markade", "emailBuilder"]);
 };
