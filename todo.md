@@ -7,12 +7,18 @@ Rollcall
 
 - [x] List roll call names with those with a patron above those without
 - [ ] List roll call with active players at the top by preference
+  * How do I know if a player is active?
 - [ ] Guild, city and order rolls should be header linking to appropriate WORLD page, graphic alongside short blurb, suggest founding text. Order with a link to that deity HELP page though ideally would be nice to have a similar header with a graphic for each deity and their fiIrstintro text (I have these) and their in-game help after active followers
+  * So up top there should be a graphic and help / firstintro text above all the characters?
 
-History
--------
-- [ ] What you have as modern affairs needs to move from news into history. Timeline and Godline should be bragging here cross kinked if possible. Ideally this content suitors be flexible liked the Intro and News sections to reduce need for further coding at html level once initial but is done. Check Avalon HELP for content but figure the player memoirs and history legend stuff would all be better here. This will also reduce the HELP GUIDE section load a little.
 - [ ] **IDEA**: could we have a click against a player in roll call options SEND MESSAGE, go-to meetplace profile, and include their creation date as per history file. Avalon can provide all this info in any format most easy.
+
+
+History / News
+--------------
+
+- [ ] What you have as modern affairs needs to move from news into history. Timeline and Godline should be bragging here cross linked if possible. Ideally this content suitors be flexible like the Intro and News sections to reduce need for further coding at html level once initial but is done. Check Avalon HELP for content but figure the player memoirs and history legend stuff would all be better here. This will also reduce the HELP GUIDE section load a little.
+  - What is timeline and godline?
 
 Front Page:
 -----------

@@ -68,15 +68,29 @@ function Controller() {
     if (cat == null && result == null) return next(new NoPageError(url, cat, result));
 
     util.renderFile(result.file, function(err, blocks) {
-      if (err) return next(err);
-      res.render("intro/page", {
-        meta: blocks.normal.meta,
-        extra: blocks,
-        toc: toc,
-        avalon: avalon,
-        cat: cat,
-        page: result,
-      })
+      if (err) {
+        // return next(err);
+        return util.renderFile(INTRODIR+"/empty.md", function(secondErr, blocks) {
+          blocks.normal.html = "<pre><code>"+JSON.stringify(err, null, 2)+"</code></pre>";
+          res.render("intro/page", {
+            meta: blocks.normal.meta,
+            extra: blocks,
+            toc: toc,
+            avalon: avalon,
+            cat: cat,
+            page: result,
+          })
+        })
+      } else {
+        res.render("intro/page", {
+          meta: blocks.normal.meta,
+          extra: blocks,
+          toc: toc,
+          avalon: avalon,
+          cat: cat,
+          page: result,
+        })
+      }
     })
   }
 }

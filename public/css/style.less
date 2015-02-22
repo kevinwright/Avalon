@@ -1340,6 +1340,12 @@
         }
       }
       pre {
+        white-space: pre-wrap;       /* css-3 */
+        white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+        white-space: -pre-wrap;      /* Opera 4-6 */
+        white-space: -o-pre-wrap;    /* Opera 7 */
+        word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
         font-size: 12px;
         line-height: 16px;
         background: #070A0F;
@@ -1360,6 +1366,38 @@
       .icon {
         margin: auto 5px;
       }
+    }
+  }
+
+  .ui.manual .text.help.markdown pre,
+  .ui.bb .text.help.markdown pre,
+  .ui.intro .text.help.markdown pre {
+    &.mud-output {
+      color: #c0c0c0;
+      background-color: #000;
+      font-family: monospace;
+
+      .reset     {color: #c0c0c0;}
+      .bg-reset  {background-color: #000;}
+      .black     {color: #000;}
+      .red       {color: red;}
+      .green     {color: lime;}
+      .yellow    {color: yellow;}
+      .blue      {color: #3333FF;}
+      .purple    {color: fuchsia;}
+      .cyan      {color: aqua;}
+      .white     {color: #c0c0c0;}
+      .bg-black  {background-color: #000;}
+      .bg-red    {background-color: red;}
+      .bg-green  {background-color: lime;}
+      .bg-yellow {background-color: yellow;}
+      .bg-blue   {background-color: #3333FF;}
+      .bg-purple {background-color: fuchsia;}
+      .bg-cyan   {background-color: aqua;}
+      .bg-white  {background-color: #c0c0c0;}
+      .underline {text-decoration: underline;}
+      .bold      {font-weight: bold;}
+      .blink     {text-decoration: blink;}
     }
   }
 

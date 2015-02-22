@@ -121,6 +121,13 @@ var readFiles = function(files, callback) {
     }
     callback(null, blocks);
   }
+  var renderSync = function(content) {
+    var blocks = catchBlock(content);
+    for (var key in blocks)
+      if(blocks.hasOwnProperty(key))
+        blocks[key] = metaMarked(blocks[key]);
+    return blocks;
+  }
 
   var renderFile = function(file, callback) {
     if (file in fileErrCache) return callback(fileErrCache[file]);
@@ -158,6 +165,11 @@ var readFiles = function(files, callback) {
     });
   }
 
+  var renderFileSync = function(file) {
+    var content = fs.readFileSync(file).toString();
+    return renderSync(content);
+  }
+
 
 function cap(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -168,7 +180,9 @@ module.exports = {
   catchBlock: catchBlock,
   marked: metaMarked,
   render: render,
+  renderSync: renderSync,
   renderFile: renderFile,
+  renderFileSync: renderFileSync,
   cap: cap,
   cache: {
     file: fileCache,

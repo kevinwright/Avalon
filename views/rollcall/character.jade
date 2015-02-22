@@ -44,6 +44,11 @@ block content
         .four.column.wide.sidebar
           .ui.block
             .content
+              .ui.menu.vertical
+                a.item(href="http://www.meetplace.net/user/"+person.name.toLowerCase()) Meetplace
+                
+          .ui.block
+            .content
               if (person.city != "god")
                 .ui.menu.vertical
                   a.item(href="/rollcall/cities/"+person.city)
