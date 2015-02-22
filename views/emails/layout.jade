@@ -7,7 +7,8 @@ html(xmlns='http://www.w3.ord/1999/xhtml')
     meta(name='format-detection', content='address=no')
     meta(name='format-detection', content='telephone=no')
     style: include style.css
-    title= $.title
+    if $.title
+      title= $.title
     include mixins
   body
     if $.url
