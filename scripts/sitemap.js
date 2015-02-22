@@ -74,7 +74,10 @@ function writeUrl(urlpath, lm, changefreq, prior) {
     url += "<loc>http://www.avalon-rpg.com" + urlpath + "</loc>";
 
   if (lm) {
-    var date = lm.getFullYear() + "-" + (lm.getMonth() + 1) + "-" + lm.getDate();
+    var month = lm.getMonth() + 1;
+    month = ('0' + month).slice(-2);
+
+    var date = lm.getFullYear() + "-" + month + "-" + ('0' + lm.getDate()).slice(-2);
     url += "<lastmod>"+date+"</lastmod>";
   }
 
