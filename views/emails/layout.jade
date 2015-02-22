@@ -7,11 +7,11 @@ html(xmlns='http://www.w3.ord/1999/xhtml')
     meta(name='format-detection', content='address=no')
     meta(name='format-detection', content='telephone=no')
     style: include style.css
-    if $.title
+    if $ && $.title
       title= $.title
     include mixins
   body
-    if $.url
+    if $ && $.url
       center(style="padding: 5px;")
         a(href=$.url) Can't view this? View in the browser.
     table.body
@@ -34,13 +34,14 @@ html(xmlns='http://www.w3.ord/1999/xhtml')
                                       td.overlay
                                         a(href="http://www.avalon-rpg.com")
                                           img(height="200", src="http://www.avalon-rpg.com/img/logo.png")
-                                        span.template-label #{$.title}
+                                        if $ && $.title
+                                          span.template-label #{$.title}
                                       td.expander
               table.container
                 tbody
                   tr
                     td
-                      if $.callout
+                      if $ && $.callout
                         table.row.ui.box
                           tbody
                             tr
@@ -80,14 +81,14 @@ html(xmlns='http://www.w3.ord/1999/xhtml')
                                             tr
                                               td.left-text-pad
                                                 h5 Connect With Us
-                                                if $.social
+                                                if $ && $.social
                                                   for item in $.social
                                                     table.tiny-button(class=item.title.toLowerCase())
                                                       tbody: tr: td: a(href=item.url, style="color: #fff;") #{item.title}
                                       td
                                         table.five.sub-columns.last(style="vertical-align:middle")
                                           tbody: tr: td.last.right-text-pad.center
-                                            if $.links
+                                            if $ && $.links
                                               for item in $.links
                                                 h5 #{item.title}
                                                 a(href=item.url) #{item.description}
