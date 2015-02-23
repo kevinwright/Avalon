@@ -34,7 +34,16 @@ function Controller() {
     var result = legacy.filter(function(item) {
       return (item.url == "/" + url) && item.file;
     })
-    if (result.length == 0) return next(new NoPageError(url, "legacy", result));
+    if (result.length == 0) {
+      toc.filter(function(top) {
+        return top.short == url;
+      })
+      if (toc) {
+        return res.redirect("/intro/" + toc[0].items[0].url)
+      }
+
+      return next(new NoPageError(url, "legacy", result));
+    }
     
     util.renderFile(result[0].file, function(err, blocks) {
       if (err) return next(err);
