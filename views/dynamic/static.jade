@@ -5,6 +5,8 @@ block head
     - var title = page.library.meta.seo.title
     - var description = page.library.meta.seo.description
     - var keywords = page.library.meta.seo.keywords
+  if (page.type == "html")
+    - var title = page.info.title
   if (page.canonical)
     link(rel="canonical", href=page.canonical)
   else if (page.library.meta.canonical)

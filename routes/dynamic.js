@@ -1,5 +1,6 @@
 var LIBRARYDIR = global.avalon.dir.library;
-var router = require('express').Router();
+var express = require('express')
+var router = express.Router();
 var avalon = require("../controller/avalon");
 var util = require("../helper/util");
 
@@ -19,7 +20,7 @@ function renderPage(page) {
 }
 
 function renderHTML(page) {
-  return function (req, res) {
+  return function (req, res, next) {
     util.readFile(page.file, function(err, content) {
       if (err) return next(err);
       page.html = content;
@@ -37,6 +38,11 @@ for (var i = 0; i<files.length; i++) {
     router.get(page.url, renderPage(page));
   } else if (page.type == "html") {
     router.get(page.url, renderHTML(page));
+  } else if (page.type == "download") {
+    router.use(page.url, express.static(page.file));
+  } else if (page.type == "directory") {
+    console.log(page.file, page.url);
+    router.use(page.url, express.static(page.file));
   }
 }
 
