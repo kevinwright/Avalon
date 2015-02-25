@@ -274,6 +274,12 @@
         color: darken(@col_foreground, 20%); 
       }
     }
+    &.large {
+      font-size: 1.2em;
+      cite {
+        font-size: .8em;
+      }
+    }
     &.big {
       font-size: 1.5em;
       cite {
@@ -869,6 +875,11 @@
       p {
         margin: 1em auto;
       }
+      blockquote {
+        p {
+          margin: auto;
+        }
+      }
       pre {
         background: #070A0F;
         color: #c5c8c6;
@@ -1327,7 +1338,6 @@
       }
     }
     .text.help.markdown {
-      
       p {
         margin: 1em auto;
         > code {
