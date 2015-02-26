@@ -44,9 +44,8 @@ block content
         .four.column.wide.sidebar
           .ui.block
             .content
-              img(src="/api/avatar/"+person.name.toLowerCase()+".jpg", onerror='this.style.display = "none"').ui.image.fluid
-              .ui.menu.vertical
-                a.item(href="http://www.meetplace.net/user/"+person.name.toLowerCase()) Meetplace
+              a(href="http://www.meetplace.net/user/"+person.name.toLowerCase(), title="Meetplace profile of " + person.title)
+                img(src="/api/avatar/"+person.name.toLowerCase()+".jpg", alt="Avatar of " + person.title, onerror='this.parentElement.parentElement.parentElement.style.display = "none"').ui.image.fluid
                 
           .ui.block
             .content
