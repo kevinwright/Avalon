@@ -4,7 +4,7 @@ block head
   - var title = map.title + " | " + meta.seo.title
   - var description = meta.seo.description
   - var keywords = meta.seo.keywords
-  link(rel="canonical", href="http://www.avalon-rpg.com/maps/" + map.url)
+  - var canonical = "http://www.avalon-rpg.com/maps/" + map.url
 block content
   .ui.content.maps
     .contain.large

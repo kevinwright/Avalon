@@ -1,6 +1,7 @@
 if title
   title #{title}
   meta(property='og:title', content='#{title}')
+  meta(itemprop='name', content=title)
 else
   title Avalon - The First Online Text Based Roleplaying Game
   meta(property='og:title', content='Avalon - The First Online Text Based Roleplaying Game')
@@ -9,8 +10,17 @@ if description
 else if (description === false)
   
 else
-  meta(name="description", content="Avalon, the premier role-playing game. Windows and Java game client for immediate play. 'The most complex, atmospheric role-playing game on the net.")
+  meta(name="description", content="Avalon; the Legend Lives is a text based game, oldest of its kind, of the online roleplaying game world genre. First online to the world in 1989, it has been developing and growing ever since. It contains some of the finest imginative writing or text (as it is known, in computer parlance) and is one of the few text based games proven to satisfy the connoisseur of fantasy literature and online roleplaying alike. Join its on-going narrative; become a part of the rich tapestry of player history and divine conflicts. By creating an Avalon character you will engage in an online roleplaying game world of exquisite beauty, decades of lovingly crafted design and a breadth of play possibilities that makes most other text based games or multi player 'worlds' seem pale imitations. For Avalon was one of the first multi-user online gameworld: it predates even the internet.")
 if keywords
   meta(name='keywords', content='#{keywords}')
 else
   meta(name='keywords', content='role-playing game, RPG, RPGS, multiplayer games, interactive games, multiuser games, adventure games, fantasy games')
+meta(property='og:type', content='website')
+if canonical
+  link(rel="canonical", href=canonical)
+  meta(property='og:url', content=canonical)
+meta(name="author", content="Avalon, The Legend Lives")
+meta(property="og:site_name", content="Avalon; the Legend Lives")
+meta(property="fb:admins", content="100001924247273")
+meta(property="fb:page_id", content="189653637729605") 
+meta(property="fb:page_id", content="184129298274122")

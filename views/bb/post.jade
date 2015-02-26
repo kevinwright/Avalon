@@ -4,7 +4,7 @@ include ../includes/bb
 block head
   - var title = post.subject + " - " + board.title + " Bulletin Board - Avalon Online RPG"
   - var description = false
-  link(rel="canonical", href="http://www.avalon-rpg.com/bb/"+board.url+"/"+post.number+"/"+encodeURIComponent(post.subject))
+  - var canonical = "http://www.avalon-rpg.com/bb/"+board.url+"/"+post.number+"/"+encodeURIComponent(post.subject)
 
 block content
   .ui.content.bb

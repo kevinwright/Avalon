@@ -8,9 +8,9 @@ block head
   if (page.type == "html")
     - var title = page.info.title
   if (page.canonical)
-    link(rel="canonical", href=page.canonical)
+    - var canonical = page.canonical
   else if (page.library.meta.canonical)
-    link(rel="canonical", href=page.library.meta.canonical)
+    - var canonical = page.library.meta.canonical
 block content
   .ui.content.page.static
     .contain

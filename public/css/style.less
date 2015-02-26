@@ -577,7 +577,8 @@
 //   / __  / / / / __/ __/ __ \/ __ \/ ___/
 //  / /_/ / /_/ / /_/ /_/ /_/ / / / (__  ) 
 // /_____/\__,_/\__/\__/\____/_/ /_/____/  
-
+  
+  .ui.menu.inverted .item.button,
   .ui.button {
     border: transparent;
     background: rgba(255, 255, 255, 0.1);
@@ -612,6 +613,54 @@
     &.simple {
       box-shadow: none;
       &:hover {box-shadow: none;}
+    }
+    &.twitter {
+      background-color: #4092cc;
+      color: #fff;
+      text-shadow: none;
+      background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,.05)),to(rgba(0,0,0,.1)));
+      background-image: -webkit-linear-gradient(rgba(255,255,255,.05),rgba(0,0,0,.1));
+      background-image: linear-gradient(rgba(255,255,255,.05),rgba(0,0,0,.1));
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      font-size: .8rem;
+      &:hover, &:active {
+        background-color: #549dd1;
+        color: #fff;
+        text-shadow: none;
+      }
+    }
+    &.facebook {
+      background-color: #3b579d;
+      color: #fff;
+      text-shadow: none;
+      background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,.05)),to(rgba(0,0,0,.1)));
+      background-image: -webkit-linear-gradient(rgba(255,255,255,.05),rgba(0,0,0,.1));
+      background-image: linear-gradient(rgba(255,255,255,.05),rgba(0,0,0,.1));
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      font-size: .8rem;
+      &:hover, &:active {
+        background-color: #4261b0;
+        color: #fff;
+        text-shadow: none
+      }
+    }
+    &.google.plus {
+      background-color: #d34836;
+      color: #fff;
+      text-shadow: none;
+      background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,.05)),to(rgba(0,0,0,.1)));
+      background-image: -webkit-linear-gradient(rgba(255,255,255,.05),rgba(0,0,0,.1));
+      background-image: linear-gradient(rgba(255,255,255,.05),rgba(0,0,0,.1));
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      font-size: .8rem;
+      &:hover, &:active {
+        background-color: #d85b4b;
+        color: #fff;
+        text-shadow: none;
+      }
     }
   }
 

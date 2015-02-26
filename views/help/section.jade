@@ -3,7 +3,7 @@ extends ../layout
 block head
   - var title = section.title + " - Avalon - multiplayer game world - Help and manual section"
   - var description = false
-  link(rel="canonical", href="http://www.avalon-rpg.com/help/sections/" + section.id)
+  - var canonical = "http://www.avalon-rpg.com/help/sections/" + section.id
 block content
   .ui.content.manual
     .contain

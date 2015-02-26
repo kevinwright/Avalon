@@ -1,7 +1,7 @@
 .ui.footer
   img(src="/img/wax.png", style="position: absolute; right: 0px; top: 0px; height: 250px")
   .contain
-    .ui.four.columns.grid.responsive
+    .ui.five.columns.grid.responsive
       
       .column
         h3.ui.title.underline World
@@ -40,3 +40,15 @@
           li: a.item(href="http://www.meetplace.net", target="_blank") Meetplace Community
           li: a.social.facebook.item(href="https://www.facebook.com/pages/Avalon-the-Legend-Lives-Game-Page/184129298274122", target="_blank") Facebook
           li: a.social.twitter.item(href="https://twitter.com/AvalonOnlineRPG", target="_blank") Twitter
+
+      .column
+        ul.ui.inverted.vertical.menu
+          a(href="JavaScript:window.open('https://twitter.com/share?url='+window.location.href+'&text=&via=AvalonOnlineRPG','','width=657,height=400,scrollbars=1')", target="_blank").ui.button.twitter.item
+            i.icon.twitter
+            | Tweet
+          a(href="JavaScript:window.open('http://www.facebook.com/sharer.php?u='+window.location.href,'','width=657,height=400,scrollbars=1')", target="_blank").ui.button.facebook.item
+            i.icon.facebook
+            | Facebook
+          a(href="https://plus.google.com/share?url=http://www.avalon-rpg.com" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;").ui.button.google.plus.item
+            i.icon.google.plus
+            | Post

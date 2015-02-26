@@ -5,7 +5,7 @@ block head
   - var description = false
   - var keywords = false
   if (page.canonical)
-    link(rel="canonical", href=page.canonical)
+    - var canonical = page.canonical
 block content
   .ui.content.page.academy
     .contain

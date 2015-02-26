@@ -11,7 +11,7 @@ block head
     - var description = false
   if (page.content.library && page.content.library.meta && page.content.library.meta.keywords)
     - var keywords = page.content.library.meta.keywords.toString()
-  link(rel="canonical", href="http://www.avalon-rpg.com/help/pages/" + page.title.toLowerCase())
+  - var canonical = "http://www.avalon-rpg.com/help/pages/" + page.title.toLowerCase()
 block content
   .ui.content.manual
     .contain

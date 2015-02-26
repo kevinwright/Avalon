@@ -7,7 +7,7 @@ block head
     - var error = title = "No such character #{character}!"
   if !error
     - var title = person.title
-    link(rel="canonical", href="http://www.avalon-rpg.com/rollcall/characters/"+person.name.toLowerCase())
+    - var canonical = "http://www.avalon-rpg.com/rollcall/characters/"+person.name.toLowerCase()
 
 block content
   .ui.content.rollcall
