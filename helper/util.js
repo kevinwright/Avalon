@@ -94,7 +94,7 @@ var readFiles = function(files, callback) {
   var metaMarked = function(src, opt, callback) {
     if (Object.prototype.toString.call(src) !== '[object String]')
       throw new TypeError('First parameter must be a string.');
-
+    src=src.trim();
     var mySplitInput = splitInput(src);
 
     return mySplitInput ?  {
