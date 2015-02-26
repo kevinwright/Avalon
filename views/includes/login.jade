@@ -2,11 +2,11 @@ form(method="post", action="/lumiere").ui.form.box#loginForm
   h3.ui.title.underline Login existing character
   .field.username
     .ui.input
-      label(for="login-username") Character Name
+      label(for="login-username") Character Name (no spaces or numbers)
       input#login-username(type="text", name="username")
   .field
     .ui.input
-      label Password
+      label Password (no spaces)
       input#login-password(type="password", name="password")
   .three.fields
     p Client

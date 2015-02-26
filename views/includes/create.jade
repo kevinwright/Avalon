@@ -2,13 +2,13 @@ form(method="post", action="/lumiere").ui.form.box#createForm
   h3.ui.title.underline Create a new Avalon character
   .field.username
     .ui.input
-      label(for="create-username") Character Name
+      label(for="create-username") Character Name (no spaces or numbers)
       input#create-username(type="text", name="username", maxlength=18)
       p #{meta.form.username}
   .two.fields.password
     .field
       .ui.input
-        label(for="create-password") Password
+        label(for="create-password") Password (no spaces)
         input#create-password(type="password", name="password", maxlength=50)
     .field
       .ui.input
