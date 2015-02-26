@@ -9,6 +9,7 @@ var checkErrors = {
 }
 
 var api = {
+  avatar: require("./avatar"),
   stats: function(req, res) {
     res.render("stats.jade", {
       avalon: avalon,

@@ -10,6 +10,7 @@ router.get('/', function(req, res) {
 
 router.get("/stats/", api.stats);
 router.get("/who/", api.who);
+router.get("/avatar/:username.jpg", api.avatar);
 router.get("/checkname/", api.checkName);
 router.get("/checkname/:username", api.checkName);
 
