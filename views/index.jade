@@ -32,40 +32,7 @@ block content
 
 
         .six.column.wide.sidebar
-          form(method="post", action="/lumiere/").ui.form.block#createForm
-            .content
-              h3.ui.title.underline Create New Avalon Character
-                a(href="/play/").right.label#loginExistingLink Existing Players
-              .field.user
-                .ui.input
-                  label(for="create-username") Character Name
-                  input#create-username(type="text", name="username", maxlength=18)
-              .two.fields
-                .field
-                  .ui.input
-                    label(for="create-password") Password
-                    input#create-password(type="password", name="password", maxlength=50)
-                .field
-                  .ui.input
-                    label(for="create-confirmpass") Confirm Password
-                    input#create-confirmpass(type="password", name="confirmpass", maxlength=50)
-              .field
-                .ui.input
-                  label(for="create-email") Email
-                  input#create-email(type="text", name="email")
-              .three.fields
-                .field Gender
-                .field.inline
-                  input#male(type="radio", name="gender", value="male", checked="checked")
-                  label(for="male") Male
-                .field.inline
-                  input#female(type="radio", name="gender", value="female")
-                  label(for="female") Female
-              input(type="hidden", name="run", value="lumiere", checked="checked")
-              input(type="hidden", name="create", value="yes")
-              input(type="hidden", name="loginkey", value="")
-              button.ui.button.save.fluid(style="margin-top: 16px;") Create a new character
-
+          include includes/multiform.jade
           .ui.block
             .content
               h3.ui.title.underline #{meta.information.title}
@@ -112,39 +79,89 @@ block content
           if (blurb.link)
             a(href=blurb.link.url).ui.button= blurb.link.text
 
-block scripts
+append scripts
   script(src="/js/jquery.validate.min.js")
   script.
-    $("#createForm").validate({
-      onkeyup: false,
-      rules: {
-        username: {
-          required: true,
-          minlength: 3,
-          remote: {
-            url: "/api/checkname",
-            data: {
-              format: "boolean"
-            }
-          }
-        },
-        password: "required",
-        confirmpass: {
-          equalTo: "#create-password",
-          required: true
-        },
-        email: "email",
-      },
-      messages: {
-          username: {
-            required: "This field is required",
-            minlength: "Your username needs to be at least 3 characters",
-            maxlength: "Your username needs to be less than 18 characters",
-            remote: "You can't use this name, try another one."
-          }
-        }
+    var createNewUser = false;
+    $(".ui.form.login .expand").bind("click", function() {
+      var hidden = $(".ui.form.login .hidden");
+
+      if (hidden.is(":visible")) {
+        hidden.hide("fast");
+        $(".ui.form.login .ui.title, .ui.form.login .save.button").text("Login");
+        $(".ui.form.login #create").val("no");
+        createNewUser = false;
+      } else {
+        $(".ui.form.login .ui.title, .ui.form.login .save.button").text("Create Character");
+        hidden.show("fast");
+        $(".ui.form.login #create").val("yes");
+        createNewUser = true;
+      }
+
+      $(this).find(".icon").toggleClass("active");
     });
 
+    $.validator.setDefaults({
+      errorClass: 'errorField',
+      errorElement: 'div',
+      errorPlacement: function(error, element) {
+        error.addClass("ui red pointing above ui label error").appendTo( element.closest('div.field') );
+      },
+      highlight: function(element, errorClass, validClass) {
+        $(element).closest("div.field").addClass("error").removeClass("success");
+      },
+      unhighlight: function(element, errorClass, validClass){
+        $(element).closest(".error").removeClass("error").addClass("success");
+      }
+
+    });
+
+    loginValidator = $('#login-form').validate({});
+
+    $('#create-username').rules('add', {
+      onkeyup: false,
+      required: true,
+      minlength: 3,
+      maxlength: 18,
+      remote: {
+        param: {
+          url: "api/checkname/",
+          data: {
+            'format': "boolean"
+          }
+        },
+        depends: function(element) { return createNewUser; }
+      },
+      messages: {
+        required:  'This field is required',
+        minlength: 'Your username needs to be at least 3 characters',
+        maxlength: 'Your username needs to be less than 18 characters',
+        remote:    'This username is unavailable'
+      }
+    });
+
+    $('#create-password').rules('add', { required: true });
+
+    $('#create-confirmpass').rules('add', {
+      required: { depends: function(element) { return createNewUser; } },
+      equalTo: '#create-password'    
+    });
+
+    $('#create-email').rules('add', {
+      email: true    
+    });
+
+    $("input[type='radio'][name='run']").change(function(e) {
+      var target = $(e.currentTarget);
+      var value = target.val();
+      var form = target.closest("form");
+      //- if (value == "umbra") form.attr("action", "http://umbra.avalon-rpg.com");
+      if (value == "umbra") form.attr("action", "http://localhost:2252");
+      if (value == "applet") form.attr("action", "/javalon");
+      if (value == "lumiere") form.attr("action", "/lumiere");
+    });
+
+  script.
     $(document).ready(function() {
       var current = 0;
       var slides = $(".ui.scroll .content");

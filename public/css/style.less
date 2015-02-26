@@ -331,6 +331,10 @@
     &.small {
       margin-bottom: 10px;
     }
+    &.error {
+      border-color: fade(@col_red, 20%);
+      box-shadow: 0px 0px 8px fade(@col_red, 20%);
+    }
     &.notice {
       background: rgba(0, 0, 0, 0.5);
       color: #fff;
@@ -807,7 +811,21 @@
 //   / /   / / / / __ `__ \/ / _ \/ ___/ _ \
 //  / /___/ /_/ / / / / / / /  __/ /  /  __/
 // /_____/\__,_/_/ /_/ /_/_/\___/_/   \___/ 
-                      
+               
+  .ui.form.login {
+    .center.field {
+      text-align: center;
+    }
+    .question.mark {
+      &:hover {
+        color: #fff;
+        opacity: 1;
+      }
+    }
+    .hidden.fields {
+      display: none;
+    }
+  }
   .ui.content.play {
     .ui.form {
       position: relative;

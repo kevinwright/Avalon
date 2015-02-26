@@ -1,4 +1,5 @@
-var checkName = require("../api/checkname.js");
+var checkName = require("../api/checkname");
+var avalon = require("../avalon");
 
 var NEWCHARACTER = 0,
     BADNAME = 1,
@@ -8,33 +9,75 @@ var NEWCHARACTER = 0,
 
 
 function PlayController() {
-  this.post = function(req, res) {
-    var name = req.body["user"];
-    var password = req.body["password"];
-    var client = req.body["client"];
-    if (!name) {
-      return res.render('play/index', { user: name, password: password, code: BLANK });
-    }
-    checkName(name, function(result, status) {
-      if (result === true) {
-        // available name, so make a new character
-        return res.render('play/index', { user: name, password: password, code: NEWCHARACTER });
-      } else {
-        if (status === EXISTING) {
-          // character exists, so check password and log in
-          if (client === "lumiere")
-            return res.redirect('play/lumiere', { user: name, password: password, code: EXISTING });
-          else
-            return res.render('play/javalon', { user: name, password: password, code: EXISTING });
-        } else if (status === BADNAME) {
-          // bad character name, so show the form
-          return res.render('play/index', { user: name, password: password, code: BADNAME, message: "Bad character name. Try something else!" });
-        } else {
-          // bad user input, so show the form
-          return res.render('play/index', { user: name, password: password, code: BADINPUT, message: "Bad input" });
-        }
-      }
+  var self = this;
+
+  this.get = function(req, res, next) {
+    avalon.info("play.md", function(err, meta) {
+      if (err) return next(err);
+      res.render('play/index', {meta: meta.meta, avalon: avalon});
     });
+  }
+
+  var FormError = function(type, message) {
+    this.type = type;
+    this.message = message;
+  }
+
+  var showError = function(formError, req, res, next) {
+    avalon.info("play.md", function(err, meta) {
+      if (err) return next(err);
+
+      res.render('play/index', {
+        form: req.body,
+        error: formError,
+        meta: meta.meta,
+        avalon: avalon
+      });
+    });
+  }
+
+  var check = function(form, callback) {
+    console.log(form);
+    if (!form.username)
+      return callback(new FormError("username", "Fill in an username!"));
+    if (!form.password)
+      return callback(new FormError("password", "Fill in a password!"));
+    if (form.create == "no") return callback(null, form);
+    if (form.create == "yes") {
+      if (!form.gender) 
+        return callback(new FormError("gender", "Select a gender!"));
+      if (!form.confirmpass)
+        return callback(new FormError("confirmpass", "Confirm your password!"));
+      if (form.confirmpass != form.password)
+        return callback(new FormError("confirmpass", "Your password is not the same."));
+      return checkName.check(form.username, function(result, status) {
+        if (result === true) return callback(null, form);
+        console.log(result, status);
+      });
+    }
+
+    return callback(new FormError("Unknown", "Something Went Wrong!"));
+  }
+
+  this.lumiere = function(req, res, next) {
+    return check(req.body, function(err, form) {
+      if (err) return showError(err, req, res, next);
+      
+      if (form.run == "lumiere") {
+        var flashvars = {
+          username: form["username"],
+          password: form["password"],
+          create: form["create"],
+          gender: form["gender"],
+          email: form["email"]
+        }
+
+        return res.render('play/lumiere', { avalon:avalon, flashvars: flashvars});
+      }
+
+
+
+    })
   }
 }
 

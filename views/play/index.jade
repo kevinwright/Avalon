@@ -9,6 +9,11 @@ block head
 block content
   .ui.content.play
     .contain
+      - console.log(createForm, error, form)
+      if (error)
+        .ui.box.small.error
+          h3.ui.title #{error.message}
+  
       .ui.box.small.tablet-only
         h3.ui.title.underline #{meta.umbra.title}
         p #{meta.umbra.description}
@@ -18,78 +23,12 @@ block content
 
       .ui.grid.responsive
         .eight.column.wide
-
-          form(method="post", action="/lumiere/").ui.form.box#createForm
-            h3.ui.title.underline Create a new Avalon character
-            .field.username
-              .ui.input
-                label(for="create-username") Character Name
-                input#create-username(type="text", name="username", maxlength=18)
-                p #{meta.form.username}
-            .two.fields.password
-              .field
-                .ui.input
-                  label(for="create-password") Password
-                  input#create-password(type="password", name="password", maxlength=50)
-              .field
-                .ui.input
-                  label(for="create-confirmpass") Confirm Password
-                  input#create-confirmpass(type="password", name="confirmpass", maxlength=50)
-              p(style="margin-bottom: 16px;") #{meta.form.password}
-            .field.user
-              .ui.input
-                label(for="create-email") Email
-                input#create-email(type="text", name="email")
-                p #{meta.form.email}
-            .two.fields
-              p Gender
-              .field.inline
-                input#male(type="radio", name="gender", value="male", checked="checked")
-                label(for="male") Male
-              .field.inline
-                input#female(type="radio", name="gender", value="female")
-                label(for="female") Female
-            .two.fields
-              p Client
-              .field.inline
-                input#create-run-lumiere(type="radio", name="run", value="lumiere", checked="checked")
-                label(for="create-run-lumiere") Lumiere
-                p #{meta.form.lumiere}
-              .field.inline
-                input#create-run-applet(type="radio", name="run", value="applet")
-                label(for="create-run-applet") Javalon
-                p #{meta.form.lumiere}
-              p #{meta.form.clients}
-            input(type="hidden", name="create", value="yes")
-            input(type="hidden", name="loginkey", value="")
-            button.ui.button.save.fluid(style="margin-top: 16px;") Create a new character
+          include ../includes/create
 
         .eight.column.wide
-          form(method="post", action="/lumiere/").ui.form.box#loginForm
-            h3.ui.title.underline Login existing character
-            .field.username
-              .ui.input
-                label(for="login-username") Character Name
-                input#login-username(type="text", name="username")
-            .field
-              .ui.input
-                label Password
-                input#login-password(type="password", name="password")
-            .two.fields
-              p Client
-              .field.inline
-                input#login-run-lumiere(type="radio", name="run", value="lumiere", checked="checked")
-                label(for="login-run-lumiere") Lumiere
-                p #{meta.form.lumiere}
-              .field.inline
-                input#login-run-applet(type="radio", name="run", value="applet")
-                label(for="login-run-applet") Javalon
-                p #{meta.form.javalon}
-              p #{meta.form.clients}
-
-            input(type="hidden", name="create", value="no")
-            input(type="hidden", name="loginkey", value="0")
-            button.ui.button.save.fluid(style="margin-top: 16px;") Login
+          include ../includes/login
+          
+          
           .ui.box
             for group in meta.clients
               .head.item #{group.title}
@@ -141,4 +80,13 @@ block scripts
         },
         password: "required"
       }
+    });
+    $("input[type='radio'][name='run']").change(function(e) {
+      var target = $(e.currentTarget);
+      var value = target.val();
+      var form = target.closest("form");
+      //- if (value == "umbra") form.attr("action", "http://umbra.avalon-rpg.com");
+      if (value == "umbra") form.attr("action", "http://localhost:2252");
+      if (value == "applet") form.attr("action", "/javalon");
+      if (value == "lumiere") form.attr("action", "/lumiere");
     });

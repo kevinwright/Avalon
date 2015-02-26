@@ -1,0 +1,47 @@
+form(method="post", action="/lumiere").ui.form.box#createForm
+  h3.ui.title.underline Create a new Avalon character
+  .field.username
+    .ui.input
+      label(for="create-username") Character Name
+      input#create-username(type="text", name="username", maxlength=18)
+      p #{meta.form.username}
+  .two.fields.password
+    .field
+      .ui.input
+        label(for="create-password") Password
+        input#create-password(type="password", name="password", maxlength=50)
+    .field
+      .ui.input
+        label(for="create-confirmpass") Confirm Password
+        input#create-confirmpass(type="password", name="confirmpass", maxlength=50)
+    p(style="margin-bottom: 16px;") #{meta.form.password}
+  .field.email
+    .ui.input
+      label(for="create-email") Email
+      input#create-email(type="email", name="email")
+      p #{meta.form.email}
+  .two.fields
+    p Gender
+    .field.inline
+      input#male(type="radio", name="gender", value="male", checked="checked")
+      label(for="male") Male
+    .field.inline
+      input#female(type="radio", name="gender", value="female")
+      label(for="female") Female
+  .three.fields
+    p Client
+    .field.inline
+      input#create-run-lumiere(type="radio", name="run", value="lumiere", checked="checked")
+      label(for="create-run-lumiere") Lumiere
+      p #{meta.form.lumiere}
+    .field.inline
+      input#create-run-umbra(type="radio", name="run", value="umbra")
+      label(for="create-run-umbra") Umbra
+      p #{meta.form.umbra}
+    .field.inline
+      input#create-run-applet(type="radio", name="run", value="applet")
+      label(for="create-run-applet") Javalon
+      p #{meta.form.javalon}
+  input(type="hidden", name="create", value="yes")
+  input(type="hidden", name="loginkey", value="")
+  button.ui.button.save.fluid(style="margin-top: 16px;") Create a new character

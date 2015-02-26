@@ -1,0 +1,28 @@
+form(method="post", action="/lumiere").ui.form.box#loginForm
+  h3.ui.title.underline Login existing character
+  .field.username
+    .ui.input
+      label(for="login-username") Character Name
+      input#login-username(type="text", name="username")
+  .field
+    .ui.input
+      label Password
+      input#login-password(type="password", name="password")
+  .three.fields
+    p Client
+    .field.inline
+      input#login-run-lumiere(type="radio", name="run", value="lumiere", checked="checked")
+      label(for="login-run-lumiere") Lumiere
+      p #{meta.form.lumiere}
+    .field.inline
+      input#login-run-umbra(type="radio", name="run", value="umbra")
+      label(for="login-run-umbra") Umbra
+      p #{meta.form.umbra}
+    .field.inline
+      input#login-run-applet(type="radio", name="run", value="applet")
+      label(for="login-run-applet") Javalon
+      p #{meta.form.javalon}
+
+  input(type="hidden", name="create", value="no")
+  input(type="hidden", name="loginkey", value="0")
+  button.ui.button.save.fluid(style="margin-top: 16px;") Login
