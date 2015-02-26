@@ -15,19 +15,12 @@ block content
           h1.ui.title.center.underline #{meta.title}
           p.lead !{meta.summary}
           .text.help.markdown !{extra.normal.html}
-
+          
         .four.column.wide.sidebar
           .ui.block
             .content
-              .ui.menu.vertical.dotted
-                for item in legacy
-                  a(href="/intro" + item.url).item
+              ul.ui.menu.vertical
+                for item in toc
+                  a(href="/intro" + item.items[0].url).item.head
+                    i.icon.circle.blank
                     |  #{item.content}
-        //- .four.column.wide.sidebar
-        //-   .ui.block
-        //-     .content
-        //-       ul.ui.menu.vertical
-        //-         for item in toc
-        //-           a(href="/intro" + item.items[0].url).item.head
-        //-             i.icon.circle.blank
-        //-             |  #{item.content}

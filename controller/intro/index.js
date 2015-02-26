@@ -22,8 +22,8 @@ function Controller() {
       res.render('intro/index', {
         meta: blocks.normal.meta,
         extra: blocks,
-        // toc: toc,
-        legacy: legacy,
+        toc: toc,
+        // legacy: legacy,
         avalon: avalon
       });
     });
@@ -35,11 +35,11 @@ function Controller() {
       return (item.url == "/" + url) && item.file;
     })
     if (result.length == 0) {
-      toc.filter(function(top) {
+      var top = toc.filter(function(top) {
         return top.short == url;
       })
-      if (toc) {
-        return res.redirect("/intro/" + toc[0].items[0].url)
+      if (top) {
+        return res.redirect("/intro" + top[0].items[0].url)
       }
 
       return next(new NoPageError(url, "legacy", result));
