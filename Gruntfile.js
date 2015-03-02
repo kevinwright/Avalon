@@ -36,7 +36,7 @@ module.exports = function(grunt) {
       test: {
         options: {
           applyStyleTags: true,
-          removeStyleTags: true
+          removeStyleTags: false
         },
         files : [{
           expand: true,

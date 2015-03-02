@@ -84,7 +84,7 @@ html(xmlns='http://www.w3.ord/1999/xhtml')
                                                 if $ && $.social
                                                   for item in $.social
                                                     table.tiny-button(class=item.title.toLowerCase())
-                                                      tbody: tr: td: a(href=item.url, style="color: #fff;") 
+                                                      tbody: tr: td: a(href=item.url, style="color: #fff;") #{item.title}
                                                 else
                                                   if markade && markade.config && markade.config.social
                                                     for item in markade.config.social
