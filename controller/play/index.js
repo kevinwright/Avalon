@@ -72,6 +72,8 @@ function PlayController() {
           email: form["email"]
         }
 
+        console.log(flashvars);
+
         return res.render('play/lumiere', { avalon:avalon, flashvars: flashvars});
       }
 

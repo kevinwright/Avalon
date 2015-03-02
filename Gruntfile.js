@@ -1,3 +1,6 @@
+var fs = require("fs");
+var yaml = require("js-yaml");
+
 module.exports = function(grunt) {
   grunt.initConfig({
     less: {
@@ -21,6 +24,7 @@ module.exports = function(grunt) {
     markade: {
       def: {
         options: {
+          "config": yaml.safeLoad(fs.readFileSync("/library/emails/config.yaml")),
           "template": "views/emails/default.jade"
         },
         files: {

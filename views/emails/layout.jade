@@ -84,7 +84,12 @@ html(xmlns='http://www.w3.ord/1999/xhtml')
                                                 if $ && $.social
                                                   for item in $.social
                                                     table.tiny-button(class=item.title.toLowerCase())
-                                                      tbody: tr: td: a(href=item.url, style="color: #fff;") #{item.title}
+                                                      tbody: tr: td: a(href=item.url, style="color: #fff;") 
+                                                else
+                                                  if markade && markade.config && markade.config.social
+                                                    for item in markade.config.social
+                                                      table.tiny-button(class=item.title.toLowerCase())
+                                                        tbody: tr: td: a(href=item.url, style="color: #fff;") #{item.title}
                                       td
                                         table.five.sub-columns.last(style="vertical-align:middle")
                                           tbody: tr: td.last.right-text-pad.center
@@ -93,6 +98,12 @@ html(xmlns='http://www.w3.ord/1999/xhtml')
                                                 h5 #{item.title}
                                                 a(href=item.url) #{item.description}
                                                 br
+                                            else
+                                              if markade && markade.config && markade.config.links
+                                                for item in markade.config.links
+                                                  h5 #{item.title}
+                                                  a(href=item.url) #{item.description}
+                                                  br
                                       td.banner-img
                                         table.two.sub-columns.last(style="vertical-align: middle")
                                           tbody: tr: td.last.right-text-pad.center
