@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    include includes/meta
+    - var title = $.title
+    include includes/seo
+    include includes/css
+  body
+    include includes/topbar
+    .ui.header
+      .logo-wrap
+        a(href="/"): img.logo(src="/img/logo.png")
+
+    .ui.content
+      .contain
+        h1.ui.title.underline.center= $.title
+
+    .ui.content.page.bb
+      .contain
+        .ui.grid.responsive
+          .twelve.column.wide.main
+            for block in blocks
+              .text.help.markdown !{block.html}
+          .four.column.wide.sidebar
+            .ui.block
+              .content
+                ul.ui.vertical.menu
+                  for page in markade.config.pages
+                    a.item(href=page, class={active: page == $.url}) #{page}

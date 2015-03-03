@@ -1,0 +1,59 @@
+extends ../layout
+
+block head
+  - var title = meta.seo.title
+  - var description = meta.seo.description
+  - var keywords = meta.seo.keywords
+
+block content
+  .ui.content
+    .contain
+      h2.ui.title.center.underline #{meta.title}
+      p #{meta.summary}
+      .section.ancienthistory.ui.box
+        .ui.grid.responsive.two.columns
+          .column
+            h4.ui.title: a(href="/help/pages/springtown") Springtown
+            | The rise of Springdale.
+          .column
+            h4.ui.title: a(href="/help/pages/history") History
+            | An overview of Avalon's pre-modern era.
+          .column
+            h4.ui.title: a(href="/help/pages/fall") Fall
+            | The fall of Alessandria.
+          .column
+            h4.ui.title: a(href="/help/pages/azrilites") Azrilites
+            | The legend of the Azrilites.
+          .column
+            h4.ui.title: a(href="/help/pages/bezejeth") Bezejeth
+            | Count Bezejeth and Necromancy.
+          .column
+            h4.ui.title: a(href="/help/pages/colonisation") Colonisation
+            | Early colonisation of Avalon.
+          .column
+            h4.ui.title: a(href="/help/pages/divinewar") Divine War
+            | The Divine War.
+          .column
+            h4.ui.title: a(href="/help/pages/stone") Stone
+            | The founding stone of Mercinae.
+          .column
+            h4.ui.title: a(href="/help/pages/agemmenion") Agemmenion
+            | Thakria and the Count Agemmenion.
+          .column
+            h4.ui.title: a(href="/help/pages/cultists") Cultists
+            | The Cult of the Long Night.
+          .column
+            h4.ui.title: a(href="/help/pages/doom") Doom
+            | The Doom of Pagea.
+          .column
+            h4.ui.title: a(href="/help/pages/firstborn") First Born
+            | The firstborn to Avalon.
+          .column
+            h4.ui.title: a(href="/help/pages/firstmasters") First masters
+            | The first Masters of the Guilds.
+          .column
+            h4.ui.title: a(href="/help/pages/firstgods") First Gods
+            | The first deities in Avalon.
+          .column
+            h4.ui.title: a(href="/help/pages/ammarie") Ammarie
+            | The story of Ammarie the Possessed.

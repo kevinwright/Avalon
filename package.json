@@ -23,6 +23,7 @@
     "js-yaml": "^3.2.6",
     "marked": "^0.3.3",
     "morgan": "^1.5.1",
+    "mysql": "^2.5.5",
     "node-cache": "^1.1.0",
     "request": "^2.53.0",
     "sanitize-html": "^1.4.3"

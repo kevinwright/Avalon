@@ -22,7 +22,18 @@ module.exports = function(grunt) {
       },
     },
     markade: {
-      def: {
+      docs: {
+        options: {
+          config: {
+            pages: ["index.html", "library.html", "pages.html", "emails.html", "server.html", "contact.html"]
+          },
+          template: "views/howto.jade",
+        },
+        files: {
+          "public/howto": "/library/howto/*.md"
+        }
+      },
+      email: {
         options: {
           "config": yaml.safeLoad(fs.readFileSync("/library/emails/config.yaml")),
           "template": "views/emails/default.jade"
@@ -63,5 +74,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-email-builder');
 
   grunt.registerTask('default', ["less", 'watch']);
-  grunt.registerTask('email', ["less:email", "markade", "emailBuilder"]);
+  grunt.registerTask("docs", "markade:docs");
+  grunt.registerTask('email', ["less:email", "markade:email", "emailBuilder"]);
 };

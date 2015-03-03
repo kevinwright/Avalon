@@ -11,22 +11,22 @@ var avalon = require("../controller/avalon");
 
 // Methods
   function getIndex(req, res, next) {
-    avalon.info("history.md", function(err, meta, extra) {
+    avalon.info("history/history.md", function(err, meta, extra) {
       if (err) return next(err);
       res.render('history/index', { meta:meta.meta, extra:extra, avalon: avalon });
     })
   }
 
   function getOrdinations(req, res) {
-    res.render('history/ordinations', { title: "Ordinations - The Greatest Event in the Land", avalon: avalon });
+      res.render('history/ordinations', { avalon: avalon });
   }
 
   function getModernHistory(req, res) {
-    res.render('history/modernhistory', { title: "Modern History", avalon: avalon });
+      res.render('history/modernhistory', { avalon: avalon });
   }
 
   function getAncientHistory(req, res) {
-    res.render('history/ancienthistory', { title: "Ancient History", avalon: avalon });
+      res.render('history/ancienthistory', { avalon: avalon });
   }
 
 
