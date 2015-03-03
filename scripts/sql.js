@@ -1,17 +1,17 @@
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'meetplace.net',
-  database : 'meetplac_oxw1',
-  user     : 'meetplac_avalon',
-  password : '!F2OHg9}HJW='
+      host     : 'meetplace.net',
+      database : 'meetplac_oxw1',
+      user     : 'meetplac_avalon',
+      password : '!F2OHg9}HJW='
 });
 
 connection.connect();
 
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+connection.query("SELECT user.id, user.username, avatar.hash FROM  `dck_base_user` user INNER JOIN  `dck_base_avatar` avatar ON avatar.userId = user.id WHERE user.username =  'illyism' LIMIT 1",
+function(err, rows, fields) {
   if (err) throw err;
-
-  console.log('The solution is: ', rows[0].solution);
+  console.log(rows);
 });
 
 connection.end();

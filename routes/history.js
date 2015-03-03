@@ -18,15 +18,24 @@ var avalon = require("../controller/avalon");
   }
 
   function getOrdinations(req, res) {
-      res.render('history/ordinations', { avalon: avalon });
+    avalon.info("history/ordinations.md", function(err, meta, extra) {
+      if (err) return next(err);
+      res.render('history/list', { meta:meta.meta, avalon: avalon });
+    });
   }
 
   function getModernHistory(req, res) {
-      res.render('history/modernhistory', { avalon: avalon });
+    avalon.info("history/modernhistory.md", function(err, meta, extra) {
+      if (err) return next(err);
+      res.render('history/list', { meta:meta.meta, avalon: avalon });
+    });
   }
 
   function getAncientHistory(req, res) {
-      res.render('history/ancienthistory', { avalon: avalon });
+    avalon.info("history/ancienthistory.md", function(err, meta, extra) {
+      if (err) return next(err);
+      res.render('history/list', { meta:meta.meta, avalon: avalon });
+    });
   }
 
 
