@@ -25,7 +25,7 @@ module.exports = function(grunt) {
       docs: {
         options: {
           config: {
-            pages: ["index.html", "library.html", "pages.html", "emails.html", "server.html", "contact.html"]
+            pages: ["index.html", "library.html", "pages.html", "intro.html", "emails.html", "server.html", "contact.html"]
           },
           template: "views/howto.jade",
         },
