@@ -22,11 +22,13 @@ block content
           | #{meta.umbra.button}
 
       .ui.grid.responsive
+        include ../includes/create
+        include ../includes/login
         .eight.column.wide
-          include ../includes/create
+          +create()(class="ui box")
 
         .eight.column.wide
-          include ../includes/login
+          +login()(class="ui box")
           
           
           .ui.box

@@ -1,55 +1,86 @@
-form.ui.form.login.block#login-form(action="/lumiere", method="post")
+.block
+  ul.ui.menu.fluid.two.items.switch
+    .item.active(data-type="create") Create New Character
+    .item(data-type="login") Login
   .content
-    h3.ui.title.underline Login
-    .field.user
-      .ui.input
-        label(for="create-username", title="3 characters minimum, letters only. Be sure to choose a name appropriate for a fantasy game-world setting.")
-          | Character Name (no spaces or numbers)
-          i.icon.question.mark
-        input#create-username(type="text", name="username", minlength=3, maxlength=18, required)
-    .field
-      .ui.input
-        label(for="create-password", title="3 characters minimum, may include letters, numbers and punctuation, but no spaces, carets or tildes. Example - s_ecr3.t.")
-          | Password (no spaces)
-          i.icon.question.mark
-        input(name="password", type="password", minlength=3, maxlength=50, required)#create-password
-    .expand.field
-      i.icon.triangle.down
-      span.text Create Character
-    .hidden.fields
+    form(method="post", action="/lumiere").ui.login.form#createForm
+      h3.ui.title.underline.center Create New Character
+      .field.user
+        .ui.input
+          label(for="create-username", title="3 characters minimum, letters only. Be sure to choose a name appropriate for a fantasy game-world setting.")
+            | Character Name (no spaces or numbers)
+            i.icon.question.mark
+          input#create-username(type="text", name="username", minlength=3, maxlength=18, required)
       .fields
         .eight.wide.field
-          label(for="create-email", title="Entering your e-mail address will ensure that your character is saved when you exit as we regularly delete unregistered characters to make room for new players.")
-            | Email
-            i.icon.question.mark
-          input(type="email", name="email", placeholder="myaddress@example.com")#create-email
+          .ui.input
+            label(for="create-password", title="3 characters minimum, may include letters, numbers and punctuation, but no spaces, carets or tildes. Example - s_ecr3.t.")
+              | Password (no spaces)
+              i.icon.question.mark
+            input(name="password", type="password", minlength=3, maxlength=50, required)#create-password
         .eight.wide.input.field
           label(for="create-confirmpass") Confirm Password
           input(name="confirmpass", type="password")#create-confirmpass
-        .inline.fields
-          .field Gender
-          .field
-            .ui.radio.checkbox
-              input#male(type="radio", name="gender", value="male", checked="checked")
-              label(for="male") Male
-          .field
-            .ui.radio.checkbox
-              input#female(type="radio", name="gender", value="female")
-              label(for="female") Female
-    .fields
-      .four.center.wide.field Client:
-      .four.center.wide.input.field
-        .ui.radio.checkbox
-          input#lumiere(type="radio", name="run", value="lumiere", checked="checked")
-          label(for="lumiere") Lumiere
-      .four.center.wide.input.field
-        .ui.radio.checkbox
-          input#umbra(type="radio", name="run", value="umbra")
-          label(for="umbra") Umbra
-      .four.center.wide.input.field
-        .ui.radio.checkbox
-          input#javalon(type="radio", name="run", value="applet")
-          label(for="javalon") Javalon
-      input(type="hidden", name="create", value="no")#create
-      input(type="hidden", name="loginkey", value="")
-    input(type="submit", value="Login").ui.button.save.fluid(style="margin-top: 16px;")
+      .field
+        label(for="create-email", title="Entering your e-mail address will ensure that your character is saved when you exit as we regularly delete unregistered characters to make room for new players.")
+          | Email
+          i.icon.question.mark
+        input(type="email", name="email", placeholder="myaddress@example.com")#create-email
+      .inline.fields
+        .field Gender
+        .field
+          .ui.radio.checkbox
+            input#male(type="radio", name="gender", value="male", checked="checked")
+            label(for="male") Male
+        .field
+          .ui.radio.checkbox
+            input#female(type="radio", name="gender", value="female")
+            label(for="female") Female
+      .fields
+        .four.center.wide.field Client:
+        .four.center.wide.input.field
+          .ui.radio.checkbox
+            input#lumiere(type="radio", name="run", value="lumiere", checked="checked")
+            label(for="lumiere") Lumiere
+        .four.center.wide.input.field
+          .ui.radio.checkbox
+            input#umbra(type="radio", name="run", value="umbra")
+            label(for="umbra") Umbra
+        .four.center.wide.input.field
+          .ui.radio.checkbox
+            input#javalon(type="radio", name="run", value="applet")
+            label(for="javalon") Javalon
+        input(type="hidden", name="create", value="yes")
+        input(type="hidden", name="loginkey", value="")
+      input(type="submit", value="Create New Character").ui.button.save.fluid(style="margin-top: 16px;")
+    form(method="post", action="/lumiere").ui.hidden.login.form#loginForm
+      h3.ui.title.underline.center Login
+      .field.user
+        .ui.input
+          label(for="create-username", title="3 characters minimum, letters only. Be sure to choose a name appropriate for a fantasy game-world setting.")
+            | Character Name (no spaces or numbers)
+            i.icon.question.mark
+          input#create-username(type="text", name="username", minlength=3, maxlength=18, required)
+      .field
+        .ui.input
+          label(for="create-password", title="3 characters minimum, may include letters, numbers and punctuation, but no spaces, carets or tildes. Example - s_ecr3.t.")
+            | Password (no spaces)
+            i.icon.question.mark
+          input(name="password", type="password", minlength=3, maxlength=50, required)#create-password
+      .fields
+        .four.center.wide.field Client:
+        .four.center.wide.input.field
+          .ui.radio.checkbox
+            input#lumiere(type="radio", name="run", value="lumiere", checked="checked")
+            label(for="lumiere") Lumiere
+        .four.center.wide.input.field
+          .ui.radio.checkbox
+            input#umbra(type="radio", name="run", value="umbra")
+            label(for="umbra") Umbra
+        .four.center.wide.input.field
+          .ui.radio.checkbox
+            input#javalon(type="radio", name="run", value="applet")
+            label(for="javalon") Javalon
+        input(type="hidden", name="create", value="no")
+        input(type="hidden", name="loginkey", value="")
+      input(type="submit", value="Login").ui.button.save.fluid(style="margin-top: 16px;")

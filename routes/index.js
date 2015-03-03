@@ -10,8 +10,11 @@ var recent = require("../controller/news/recent.js");
   function getIndex(req, res, next) {
     recent(function(err, data) {
       avalon.info("front.md", function(err, meta, extra) {
-        if (err) return next(err);
-        res.render('index', { avalon: avalon, meta: meta.meta, extra:extra, recent: data });
+        avalon.info("play.md", function(err, play) {
+          if (err) return next(err);
+          meta.meta.form = play.meta.form;
+          res.render('index', { avalon: avalon, meta: meta.meta, extra:extra, recent: data });
+        });
       });
     })
   }

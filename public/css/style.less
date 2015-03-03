@@ -432,6 +432,17 @@
     &.fluid {
       width: 100%;
     }
+    &.two.items {
+      .item {
+        width: 50%;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+        &.active {
+          cursor: default;
+        }
+      }
+    }
     li {display: inline-block;}
     .item {
       display: inline-block;
@@ -862,6 +873,9 @@
 // /_____/\__,_/_/ /_/ /_/_/\___/_/   \___/ 
                
   .ui.form.login {
+    &.hidden {
+      display: none;
+    }
     .center.field {
       text-align: center;
     }
