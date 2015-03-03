@@ -4,10 +4,14 @@ var fs = require("fs");
 var yaml = require("js-yaml");
 var marked = require("marked");
 
-var fileCache = new NodeCache( { stdTTL: 600, checkperiod: 1200 } );
+if (process.env.NODE_ENV === "production")
+  ttlTime = 600
+else
+  ttlTime = 10
+var fileCache = new NodeCache( { stdTTL: ttlTime, checkperiod: ttlTime*2 } );
 var fileErrCache = {}; // we should cache errors, or else it will try to look for it each time
 
-var markCache = new NodeCache( { stdTTL: 600, checkperiod: 1200 } );
+var markCache = new NodeCache( { stdTTL: ttlTime, checkperiod: ttlTime*2 } );
 var markErrCache = {};
 
 // returns: err, success
