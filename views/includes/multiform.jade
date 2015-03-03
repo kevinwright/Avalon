@@ -52,7 +52,7 @@
             label(for="javalon") Javalon
         input(type="hidden", name="create", value="yes")
         input(type="hidden", name="loginkey", value="")
-      input(type="submit", value="Create New Character").ui.button.save.fluid(style="margin-top: 16px;")
+      input(type="submit", value="Create New Character", style="margin-top: 16px;").ui.button.save.fluid
     form(method="post", action="/lumiere").ui.hidden.login.form#loginForm
       h3.ui.title.underline.center Login
       .field.user
@@ -83,4 +83,4 @@
             label(for="javalon") Javalon
         input(type="hidden", name="create", value="no")
         input(type="hidden", name="loginkey", value="")
-      input(type="submit", value="Login").ui.button.save.fluid(style="margin-top: 16px;")
+      input(type="submit", value="Login", style="margin-top: 16px;").ui.button.save.fluid

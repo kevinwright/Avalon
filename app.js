@@ -9,6 +9,7 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var compression = require('compression');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
@@ -70,6 +71,7 @@ else {
     app.use(logger("dev"));
 }
 
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
