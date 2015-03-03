@@ -76,7 +76,7 @@ function Controller() {
 
     if (cat == null && result == null) return next(new NoPageError(url, cat, result));
 
-    util.renderFile(result.file, function(err, blocks) {
+    util.renderFile(INTRODIR+"/"+result.file, function(err, blocks) {
       if (err) {
         // return next(err);
         return util.renderFile(INTRODIR+"/empty.md", function(secondErr, blocks) {

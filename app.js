@@ -12,23 +12,45 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-global.avalon = {
-    dir: {
-        help: "/help/help",
-        world: "/library/world/",
-        rollcall: "/help/rollcall",
-        autohelp: "/help/autohelp",
-        bb: "/help/bb",
-        library: "/library",
-        library_pages: "/library/pages",
-        library_help: "/library/help",
-        intro: "/library/intro"
-    },
-    files: {
-        menu: "/library/menu.js",
-        synonyms: "/library/synonyms.js",
-        pages: "/library/pages.js",
-        toc: "/library/intro/toc.js"
+if (process.env.NODE_ENV === "production") {
+    global.avalon = {
+        dir: {
+            help: "/help/help",
+            world: "/library/world/",
+            rollcall: "/help/rollcall",
+            autohelp: "/help/autohelp",
+            bb: "/help/bb",
+            library: "/library",
+            library_pages: "/library/pages",
+            library_help: "/library/help",
+            intro: "/library/intro"
+        },
+        files: {
+            menu: "/library/menu.js",
+            synonyms: "/library/synonyms.js",
+            pages: "/library/pages.js",
+            toc: "/library/intro/toc.js"
+        }
+    }
+} else {
+    global.avalon = {
+        dir: {
+            help: "/help/help",
+            world: "/library/test/world/",
+            rollcall: "/help/rollcall",
+            autohelp: "/help/autohelp",
+            bb: "/help/bb",
+            library: "/library/test",
+            library_pages: "/library/test/pages",
+            library_help: "/library/test/help",
+            intro: "/library/test/intro"
+        },
+        files: {
+            menu: "/library/test/menu.js",
+            synonyms: "/library/test/synonyms.js",
+            pages: "/library/test/pages.js",
+            toc: "/library/test/intro/toc.js"
+        }
     }
 }
 

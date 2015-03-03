@@ -1,4 +1,5 @@
 var LIBRARYDIR = global.avalon.dir.library;
+var PAGESDIR = global.avalon.dir.library_pages;
 var express = require('express')
 var router = express.Router();
 var avalon = require("../controller/avalon");
@@ -8,7 +9,7 @@ var files = require(global.avalon.files.pages);
 
 function renderPage(page) {
   return function (req, res, next) {
-    util.renderFile(page.file, function(err, blocks) {
+    util.renderFile(PAGESDIR+"/"+page.file, function(err, blocks) {
       if (err) return next(err);
       page.library = blocks.normal;
       res.render("dynamic/"+page.template, {
@@ -21,7 +22,7 @@ function renderPage(page) {
 
 function renderHTML(page) {
   return function (req, res, next) {
-    util.readFile(page.file, function(err, content) {
+    util.readFile(PAGESDIR+"/"+page.file, function(err, content) {
       if (err) return next(err);
       page.html = content;
       res.render("dynamic/"+page.template, {
