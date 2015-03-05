@@ -6,6 +6,8 @@
 // /_____/_/|_/ .___/_/   \___/____/____/  
 //           /_/                           
 
+var pmx = require('pmx');
+pmx.init();
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -111,6 +113,8 @@ app.use('/', require('./routes/world'));
 //   / __/ / ___/ ___/ __ \/ ___/ ___/
 //  / /___/ /  / /  / /_/ / /  (__  ) 
 // /_____/_/  /_/   \____/_/  /____/  
+
+app.use(pmx.expressErrorHandler());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
