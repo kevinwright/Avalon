@@ -51,7 +51,9 @@ module.exports = function(grunt) {
         },
         files : [{
           expand: true,
-          src: ['tmp/emails/*.html'],
+          src: ['*.html'],
+          cwd: 'tmp/emails',
+          ext: '.html',
           dest: 'public/emails',
         }]
       }
