@@ -30,26 +30,26 @@
         .field Gender
         .field
           .ui.radio.checkbox
-            input#male(type="radio", name="gender", value="male", checked="checked")
-            label(for="male") Male
+            input#create-male(type="radio", name="gender", value="male", checked="checked")
+            label(for="create-male") Male
         .field
           .ui.radio.checkbox
-            input#female(type="radio", name="gender", value="female")
-            label(for="female") Female
+            input#create-female(type="radio", name="gender", value="female")
+            label(for="create-female") Female
       .fields
         .four.center.wide.field Client:
         .four.center.wide.input.field
           .ui.radio.checkbox
-            input#lumiere(type="radio", name="run", value="lumiere", checked="checked")
-            label(for="lumiere") Lumiere
+            input#create-lumiere(type="radio", name="run", value="lumiere", checked="checked")
+            label(for="create-lumiere") Lumiere
         .four.center.wide.input.field
           .ui.radio.checkbox
-            input#umbra(type="radio", name="run", value="umbra")
-            label(for="umbra") Umbra
+            input#create-umbra(type="radio", name="run", value="umbra")
+            label(for="create-umbra") Umbra
         .four.center.wide.input.field
           .ui.radio.checkbox
-            input#javalon(type="radio", name="run", value="applet")
-            label(for="javalon") Javalon
+            input#create-javalon(type="radio", name="run", value="applet")
+            label(for="create-javalon") Javalon
         input(type="hidden", name="create", value="yes")
         input(type="hidden", name="loginkey", value="")
       input(type="submit", value="Create New Character", style="margin-top: 16px;").ui.button.save.fluid
@@ -57,30 +57,30 @@
       h3.ui.title.underline.center Login
       .field.user
         .ui.input
-          label(for="create-username", title="3 characters minimum, letters only. Be sure to choose a name appropriate for a fantasy game-world setting.")
+          label(for="login-username", title="3 characters minimum, letters only. Be sure to choose a name appropriate for a fantasy game-world setting.")
             | Character Name (no spaces or numbers)
             i.icon.question.mark
-          input#create-username(type="text", name="username", minlength=3, maxlength=18, required)
+          input#login-username(type="text", name="username", minlength=3, maxlength=18, required)
       .field
         .ui.input
-          label(for="create-password", title="3 characters minimum, may include letters, numbers and punctuation, but no spaces, carets or tildes. Example - s_ecr3.t.")
+          label(for="login-password", title="3 characters minimum, may include letters, numbers and punctuation, but no spaces, carets or tildes. Example - s_ecr3.t.")
             | Password (no spaces)
             i.icon.question.mark
-          input(name="password", type="password", minlength=3, maxlength=50, required)#create-password
+          input(name="password", type="password", minlength=3, maxlength=50, required)#login-password
       .fields
         .four.center.wide.field Client:
         .four.center.wide.input.field
           .ui.radio.checkbox
-            input#lumiere(type="radio", name="run", value="lumiere", checked="checked")
-            label(for="lumiere") Lumiere
+            input#login-lumiere(type="radio", name="run", value="lumiere", checked="checked")
+            label(for="login-lumiere") Lumiere
         .four.center.wide.input.field
           .ui.radio.checkbox
-            input#umbra(type="radio", name="run", value="umbra")
-            label(for="umbra") Umbra
+            input#login-umbra(type="radio", name="run", value="umbra")
+            label(for="login-umbra") Umbra
         .four.center.wide.input.field
           .ui.radio.checkbox
-            input#javalon(type="radio", name="run", value="applet")
-            label(for="javalon") Javalon
+            input#login-javalon(type="radio", name="run", value="applet")
+            label(for="login-javalon") Javalon
         input(type="hidden", name="create", value="no")
         input(type="hidden", name="loginkey", value="")
       input(type="submit", value="Login", style="margin-top: 16px;").ui.button.save.fluid
