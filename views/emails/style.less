@@ -1,12 +1,17 @@
 @import "ink.less";
 
-body, html, table[class="body"] {
+body, html {
   background: #010E16;
 }
 *, ::before, ::after {
 -webkit-box-sizing: border-box;
 -moz-box-sizing: border-box;
 box-sizing: border-box;
+}
+table.body {
+  background: url(http://www.avalon-rpg.com/img/pattern/header.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 body, table.body, h1, h2, h3, h4, h5, h6, p, td {
   color: #fff;
@@ -98,12 +103,6 @@ table.google-plus:hover td {
 }
 
 .header {
-  background: url("http://www.avalon-rpg.com/img/pattern/header.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center bottom;
-  margin-bottom: -175px;
 }
 .header .overlay {
   text-align: center;
@@ -125,7 +124,7 @@ table.header.row {
 
 .footer {
   background: #e6dfd2;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 .footer img {
   position: relative;
