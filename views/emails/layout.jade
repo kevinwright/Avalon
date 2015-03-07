@@ -113,26 +113,45 @@ html(xmlns='http://www.w3.ord/1999/xhtml')
                               td.wrapper
                                 table.twelve.columns
                                   tbody
-                                    tr
-                                      td
-                                        p.tiny
-                                          a(href="<% unsubscribe %>") Unsubscribe
-                                          |   if you do not wish to receive any of the Avalon newsletters, journals or mailshots.
-                             
-                                    tr
-                                      td
-                                        p.tiny
-                                          a(href="http://www.meetplace.net/forum/48") History in the Making: Modern Avalon in the 14th Century
-                                          |  • 
-                                          a(href="http://www.avalon-rpg.com/play/") Play Now
-                                          |  • 
-                                          a(href="http://umbra.avalon-rpg.com/") Umbra Mobile Client
+                                    unless $ && $.unsubscribe == false
+                                      tr
+                                        td
+                                          p.tiny
+                                            a(href="<% unsubscribe %>") Unsubscribe
+                                            |   if you do not wish to receive any of the Avalon newsletters, journals or mailshots.
+                                    
+                                    if $ && $.bottomlinks
+                                      tr
+                                        td
+                                          p.tiny
+                                            for item,i in $.bottomlinks
+                                              a(href=item.url) #{item.title}
+                                              if i != $.bottomlinks.length - 1
+                                                |  •  
+                                    else
+                                      if markade && markade.config && markade.config.bottomlinks
+                                        tr
+                                          td
+                                            p.tiny
+                                              for item,i in markade.config.bottomlinks
+                                                a(href=item.url) #{item.title}
+                                                if i != markade.config.bottomlinks.length -1
+                                                  |  •  
 
-                                    tr
-                                      td
-                                        p.tiny
-                                          a(href="http://www.avalon-rpg.com/help/pages/privacy.html") Privacy Policy
-                                          |  •  
-                                          a(href="http://www.avalon-rpg.com/help/pages/terms.html") Terms &amp; Conditions
-                                          |  • 
-                                          a(href="http://www.avalon-rpg.com/help/pages/contact.html") Contact Us
+                                    if $ && $.speclinks
+                                      tr
+                                        td
+                                          p.tiny
+                                            for item,i in $.speclinks
+                                              a(href=item.url) #{item.title}
+                                              if i != $.speclinks.length - 1
+                                                |  •  
+                                    else
+                                      if markade && markade.config && markade.config.speclinks
+                                        tr
+                                          td
+                                            p.tiny
+                                              for item,i in markade.config.speclinks
+                                                a(href=item.url) #{item.title}
+                                                if i != markade.config.speclinks.length - 1
+                                                  |  •  
