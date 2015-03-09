@@ -12,9 +12,44 @@ block content
 
       .ui.grid.responsive
         .twelve.column.wide.main
+          if (meta.where)
+            - var where = meta.where.match(/^<(.*)> (.*) <(.*)>$/);
+            .bread
+              if where[1]
+                a(href="/intro/"+cat.short+"/"+where[1].toLowerCase()) #{where[1]}
+              i.icon.angle.left
+              b #{page.content}
+              i.icon.angle.right
+              if where[3]
+                a(href="/intro/"+cat.short+"/"+where[3].toLowerCase()) #{where[3]}
           h1.ui.title.center.underline #{meta.title}
           p.lead !{meta.summary}
           .text.help.markdown !{extra.normal.html}
+          if (extra.advanced)
+            .ui.box
+              h3.ui.title Advanced
+              != extra.advanced.html
+          if (meta.commands || meta.refs)
+            .ui.box
+              if (meta.commands)
+                h4.ui.title Commands
+                ul.ui.menu.simple
+                  for command in meta.commands
+                   .item #{command}
+              if (meta.refs)
+                h4.ui.title More information
+                ul.ui.menu.simple
+                  for ref in meta.refs
+                   a.item(href="/help/pages/"+ref.toLowerCase(), target="_blank") #{ref}
+               if (meta.rel || meta.related)
+                h4.ui.title Related Articles
+                ul.ui.menu.simple
+                  if meta.rel
+                    for ref in meta.rel
+                     a.item(href="/help/pages/"+ref.toLowerCase(), target="_blank") #{ref}
+                  if meta.related
+                    for ref in meta.related
+                     a.item(href="/help/pages/"+ref.toLowerCase(), target="_blank") #{ref}
 
         .four.column.wide.sidebar
           .ui.block
