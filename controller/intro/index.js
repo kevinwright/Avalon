@@ -38,7 +38,7 @@ function Controller() {
       var top = toc.filter(function(top) {
         return top.short == url;
       })
-      if (top) {
+      if (top && top.length > 0) {
         return res.redirect("/intro" + top[0].items[0].url)
       }
 
