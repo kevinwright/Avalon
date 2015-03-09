@@ -14,14 +14,15 @@ block content
         .twelve.column.wide.main
           if (meta.where)
             - var where = meta.where.match(/^<(.*)> (.*) <(.*)>$/);
-            .bread
-              if where[1]
-                a(href="/intro/"+cat.short+"/"+where[1].toLowerCase()) #{where[1]}
-              i.icon.angle.left
-              b #{page.content}
-              i.icon.angle.right
-              if where[3]
-                a(href="/intro/"+cat.short+"/"+where[3].toLowerCase()) #{where[3]}
+            if where
+              .bread
+                if where[1]
+                  a(href="/intro/"+cat.short+"/"+where[1].toLowerCase()) #{where[1]}
+                i.icon.angle.left
+                b #{page.content}
+                i.icon.angle.right
+                if where[3]
+                  a(href="/intro/"+cat.short+"/"+where[3].toLowerCase()) #{where[3]}
           h1.ui.title.center.underline #{meta.title}
           p.lead !{meta.summary}
           .text.help.markdown !{extra.normal.html}
