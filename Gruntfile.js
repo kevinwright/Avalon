@@ -12,14 +12,6 @@ module.exports = function(grunt) {
         src: ['public/css/style.less'],
         dest: 'public/css/style.css'
       },
-      email: {
-        options: {
-          compress: true,
-          cleancss: true
-        },
-        src: ['views/emails/style.less'],
-        dest: 'views/emails/style.css'
-      },
     },
     markade: {
       docs: {
@@ -36,7 +28,10 @@ module.exports = function(grunt) {
       email: {
         options: {
           "config": yaml.safeLoad(fs.readFileSync("/library/emails/config.yaml")),
-          "template": "views/emails/default.jade"
+          "template": "views/emails/default.jade",
+          "jade": {
+            pretty: true
+          }
         },
         files: {
           "tmp/emails": "/library/emails/default/*.md"
@@ -77,5 +72,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ["less", 'watch']);
   grunt.registerTask("docs", "markade:docs");
-  grunt.registerTask('email', ["less:email", "markade:email", "emailBuilder"]);
+  grunt.registerTask('email', ["markade:email", "emailBuilder"]);
 };

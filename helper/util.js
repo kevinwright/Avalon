@@ -174,6 +174,18 @@ var readFiles = function(files, callback) {
     return renderSync(content);
   }
 
+  var renderYAML = function(file, callback) {
+    if (file in fileErrCache) return callback(fileErrCache[file]);
+    readFile(file, function(fileErr, content) {
+      if (fileErr) {
+        console.log( "Error Cached: ", file );
+        fileErrCache[file] = fileErr;
+        return callback(fileErr);
+      }
+      callback(null, yaml.safeLoad(content));
+    })
+  }
+
 
 function cap(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -187,6 +199,7 @@ module.exports = {
   renderSync: renderSync,
   renderFile: renderFile,
   renderFileSync: renderFileSync,
+  renderYAML: renderYAML,
   cap: cap,
   cache: {
     file: fileCache,

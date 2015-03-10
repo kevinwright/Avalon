@@ -1,0 +1,15 @@
+extends ../layout
+
+block head
+  - var title = meta.title + " | World | Avalon RPG";
+  - var description = "Affairs"
+  - var keywords = "Online Game, Online RPG, RPG, Roleplaying Games, RPGS, MUD, MUDs, Online Games, Interactive Games, Multiplayer Games, Multiuser Games, Internet Games, Fantasy Games, Magic, Adventure, Java, Telnet Client, Online, Knight, Sorcerer, Sorcery, Poisons, Potions, Mage, Mystic, Thief, Guild, Bard, Battle, Army, Strategy";
+  - var canonical = "http://www.avalon-rpg.com/world/affairs"
+
+block content
+  .ui.content.city
+    .contain
+      h1.ui.title Affairs
+      for affair in meta.affairs
+        h2.ui.title.overline #{affair.village}
+        p #{JSON.stringify(affair)}
