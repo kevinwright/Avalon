@@ -55,12 +55,12 @@ block content
         .four.column.wide.sidebar
           .ui.block
             .content
-              .ui.menu.vertical.dotted
+              nav.ui.menu.vertical
                 for item in toc
                   if (item.short == cat.short)
-                    a(href="/intro" + item.items[0].url).item.head
-                      i.icon.circle
-                      |  #{item.content}
+                    a(href="/intro" + item.items[0].url).item.head.active
+                      i.icon.angle.down
+                      | #{item.content}
                     .menu
                       for sub in item.items
                         if (sub.content == page.content)
@@ -69,5 +69,5 @@ block content
                           a(href="/intro" + sub.url).item #{sub.content}
                   else
                     a(href="/intro" + item.items[0].url).item.head
-                      i.icon.circle.blank
+                      i.icon.angle.right
                       |  #{item.content}

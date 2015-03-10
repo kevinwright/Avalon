@@ -19,8 +19,8 @@ block content
         .four.column.wide.sidebar
           .ui.block
             .content
-              ul.ui.menu.vertical
+              nav.ui.menu.vertical
                 for item in toc
                   a(href="/intro" + item.items[0].url).item.head
-                    i.icon.circle.blank
+                    i.icon.angle.right
                     |  #{item.content}

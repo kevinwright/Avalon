@@ -66,6 +66,7 @@
 
   @width_max: 1024px;
   @col_primary: #D2B063;
+  @col_secondary: #00D1FF;
   @col_foreground: #fff;
   @col_background: #13161A;
   @col_footer: #2b1e0a;
@@ -465,10 +466,11 @@
         background: rgba(255, 255, 255, .05);
       }
       &.active {
-        color: rgba(255, 255, 255, 1);
+        // color: rgba(255, 255, 255, 1);
+        color: @col_secondary;
         background: rgba(255, 255, 255, .05);
         &:hover, &:focus {
-          color: rgba(255, 255, 255, 1);
+          color: @col_secondary;
           background: rgba(255, 255, 255, .05);
         }
       }
@@ -512,11 +514,14 @@
       padding-bottom: 0px;
       font-size: 16px;
       font-weight: 600;
-      color: #fff !important;
+      color: #fff;
       background:  transparent !important;
-      a {
-        color: #fff !important;
+      a, &a {
+        color: #fff;
         background:  transparent !important;
+      }
+      &.active {
+        color: @col_secondary;
       }
       &:before, &:after {
         display: none !important;
@@ -1349,6 +1354,22 @@
           padding: 0px;
           .content {
             padding: 0 20px;
+
+            .menu {
+              .head {
+                text-indent: -18px;
+                padding-left: 20px;
+                border-top: 1px dotted rgba(43, 105, 134, 0.4);
+                margin-top: 7px;
+                &:first-child {
+                  border-top: none;
+                }
+                .icon {
+                  width: auto;
+                  margin: 0px 5px 0px 10px;
+                }
+              }
+            }
           }
           &:after {
             background: url("/img/pattern/bg.jpg");
