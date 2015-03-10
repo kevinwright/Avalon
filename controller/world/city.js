@@ -20,7 +20,7 @@ function parseTemple(loc) {
 }
 
 module.exports = function (cityName, callback) {
-  this.name = cityName;
+  this.name = cityName.toLowerCase();
   this.title = util.cap(this.name);
 
   this.baseLocation = WORLDDIR + this.title + "/";

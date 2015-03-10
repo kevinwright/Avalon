@@ -18,13 +18,19 @@ block content
         .four.column.wide.sidebar
           .ui.block
             .content
-              .ui.menu.vertical.dotted
-                for item in legacy
-                  if (item.url == page.url)
-                    a(href="/intro" + item.url).item.active
-                      i.icon.circle
-                      |  #{item.content}
+              nav.ui.menu.vertical
+                for item in toc
+                  if (item.short == cat.short)
+                    a(href="/intro" + item.items[0].url).item.head.active
+                      i.icon.angle.down
+                      | #{item.content}
+                    .menu
+                      for sub in item.items
+                        if (sub.content == page.content)
+                          a(href="/intro" + sub.url).item.active #{sub.content}
+                        else
+                          a(href="/intro" + sub.url).item #{sub.content}
                   else
-                    a(href="/intro" + item.url).item
-                      i.icon.circle.blank
+                    a(href="/intro" + item.items[0].url).item.head
+                      i.icon.angle.right
                       |  #{item.content}
