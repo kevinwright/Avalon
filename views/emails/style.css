@@ -129,6 +129,7 @@ table.header.row {
   position: relative;
   top: -13px;
   width: auto;
+  max-height: 200px;
 }
 .footer h1, .footer h2, .footer h3, .footer h4, .footer h5, .footer h6, .footer p, .footer td {
   color: #2b1e0a;
