@@ -30,8 +30,9 @@ var guild = require("../controller/world/guild.js");
     });
   }
 
-  function getGuild(req, res) {
+  function getGuild(req, res, next) {
     guild(req.params["guild"], function(err, guildPage) {
+      if (err) return next(err);
       res.render('world/guild', { avalon:avalon, guild: guildPage });
     });
   }

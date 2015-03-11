@@ -33,6 +33,8 @@ module.exports = function (guildName, callback) {
   this.name = guildName;
   this.title = util.cap(this.name);
 
+  console.log(this.name, this.title);
+
   this.baseLocation = WORLDDIR + this.title + "/";
 
   try {
