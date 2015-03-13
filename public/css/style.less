@@ -345,6 +345,14 @@
         background: rgba(0, 0, 0, 0.6);
       }
     }
+    &.accordion {
+      .title {
+        cursor: pointer;
+      }
+      .content {
+        display: none;
+      }
+    }
   }
 
 
@@ -474,6 +482,10 @@
           background: rgba(255, 255, 255, .05);
         }
       }
+      &.primary {
+        color: #fff;
+        background-color: transparent;
+      } 
     }
     &.simple {
       a {font-weight: normal;}

@@ -7,6 +7,8 @@ var avalon = require("../avalon.js");
 var toc = require(TOCFILE);
 var legacy = require(INTRODIR + "/legacy.js");
 
+var _ = require("lodash");
+
 function NoPageError(page, cat, result) {
   this.name = "NoPageError"
   this.message = "No Such Intro Page"
@@ -74,7 +76,16 @@ function Controller() {
       }
     })
 
-    if (cat == null && result == null) return next(new NoPageError(url, cat, result));
+    if (cat == null || result == null)
+      return next(new NoPageError(url, cat, result));
+
+
+    var linkList = _.filter(_.flatten(_.pluck(toc, 'items')), function(item) {
+      return item.file;
+    });
+    var index = _.findIndex(linkList, result);
+    var previous = linkList[index - 1];
+    var nextArticle = linkList[index + 1];
 
     util.renderFile(INTRODIR+"/"+result.file, function(err, blocks) {
       if (err) {
@@ -91,6 +102,7 @@ function Controller() {
           })
         })
       } else {
+        if (!blocks.normal.meta) return next(err);
         res.render("intro/page", {
           meta: blocks.normal.meta,
           extra: blocks,
@@ -98,6 +110,8 @@ function Controller() {
           avalon: avalon,
           cat: cat,
           page: result,
+          previous: previous,
+          next: nextArticle
         })
       }
     })

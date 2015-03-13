@@ -10,14 +10,27 @@ block content
   .ui.content.intro
     .contain
       .ui.grid.responsive
-        .twelve.column.wide.main
+        .twelve.column.wide.main.breadcrumbed
+          .ui.breadcrumb(style="padding: 5px;")
+            .pagination.ui.menu(style="text-align:center;")
+              if previous
+                a(href="/intro" + previous.url).item
+                  i.icon.left.triangle
+                  | #{previous.content}
+              .item.primary #{page.content}
+              if next
+                a(href="/intro" + next.url).item
+                  | #{next.content}
+                  i.icon.right.triangle
           h1.ui.title.center.underline #{meta.title}
           p.lead !{meta.summary}
           .text.help.markdown !{extra.normal.html}
           if (extra.advanced)
-            .ui.box
-              h3.ui.title Advanced
-              != extra.advanced.html
+            .ui.box.accordion
+              h3.ui.title(data-expand="advanced", title="Click to show advanced information") Advanced
+                span.right.label
+                  i.icon.triangle.down
+              .content(data-expand="advanced") !{extra.advanced.html}
           if (meta.commands || meta.refs)
             .ui.box
               if (meta.commands)
@@ -40,6 +53,18 @@ block content
                     for ref in meta.related
                      a.item(href="/help/pages/"+ref.toLowerCase(), target="_blank") #{ref}
 
+          .pagination.ui.menu(style="text-align:center;")
+            a.primary.item(href="/intro") Back to Index
+            if previous
+              a(href="/intro" + previous.url).item
+                i.icon.left.triangle
+                | #{previous.content}
+            .item.primary #{page.content}
+            if next
+              a(href="/intro" + next.url).item
+                | #{next.content}
+                i.icon.right.triangle
+
         .four.column.wide.sidebar
           .ui.block
             .content
@@ -59,3 +84,10 @@ block content
                     a(href="/intro" + item.items[0].url).item.head
                       i.icon.angle.right
                       |  #{item.content}
+
+block scripts
+  script.
+    $(".ui.box.accordion .title").click(function(e) {
+      var targ = $(e.currentTarget).data("expand");
+      $(".ui.box.accordion .content[data-expand="+targ+"]").toggle("fast");
+    })
