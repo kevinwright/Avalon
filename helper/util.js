@@ -186,6 +186,18 @@ var readFiles = function(files, callback) {
     })
   }
 
+  var renderJSON = function(file, callback) {
+    if (file in fileErrCache) return callback(fileErrCache[file]);
+    readFile(file, function(fileErr, content) {
+      if (fileErr) {
+        console.log( "Error Cached: ", file );
+        fileErrCache[file] = fileErr;
+        return callback(fileErr);
+      }
+      callback(null, JSON.parse(content));
+    })
+  }
+
 
 function cap(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -200,6 +212,7 @@ module.exports = {
   renderFile: renderFile,
   renderFileSync: renderFileSync,
   renderYAML: renderYAML,
+  renderJSON: renderJSON,
   cap: cap,
   cache: {
     file: fileCache,

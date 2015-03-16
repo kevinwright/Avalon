@@ -4,6 +4,8 @@ var WORLDDIR = global.avalon.dir.world;
 var util = require("../../helper/util");
 var fs = require("fs");
 var parser = require("../help/parser");
+var guilds = require(WORLDDIR + "guilds.json");
+var _ = require("lodash");
 
 function parseInfo(content) {
   var result = {};
@@ -41,7 +43,9 @@ module.exports = function (guildName, callback) {
     this.error = true;
     return callback(err);
   }
-  this.info = parseInfo(this.infoContent);
+
+  this.info = _.defaults(guilds[this.name], parseInfo(this.infoContent));
+  console.log(this.info);
 
   this.get = function(item, isSingleString) {
     if (item == "skills") return parseSkill(this.baseLocation + item);
