@@ -2,6 +2,7 @@ var util = require("../helper/util.js");
 var avalon = require("./avalon.js");
 var fs = require("fs");
 var _ = require("lodash");
+var synonyms = require(global.avalon.files.synonyms);
 
 var AUTOHELPDIR = global.avalon.dir.autohelp,
     HELPDIR = global.avalon.dir.help,
@@ -28,14 +29,32 @@ var ErrorHandler = function() {
 	this.help = function(error, req, res, next) {
 		fs.readdir(AUTOHELPDIR, function(err, files) {
 			if (err) return next(err);
+
+			files = _.map(files, function(file) {
+				return _.trimRight(file, '0');
+			})
+
 			fs.readdir(HELPDIR, function(err, helps) {
 				if (err) return next(err);
 
-				var matches = _.intersection(_.map(_.filter(files, function(file) {
+
+				var syns = _.keys(synonyms);
+				var validPages = _.assign(_.intersection(files, helps), syns);
+
+				var page = error.page;
+				if (_.endsWith(page, 's')) {
+					if (_.includes(validPages, _.trimRight(page, "s"))) {
+						return res.redirect("/help/pages/" + _.trimRight(page, "s"));
+					}
+				} else {
+					if (_.includes(validPages, page + "s")) {
+						return res.redirect("/help/pages/" + pages+"s");
+					}
+				}
+
+				var matches = _.filter(validPages, function(file) {
 					return fuzzy(error.page, file);
-				}), function(file) {
-					return file.substr(0, file.length - 1);
-				}), helps);
+				});
 
 				res.render('error/help', {
 				    avalon: avalon,
