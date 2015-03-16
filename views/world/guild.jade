@@ -29,7 +29,9 @@ block content
           != guild.get("intro")
 
           a(name="first")
-          h2.ui.title.overline Words of #{guild.info.foundedby}, first guildmaster
+          h2.ui.title.overline Words of 
+            a(href="/rollcall/characters/"+guild.info.foundedby.toLowerCase()) #{guild.info.foundedby}
+            | , first guildmaster
           != guild.get("firstwords")
 
           .ui.manual
@@ -41,7 +43,8 @@ block content
           h2.ui.title.overline.underline Guild specialist skills
           - var skills = guild.get("skills")
           for skill in skills
-            h4.ui.title #{skill.title}
+            h4.ui.title
+              a(href="/help/pages/"+skill.title.toLowerCase(), title="The "+ skill.title + " skill") #{skill.title}
             p #{skill.description}
 
           a(name="location")
