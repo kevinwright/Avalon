@@ -31,6 +31,7 @@ function Controller() {
   }
 
   this.errorBoard = function(res, board) {
+    res.status(404);
     res.render('bb/error', {
         message: "No such board: " + board,
         error: {},
@@ -39,6 +40,7 @@ function Controller() {
   }
 
   this.errorPost = function(res, board, id) {
+    res.status(404);
     res.render('bb/error', {
         message: "No such post: " + id,
         board: board,

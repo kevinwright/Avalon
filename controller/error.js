@@ -56,6 +56,7 @@ var ErrorHandler = function() {
 					return fuzzy(error.page, file);
 				});
 
+				res.status(404);
 				res.render('error/help', {
 				    avalon: avalon,
 				    matches: matches,
