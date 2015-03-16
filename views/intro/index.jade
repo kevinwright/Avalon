@@ -19,8 +19,18 @@ block content
         .four.column.wide.sidebar
           .ui.block
             .content
-              nav.ui.menu.vertical
+              nav.ui.menu.vertical.reveal
                 for item in toc
-                  a(href="/intro" + item.items[0].url).item.head
-                    i.icon.angle.right
-                    |  #{item.content}
+                  .item.head(data-expand=item.short)
+                    i.icon.angle.down
+                    | #{item.content}
+                  .menu(data-expand=item.short)
+                    for sub in item.items
+                      a(href="/intro" + sub.url).item #{sub.content}
+
+block scripts
+  script.
+    $(".ui.menu.reveal .head").click(function(e) {
+      var targ = $(e.currentTarget).data("expand");
+      $(".ui.menu.reveal .menu[data-expand="+targ+"]").toggle("fast");
+    })

@@ -107,21 +107,40 @@ app.use('/lumiere', require('./routes/lumiere'));
 
 app.use('/', require('./routes/world'));
 
-
 //     ______                         
 //    / ____/_____________  __________
 //   / __/ / ___/ ___/ __ \/ ___/ ___/
 //  / /___/ /  / /  / /_/ / /  (__  ) 
 // /_____/_/  /_/   \____/_/  /____/  
 
+var ErrorHandler = require("./controller/error");
 app.use(pmx.expressErrorHandler());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
+    var err = new Error("not found");
     err.status = 404;
     err.path = req.url;
     next(err);
+});
+
+app.use(function(err, req, res, next) {
+    switch(err.type) {
+        case "help":
+            return ErrorHandler.help(err, req, res, next);
+            break;
+
+        case "guild":
+            return res.redirect("/world#guilds");
+            break;
+
+        case "city":
+            return res.redirect("/world#cities");
+            break;
+
+        default:
+            next(err);
+    }
 });
 
 // development error handler
@@ -129,7 +148,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        res.render('error', {
+        res.render('error/error', {
             avalon: avalon,
             message: err.message,
             error: err
@@ -141,7 +160,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.render('error/error', {
         avalon: avalon,
         message: err.message,
         error: {}

@@ -113,7 +113,12 @@ function findParticipant(board, person) {
 function parseSections() {
   var boards = {};
 
-  var data = require(BBDIR + "/boards.json").boards;
+  try {
+    var data = require(BBDIR + "/boards.json").boards;
+  } catch(err) {
+    console.error(err);
+    return null;
+  }
   for (var i = 0; i<data.length;i++) {
     try {
       var board = require(BBDIR + "/" + data[i].href);

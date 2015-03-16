@@ -16,23 +16,31 @@ var guild = require("../controller/world/guild.js");
   router.get(["/citguilds/:page.html", "/citguilds/:page"], redirectCityGuilds);
 
 // Methods
-  function getIndex(req, res) {
+  function getIndex(req, res, next) {
     avalon.info("world.md", function(err, meta) {
-      if (err) return console.log(err);
+      if (err) return next(err);
       res.render('world/index', { avalon:avalon, meta: meta.meta, title: "The world of Avalon, Online RPG Game" });
     })
   }
 
   function getCity(req, res, next) {
     city(req.params["city"], function(err, cityPage) {
-      if (err) return next(err);
+      if (err) return next({
+        err: err,
+        type: "city",
+        city: req.params["city"]
+      });
       res.render('world/city', { avalon:avalon, city: cityPage });
     });
   }
 
   function getGuild(req, res, next) {
     guild(req.params["guild"], function(err, guildPage) {
-      if (err) return next(err);
+      if (err) return next({
+        err: err,
+        type: "guild",
+        guild: req.params["guild"]
+      });
       res.render('world/guild', { avalon:avalon, guild: guildPage });
     });
   }

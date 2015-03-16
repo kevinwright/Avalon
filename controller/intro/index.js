@@ -76,8 +76,14 @@ function Controller() {
       }
     })
 
-    if (cat == null || result == null)
-      return next(new NoPageError(url, cat, result));
+    if (cat == null || result == null) {
+      if (category) {
+        return res.redirect("/intro/" + category);
+      } else {
+
+        return next(new NoPageError(url, cat, result));
+      }
+    }
 
 
     var linkList = _.filter(_.flatten(_.pluck(toc, 'items')), function(item) {

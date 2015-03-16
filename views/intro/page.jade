@@ -68,26 +68,25 @@ block content
         .four.column.wide.sidebar
           .ui.block
             .content
-              nav.ui.menu.vertical
+              nav.ui.menu.vertical.reveal
                 for item in toc
-                  if (item.short == cat.short)
-                    a(href="/intro" + item.items[0].url).item.head.active
-                      i.icon.angle.down
-                      | #{item.content}
-                    .menu
-                      for sub in item.items
-                        if (sub.content == page.content)
-                          a(href="/intro" + sub.url).item.active #{sub.content}
-                        else
-                          a(href="/intro" + sub.url).item #{sub.content}
-                  else
-                    a(href="/intro" + item.items[0].url).item.head
-                      i.icon.angle.right
-                      |  #{item.content}
+                  .item.head(class={"active": item.short == cat.short}, data-expand=item.short)
+                    i.icon.angle.down
+                    | #{item.content}
+                  .menu(class={"active": item.short == cat.short}, data-expand=item.short)
+                    for sub in item.items
+                      if (sub.content == page.content)
+                        a(href="/intro" + sub.url).item.active #{sub.content}
+                      else
+                        a(href="/intro" + sub.url).item #{sub.content}
 
 block scripts
   script.
     $(".ui.box.accordion .title").click(function(e) {
       var targ = $(e.currentTarget).data("expand");
       $(".ui.box.accordion .content[data-expand="+targ+"]").toggle("fast");
+    })
+    $(".ui.menu.reveal .head").click(function(e) {
+      var targ = $(e.currentTarget).data("expand");
+      $(".ui.menu.reveal .menu[data-expand="+targ+"]").toggle("fast");
     })

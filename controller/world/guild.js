@@ -33,8 +33,6 @@ module.exports = function (guildName, callback) {
   this.name = guildName;
   this.title = util.cap(this.name);
 
-  console.log(this.name, this.title);
-
   this.baseLocation = WORLDDIR + this.title + "/";
 
   try {
@@ -47,15 +45,25 @@ module.exports = function (guildName, callback) {
 
   this.get = function(item, isSingleString) {
     if (item == "skills") return parseSkill(this.baseLocation + item);
-    if (isSingleString) {
-      return fs.readFileSync(this.baseLocation + item, "utf8");
-    } else {
-      return parser(fs.readFileSync(this.baseLocation + item, "utf8"));
+    try {
+      if (isSingleString) {
+        return fs.readFileSync(this.baseLocation + item, "utf8");
+      } else {
+        return parser(fs.readFileSync(this.baseLocation + item, "utf8"));
+      }
+    } catch(err) {
+      console.error(err);
+      return callback(err);
     }
   }
 
   this.help = function(title) {
-    return parser(fs.readFileSync(HELPDIR + "/" + title, "utf8"));
+    try {
+      return parser(fs.readFileSync(HELPDIR + "/" + title, "utf8"));
+    } catch(err) {
+      console.error(err);
+      return callback(err);
+    }
   }
 
   callback(null, this);

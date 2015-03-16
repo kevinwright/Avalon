@@ -14,9 +14,9 @@ var Page = require("./page");
 function Controller() {
   var self = this;
 
-  this.index = function(req, res) {
+  this.index = function(req, res, next) {
     avalon.info("help.md", function(err, meta, extra) {
-      if (err) return console.log(err);
+      if (err) return next(err);
       res.render('help/index', {
         title: "Help",
         meta: meta.meta,
@@ -27,7 +27,7 @@ function Controller() {
   }
 
   // :section
-  this.section = function(req, res) {
+  this.section = function(req, res, next) {
     var section = req.params["section"] || req.query["section"];
     res.render("help/section", {
       title: section,
@@ -38,40 +38,28 @@ function Controller() {
   }
 
   // :page
-  this.page = function(req, res) {
+  this.page = function(req, res, next) {
     var page = req.params["page"] || req.query["page"];
 
     readPage(page, function(err, data) {
       if (err) {
-        res.status(err.status || 500);
-        console.error(err);
-        if (err.errno == 34) {
-          res.status(404);
-          return res.render('error', {
-              message: "No such page: " + page,
-              error: {},
-              avalon: avalon
-          });
-        } else {
-          res.status(404);
-          return res.render('error', {
-              message: err.message,
-              error: {},
-              avalon: avalon
-          });
-        }
-      } else {
-        res.render("help/page", {
-          title: page,
-          page: data,
-          section: self.sections[data.section],
-          avalon: avalon
-        })
-      }
+        return next({
+          err: err,
+          type: "help",
+          page: page
+        });
+      } 
+
+      res.render("help/page", {
+        title: page,
+        page: data,
+        section: self.sections[data.section],
+        avalon: avalon
+      })
     })
   }
 
-  this.search = function(req, res) {
+  this.search = function(req, res, next) {
     res.redirect("/help/pages/" + req.query["page"].toLowerCase());
   };
   

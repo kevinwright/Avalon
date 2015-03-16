@@ -43,6 +43,15 @@ block content
 block scripts
   script(src="/js/jquery.validate.min.js")
   script.
+    $.validator.addMethod(
+        "regex",
+        function(value, element, regexp) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
+        },
+        "Check your input."
+    );
+
     $("#createForm").validate({
       onkeyup: false,
       rules: {
@@ -83,6 +92,13 @@ block scripts
         password: "required"
       }
     });
+
+    $("#login-username").rules("add", { regex: "^[a-zA-Z]+$", messages: {regex: "Only letters allowed, no spaces or numbers"} });
+    $("#create-username").rules("add", { regex: "^[a-zA-Z]+$", messages: {regex: "Only letters allowed, no spaces or numbers"} });
+
+    $("#login-password").rules("add", { regex: "^[a-zA-Z0-9]+$", messages: {regex: "Only letters and numbers allowed, no spaces"} });
+    $("#create-password").rules("add", { regex: "^[a-zA-Z0-9]+$", messages: {regex: "Only letters and numbers allowed, no spaces"} });
+
     $("input[type='radio'][name='run']").change(function(e) {
       var target = $(e.currentTarget);
       var value = target.val();
