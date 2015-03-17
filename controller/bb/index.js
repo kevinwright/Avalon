@@ -54,7 +54,7 @@ function Controller() {
     var param = req.params["board"] || req.query["board"];
 
     util.renderJSON(BBDIR + "/boards.json", function(err, boards) {
-      if (err) return next(err);
+      if (err) return self.errorBoard(res, param);
 
       board = _.first(_(boards.boards)
         .filter(function(board) {
@@ -126,12 +126,12 @@ function Controller() {
   }
 
   // params: /bb/:board/:id/subject
-  this.post = function(req, res) {
+  this.post = function(req, res, next) {
     var param = req.params["board"] || req.query["board"];
     var id = req.params["id"] || req.query["id"];
 
     util.renderJSON(BBDIR + "/boards.json", function(err, boards) {
-      if (err) return next(err);
+      if (err) return self.errorPost(res, board, id);
 
       board = _.first(_(boards.boards)
         .filter(function(board) {
@@ -157,7 +157,7 @@ function Controller() {
             return post.number == id;
           });
 
-        if (!post) return next(err);
+        if (!post) return self.errorPost(res, board, id);
         readPost(board.id, post.body.href, function(err, content) {
           if (err) return self.errorPost(res, board, id);
 

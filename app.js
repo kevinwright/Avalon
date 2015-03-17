@@ -138,6 +138,11 @@ app.use(function(err, req, res, next) {
             return res.redirect("/world#cities");
             break;
 
+        case "intro":
+            err.status = 404;
+            next(err);
+            break;
+
         default:
             next(err);
     }

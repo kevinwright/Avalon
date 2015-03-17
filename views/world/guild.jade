@@ -72,7 +72,8 @@ block content
             .content
               .ui.menu.vertical
                 a.item(href="/rollcall/characters/" + guild.info.guildmaster.toLowerCase(), title="The Guildmaster") #{guild.info.guildmaster}
-                a.item(href="/rollcall/characters/" + guild.info.patron.toLowerCase(), title="The Patron") #{guild.info.patron}
+                if guild.info.patron
+                  a.item(href="/rollcall/characters/" + guild.info.patron.toLowerCase(), title="The Patron") #{guild.info.patron}
                 a.item(href="/rollcall/guilds/" + guild.name) Members
                 a.item(href="/world/")
                   i.icon.left.triangle

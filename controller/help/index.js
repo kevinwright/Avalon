@@ -29,6 +29,7 @@ function Controller() {
   // :section
   this.section = function(req, res, next) {
     var section = req.params["section"] || req.query["section"];
+    if (!self.sections[section]) return res.redirect("/help/");
     res.render("help/section", {
       title: section,
       section: self.sections[section],

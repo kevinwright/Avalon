@@ -44,8 +44,7 @@ module.exports = function (guildName, callback) {
     return callback(err);
   }
 
-  this.info = _.defaults(guilds[this.name], parseInfo(this.infoContent));
-  console.log(this.info);
+  this.info = _.defaults({}, guilds[this.name], parseInfo(this.infoContent));
 
   this.get = function(item, isSingleString) {
     if (item == "skills") return parseSkill(this.baseLocation + item);

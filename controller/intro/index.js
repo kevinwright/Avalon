@@ -11,10 +11,12 @@ var _ = require("lodash");
 
 function NoPageError(page, cat, result) {
   this.name = "NoPageError"
-  this.message = "No Such Intro Page"
+  this.message = "Intro page not found"
   this.page = page
   this.cat = cat
   this.result = result
+  this.type = "intro"
+  this.status = 404
 }
 
 function Controller() {
@@ -80,7 +82,6 @@ function Controller() {
       if (category) {
         return res.redirect("/intro/" + category);
       } else {
-
         return next(new NoPageError(url, cat, result));
       }
     }
