@@ -79,7 +79,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // static folders
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+    maxAge: 86400000 // 1 day
+}));
 app.use("/help/downloads", express.static(path.join(__dirname, 'downloads')));
 
 
