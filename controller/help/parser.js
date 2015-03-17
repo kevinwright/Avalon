@@ -32,10 +32,17 @@ module.exports = function(content) {
     })
 
     // HELP XXX into hyperlink
-    line = line.replace(/(.*[^>])HELP ([A-Z][A-Z]*)(.*)/g, function(match, p1, p2, p3, offset, str) {
+    line = line.replace(/HELP ([A-Z][A-Z]*)\/?([A-Z[A-Z]*)?/gi, function(match, p1, p2, p3, offset, string) {
+      if (p2) {
+        return "HELP <a href=\"/help/pages/" + p1.toLowerCase() + "\">" + p1 + "</a> / <a href=\"/help/pages/" + p2.toLowerCase() + "\">" + p2 + "</a>";
+      } else {
+        return "<a href=\"/help/pages/" + p1.toLowerCase() + "\">HELP " + p1 + "</a>";
+      }
+    })
+    /*line = line.replace(/(.*[^>])HELP ([A-Z][A-Z]*)(.*)/g, function(match, p1, p2, p3, offset, str) {
       return p1 + "<a href=\"/help/pages/" + p2.toLowerCase() + "\">HELP " + p2 + "</a>" + p3;
     })
-
+*/
     // .. to .
     line = line.replace(/(.*[^\.])\.\.([^\.].*)/g, function(match, p1, p2, offset, str) {
       return p1  + "." + p2;
