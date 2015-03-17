@@ -35,9 +35,9 @@ module.exports = function(content) {
     // HELP XXX into hyperlink
     line = line.replace(/ HELP ([A-Z][A-Z]*)\/?([A-Z[A-Z]*)?/gi, function(match, p1, p2, p3, offset, string) {
       if (p2) {
-        return "HELP <a href=\"/help/pages/" + p1.toLowerCase() + "\">" + p1 + "</a> / <a href=\"/help/pages/" + p2.toLowerCase() + "\">" + p2 + "</a>";
+        return " HELP <a href=\"/help/pages/" + p1.toLowerCase() + "\">" + p1 + "</a> / <a href=\"/help/pages/" + p2.toLowerCase() + "\">" + p2 + "</a>";
       } else {
-        return "<a href=\"/help/pages/" + p1.toLowerCase() + "\">HELP " + p1 + "</a>";
+        return " <a href=\"/help/pages/" + p1.toLowerCase() + "\">HELP " + p1 + "</a>";
       }
     })
 
