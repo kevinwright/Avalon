@@ -27,8 +27,9 @@ module.exports = function(content) {
       return "<b>" + p1 + "</b>";
     })
 
-    line = line.replace(/(.*[^>\"])http:\/\/([A-Za-z.-][A-Za-z.-]*)(.*)/g, function(match, p1, p2, p3) {
-      return p1 + "<a href=\"" + p2.toLowerCase() + "\">" + p2 + "</a>" + p3;
+
+    line = line.replace(/http:\/\/([A-Za-z.-][A-Za-z.-]*)/g, function(match, p1, p2, p3) {
+      return "<a href=\"" + p1.toLowerCase() + "\">" + p1 + "</a>";
     })
 
     // HELP XXX into hyperlink
@@ -38,14 +39,6 @@ module.exports = function(content) {
       } else {
         return "<a href=\"/help/pages/" + p1.toLowerCase() + "\">HELP " + p1 + "</a>";
       }
-    })
-    /*line = line.replace(/(.*[^>])HELP ([A-Z][A-Z]*)(.*)/g, function(match, p1, p2, p3, offset, str) {
-      return p1 + "<a href=\"/help/pages/" + p2.toLowerCase() + "\">HELP " + p2 + "</a>" + p3;
-    })
-*/
-    // .. to .
-    line = line.replace(/(.*[^\.])\.\.([^\.].*)/g, function(match, p1, p2, offset, str) {
-      return p1  + "." + p2;
     })
 
     if (!block && line.indexOf("   ") >= 0) {
