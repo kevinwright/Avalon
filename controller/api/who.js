@@ -33,7 +33,8 @@ function WhoList() {
 
   // check every 10 minutes
   setInterval(this.updateUsers, 10 * 1000 * 60);
-  setTimeout(this.updateUsers, 1000);
+  if (!process.env.TEST)
+    setTimeout(this.updateUsers, 1000);
 }
 
 

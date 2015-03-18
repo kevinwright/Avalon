@@ -99,9 +99,9 @@ function Controller() {
 
     util.renderFile(INTRODIR+"/"+result.file, function(err, blocks) {
       if (err) {
-        // return next(err);
         return util.renderFile(INTRODIR+"/empty.md", function(secondErr, blocks) {
           blocks.normal.html = "<pre><code>"+JSON.stringify(err, null, 2)+"</code></pre>";
+          res.status(404);
           res.render("intro/page", {
             meta: blocks.normal.meta,
             extra: blocks,

@@ -73,7 +73,7 @@ module.exports = function(grunt) {
     },
     mochacli: {
       options: {
-          env: {NODE_ENV: "production"},
+          env: {NODE_ENV: "production", "TEST": true},
           bail: true,
           filesRaw: ["test/*.test.js"]
       },
