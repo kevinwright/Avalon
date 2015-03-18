@@ -3,11 +3,12 @@ var NodeCache = require( "node-cache" );
 var fs = require("fs");
 var yaml = require("js-yaml");
 var marked = require("marked");
+var ttlTime = 600;
 
 if (process.env.NODE_ENV === "production")
-  ttlTime = 600
+  ttlTime = 600;
 else
-  ttlTime = 10
+  ttlTime = 10;
 var fileCache = new NodeCache( { stdTTL: ttlTime, checkperiod: ttlTime*2 } );
 var fileErrCache = {}; // we should cache errors, or else it will try to look for it each time
 
@@ -44,44 +45,60 @@ var readFile = function(file, callback) {
 
     });
   });
-}
+};
 
-var readFiles = function(files, callback) {
-  var result = [], errors = [], l = files.length;
-  files.forEach(function (path, k) {
-    readFile(path, function (err, data) {
-      // decrease waiting files
-      --l;
-      // just skip non-npm packages and decrease valid files count
-      err && (errors[k] = err);
-      !err && (result[k] = data);
-      // invoke cb if all read
-      !l && cb (errors.length? errors : undef, result);
+var readdir = function(dir, callback) {
+  if (dir in fileErrCache) {
+    return callback(fileErrCache[dir]);
+  }
+
+  fileCache.get(dir, function(err, hit){
+    if( !err && hit[dir] ) {
+      return callback(null, hit[dir]);
+    }
+
+    fs.readdir(dir, function(fileErr, content) {
+      if (fileErr) {
+        console.log( "Error Cached: ", dir );
+        fileErrCache[dir] = fileErr;
+        return callback(fileErr);
+      }
+      
+      callback(null, content);
+
+      fileCache.set( dir, content, function( err, success ){
+        if( !err && success ){
+          console.log( "Cached: ", dir );
+        } else {
+          console.error( "Cache Failed: ", dir );
+        }
+      });
+
     });
   });
-}
+};
 
 
 // Rendering Library Files
   var catchBlock = function(content) {
     var blockType = "normal";
     var lines = content.split("\n");
-    var blocks = {}
+    var blocks = {};
     for (var i=0; i<lines.length; i++) {
       var line = lines[i];
 
-      if (line.substr(0,1) == "@") {
+      if (line.substr(0,1) === "@") {
         blockType = line.substr(1).trim();
         if (blockType === "end") blockType = "normal";
         continue;
       }
       if (blocks[blockType])
-        blocks[blockType] += line + "\n"
+        blocks[blockType] += line + "\n";
       else
         blocks[blockType] = line + "\n";
     }
     return blocks;
-  }
+  };
 
   // Splits the given string into a meta section and a markdown section
   // if a meta section is present, else returns null
@@ -95,7 +112,8 @@ var readFiles = function(files, callback) {
   }
 
   // [Based on meta-marked](https://github.com/j201/meta-marked)
-  var metaMarked = function(src, opt, callback) {
+  var metaMarked = Object.create(marked);
+  metaMarked = function(src, opt, callback) {
     if (Object.prototype.toString.call(src) !== '[object String]')
       throw new TypeError('First parameter must be a string.');
     src=src.trim();
@@ -109,7 +127,6 @@ var readFiles = function(files, callback) {
         html : marked(src, opt, callback)
       };
   };
-  metaMarked.__proto__ = marked;
 
   // returns: err, blocks
   var render = function(content, callback) {
@@ -124,14 +141,14 @@ var readFiles = function(files, callback) {
       }
     }
     callback(null, blocks);
-  }
+  };
   var renderSync = function(content) {
     var blocks = catchBlock(content);
     for (var key in blocks)
       if(blocks.hasOwnProperty(key))
         blocks[key] = metaMarked(blocks[key]);
     return blocks;
-  }
+  };
 
   var renderFile = function(file, callback) {
     if (file in fileErrCache) return callback(fileErrCache[file]);
@@ -167,12 +184,12 @@ var readFiles = function(files, callback) {
       });
 
     });
-  }
+  };
 
   var renderFileSync = function(file) {
     var content = fs.readFileSync(file).toString();
     return renderSync(content);
-  }
+  };
 
   var renderYAML = function(file, callback) {
     if (file in fileErrCache) return callback(fileErrCache[file]);
@@ -183,8 +200,8 @@ var readFiles = function(files, callback) {
         return callback(fileErr);
       }
       callback(null, yaml.safeLoad(content));
-    })
-  }
+    });
+  };
 
   var renderJSON = function(file, callback) {
     if (file in fileErrCache) return callback(fileErrCache[file]);
@@ -195,8 +212,8 @@ var readFiles = function(files, callback) {
         return callback(fileErr);
       }
       callback(null, JSON.parse(content));
-    })
-  }
+    });
+  };
 
 
 function cap(str) {
@@ -205,6 +222,7 @@ function cap(str) {
 
 module.exports = {
   readFile: readFile,
+  readdir: readdir,
   catchBlock: catchBlock,
   marked: metaMarked,
   render: render,
@@ -218,4 +236,4 @@ module.exports = {
     file: fileCache,
     library: markCache
   }
-}
+};

@@ -6,7 +6,7 @@ var avalon = require("../avalon.js");
 var checkErrors = {
   2: "This username has already been used",
   1: "You can't use this username"
-}
+};
 
 var api = {
   avatar: require("./avatar"),
@@ -18,8 +18,8 @@ var api = {
   },
   checkName : function(req, res) {
     try {
-      var name = req.params["username"] || req.query["username"];
-      var format = req.query["format"];
+      var name = req.params.username || req.query.username;
+      var format = req.query.format;
       if (!name) {
         if (format === "text") return res.send("BAD");
         else return res.jsonp({username: false, message: "Please fill in a name", status: -1});
@@ -38,18 +38,20 @@ var api = {
             username: name,
             message: checkErrors[status],
             status: status
-          })
+          });
         }
       });
-    } catch(e) {console.error(e)}
+    } catch(e) {
+      console.error(e);
+    }
   },
 
   who : function(req, res) {
     res.jsonp({
       count: who.users.length,
       players: who.users
-    })
+    });
   }
-}
+};
 
 module.exports = api;

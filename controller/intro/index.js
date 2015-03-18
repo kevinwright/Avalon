@@ -10,13 +10,13 @@ var legacy = require(INTRODIR + "/legacy.js");
 var _ = require("lodash");
 
 function NoPageError(page, cat, result) {
-  this.name = "NoPageError"
-  this.message = "Intro page not found"
-  this.page = page
-  this.cat = cat
-  this.result = result
-  this.type = "intro"
-  this.status = 404
+  this.name = "NoPageError";
+  this.message = "Intro page not found";
+  this.page = page;
+  this.cat = cat;
+  this.result = result;
+  this.type = "intro";
+  this.status = 404;
 }
 
 function Controller() {
@@ -31,19 +31,21 @@ function Controller() {
         avalon: avalon
       });
     });
-  }
+  };
 
   this.legacy = function(req, res, next) {
-    var url = req.params["page"] || req.query["page"];
+    var url = req.params.page || req.query.page;
     var result = legacy.filter(function(item) {
-      return (item.url == "/" + url) && item.file;
-    })
-    if (result.length == 0) {
+      return item.url === "/" + url && item.file;
+    });
+
+    if (result.length === 0) {
       var top = toc.filter(function(top) {
-        return top.short == url;
-      })
+        return top.short === url;
+      });
+
       if (top && top.length > 0) {
-        return res.redirect("/intro" + top[0].items[0].url)
+        return res.redirect("/intro" + top[0].items[0].url);
       }
 
       return next(new NoPageError(url, "legacy", result));
@@ -57,28 +59,29 @@ function Controller() {
         legacy: legacy,
         avalon: avalon,
         page: result[0],
-      })
-    })
-  }
+      });
+    });
+  };
 
   this.page = function(req, res, next) {
-    var category = req.params["category"] || req.query["category"];
-    var page = req.params["page"] || req.query["page"];
+    var category = req.params.category || req.query.category;
+    var page = req.params.page || req.query.page;
     var url = "/" + category + "/" + page;
 
     var cat, result;
 
     toc.filter(function(top) {
       var items = top.items.filter(function(item) {
-        return item.url == url;
-      })
+        return item.url === url;
+      });
+
       if (items.length > 0) {
         cat = top;
         result = items[0];
       }
-    })
+    });
 
-    if (cat == null || result == null) {
+    if (cat === null || result === null) {
       if (category) {
         return res.redirect("/intro/" + category);
       } else {
@@ -106,8 +109,8 @@ function Controller() {
             avalon: avalon,
             cat: cat,
             page: result,
-          })
-        })
+          });
+        });
       } else {
         if (!blocks.normal.meta) return next(err);
         res.render("intro/page", {
@@ -119,10 +122,10 @@ function Controller() {
           page: result,
           previous: previous,
           next: nextArticle
-        })
+        });
       }
-    })
-  }
+    });
+  };
 }
 
 module.exports = new Controller();

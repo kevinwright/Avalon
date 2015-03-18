@@ -7,6 +7,46 @@ var _ = require("lodash");
 
 var hints = require("./hints");
 
+function getPosts(board, page, callback) {
+  util.renderJSON(path.resolve(BBDIR, board.href), function(err, posts) {
+    if (err) return callback(err);
+    posts = posts.posts;
+
+    var top = board.posts - 20 * (page - 1);
+    var bottom = board.posts - 20 * page;
+
+    posts = _(posts)
+      .filter(function(post) {
+        return top > post.number && post.number > bottom;
+      })
+      .reverse()
+      .value();
+
+    callback(null, posts);
+  });
+}
+
+function findParticipant(board, person, callback) {
+  util.renderJSON(path.resolve(BBDIR, board.href), function(err, posts) {
+    if (err) return callback(err);
+    posts = posts.posts;
+
+    posts = _(posts)
+      .filter(function(post) {
+        return person === post.from.shortname || person === post.to.shortname;
+      })
+      .reverse()
+      .value();
+
+    callback(null, posts);
+  });
+}
+
+function readPost(boardId, postHref, callback) {
+  var fileLocation = path.resolve(BBDIR, boardId.toString(), postHref.toString());
+  util.readFile(fileLocation, callback);
+}
+
 function Controller() {
   var self = this;
   
@@ -26,9 +66,9 @@ function Controller() {
       res.render("bb/index", {
         avalon: avalon,
         boards: boards
-      })
-    })
-  }
+      });
+    });
+  };
 
   this.errorBoard = function(res, board) {
     res.status(404);
@@ -37,7 +77,7 @@ function Controller() {
         error: {},
         avalon: avalon
     });
-  }
+  };
 
   this.errorPost = function(res, board, id) {
     res.status(404);
@@ -47,18 +87,18 @@ function Controller() {
         error: {},
         avalon: avalon
     });
-  }
+  };
 
   // params: /bb/:board/
   this.board = function(req, res, next) {
-    var param = req.params["board"] || req.query["board"];
+    var param = req.params.board || req.query.board;
 
     util.renderJSON(BBDIR + "/boards.json", function(err, boards) {
       if (err) return self.errorBoard(res, param);
 
-      board = _.first(_(boards.boards)
+      var board = _.first(_(boards.boards)
         .filter(function(board) {
-          return board.public && board.shortname == param;
+          return board.public && board.shortname === param;
         })
         .map(function(board) {
           return _.defaults(board, {
@@ -72,7 +112,7 @@ function Controller() {
 
       if (!board) return self.errorBoard(res, param);
 
-      var page = parseInt(req.query["page"]) || 1;
+      var page = parseInt(req.query.page) || 1;
 
       getPosts(board, page, function(err, posts) {
         if (err) return next(err);
@@ -81,22 +121,22 @@ function Controller() {
           board: board,
           posts: posts,
           page: page
-        })
-      })
+        });
+      });
     });
-  }
+  };
 
   // params: /bb/:board/participant/:person
-  this.participant = function(req, res) {
-    var param = req.params["board"] || req.query["board"];
-    var person = req.params["person"] || req.query["person"];
+  this.participant = function(req, res, next) {
+    var param = req.params.board || req.query.board;
+    var person = req.params.person || req.query.person;
 
     util.renderJSON(BBDIR + "/boards.json", function(err, boards) {
       if (err) return next(err);
 
-      board = _.first(_(boards.boards)
+      var board = _.first(_(boards.boards)
         .filter(function(board) {
-          return board.public && board.shortname == param;
+          return board.public && board.shortname === param;
         })
         .map(function(board) {
           return _.defaults(board, {
@@ -109,8 +149,6 @@ function Controller() {
         .value());
 
       if (!board) return self.errorBoard(res, param);
-
-      var page = parseInt(req.query["page"]) || 1;
 
       findParticipant(board, person, function(err, posts) {
         if (err) return next(err);
@@ -120,22 +158,23 @@ function Controller() {
           board: board,
           posts: posts,
           participant: person
-        })
-      })
+        });
+      });
     });
-  }
+  };
 
   // params: /bb/:board/:id/subject
   this.post = function(req, res, next) {
-    var param = req.params["board"] || req.query["board"];
-    var id = req.params["id"] || req.query["id"];
+    var param = req.params.board || req.query.board;
+    var id = req.params.id || req.query.id;
+    id = parseInt(id);
 
     util.renderJSON(BBDIR + "/boards.json", function(err, boards) {
-      if (err) return self.errorPost(res, board, id);
+      if (err) return next(err);
 
-      board = _.first(_(boards.boards)
+      var board = _.first(_(boards.boards)
         .filter(function(board) {
-          return board.public && board.shortname == param;
+          return board.public && board.shortname === param;
         })
         .map(function(board) {
           return _.defaults(board, {
@@ -148,14 +187,13 @@ function Controller() {
         .value());
 
       if (!board) return self.errorBoard(res, param);
-
       util.renderJSON(path.resolve(BBDIR, board.href), function(err, posts) {
-        if (err) return callback(err);
+        if (err) return next(err);
         posts = posts.posts;
         
         var post = _.find(posts, function(post) {
-            return post.number == id;
-          });
+          return post.number === id;
+        });
 
         if (!post) return self.errorPost(res, board, id);
         readPost(board.id, post.body.href, function(err, content) {
@@ -166,51 +204,11 @@ function Controller() {
             board: board,
             post: post,
             content: parser(content)
-          })
-        })
-      })
+          });
+        });
+      });
     });
-  }
-}
-
-function getPosts(board, page, callback) {
-  util.renderJSON(path.resolve(BBDIR, board.href), function(err, posts) {
-    if (err) return callback(err);
-    posts = posts.posts;
-
-    var top = board.posts - (20 * (page - 1));
-    var bottom = board.posts - (20 * page);
-
-    posts = _(posts)
-      .filter(function(post) {
-        return top > post.number && post.number > bottom;
-      })
-      .reverse()
-      .value();
-
-    callback(null, posts);
-  })
-}
-
-function findParticipant(board, person, callback) {
-  util.renderJSON(path.resolve(BBDIR, board.href), function(err, posts) {
-    if (err) return callback(err);
-    posts = posts.posts;
-
-    posts = _(posts)
-      .filter(function(post) {
-        return person == post.from.shortname || person == post.to.shortname
-      })
-      .reverse()
-      .value();
-
-    callback(null, posts);
-  })
-}
-
-function readPost(boardId, postHref, callback) {
-  var fileLocation = path.resolve(BBDIR, boardId.toString(), postHref.toString());
-  util.readFile(fileLocation, callback);
+  };
 }
 
 module.exports = new Controller();

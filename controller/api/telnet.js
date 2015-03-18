@@ -28,42 +28,44 @@ var net = require("net");
         if (evoke) evoke(chunk.toString("utf8"));
       });
       client.on("error", function(err) {
-        console.error("- API ERROR: ", err)
+        console.error("- API ERROR: ", err);
       });
       client.on("close", function() {
         console.log("- API CLOSE");
         isClosed = true;
         //self.connect();
       });
-      client.on("end", function() {console.log("- API END")});
+      client.on("end", function() {
+        console.log("- API END");
+      });
       client.write("###version 2\n");
       console.log("--- API Conected ---\n");
     };
 
     this.write = function(data, callback) {
-      console.log("writing")
+      console.log("writing");
       evoke = callback;
       lastData = data;
       if (isClosed === true) {
         self.connect(function() {
           self.write(data, callback);
-        })
+        });
       } else {
         console.log("- API SEND: ", data);
         client.resume();
         client.write(data);
       }
-    }
+    };
 
     this.pause = function() {
       client.pause();
-    }
+    };
 
   };
 
 global.telnet = new Telnet();
-telnet.connect();
+global.telnet.connect();
 
-}(root));
+}(global));
 
-module.exports = telnet;
+module.exports = global.telnet;

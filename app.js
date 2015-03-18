@@ -30,11 +30,11 @@ if (process.env.NODE_ENV === "production") {
         },
         files: {
             menu: "/library/menu.js",
-            synonyms: "/library/synonyms.js",
+            synonyms: "/library/synonyms.json",
             pages: "/library/pages.js",
             toc: "/library/intro/toc.js"
         }
-    }
+    };
 } else {
     global.avalon = {
         dir: {
@@ -50,11 +50,11 @@ if (process.env.NODE_ENV === "production") {
         },
         files: {
             menu: "/library/test/menu.js",
-            synonyms: "/library/test/synonyms.js",
+            synonyms: "/library/test/synonyms.json",
             pages: "/library/test/pages.js",
             toc: "/library/test/intro/toc.js"
         }
-    }
+    };
 }
 
 var avalon = require("./controller/avalon");
@@ -66,10 +66,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set("x-powered-by", false);
 
-if (app.get('env') === 'development')
+if (app.get('env') === 'development') {
+    console.log("LOGGING IN DEVELOPMENT MODE");
     app.use(logger('dev'));
-else {
-    
+} else {
+    console.log("LOGGING IN PRODUCTION MODE");
     app.use(logger("dev"));
 }
 
@@ -130,21 +131,14 @@ app.use(function(err, req, res, next) {
     switch(err.type) {
         case "help":
             return ErrorHandler.help(err, req, res, next);
-            break;
-
         case "guild":
             return res.redirect("/world#guilds");
-            break;
-
         case "city":
             return res.redirect("/world#cities");
-            break;
-
         case "intro":
             err.status = 404;
             next(err);
             break;
-
         default:
             next(err);
     }
@@ -153,7 +147,7 @@ app.use(function(err, req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+    app.use(function(err, req, res) {
         res.status(err.status || 500);
         res.render('error/error', {
             avalon: avalon,
@@ -165,7 +159,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
     res.status(err.status || 500);
     res.render('error/error', {
         avalon: avalon,

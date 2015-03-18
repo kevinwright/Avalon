@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var avalon = require("../controller/avalon");
 var bb = require("../controller/bb");
 
 router.get('/', bb.index);

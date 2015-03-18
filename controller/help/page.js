@@ -1,5 +1,4 @@
 var helpParser = require("./parser");
-var util = require("../../helper/util.js");
 
 
 module.exports = function(options, callback) {
@@ -10,7 +9,7 @@ module.exports = function(options, callback) {
     help: options.content.help,
     auto: options.content.auto,
     library: options.content.library
-  }
+  };
 
   // Parse autohelp
   var pageArr = /(\d+\.\d+)\s+(\w+)\s+(.*)/.exec(page.content.auto);

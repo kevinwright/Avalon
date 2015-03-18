@@ -1,0 +1,11 @@
+{
+  "undef": true,
+  "unused": true,
+  "eqeqeq": true,
+  "latedef": true,
+  "singleGroups": true,
+  "node": true,
+  "mocha": true,
+  "browser": true,
+  "predef": [  ]
+}

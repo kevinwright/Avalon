@@ -2,16 +2,17 @@ var express = require('express');
 var router = express.Router();
 var avalon = require("../controller/avalon");
 
-// Routes
-  router.get(['/', "/index.html"], getIndex);
 
 // Methods
-  function getIndex(req, res) {
-    avalon.info("news.md", function(err, meta, extra) {
-      if (err) return console.error(err);
+  function getIndex(req, res, next) {
+    avalon.info("news.md", function(err, meta) {
+      if (err) return next(err);
       res.render('news/index', { meta: meta.meta, avalon:avalon });
     });
   }
+
+// Routes
+  router.get(['/', "/index.html"], getIndex);
 
 
 module.exports = router;

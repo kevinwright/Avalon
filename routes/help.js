@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 var help = require("../controller/help");
-var avalon = require("../controller/avalon");
 
 router.get('/', help.index);
 router.get('/index.html', help.index);

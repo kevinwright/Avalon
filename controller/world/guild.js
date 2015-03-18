@@ -25,8 +25,8 @@ function parseSkill(loc) {
     skills[i] = {
       title: lines[i].split(" ", 2)[0],
       description: lines[i].substr(lines[i].split(" ", 2)[0].length)
-    }
-  };
+    };
+  }
   return skills;
 }
 
@@ -47,7 +47,7 @@ module.exports = function (guildName, callback) {
   this.info = _.defaults({}, guilds[this.name], parseInfo(this.infoContent));
 
   this.get = function(item, isSingleString) {
-    if (item == "skills") return parseSkill(this.baseLocation + item);
+    if (item === "skills") return parseSkill(this.baseLocation + item);
     try {
       if (isSingleString) {
         return fs.readFileSync(this.baseLocation + item, "utf8");
@@ -58,7 +58,7 @@ module.exports = function (guildName, callback) {
       console.error(err);
       return callback(err);
     }
-  }
+  };
 
   this.help = function(title) {
     try {
@@ -67,7 +67,7 @@ module.exports = function (guildName, callback) {
       console.error(err);
       return callback(err);
     }
-  }
+  };
 
   callback(null, this);
-}
+};

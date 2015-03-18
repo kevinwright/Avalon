@@ -6,15 +6,15 @@ var play = require("../controller/play");
 
 var get = function(req, res) {
   var flashvars = {
-    username: req.query["username"],
-    password: req.query["password"],
-    create: req.query["create"],
-    gender: req.query["gender"],
-    email: req.query["email"]
-  }
+    username: req.query.username,
+    password: req.query.password,
+    create: req.query.create,
+    gender: req.query.gender,
+    email: req.query.email
+  };
 
   res.render('play/lumiere', { avalon:avalon, flashvars: flashvars});
-}
+};
 
 router.get('/', get);
 router.post('/', play.lumiere);

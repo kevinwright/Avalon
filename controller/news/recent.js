@@ -15,6 +15,6 @@ var recent = function(callback) {
     }
     callback(null, items);
   });
-}
+};
 
 module.exports = recent;

@@ -26,51 +26,51 @@ function RollCallController() {
           guild: line[3],
           order: line[4],
           orderlevel: line[5]
-        }
+        };
         return obj;
       });
 
       if (filter) lines = lines.filter(filter);
       callback(err, lines);
     });
-  }
+  };
 
   this.getCity = function(city, callback) {
     self.get(function(person) {
       if (!person.city) return false;
-      return person.city.toLowerCase() == city.toLowerCase()
+      return person.city.toLowerCase() === city.toLowerCase();
     }, callback);
-  }
+  };
   this.getGuild = function(guild, callback) {
     self.get(function(person) {
       if (!person.guild) return false;
-      return person.guild.toLowerCase() == guild.toLowerCase()
+      return person.guild.toLowerCase() === guild.toLowerCase();
     }, callback);
-  }
+  };
   this.getOrder = function(order, callback) {
     self.get(function(person) {
       if (!person.order) return false;
-      return person.order.toLowerCase() == order.toLowerCase()
+      return person.order.toLowerCase() === order.toLowerCase();
     }, callback);
-  }
+  };
   this.getName = function(name, callback) {
     self.get(function(person) {
       if (!person.name) return false;
-      return person.name.toLowerCase() == name.toLowerCase()
+      return person.name.toLowerCase() === name.toLowerCase();
     }, callback);
-  }
+  };
 
   this.sortPatron = function(a, b) {
-    if (a.city == "god") return -1;
-    if (b.city == "god") return 1;
-    if (a.order == "No Order" && b.order == "No Order") {
+    if (a.city === "god") return -1;
+    if (b.city === "god") return 1;
+    if (a.order === "No Order" && b.order === "No Order") {
       return 0;
     }
-    if (a.order == "No Order") {
+    if (a.order === "No Order") {
       return 1;
     }
     return -1;
-  }
+  };
 
 
   this.index = function(req, res, next) {
@@ -79,71 +79,71 @@ function RollCallController() {
       self.get(null, function(err, list) {
         if (err) return next(err);
         res.render('rollcall/index', { characters: list, avalon:avalon, meta: meta.meta});
-      })
-    })
-  }
+      });
+    });
+  };
 
   this.list = function(req, res, next) {
     avalon.info("rollcall.md", function(err, meta) {
       if (err) return next(err);
       
-      var city = req.params["city"] || req.query["city"];
-      var guild = req.params["guild"] || req.query["guild"];
-      var order = req.params["order"] || req.query["order"];
-      var status = req.params["status"] || req.query["status"];
+      var city = req.params.city || req.query.city;
+      var guild = req.params.guild || req.query.guild;
+      var order = req.params.order || req.query.order;
+      var status = req.params.status || req.query.status;
 
-      if (status == "god") {
+      if (status === "god") {
         self.getCity(status, function(err, list) {
           res.render('rollcall/list', { status: util.cap(status), list: list, avalon:avalon, meta: meta.meta});
-        })
+        });
       } else if (city) {
         self.getCity(city, function(err, list) {
           list = list.sort(self.sortPatron);
           res.render('rollcall/list', { city: util.cap(city), list: list, avalon:avalon, meta: meta.meta});
-        })
+        });
       } else if (guild) {
         self.getGuild(guild, function(err, list) {
           list = list.sort(self.sortPatron);
           res.render('rollcall/list', { guild: util.cap(guild), list: list, avalon:avalon, meta: meta.meta});
-        })
+        });
       } else if (order) {
         self.getOrder(order, function(err, list) {
           res.render('rollcall/list', { order: util.cap(order), list: list, avalon:avalon, meta: meta.meta});
-        })
+        });
       } else {
         self.get(null, function(err, list) {
           list = list.sort(self.sortPatron);
           res.render('rollcall/list', { list: list, avalon:avalon, meta: meta.meta});
-        })
+        });
       }
 
-    })
-  }
+    });
+  };
 
   this.search = function(req, res) {
-    res.redirect("/rollcall/characters/" + req.query["character"].toLowerCase());
+    res.redirect("/rollcall/characters/" + req.query.character.toLowerCase());
   };
 
   this.redirect = function(req, res, next) {
-    var city = req.params["city"] || req.query["city"];
-    var guild = req.params["guild"] || req.query["guild"];
-    var order = req.params["order"] || req.query["order"];
-    var status = req.params["status"] || req.query["status"];
+    var city = req.params.city || req.query.city;
+    var guild = req.params.guild || req.query.guild;
+    var order = req.params.order || req.query.order;
+    var status = req.params.status || req.query.status;
 
-    if (status == "god") res.redirect("/rollcall/deities");
+    if (status === "god") res.redirect("/rollcall/deities");
     else if (city) res.redirect("/rollcall/cities/"+city);
     else if (guild) res.redirect("/rollcall/guilds/"+guild);
     else if (order) res.redirect("/rollcall/orders/"+order);
     else self.list(req, res, next);
-  }
+  };
 
   this.character = function(req, res, next) {
-    var character = req.params["character"] || req.query["character"];
+    var character = req.params.character || req.query.character;
     self.getName(character, function(err, list) {
-      if (err || list.length == 0) return next(err);
+      if (err || list.length === 0) return next(err);
 
       var person = list[0];
-      if (person.city == "god") {
+      if (person.city === "god") {
         util.readFile(HELPDIR + "/" + character, function(err, help) {
           if (err) return next(err);
 
@@ -153,11 +153,12 @@ function RollCallController() {
             list: list,
             avalon: avalon
           });
-        })
+        });
+
       } else {
         util.readFile(ROLLCALLDIR + "/" + character, function(err, help) {
           if (err) {
-            if (err.code == "ENOENT") {
+            if (err.code === "ENOENT") {
               return res.redirect("/rollcall");
             }
             return next(err);
@@ -169,22 +170,15 @@ function RollCallController() {
             list: list,
             avalon: avalon
           });
-        })
+        });
       }
-    })
-  }
+    });
+  };
 
   this.deities = function(req, res, next) {
     req.query = {status: "god"};
     self.list(req, res, next);
-  }
-
-  function getCharacter(name, callback) {
-    util.readFile(ROLLCALLDIR + "/" + name, function(err, content) {
-      if (err) return callback(err);
-      callback(null, content);
-    });
-  }
+  };
 
 }
 

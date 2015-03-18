@@ -29,4 +29,4 @@ module.exports =
   "27": "The various command lists concerning almost every general situation.",
   "28": "The various situations specific to Avalon, from quizzes to modem access.",
   "29": "Other information not covered in the general help."
-}
+};

@@ -9,4 +9,4 @@ module.exports = {
   "266": 'A BB section devoted entirely to those who hold DDW or duellist status.',
   "267": "A section for older Avalonians, people who're either a hundred years or older, or have played over a thousand hours in-game time.",
   "268": 'A central forum for giving over information about changes in the warfare system.'
-}
+};

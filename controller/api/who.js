@@ -13,7 +13,7 @@ function WhoList() {
         parse(body);
       }
     });
-  }
+  };
 
   function parse(body) {
     var processing = false;
@@ -37,4 +37,4 @@ function WhoList() {
 }
 
 
-module.exports = new WhoList;
+module.exports = new WhoList();
