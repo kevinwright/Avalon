@@ -36,7 +36,6 @@ function PlayController() {
   };
 
   var check = function(form, callback) {
-    console.log(form);
     if (!form.username)
       return callback(new FormError("username", "Fill in an username!"));
     if (!form.password)
@@ -70,6 +69,9 @@ function PlayController() {
           gender: form.gender,
           email: form.email
         };
+        if (!flashvars) return res.redirect("/play/");
+        if (!flashvars.username) return res.redirect("/play/");
+        if (!flashvars.password) return res.redirect("/play/");
         return res.render('play/lumiere', { avalon:avalon, flashvars: flashvars});
       }
 
