@@ -30,8 +30,13 @@ module.exports = function(content) {
     }
   }
 
+  function makeDot(match, p1, p2) {
+    return p1  + "." + p2;
+  }
+
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i];
+    block = false;
 
     line = line.replace(/</g, '&lt;');
     line = line.replace(/\>/g, '&gt;');
@@ -39,6 +44,8 @@ module.exports = function(content) {
     line = line.replace(/^\*(.*)/g, makeBold);
     line = line.replace(/http:\/\/([A-Za-z.-][A-Za-z.-]*)/g, makeHTTP);
     line = line.replace(/\s?HELP ([A-Z][A-Z]*)\/?([A-Z[A-Z]*)?/g, makeHelp);
+
+    line = line.replace(/(.*[^\.])\.\.([^\.].*)/g, makeDot);
 
     if (!block && line.indexOf("   ") >= 0) {
       block = true;
