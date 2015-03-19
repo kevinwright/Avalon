@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var avalon = require("../controller/avalon");
 
 var api = require("../controller/api");
 
 router.get('/', function(req, res) {
-  res.render('api', { avalon:avalon, title: "API Documentation" });
+  res.render('api');
 });
 
 router.get("/stats/", api.stats);

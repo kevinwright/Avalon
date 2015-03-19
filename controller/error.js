@@ -1,4 +1,3 @@
-var avalon = require("./avalon.js");
 var fs = require("fs");
 var _ = require("lodash");
 var synonyms = require(global.avalon.files.synonyms);
@@ -56,7 +55,6 @@ var ErrorHandler = function() {
 
 				res.status(404);
 				res.render('error/help', {
-				    avalon: avalon,
 				    matches: matches,
 				    message: error.message,
 				    error: error,

@@ -3,7 +3,7 @@
 var fs = require("fs");
 var helpdir = "/help/help";
 
-var regex = /^(\w+) Guild\s+\|\s+(\w+)\s+\((\d+)yr\)\s+\|\s+(\w+)\s+\|\s+(.*)$/
+var regex = /^(\w+) Guild\s+\|\s+(\w+)\s+\((\d+)yr\)\s+\|\s+(\w+)\s+\|\s+(.*)$/;
 
 var file = fs.readFileSync(helpdir + "/guilds").toString().split("\n");
 
@@ -18,7 +18,7 @@ for (var i = 0; i < file.length; i++) {
 			years: matches[3],
 			patron: matches[4],
 			location: matches[5]
-		}
+		};
 		guilds[guild.title.toLowerCase()] = guild;
 	}
 }

@@ -1,10 +1,10 @@
 extends ../layout
 
 block head
-  - var title = meta.seo.title
-  - var description = meta.seo.description
-  - var keywords = meta.seo.keywords
-
+  if (avalon.website.history[page])
+    - var title = mkTitle(avalon.website.history[page].title, "History")
+    - var description = avalon.website.history[page].description
+    - var keywords = mkKeywords(avalon.website.history[page].keywords)
 block content
   .ui.content
     .contain
@@ -19,3 +19,5 @@ block content
             .column
               h4.ui.title: a(href=link.url) #{link.title}
               | #{link.description}
+      center.section
+        a(href="/history") Return to History

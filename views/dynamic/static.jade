@@ -2,11 +2,11 @@ extends ../layout
 
 block head
   if (page.type == "library")
-    - var title = page.library.meta.seo.title
+    - var title = mkTitle(page.library.meta.seo.title)
     - var description = page.library.meta.seo.description
-    - var keywords = page.library.meta.seo.keywords
+    - var keywords = mkKeywords(page.library.meta.seo.keywords)
   if (page.type == "html" && page.info)
-    - var title = page.info.title
+    - var title = mkTitle(page.info.title)
   if (page.canonical)
     - var canonical = page.canonical
   else if (page.library.meta.canonical)

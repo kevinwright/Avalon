@@ -1,7 +1,7 @@
 extends ../layout
 
 block head
-  - var title = message || "Error";
+  - var title = mkTitle(message || "", "Error");
 
 block content
   .ui.content

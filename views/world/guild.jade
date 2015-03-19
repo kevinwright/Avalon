@@ -1,9 +1,9 @@
 extends ../layout
 
 block head
-  - var title = "The " + guild.title + " Guild | World | Online RPG, Avalon - Multiuser Gameworld";
+  - var title = mkTitle("The " + guild.title + " Guild", "Guilds")
   - var description = guild.info.outlook
-  - var keywords = guild.title + " guild, online rpg, Avalon, text, based, adventure";
+  - var keywords = mkKeywords(guild.title + ", " + avalon.website.world.guild.keywords)
   - var canonical = "http://www.avalon-rpg.com/guilds/" + guild.name
 
 block content

@@ -1,7 +1,6 @@
 var checkName = require("./checkname.js");
 var who = require("./who.js");
 var util = require("../../helper/util.js");
-var avalon = require("../avalon.js");
 
 var checkErrors = {
   2: "This username has already been used",
@@ -12,7 +11,6 @@ var api = {
   avatar: require("./avatar"),
   stats: function(req, res) {
     res.render("stats.jade", {
-      avalon: avalon,
       stats: util.cache.file.getStats()
     });
   },

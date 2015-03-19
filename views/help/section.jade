@@ -1,8 +1,9 @@
 extends ../layout
 
 block head
-  - var title = section.title + " - Avalon - multiplayer game world - Help and manual section"
-  - var description = false
+  - var title = mkTitle(section.title, avalon.website.help.index.title)
+  if avalon.website.help[section.id]
+    - var description = avalon.website.help[section.id].description
   - var canonical = "http://www.avalon-rpg.com/help/sections/" + section.id
 block content
   .ui.content.manual

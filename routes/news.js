@@ -7,7 +7,9 @@ var avalon = require("../controller/avalon");
   function getIndex(req, res, next) {
     avalon.info("news.md", function(err, meta) {
       if (err) return next(err);
-      res.render('news/index', { meta: meta.meta, avalon:avalon });
+      res.render('news/index', {
+        meta: meta.meta
+      });
     });
   }
 

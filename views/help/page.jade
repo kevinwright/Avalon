@@ -2,20 +2,23 @@ extends ../layout
 
 block head
   if (page.content.library && page.content.library.meta && page.content.library.meta.title)
-    - var title = page.content.library.meta.title + " - Avalon - multiplayer game world - Help and manual section"
+    - var title = mkTitle(page.content.library.meta.title, avalon.website.help.index.title)
   else
-    - var title = page.description + " - Avalon - multiplayer game world - Help and manual section"
+    - var title = mkTitle(page.description, avalon.website.help.index.title)
+
   if (page.content.library && page.content.library.meta && page.content.library.meta.summary)
     - var description = page.content.library.meta.summary
   else
-    - var description = false
+    - var description = page.summary
+
   if (page.content.library && page.content.library.meta && page.content.library.meta.keywords)
-    - var keywords = page.content.library.meta.keywords.toString()
+    - var keywords = mkKeywords(page.content.library.meta.keywords.toString())
+  else
+    - var keywords = mkKeywords(page.keywords)
   - var canonical = "http://www.avalon-rpg.com/help/pages/" + page.title.toLowerCase()
 block content
   .ui.content.manual
     .contain
-      
       .ui.grid.responsive
         .column.twelve.wide.main
           .bread

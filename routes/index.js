@@ -9,7 +9,11 @@ var recent = require("../controller/news/recent.js");
 	  recent(function(err, data) {
 	    avalon.info("front.md", function(err, meta, extra) {
 	      if (err) return next(err);
-	      res.render('index', { avalon: avalon, meta: meta.meta, extra:extra, recent: data });
+	      res.render('index', {
+	      	meta: meta.meta,
+	      	extra:extra,
+	      	recent:data
+	      });
 	    });
 	  });
 	}

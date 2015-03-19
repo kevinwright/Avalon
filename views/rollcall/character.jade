@@ -6,7 +6,7 @@ block head
   else
     - var error = title = "No such character #{character}!"
   if !error
-    - var title = person.title
+    - var title = mkTitle(person.title, "Characters")
     - var canonical = "http://www.avalon-rpg.com/rollcall/characters/"+person.name.toLowerCase()
 
 block content

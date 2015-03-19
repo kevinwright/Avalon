@@ -1,9 +1,9 @@
 extends ../layout
 
 block head
-  - var title = meta.seo.title
-  - var description = meta.seo.description
-  - var keywords = meta.seo.keywords
+  - var title = mkTitle(avalon.website.maps.index.title)
+  - var description = avalon.website.maps.index.description
+  - var keywords = mkKeywords(avalon.website.maps.index.keywords)
   - var canonical = "http://www.avalon-rpg.com/maps/"
 block content
   .ui.content

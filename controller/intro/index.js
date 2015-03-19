@@ -2,7 +2,6 @@ var INTRODIR = global.avalon.dir.intro,
     TOCFILE = global.avalon.files.toc;
 
 var util = require("../../helper/util.js");
-var avalon = require("../avalon.js");
 
 var toc = require(TOCFILE);
 var legacy = require(INTRODIR + "/legacy.js");
@@ -26,9 +25,7 @@ function Controller() {
       res.render('intro/index', {
         meta: blocks.normal.meta,
         extra: blocks,
-        toc: toc,
-        // legacy: legacy,
-        avalon: avalon
+        toc: toc
       });
     });
   };
@@ -57,7 +54,6 @@ function Controller() {
         meta: blocks.normal.meta,
         extra: blocks,
         legacy: legacy,
-        avalon: avalon,
         page: result[0],
       });
     });
@@ -106,7 +102,6 @@ function Controller() {
             meta: blocks.normal.meta,
             extra: blocks,
             toc: toc,
-            avalon: avalon,
             cat: cat,
             page: result,
           });
@@ -117,7 +112,6 @@ function Controller() {
           meta: blocks.normal.meta,
           extra: blocks,
           toc: toc,
-          avalon: avalon,
           cat: cat,
           page: result,
           previous: previous,

@@ -1,9 +1,12 @@
 extends ../layout
 
 block head
-  - var title = meta.title
+  if cat
+    - var title = mkTitle(meta.title, cat.content)
+  else
+    - var title = mkTitle(meta.title)
   - var description = meta.summary
-  - var keywords =  meta.keywords.toString()
+  - var keywords =  mkKeywords(meta.keywords.toString().toLowerCase())
   - var canonical = "http://www.avalon-rpg.com/intro/" + page.url
 
 block content

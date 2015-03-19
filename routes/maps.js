@@ -7,7 +7,10 @@ var avalon = require("../controller/avalon");
   function getIndex(req, res, next) {
     avalon.info("maps.md", function(err, meta, extra) {
       if (err) return next(err);
-      res.render('maps/index', { meta:meta.meta, extra:extra, avalon: avalon });
+      res.render('maps/index', {
+        meta:meta.meta,
+        extra:extra
+      });
     });
   }
 
@@ -26,7 +29,11 @@ var avalon = require("../controller/avalon");
 
 
       if (!map) return next(new Error("No map found!"));
-      res.render('maps/viewmap', { map: map, meta:meta.meta, extra:extra, avalon: avalon });
+      res.render('maps/viewmap', {
+        map: map,
+        meta:meta.meta,
+        extra:extra
+      });
     });
   }
 

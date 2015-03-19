@@ -112,8 +112,7 @@ function Controller() {
       res.render('help/index', {
         title: "Help",
         meta: meta.meta,
-        sections: self.sections,
-        avalon: avalon
+        sections: self.sections
       });
     });
   };
@@ -126,7 +125,7 @@ function Controller() {
       title: section,
       section: self.sections[section],
       sections: self.sections,
-      avalon: avalon
+      keywords: _.pluck(self.sections[section].pages, "title").join(", ").toLowerCase()
     });
   };
 
@@ -146,8 +145,7 @@ function Controller() {
       res.render("help/page", {
         title: page,
         page: data,
-        section: self.sections[data.section],
-        avalon: avalon
+        section: self.sections[data.section]
       });
     });
   };

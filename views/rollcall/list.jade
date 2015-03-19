@@ -2,34 +2,47 @@ extends ../layout
 
 block head
   if status == "god"
-    - var title = "Deities of Avalon"
+    - var _title = "Deities of Avalon"
+    - var _description = avalon.website.rollcall.god.description
+    - var _keywords = avalon.website.rollcall.god.keywords
     - var canonical = "http://www.avalon-rpg.com/rollcall/deities/"
   else if city
+    - var _description = avalon.website.rollcall.city.description + " - " + avalon.website.rollcall.index.description
+    - var _keywords = avalon.website.rollcall.city.keywords
     if city != "No Citizenship"
-      - var title = "Citizens of " + city
+      - var _title = "Citizens of " + city
     else
-      - var title = "Stateless Avalonians";
+      - var _title = "Stateless Avalonians";
     - var canonical = "http://www.avalon-rpg.com/rollcall/city/"+city.toLowerCase()
   else if guild
+    - var _description = avalon.website.rollcall.guild.description + " - " + avalon.website.rollcall.index.description
+    - var _keywords = avalon.website.rollcall.guild.keywords
     if guild != "No Guild"
-     - var title = "Members of the " + guild + " Guild"
+     - var _title = "Members of the " + guild + " Guild"
     else
-      - var title = "Guildless Avalonians"
+      - var _title = "Guildless Avalonians"
     - var canonical = "http://www.avalon-rpg.com/rollcall/guild/"+guild.toLowerCase()
   else if order
+    - var _description = avalon.website.rollcall.order.description + " - " + avalon.website.rollcall.index.description
+    - var _keywords = avalon.website.rollcall.order.keywords
     if order != "No Order"
-     - var title = "Order of " + order
+     - var _title = "Order of " + order
     else
-      - var title = "Orderless Avalonians"
+      - var _title = "Orderless Avalonians"
     - var canonical = "http://www.avalon-rpg.com/rollcall/order/"+order.toLowerCase()
   else
-    - var title = "Avalon's cast of characters"
+    - var _description = avalon.website.rollcall.index.description
+    - var _keywords = ""
+    - var _title = "Avalon's cast of characters"
     - var canonical = "http://www.avalon-rpg.com/rollcall/list"
+  - var title = mkTitle(_title, "Rollcall")
+  - var description = _title + " - " + _description
+  - var keywords = mkKeywords(_keywords + ", " + avalon.website.rollcall.index.keywords)
 
 block content
   .ui.content.rollcall
     .contain
-      h2.ui.title.center.underline #{title}
+      h2.ui.title.center.underline #{_title}
       h4.ui.title.center: a(href="/rollcall") Back to Rollcall
 
       table.ui.table.box

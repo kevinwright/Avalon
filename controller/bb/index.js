@@ -47,6 +47,7 @@ function readPost(boardId, postHref, callback) {
   util.readFile(fileLocation, callback);
 }
 
+
 function Controller() {
   var self = this;
   
@@ -63,9 +64,14 @@ function Controller() {
           hint: hints[board.id] || board.fullname + " Bulletin Board",
         });
       });
-      res.render("bb/index", {
-        avalon: avalon,
-        boards: boards
+
+      avalon.info("bb.md", function(err, meta) {
+      	if (err) return next(err);
+
+	      res.render("bb/index", {
+	        boards: boards,
+	        meta: meta.meta
+	      });
       });
     });
   };
@@ -74,8 +80,7 @@ function Controller() {
     res.status(404);
     res.render('bb/error', {
         message: "No such board: " + board,
-        error: {},
-        avalon: avalon
+        error: {}
     });
   };
 
@@ -84,8 +89,7 @@ function Controller() {
     res.render('bb/error', {
         message: "No such post: " + id,
         board: board,
-        error: {},
-        avalon: avalon
+        error: {}
     });
   };
 
@@ -117,7 +121,6 @@ function Controller() {
       getPosts(board, page, function(err, posts) {
         if (err) return next(err);
         res.render("bb/board", {
-          avalon: avalon,
           board: board,
           posts: posts,
           page: page
@@ -154,7 +157,6 @@ function Controller() {
         if (err) return next(err);
 
         res.render("bb/participant", {
-          avalon: avalon,
           board: board,
           posts: posts,
           participant: person
@@ -200,9 +202,10 @@ function Controller() {
           if (err) return self.errorPost(res, board, id);
 
           res.render("bb/post", {
-            avalon: avalon,
             board: board,
             post: post,
+            description: util.getDescription(content),
+            keywords: util.getKeywords(content),
             content: parser(content)
           });
         });

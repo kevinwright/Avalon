@@ -7,28 +7,40 @@ var avalon = require("../controller/avalon");
   function getIndex(req, res, next) {
     avalon.info("history/history.md", function(err, meta, extra) {
       if (err) return next(err);
-      res.render('history/index', { meta:meta.meta, extra:extra, avalon: avalon });
+      res.render('history/index', {
+        meta:meta.meta,
+        extra:extra
+      });
     });
   }
 
   function getOrdinations(req, res, next) {
     avalon.info("history/ordinations.md", function(err, meta) {
       if (err) return next(err);
-      res.render('history/list', { meta:meta.meta, avalon: avalon });
+      res.render('history/list', {
+        page: "ordinations",
+        meta: meta.meta
+      });
     });
   }
 
   function getModernHistory(req, res, next) {
     avalon.info("history/modernhistory.md", function(err, meta) {
       if (err) return next(err);
-      res.render('history/list', { meta:meta.meta, avalon: avalon });
+      res.render('history/list', {
+        page: "modernhistory",
+        meta: meta.meta
+      });
     });
   }
 
   function getAncientHistory(req, res, next) {
     avalon.info("history/ancienthistory.md", function(err, meta) {
       if (err) return next(err);
-      res.render('history/list', { meta:meta.meta, avalon: avalon });
+      res.render('history/list', {
+        page: "ancienthistory",
+        meta: meta.meta
+      });
     });
   }
 

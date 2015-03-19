@@ -2,8 +2,13 @@ extends ../layout
 include ../includes/bb
 
 block head
-  - var title = board.title + " Bulletin Board | Avalon Online RPG"
-  - var description = false
+  - var title = mkTitle(board.title, "Bulletin Boards")
+  if avalon.website.bb[board.url] 
+    - var description = avalon.website.bb[board.url].description
+    - var keywords = mkKeywords(avalon.website.bb[board.url].keywords)
+  else
+    - var description = avalon.website.bb.index.description
+    - var keywords = mkKeywords(avalon.website.bb.index.keywords)
   - var canonical = "http://www.avalon-rpg.com/bb/" + board.url
 
 block content

@@ -1,7 +1,7 @@
 extends ../layout
 
 block head
-  - var title = page.info.title + " | World | Avalon RPG";
+  - var title = mkTitle(page.info.title, "Academies", "World")
   - var description = false
   - var keywords = false
   if (page.canonical)

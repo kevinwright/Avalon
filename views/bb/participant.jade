@@ -2,7 +2,7 @@ extends ../layout
 include ../includes/bb
 
 block head
-  - var title = "Posts by " + participant + " | " + board.title + " Bulletin Board | Avalon Online RPG"
+  - var title = mkTitle("Posts by " + participant, board.title, "Bulletin Boards")
   - var description = false
   - var canonical = "http://www.avalon-rpg.com/bb/"+board.url+"/participant/"+participant.toLowerCase()
 
@@ -16,10 +16,8 @@ block content
         i.icon.angle.right
         |  Participant <b>#{participant}</b>
       h2.ui.title.center.underline #{participant} in #{board.title} Bulletin Board
-
       .ui.box
         .ui.sub.title.center Showing #{posts.length} posts out of #{posts.length} concerning #{participant}
-
         .section.bb
           for post in posts
             .post.section(id="post-"+post.number)

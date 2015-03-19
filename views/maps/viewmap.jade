@@ -1,9 +1,12 @@
 extends ../layout
 
 block head
-  - var title = map.title + " | " + meta.seo.title
-  - var description = meta.seo.description
-  - var keywords = meta.seo.keywords
+  - var title = mkTitle(map.title, avalon.website.maps.index.title)
+  if map.description
+    - var description = map.description
+  else
+    - var description = avalon.website.maps.index.description
+  - var keywords = mkKeywords(map.title.split(" ").join(", ").toLowerCase() + ", " + avalon.website.maps.index.keywords)
   - var canonical = "http://www.avalon-rpg.com/maps/" + map.url
 block content
   .ui.content.maps
@@ -15,8 +18,8 @@ block content
             i.icon.angle.right
             b  #{map.title}
           .image-wrap
-            a(href="/img/maps/"+map.file)
-              img(src="/img/maps/" + map.file, class={fluid: map.full == true}).ui.image.maxed
+            a(href="/img/maps/"+map.file, title=map.description)
+              img(alt=map.description, src="/img/maps/" + map.file, class={fluid: map.full == true}).ui.image.maxed
 
 
         .three.column.wide.sidebar

@@ -1,9 +1,9 @@
 extends ../layout
 
 block head
-  - var title = meta.seo.title
-  - var description = meta.seo.description
-  - var keywords = meta.seo.keywords
+  - var title = mkTitle(avalon.website.news.title)
+  - var description = avalon.website.news.description
+  - var keywords = mkKeywords(avalon.website.news.keywords)
   - var canonical = "http://www.avalon-rpg.com/news/"
 
 block content

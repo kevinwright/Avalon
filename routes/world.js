@@ -12,7 +12,9 @@ var guild = require("../controller/world/guild.js");
   function getIndex(req, res, next) {
     avalon.info("world.md", function(err, meta) {
       if (err) return next(err);
-      res.render('world/index', { avalon:avalon, meta: meta.meta, title: "The world of Avalon, Online RPG Game" });
+      res.render('world/index', {
+        meta: meta.meta
+      });
     });
   }
 
@@ -23,7 +25,9 @@ var guild = require("../controller/world/guild.js");
         type: "city",
         city: req.params.city
       });
-      res.render('world/city', { avalon:avalon, city: cityPage });
+      res.render('world/city', {
+        city: cityPage
+      });
     });
   }
 
@@ -34,7 +38,9 @@ var guild = require("../controller/world/guild.js");
         type: "guild",
         guild: req.params.guild
       });
-      res.render('world/guild', { avalon:avalon, guild: guildPage });
+      res.render('world/guild', {
+        guild: guildPage
+      });
     });
   }
 
@@ -45,7 +51,9 @@ var guild = require("../controller/world/guild.js");
   function affairs(req, res, next) {
     util.renderYAML("/library/affairs", function(err, content) {
       if (err) return next(err);
-      res.render("world/affairs", {avalon: avalon, meta: content});
+      res.render("world/affairs", {
+        meta: content
+      });
     });
   }
 

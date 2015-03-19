@@ -13,7 +13,9 @@ function PlayController() {
   this.get = function(req, res, next) {
     avalon.info("play.md", function(err, meta) {
       if (err) return next(err);
-      res.render('play/index', {meta: meta.meta, avalon: avalon});
+      res.render('play/index', {
+        meta: meta.meta
+      });
     });
   };
 
@@ -29,8 +31,7 @@ function PlayController() {
       res.render('play/index', {
         form: req.body,
         error: formError,
-        meta: meta.meta,
-        avalon: avalon
+        meta: meta.meta
       });
     });
   };
@@ -72,7 +73,9 @@ function PlayController() {
         if (!flashvars) return res.redirect("/play/");
         if (!flashvars.username) return res.redirect("/play/");
         if (!flashvars.password) return res.redirect("/play/");
-        return res.render('play/lumiere', { avalon:avalon, flashvars: flashvars});
+        return res.render('play/lumiere', {
+          flashvars: flashvars
+        });
       }
 
 

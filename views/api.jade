@@ -1,15 +1,16 @@
 extends layout
 
 block head
-  - var description = "API Documentation"
-  - var keywords = "api, code"
-  - var canonical = "http://www.avalon-rpg.com/api/"
+  - var title = mkTitle("API Documentation");
+  - var description = "API Documentation";
+  - var keywords = mkKeywords("api, code");
+  - var canonical = "http://www.avalon-rpg.com/api/";
   link(rel="stylesheet" href="/css/api.css")
 
 block content
   .ui.content
     .contain
-      h1.ui.title.underline.center= title
+      h1.ui.title.underline.center Api Documentation
 
   .ui.content
     .contain

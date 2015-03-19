@@ -78,7 +78,10 @@ function RollCallController() {
       if (err) return next(err);
       self.get(null, function(err, list) {
         if (err) return next(err);
-        res.render('rollcall/index', { characters: list, avalon:avalon, meta: meta.meta});
+        res.render('rollcall/index', {
+          characters: list,
+          meta: meta.meta
+        });
       });
     });
   };
@@ -94,26 +97,45 @@ function RollCallController() {
 
       if (status === "god") {
         self.getCity(status, function(err, list) {
-          res.render('rollcall/list', { status: util.cap(status), list: list, avalon:avalon, meta: meta.meta});
+          res.render('rollcall/list', { 
+            status: util.cap(status),
+            list: list,
+            meta: meta.meta
+          });
         });
       } else if (city) {
         self.getCity(city, function(err, list) {
           list = list.sort(self.sortPatron);
-          res.render('rollcall/list', { city: util.cap(city), list: list, avalon:avalon, meta: meta.meta});
+          res.render('rollcall/list', { 
+            city: util.cap(city),
+            list: list,
+            meta: meta.meta
+          });
         });
       } else if (guild) {
         self.getGuild(guild, function(err, list) {
           list = list.sort(self.sortPatron);
-          res.render('rollcall/list', { guild: util.cap(guild), list: list, avalon:avalon, meta: meta.meta});
+          res.render('rollcall/list', { 
+            guild: util.cap(guild),
+            list: list,
+            meta: meta.meta
+          });
         });
       } else if (order) {
         self.getOrder(order, function(err, list) {
-          res.render('rollcall/list', { order: util.cap(order), list: list, avalon:avalon, meta: meta.meta});
+          res.render('rollcall/list', { 
+            order: util.cap(order),
+            list: list,
+            meta: meta.meta
+          });
         });
       } else {
         self.get(null, function(err, list) {
           list = list.sort(self.sortPatron);
-          res.render('rollcall/list', { list: list, avalon:avalon, meta: meta.meta});
+          res.render('rollcall/list', { 
+            list: list,
+            meta: meta.meta
+          });
         });
       }
 
@@ -151,7 +173,6 @@ function RollCallController() {
             help: parser(help),
             character: character,
             list: list,
-            avalon: avalon
           });
         });
 
@@ -167,8 +188,9 @@ function RollCallController() {
           res.render('rollcall/character', {
             help: parser(help),
             character: character,
+            description: util.getDescription(help),
+            keywords: util.getKeywords(help),
             list: list,
-            avalon: avalon
           });
         });
       }

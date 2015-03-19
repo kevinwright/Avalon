@@ -3,12 +3,12 @@ var NodeCache = require( "node-cache" );
 var fs = require("fs");
 var yaml = require("js-yaml");
 var marked = require("marked");
+var _ = require("lodash");
 var ttlTime = 600;
 
-if (process.env.NODE_ENV === "production")
-  ttlTime = 600;
-else
-  ttlTime = 10;
+if (process.env.NODE_ENV === "production") ttlTime = 600;
+else ttlTime = 10;
+
 var fileCache = new NodeCache( { stdTTL: ttlTime, checkperiod: ttlTime*2 } );
 var fileErrCache = {}; // we should cache errors, or else it will try to look for it each time
 
@@ -220,6 +220,46 @@ function cap(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+
+var stopWords = ["about", "all", "alone", "also", "am", "and", "as", "at",
+"because", "before", "beside", "besides", "between", "but", "by", "etc", "for",
+"i", "is", "in", "of", "on", "other", "others", "so", "than", "that", "though",
+"or", "your", "not", "be", "will", "did", "you", "are", "any", "a", "want",
+"from", "this", "here", "were", "their", "year", "month", "day",
+"over", "written",
+"the", "we", "my", "to", "too", "trough", "until"];
+function getKeywords(str) {
+  return _(str.split(/\b/))
+    .map(function(w) {
+      return w.toLowerCase();
+    })
+    .filter(function(w) {
+      return /^[a-z]+$/.test(w);
+    })
+    .filter(function(w) {
+      return stopWords.indexOf(w) === -1 && w.length > 4;
+    })
+    .countBy()
+    .map(function (count, word) {
+      return {
+        word: word,
+        count: count
+      };
+    })
+    .sortBy("count")
+    .reverse()
+    .pluck("word")
+    .slice(0, 20)
+    .value();
+}
+
+function getDescription(str) {
+  var maxLength = 250;
+  var trimmedString = str.substr(0, maxLength);
+  trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")));
+  return trimmedString.replace(/(\r\n|\n|\r)/gm," ");
+}
+
 module.exports = {
   readFile: readFile,
   readdir: readdir,
@@ -232,6 +272,8 @@ module.exports = {
   renderYAML: renderYAML,
   renderJSON: renderJSON,
   cap: cap,
+  getKeywords: getKeywords,
+  getDescription: getDescription,
   cache: {
     file: fileCache,
     library: markCache

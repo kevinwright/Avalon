@@ -1,5 +1,5 @@
 var helpParser = require("./parser");
-
+var util = require("../../helper/util");
 
 module.exports = function(options, callback) {
   var page = {};
@@ -10,6 +10,11 @@ module.exports = function(options, callback) {
     auto: options.content.auto,
     library: options.content.library
   };
+
+  if (page.content.help) {
+    page.summary = util.getDescription(page.content.help);
+    page.keywords = util.getKeywords(page.content.help);
+  }
 
   // Parse autohelp
   var pageArr = /(\d+\.\d+)\s+(\w+)\s+(.*)/.exec(page.content.auto);

@@ -2,16 +2,16 @@ extends ../layout
 include ../includes/bb
 
 block head
-  - var title = "Bulletin Boards | Avalon Online RPG"
-  - var description = false
-  - var canonical = "http://www.avalon-rpg.com/bb/"
+  - var title = mkTitle("Bulletin Boards");
+  - var description = avalon.website.bb.index.description;
+  - var keywords = mkKeywords(avalon.website.bb.index.keywords);
+  - var canonical = "http://www.avalon-rpg.com/bb/";
 
 block content
   .ui.content.bb
     .contain
-      h2.ui.title.center.underline Bulletin Boards
-      p.lead The Avalon bulletin board is a method for all Avalonians to maintain contact with each other. It should be used for notices and messages  relating to world-wide issues and as a convenient method for Cities, Guilds and Orders to speak to the assembled masses.
-
+      h2.ui.title.center.underline #{meta.title}
+      p.lead #{meta.summary}
       .section.bb.ui.box
         .ui.grid.responsive.two.columns
           for board in boards
