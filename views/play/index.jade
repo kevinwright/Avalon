@@ -96,7 +96,6 @@ block scripts
     $("#login-username").rules("add", { regex: "^[a-zA-Z]+$", messages: {regex: "Only letters allowed, no spaces or numbers"} });
     $("#create-username").rules("add", { regex: "^[a-zA-Z]+$", messages: {regex: "Only letters allowed, no spaces or numbers"} });
 
-    $("#login-password").rules("add", { regex: "^[a-zA-Z0-9]+$", messages: {regex: "Only letters and numbers allowed, no spaces"} });
     $("#create-password").rules("add", { regex: "^[a-zA-Z0-9]+$", messages: {regex: "Only letters and numbers allowed, no spaces"} });
 
     $("input[type='radio'][name='run']").change(function(e) {
