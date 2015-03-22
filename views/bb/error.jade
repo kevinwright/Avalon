@@ -1,7 +1,10 @@
 extends ../layout
 
 block head
-  - var title = mkTitle(message || "", board.title);
+  if board
+    - var title = mkTitle(message || "", board.title);
+  else
+    - var title = mkTitle(message || "", "Bulletin Boards");
 
 block content
   .ui.content.bb
