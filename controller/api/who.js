@@ -17,7 +17,11 @@ function WhoList() {
 
   function parse(body) {
     var processing = false;
-    var lines = body.split("\r\n");
+    
+    var startIndex = body.indexOf("###users");
+    var text = body.substr(startIndex + "###users".length).trim();
+
+    var lines = text.split("\r\n");
     var users = [];
     for (var i = 0; i<lines.length;i++) {
       var line = lines[i];

@@ -8,7 +8,7 @@ block head
 block content
   .ui.content
     .contain
-      h2.ui.title.center.underline #{meta.title}
+      h1.ui.title.center.underline #{meta.title}
       p.lead #{meta.description}
 
       .section.history.ui.box
@@ -17,6 +17,14 @@ block content
             .column
               h4.ui.title: a(href=link.url) #{link.title}
               | #{link.description}
+
+      .section.modern.box.ui
+        h2.ui.title.underline #{meta.modern.title}
+        .ui.grid.responsive.two.columns
+          for item in meta.modern.items
+            .column
+              h4.ui.title: a(href=item.url) #{item.title}
+              | #{item.description}
 
       .ui.box
         != extra.normal.html

@@ -48,14 +48,6 @@ var guild = require("../controller/world/guild.js");
     res.redirect("/world/");
   }
 
-  function affairs(req, res, next) {
-    util.renderYAML("/library/affairs", function(err, content) {
-      if (err) return next(err);
-      res.render("world/affairs", {
-        meta: content
-      });
-    });
-  }
 
   var cities = ["Mercinae", "Thakria", "Parrius", "Silverfalls"];
   var academies = ["Orphanage", "Academy", "Institute", "College"];
@@ -72,7 +64,6 @@ var guild = require("../controller/world/guild.js");
   router.get('/cities/:city', getCity);
   router.get('/guilds/:guild', getGuild);
   router.get("/citguilds", redirectIndex);
-  router.get("/world/affairs", affairs);
   router.get(["/citguilds/:page.html", "/citguilds/:page"], redirectCityGuilds);
 
 

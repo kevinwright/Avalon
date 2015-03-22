@@ -28,7 +28,7 @@ block content
 
       .cities.box.ui
         a(name="cities")
-        h2.ui.title #{meta.cities.title}
+        h2.ui.title.underline #{meta.cities.title}
         .ui.menu
           for city in meta.cities.cities
             a.item(href="/rollcall/cities/"+city.toLowerCase()) #{city}
@@ -36,17 +36,30 @@ block content
                
       .guilds.box.ui
         a(name="guilds")
-        h2.ui.title #{meta.guilds.title}
+        h2.ui.title.underline #{meta.guilds.title}
         .ui.menu
           for guild in meta.guilds.guilds
             a.item(href="/rollcall/guilds/"+guild.toLowerCase()) #{guild}
       
       .order.box.ui
         a(name="orders")
-        h2.ui.title #{meta.orders.title}
+        h2.ui.title.underline #{meta.orders.title}
         .ui.menu
           for order in meta.orders.orders
             a.item(href="/rollcall/orders/"+order.toLowerCase()) #{order}
+
+      .online.box.ui
+        a(name="who")
+        h2.ui.title.underline Who
+        table.ui.table
+          thead
+            tr
+              th Name
+          tbody
+            for user,i in avalon.users()
+              tr
+                td #{user}
+
 block scripts
   datalist#characters
     for char in characters
