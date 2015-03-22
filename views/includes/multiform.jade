@@ -4,7 +4,6 @@
     .item(data-type="login") Login
   .content
     form(method="post", action="/lumiere/").ui.login.form#createForm
-      h3.ui.title.underline.center Create New Character
       .field.user
         .ui.input
           label(for="create-username", title="3 characters minimum, letters only. Be sure to choose a name appropriate for a fantasy game-world setting.")
@@ -54,7 +53,6 @@
         input(type="hidden", name="loginkey", value="")
       input(type="submit", value="Create New Character", style="margin-top: 16px;").ui.button.save.fluid
     form(method="post", action="/lumiere/").ui.hidden.login.form#loginForm
-      h3.ui.title.underline.center Login
       .field.user
         .ui.input
           label(for="login-username", title="3 characters minimum, letters only. Be sure to choose a name appropriate for a fantasy game-world setting.")

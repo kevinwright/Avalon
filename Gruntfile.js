@@ -72,13 +72,19 @@ module.exports = function(grunt) {
       }
     },
     mochacli: {
-      options: {
-          env: {NODE_ENV: "production", "TEST": true},
-          bail: true,
-          filesRaw: ["test/*.test.js"]
+      production: {
+        options: {
+            env: {NODE_ENV: "production", "TEST": true},
+            bail: true,
+            filesRaw: ["test/*.test.js"]
+        }
       },
-      files: {
-
+      development: {
+        options: {
+            env: {NODE_ENV: "development", "TEST": true},
+            bail: true,
+            filesRaw: ["test/*.test.js"]
+        }
       }
     },
     watch: {
@@ -100,7 +106,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-cli');
 
-  grunt.registerTask("test", ["jshint", "mochacli"]);
+  grunt.registerTask("test", ["jshint", "mochacli:production"]);
+  grunt.registerTask("dev", ["jshint", "mochacli:development"]);
   grunt.registerTask('default', ["less", 'watch']);
   grunt.registerTask("docs", "markade:docs");
   grunt.registerTask('email', ["markade:email", "emailBuilder"]);
