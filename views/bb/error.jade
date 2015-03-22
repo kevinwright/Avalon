@@ -1,5 +1,8 @@
 extends ../layout
 
+block head
+  - var title = mkTitle(message || "", board.title);
+
 block content
   .ui.content.bb
     .contain
@@ -12,9 +15,9 @@ block content
           i.icon.angle.right
           |  Post <b>#{post.number}</b>
       h1.ui.title.center= message
-      p.lead(style="text-align:center;") <b>Wraith</b> must have eaten it! Go back to 
+      p.lead(style="text-align:center;") Click to return to 
         if (board)
-          a(href="/bb/" + board.url)  the #{board.title} bulletin board.
+          a(href="/bb/" + board.url) the #{board.title} bulletin board
         else
           a(href="/bb/") the bulletin boards overview.
       

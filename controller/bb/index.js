@@ -171,6 +171,10 @@ function Controller() {
     var id = req.params.id || req.query.id;
     id = parseInt(id);
 
+    if (!id) {
+      return res.redirect("/bb/"+param);
+    }
+
     util.renderJSON(BBDIR + "/boards.json", function(err, boards) {
       if (err) return next(err);
 
