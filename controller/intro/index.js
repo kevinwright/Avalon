@@ -46,7 +46,7 @@ function Controller() {
         return res.redirect("/intro" + top[0].items[0].url);
       }
 
-      return next(new NoPageError(url, "legacy", result));
+      return next(new NoPageError(url, "legacy", result, {page: url}));
     }
     
     util.renderFile(result[0].file, function(err, blocks) {
