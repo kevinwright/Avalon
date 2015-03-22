@@ -8,12 +8,13 @@ var legacy = require(INTRODIR + "/legacy.js");
 
 var _ = require("lodash");
 
-function NoPageError(page, cat, result) {
+function NoPageError(url, cat, result, params) {
   this.name = "NoPageError";
   this.message = "Intro page not found";
-  this.page = page;
+  this.url = url;
   this.cat = cat;
   this.result = result;
+  this.query = params;
   this.type = "intro";
   this.status = 404;
 }
@@ -77,11 +78,11 @@ function Controller() {
       }
     });
 
-    if (cat === null || result === null) {
-      if (category) {
+    if (!cat  || !result) {
+      if (cat) {
         return res.redirect("/intro/" + category);
       } else {
-        return next(new NoPageError(url, cat, result));
+        return next(new NoPageError(url, cat, result, req.params));
       }
     }
 

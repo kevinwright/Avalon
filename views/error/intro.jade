@@ -1,0 +1,18 @@
+extends ../layout
+
+block head
+  - var title = mkTitle("The intro file '" + page + "'' was not found", avalon.website.intro.index)
+
+block content
+  .ui.content
+    .contain
+      h2.ui.title.center.underline= "The intro file '" + page + "' was not found."
+      
+      .ui.box
+        h2.ui.title Perhaps you meant to view one of these?
+        .ui.menu.vertical
+          for match in matches
+            a.item(href="/intro/" + match.url) #{match.content}
+
+      center.section
+        a(href="/intro") Return to Intro

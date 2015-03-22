@@ -149,42 +149,24 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   switch(err.type) {
     case "help":
-      return ErrorHandler.help(err, req, res, next);
+      ErrorHandler.help(err, req, res, next);
+      break;
     case "guild":
-      return res.redirect("/world#guilds");
+      res.redirect("/world#guilds");
+      break;
     case "city":
-        return res.redirect("/world#cities");
+      res.redirect("/world#cities");
+      break;
     case "intro":
-      err.status = 404;
-      next(err);
+      ErrorHandler.intro(err, req, res, next);
       break;
     default:
-      next(err);
+      ErrorHandler.print(err, req, res, next);
   }
 });
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res) {
-    res.status(err.status || 500);
-    res.render('error/error', {
-      avalon: avalon,
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res) {
-  res.status(err.status || 500);
-  res.render('error/error', {
-    avalon: avalon,
-    message: err.message,
-    error: {}
-  });
+app.use(function(err, req, res, next) {
+  ErrorHandler.print(err, req, res, next);
 });
 
 module.exports = app;

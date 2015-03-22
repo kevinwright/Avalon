@@ -1,6 +1,11 @@
 var fs = require("fs");
 var _ = require("lodash");
 var synonyms = require(global.avalon.files.synonyms);
+var express = require('express');
+var app = express();
+
+var TOCFILE = global.avalon.files.toc;
+var toc = require(TOCFILE);
 
 var AUTOHELPDIR = global.avalon.dir.autohelp,
     HELPDIR = global.avalon.dir.help;
@@ -63,6 +68,42 @@ var ErrorHandler = function() {
 			});
 		});
 	};
+
+  this.intro = function(err, req, res) {
+    var category = err.query.category;
+    var page = err.query.page;
+
+    console.log(category, page);
+
+    var linkList = _.filter(_.flatten(_.pluck(toc, 'items')), function(item) {
+      return _.includes(item.url, page);
+    });
+
+    if (linkList.length === 1) {
+      return res.redirect("/intro" + linkList[0].url);
+    }
+
+    res.status(404);
+    res.render('error/intro', {
+        matches: linkList,
+        message: err.message,
+        error: err,
+        page: page
+    });
+  };
+
+  this.print = function(err, req, res) {
+    res.status(err.status || 500);
+    var message = err.message;
+    var stack = err;
+    if (app.get('env') === 'production') {
+      stack = {};
+    }
+    res.render('error/error', {
+      message: message,
+      error: stack
+    });
+  };
 };
 
 
