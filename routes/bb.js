@@ -16,6 +16,7 @@ router.get('/:board/:id.html', bb.post);
 router.get('/:board/:id', bb.post);
 router.get('/:board/:id/:subject.html', bb.post);
 router.get('/:board/:id/:subject', bb.post);
+router.get('/:board/:id/*', bb.post);
 
 
 
