@@ -48,17 +48,40 @@ block content
           for order in meta.orders.orders
             a.item(href="/rollcall/orders/"+order.toLowerCase()) #{order}
 
-      .online.box.ui
+      .affairs.box.ui
         a(name="who")
         h2.ui.title.underline Who
         table.ui.table
           thead
             tr
-              th Name
+              th Title
+              if !status
+                if !city
+                  th City
+                if !guild
+                  th Guild
+                if !order
+                  th Order
+                if order
+                  th Order Status
           tbody
-            for user,i in avalon.users()
+            for person in who
               tr
-                td #{user}
+                - var title = person.title.replace(person.name, "<a href='/rollcall/characters/"+person.name.toLowerCase()+"''>"+person.name+"</a>")
+                td !{title}
+                if !status
+                  if !city
+                    if (person.city != "god")
+                      td: a(href="/rollcall/cities/"+person.city)= person.city
+                    else
+                      td: a(href="/rollcall/deities") God
+                  if !guild
+                    td: a(href="/rollcall/guilds/"+person.guild)= person.guild
+                  if !order
+                    td: a(href="/rollcall/orders/"+person.order)= person.order
+                  if order
+                    td= person.orderlevel
+
 
 block scripts
   datalist#characters

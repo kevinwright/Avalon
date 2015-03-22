@@ -3,6 +3,7 @@ var HELPDIR = global.avalon.dir.help;
 
 var util = require("../../helper/util");
 var avalon = require("../avalon");
+var _ = require("lodash");
 
 var parser = require("../help/parser");
 
@@ -72,15 +73,27 @@ function RollCallController() {
     return -1;
   };
 
+  this.getWho = function(callback) {
+    var who = avalon.users();
+    self.get(function(person) {
+      if (!person.name) return false;
+      return _.contains(who, person.name);
+    }, callback);
+  };
+
 
   this.index = function(req, res, next) {
     avalon.info("rollcall.md", function(err, meta) {
       if (err) return next(err);
       self.get(null, function(err, list) {
         if (err) return next(err);
-        res.render('rollcall/index', {
-          characters: list,
-          meta: meta.meta
+        self.getWho(function(err, who) {
+          if (err) return next(err);
+          res.render('rollcall/index', {
+            characters: list,
+            who: who,
+            meta: meta.meta
+          });
         });
       });
     });
