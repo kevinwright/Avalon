@@ -12,10 +12,10 @@ block content
       p.lead #{meta.description}
 
       .section.history.ui.box
-        .ui.grid.responsive.two.columns
+        .ui.grid.responsive.one.columns
           for link in meta.links
             .column
-              h4.ui.title: a(href=link.url) #{link.title}
+              h2.ui.title: a(href=link.url) #{link.title}
               | #{link.description}
 
       .section.modern.box.ui

@@ -1,0 +1,29 @@
+extends ../layout
+
+block head
+  if (avalon.website.history[page])
+    - var title = mkTitle(avalon.website.history[page].title, "History")
+    - var description = avalon.website.history[page].description
+    - var keywords = mkKeywords(avalon.website.history[page].keywords)
+block content
+  .ui.content
+    .contain
+      h2.ui.title.center.underline #{meta.title}
+      if meta.subtitle
+        h4.sub.title.center.ui #{meta.subtitle}
+      .section.timeline.ui.grid
+        for item in meta.timeline
+          .row(class={important: item.important, day: item.date, month: item.month, year: item.year, real: item.real})
+            .date.column.four.wide
+              .day #{item.date}
+              .month #{item.month}
+              .year #{item.year}
+              .real #{item.real}
+            .column.twelve.wide
+              .content #{item.content}
+
+
+
+
+      center.section
+        a(href="/history") Return to History

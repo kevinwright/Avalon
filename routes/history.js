@@ -44,10 +44,21 @@ var avalon = require("../controller/avalon");
     });
   }
 
+  function getTimeline(req, res, next) {
+    avalon.info("history/timeline.md", function(err, meta) {
+      if (err) return next(err);
+      res.render('history/timeline', {
+        page: "timeline",
+        meta: meta.meta
+      });
+    });
+  }
+
 
 // Routes
   router.get(['/', "/index.html"], getIndex);
   router.get(['/ordinations', "/ordinations.html"], getOrdinations);
+  router.get(['/timeline'], getTimeline);
   router.get(['/modernhistory', "/modernhistory.html"], getModernHistory);
   router.get(['/ancienthistory', "/ancienthistory.html"], getAncientHistory);
 

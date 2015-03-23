@@ -30,7 +30,7 @@ block content
 
       .section.military.affairs.box.ui
         h2.ui.title.underline #{meta.military.title}
-        table.ui.table#militaryTable
+        table.ui.sortable.selectable.revealable.table#militaryTable
           thead
             tr
               th(data-sort="string") Village
@@ -39,9 +39,12 @@ block content
               th(data-sort="string") Occupied
               th(data-sort="int") Legions
           tbody
-            for affair in affairs
-              tr
-                td #{affair.village}
+            for affair,i in affairs
+              tr(data-id=i, class={expand: affair.legions})
+                td
+                  if affair.legions
+                    i.icon.angle.down
+                  | #{affair.village}
                 td #{affair.city}
                 td #{affair.conflict}
                 td #{affair.occupied}
@@ -49,7 +52,36 @@ block content
                   td #{affair.legions.length}
                 else
                   td 0
+                if affair.legions
+                  td(data-id=i, style="", colspan="5").expandable
+                    table(width="100%", class="ui box small")
+                      thead
+                        tr
+                          th Legion
+                          th Structure
+                          th Commander
+                          th Size
+                      tbody
+                        for legion in affair.legions
+                          - leg = legion.match(/^(\w+) (\w+) (\w+) x (\d+)$/)
+                          if leg
+                            tr
+                              td #{leg[1]}
+                              td #{leg[2]}
+                              td #{leg[3]}
+                              td #{leg[4]}
 block scripts
   script(src="/js/jquery.table.js")
   script.
     $("#militaryTable").stupidtable();
+    $("#militaryTable .expand").click(function(e) {
+      var id = $(e.currentTarget).data("id");
+      var all = $("#militaryTable .expandable");
+      var expandable = $("#militaryTable .expandable[data-id=" + id + "]");
+      if (expandable.is(":visible")) {
+        expandable.toggle();
+      } else {
+        all.hide();
+        expandable.toggle();
+      }
+    });
