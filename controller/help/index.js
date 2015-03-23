@@ -10,6 +10,8 @@ var hints = require("./hints");
 var synonym = require("./synonym");
 var Section = require("./section");
 var Page = require("./page");
+var fs = require("fs");
+var helpParser = require("./parser");
 
 
 
@@ -126,6 +128,34 @@ function Controller() {
       section: self.sections[section],
       sections: self.sections,
       keywords: _.pluck(self.sections[section].pages, "title").join(", ").toLowerCase()
+    });
+  };
+
+  this.full = function(req, res, next) {
+    avalon.info("help.md", function(err, meta) {
+      if (err) return next(err);
+      var pages = _(self.sections)
+        .pluck("pages")
+        .flatten()
+        .map(function(page) {
+          try {
+            page.html = fs.readFileSync(HELPDIR + "/" + page.title.toLowerCase()).toString();
+            page.html = helpParser(page.html, "#");
+            return page;
+          } catch(err) {
+            return page;
+          }
+        })
+        .filter(function(page) {
+          return page.html;
+        })
+        .value();
+      res.render('help/full', {
+        title: "Help",
+        meta: meta.meta,
+        pages: pages,
+        sections: self.sections
+      });
     });
   };
 

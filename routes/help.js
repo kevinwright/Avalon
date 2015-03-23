@@ -5,6 +5,7 @@ var help = require("../controller/help");
 
 router.get('/', help.index);
 router.get('/index.html', help.index);
+router.get('/full', help.full);
 
 router.get('/sections/:section.html', help.section);
 router.get('/sections/:section', help.section);

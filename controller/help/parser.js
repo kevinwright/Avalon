@@ -1,9 +1,10 @@
 var sanitizeHtml = require('sanitize-html');
 
-module.exports = function(content) {
+module.exports = function(content, baseURL) {
   var lines = content.split("\n");
   var finalLines = "";
   var block = false;
+  if (!baseURL) baseURL = "/help/pages/";
 
   // highlight **
   function makeHeader(match, p1) {
@@ -24,9 +25,9 @@ module.exports = function(content) {
   // HELP BLAH into hyperlinks
   function makeHelp(match, p1, p2) {
     if (p2) {
-      return " HELP <a href=\"/help/pages/" + p1.toLowerCase() + "\">" + p1 + "</a> / <a href=\"/help/pages/" + p2.toLowerCase() + "\">" + p2 + "</a>";
+      return " HELP <a href=\"" + baseURL + p1.toLowerCase() + "\">" + p1 + "</a> / <a href=\"" + baseURL + p2.toLowerCase() + "\">" + p2 + "</a>";
     } else {
-      return " <a href=\"/help/pages/" + p1.toLowerCase() + "\">HELP " + p1 + "</a>";
+      return " <a href=\"" + baseURL + p1.toLowerCase() + "\">HELP " + p1 + "</a>";
     }
   }
 
@@ -40,6 +41,7 @@ module.exports = function(content) {
 
     line = line.replace(/</g, '&lt;');
     line = line.replace(/\>/g, '&gt;');
+    line = line.replace(/^\+$/, '');
     line = line.replace(/^\*\*(.*)/g, makeHeader);
     line = line.replace(/^\*(.*)/g, makeBold);
     line = line.replace(/http:\/\/([A-Za-z.-][A-Za-z.-]*)/g, makeHTTP);

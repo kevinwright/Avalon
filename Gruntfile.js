@@ -12,6 +12,14 @@ module.exports = function(grunt) {
         src: ['public/css/style.less'],
         dest: 'public/css/style.css'
       },
+      print: {
+        options: {
+          compress: true,
+          cleancss: true
+        },
+        src: ['public/css/print.less'],
+        dest: 'public/css/print.css'
+      },
     },
     markade: {
       docs: {

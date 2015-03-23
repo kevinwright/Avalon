@@ -1,0 +1,38 @@
+extends print
+
+block content
+  .ui.content
+    .contain
+      h1.ui.title.center.underline The Manual of Avalon
+      p.lead.center This is the full, comprehensive Avalon manual. The manual here contains everything a player needs to know about Avalon.
+
+      a(href="javascript:if(window.print)window.print()").print-button Click to Print / Save as PDF
+      .info-button Press CTRL+S or CMD+S to save this page.
+
+      .help.index
+        a(id="index")
+        for section in sections
+          .help.section
+            h3.ui.title.underline
+              | #{section.id} - 
+              a(href="#" + section.id) #{section.title}
+              .right.label.expand(data-id=section.id): i.icon.triangle.down
+            p.lead #{section.hint}
+
+            table.ui.table
+              tbody
+                for page in section.pages
+                  tr
+                    td(style="width: 10%") #{page.id}
+                    td(style="width: 20%"): a(id="top-"+page.title.toLowerCase(), href="#" + page.title.toLowerCase()) #{page.title}
+                    td(style="width: 70%") #{page.description}
+
+      .help.content
+        for page in pages
+          .help.page
+            a(id=page.title.toLowerCase())
+            h3.ui.title.underline
+              | #{page.id} - #{page.title}
+              a.right(href="#top-"+page.title.toLowerCase()) Back to Top
+              
+            .html!= page.html

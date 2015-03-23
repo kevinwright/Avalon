@@ -1,0 +1,378 @@
+
+@import url(http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700,900);
+
+//     ____                 __ 
+//    / __ \___  ________  / /_
+//   / /_/ / _ \/ ___/ _ \/ __/
+//  / _, _/  __(__  )  __/ /_  
+// /_/ |_|\___/____/\___/\__/  
+                            
+
+  html, body {
+    background: white;
+    border: 0;
+    font-family: "Alegreya", "Times New Roman", "Times", serif;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+  }
+
+  div, span, object, iframe, img, table, caption, thead, tbody,
+  tfoot, tr, tr, td, article, aside, canvas, details, figure, hgroup, menu,
+  nav, footer, header, section, summary, mark, audio, video {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, cit, code,
+  del, dfn, em, ins, q, samp, small, strong, sub, sup, b, i, hr, dl, dt, dd,
+  ol, ul, li, fieldset, legend, label {
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+  }
+
+  article, aside, canvas, figure, figure img, figcaption, hgroup,
+  footer, header, nav, section, audio, video {
+    display: block;
+  }
+
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+    caption, th, td {
+      text-align: left;
+      vertical-align: middle;
+    }
+  }
+
+  a img {
+    border: 0;
+  }
+
+  :focus {
+    outline: 0;
+  }
+
+//  _    __               
+// | |  / /___ ___________
+// | | / / __ `/ ___/ ___/
+// | |/ / /_/ / /  (__  ) 
+// |___/\__,_/_/  /____/  
+                       
+
+  @width_max: 760px;
+  @col_primary: #000;
+  @col_secondary: #000;
+  @col_foreground: #000;
+  @col_background: #fff;
+
+  @large_responsive:   ~"only screen and (max-width: 1280px)"; // smaller than contain.large
+  @desktop:   ~"only screen and (min-width: 1024px)";
+  @tablet:    ~"only screen and (min-width: 720px) and (max-width: 1023px)";
+  @phone:   ~"only screen and (max-width: 719px)";
+
+//    ______                           __
+//   / ____/__  ____  ___  _________ _/ /
+//  / / __/ _ \/ __ \/ _ \/ ___/ __ `/ / 
+// / /_/ /  __/ / / /  __/ /  / /_/ / /  
+// \____/\___/_/ /_/\___/_/   \__,_/_/   
+                                      
+
+  *,
+  ::before,
+  ::after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: @col_background;
+    color: @col_foreground;
+  }
+
+  a {
+    color: @col_primary;
+    text-decoration: none;
+    font-weight: 700;
+    &:visited {
+      color: darken(@col_primary, 15%);
+    }
+    &:hover, &:focus {
+      color: lighten(@col_primary, 20%);
+      text-decoration: underline;
+    }
+  }
+
+  b, strong, .bold {
+    font-weight: 700;
+  }
+
+  em {
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  p {
+    margin: 1em 0em;
+    &.lead {
+      font-size: 1.2em;
+    }
+    &.center {
+      text-align: center;
+    }
+  }
+
+  ::selection, mark {
+    background: @col_primary;
+    color: @col_foreground;
+  }
+  ::-moz-selection {
+    background: @col_primary;
+    color: @col_foreground;
+  }
+
+  ul {
+    list-style: inside;
+    ul {
+      padding-left: 1em;
+    }
+  }
+
+  hr {
+    border-bottom: solid 1px rgba(43, 105, 134, 0.4);
+    border-top: solid 1px rgba(0, 0, 0, 1);
+    margin-bottom: 1em;
+  }
+
+
+//    __  ______
+//   / / / /  _/
+//  / / / // /  
+// / /_/ // /   
+// \____/___/   
+             
+
+  .ui.content {
+    &.margin {
+      padding: 75px 0;
+    }
+    &.margin-top {
+      margin-top: 75px;
+      @media @tablet, @phone {margin-top: 00px;}
+    }
+  }
+
+  .contain {
+    max-width: @width_max;
+    margin: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    &.large {
+      max-width: 1280px;
+      @media @large_responsive {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+    @media @tablet {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    @media @phone {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    @media print {
+      max-width: 100%;
+    }
+  }
+
+
+//   ______                                         __         
+//  /_  __/_  ______  ____  ____ __________ _____  / /_  __  __
+//   / / / / / / __ \/ __ \/ __ `/ ___/ __ `/ __ \/ __ \/ / / /
+//  / / / /_/ / /_/ / /_/ / /_/ / /  / /_/ / /_/ / / / / /_/ / 
+// /_/  \__, / .___/\____/\__, /_/   \__,_/ .___/_/ /_/\__, /  
+//     /____/_/          /____/          /_/          /____/   
+
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.5em; }
+  h3 { font-size: 1.17em; }
+  h5 { font-size: .83em; }
+  h6 { font-size: .75em; }
+
+  .ui.title {
+    &.center, &.centre {text-align: center;}
+    &.underline {
+      padding: .2em 0;
+      margin: .2em auto;
+      border-bottom: double 4px #000;
+    }
+    & + p {
+      margin-top: 0;
+    }
+    &.sub {
+      margin-top: 0px;
+      padding-top: 0px;
+    }
+    .right.label {
+      float: right;
+      display: inline;
+      &.ui.menu {
+        .item {
+          padding-top: 0px;
+          padding-bottom: 0px;
+        }
+      }
+      @media @phone {
+        float: none;
+        display: block;
+      }
+      &.expand {
+        cursor: pointer;
+        &.active {color: #fff;}
+      }
+    }
+  }
+
+  blockquote {
+    border-left: 4px solid @col_primary;
+    padding: 0 15px;
+    color: darken(@col_foreground, 20%);
+    quotes: auto;
+    p {
+      &:before {
+        content: "“";
+      }
+      &:after {
+        content: "”";
+      }
+    }
+    cite {
+      font-weight: bold;
+      font-style: italic;
+      a {
+        color: darken(@col_foreground, 20%); 
+      }
+    }
+    &.large {
+      font-size: 1.2em;
+      cite {
+        font-size: .8em;
+      }
+    }
+    &.big {
+      font-size: 1.5em;
+      cite {
+        font-size: .8em;
+      }
+    }
+    &.center {
+      text-align: center;
+      border-left: none;
+      p {
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  span.small, font.small {
+    font-size: .8em;
+  }
+
+
+// Header
+
+.ui.header {
+  text-align: center;
+}
+
+// table
+
+.ui.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1em;
+  th, tr, td {
+    border-collapse: collapse;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+    -ms-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+  }
+  th {
+    cursor: auto;
+    background-color: rgba(255, 255, 255, 0.05);
+
+    text-align: left;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.5em 0.7em;
+    vertical-align: middle;
+  }
+  td {
+    padding: 0.1em 0em;
+    vertical-align: middle;
+  }
+  tbody tr:nth-child(2n) {
+    background-color: rgba(255, 255, 255, 0.02);
+  }
+}
+
+.ui.title {
+  .right {
+    float: right;
+  }
+  @media print {
+    .right {
+      display: none;
+    }
+  }
+}
+
+
+.print-button, .info-button {
+  @media print {
+    display: none;
+  }
+  font-weight: 900;
+  font-size: 24px;
+  text-align: center;
+  display: block;
+}
+
+.help.page {
+  .html {
+    font-size: 12pt;
+    line-height: 1.3;
+    margin: 1em auto;
+    p {
+      margin: 0px;
+    }
+    table {
+      width: 100%;
+    }
+    pre {
+      font-size: 10pt;
+      white-space: pre-wrap;       /* CSS 3 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    }
+    br + br {
+      display: none;
+    }
+  }
+}
