@@ -428,6 +428,14 @@
         }
       }
     }
+    &.mobile-responsive {
+      @media @phone {
+        width: 100%;
+        .column, .wide.column, &.columns .column {
+          width: 100%;
+        }
+      }
+    }
   }
 
 
@@ -1179,6 +1187,9 @@
       }
       
       .content {
+        .title {
+          font-weight: normal;
+        }
         font-weight: 300;
         display: table-cell;
         vertical-align: middle;
@@ -1210,6 +1221,31 @@
         }
       }
     }
+
+    @media @phone {
+      .row {
+        .date {
+          text-align: left;
+          .month, .year, .real, .day {
+            display: inline-block;
+            font-size: 16px !important;
+            font-weight: bold !important;
+            text-transform: inherit !important;
+            margin-right: 1em;
+          }
+        }
+        .content {
+          height: auto;
+          display: block;
+        }
+        &.important {
+          .date {
+            text-align: center;
+          }
+        }
+      }
+    }
+
   }
 
 

@@ -11,16 +11,23 @@ block content
       h2.ui.title.center.underline #{meta.title}
       if meta.subtitle
         h4.sub.title.center.ui #{meta.subtitle}
-      .section.timeline.ui.grid
+      .section.timeline.ui.grid.mobile-responsive
         for item in meta.timeline
           .row(class={important: item.important, day: item.date, month: item.month, year: item.year, real: item.real})
             .date.column.four.wide
-              .day #{item.date}
-              .month #{item.month}
-              .year #{item.year}
-              .real #{item.real}
+              if item.date
+                .day #{item.date}
+              if item.month
+                .month #{item.month}
+              if item.year
+                .year #{item.year}
+              if item.real
+                .real #{item.real}
             .column.twelve.wide
-              .content #{item.content}
+              .content
+                if item.title
+                  h4.title #{item.title}
+                | #{item.content}
 
 
 
