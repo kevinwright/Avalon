@@ -72,16 +72,4 @@ block content
                               td #{leg[4]}
 block scripts
   script(src="/js/jquery.table.js")
-  script.
-    $("#militaryTable").stupidtable();
-    $("#militaryTable .expand").click(function(e) {
-      var id = $(e.currentTarget).data("id");
-      var all = $("#militaryTable .expandable");
-      var expandable = $("#militaryTable .expandable[data-id=" + id + "]");
-      if (expandable.is(":visible")) {
-        expandable.toggle();
-      } else {
-        all.hide();
-        expandable.toggle();
-      }
-    });
+  script(src="/js/affairs.js")

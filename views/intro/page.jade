@@ -84,12 +84,5 @@ block content
                         a(href="/intro" + sub.url).item #{sub.content}
 
 block scripts
-  script.
-    $(".ui.box.accordion .title").click(function(e) {
-      var targ = $(e.currentTarget).data("expand");
-      $(".ui.box.accordion .content[data-expand="+targ+"]").toggle("fast");
-    })
-    $(".ui.menu.reveal .head").click(function(e) {
-      var targ = $(e.currentTarget).data("expand");
-      $(".ui.menu.reveal .menu[data-expand="+targ+"]").toggle("fast");
-    })
+  script(src="/js/accordion.js")
+  script(src="/js/reveal.js")
