@@ -6,8 +6,8 @@ module.exports = function(grunt) {
     less: {
       dev: {
         options: {
-          compress: false,
-          cleancss: false
+          compress: true,
+          cleancss: true
         },
         src: ['public/css/style.less'],
         dest: 'public/css/style.css'
@@ -81,7 +81,6 @@ module.exports = function(grunt) {
     },
     autoprefixer: {
       options: {
-        diff: true,
         safe: true,
         browsers: ['last 5 versions', '> 1%', "ie >= 6", "iOS >= 4"]
       },
