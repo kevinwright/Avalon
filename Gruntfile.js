@@ -6,8 +6,8 @@ module.exports = function(grunt) {
     less: {
       dev: {
         options: {
-          compress: true,
-          cleancss: true
+          compress: false,
+          cleancss: false
         },
         src: ['public/css/style.less'],
         dest: 'public/css/style.css'
@@ -79,6 +79,17 @@ module.exports = function(grunt) {
         },
       }
     },
+    autoprefixer: {
+      options: {
+        diff: true,
+        safe: true,
+        browsers: ['last 5 versions', '> 1%', "ie >= 6", "iOS >= 4"]
+      },
+      dev: {
+        src: ['public/css/style.css'],
+        dest: 'public/css/style.css'
+      },
+    },
     mochacli: {
       production: {
         options: {
@@ -98,7 +109,7 @@ module.exports = function(grunt) {
     watch: {
       less: {
         files: ['public/css/*.less'],
-        tasks: ['less'],
+        tasks: ['less', 'autoprefixer'],
       },
       livereload: {
         options: { livereload: true },
@@ -113,10 +124,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-email-builder');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-cli');
+  grunt.loadNpmTasks('grunt-autoprefixer');
 
   grunt.registerTask("test", ["jshint", "mochacli:production"]);
   grunt.registerTask("dev", ["jshint", "mochacli:development"]);
-  grunt.registerTask('default', ["less", 'watch']);
+  grunt.registerTask('default', ["less", "autoprefixer", 'watch']);
   grunt.registerTask("docs", "markade:docs");
   grunt.registerTask('email', ["markade:email", "emailBuilder"]);
 };

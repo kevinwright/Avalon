@@ -46,7 +46,7 @@ block content
               form(action="/help/search").helpform
                 .ui.fluid.icon.input
                   label HELP
-                  input(type="text", name="page", list="pages")
+                  input(type="text", name="page", list="pages", placeholder="search...")
                   i.search.icon
 
             .content
@@ -54,7 +54,7 @@ block content
               form(action="/rollcall/search").historyform
                 .ui.fluid.icon.input
                   label HISTORY
-                  input(type="text", name="character")
+                  input(type="text", name="character", placeholder="search...")
                   i.search.icon
                     
           .ui.block
