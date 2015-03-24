@@ -19,9 +19,7 @@ Rollcall
 History / News
 --------------
 
-- [ ] What you have as modern affairs needs to move from news into history. Timeline and Godline should be bragging here cross linked if possible. Ideally this content suitors be flexible like the Intro and News sections to reduce need for further coding at html level once initial but is done. Check Avalon HELP for content but figure the player memoirs and history legend stuff would all be better here. This will also reduce the HELP GUIDE section load a little.
-  - What is timeline and godline?
-  - And what should be move exactly?
+- [X] What you have as modern affairs needs to move from news into history. Timeline and Godline should be bragging here cross linked if possible. Ideally this content suitors be flexible like the Intro and News sections to reduce need for further coding at html level once initial but is done. Check Avalon HELP for content but figure the player memoirs and history legend stuff would all be better here. This will also reduce the HELP GUIDE section load a little.
 - [?] News should include the latest newsletter summary with link to full content, which is already in new site format.
   - Where is the newsletter?
 
@@ -47,12 +45,12 @@ World:
   - /cities/mercinae/ => /library/world/Mercinae
   - /guilds/bards/ => /library/world/Bards
 
-- [ ] This section should include AFFAIRS data again simply taken from a file Avalon keeps automatically up to date.
+- [X] This section should include AFFAIRS data again simply taken from a file Avalon keeps automatically up to date.
 - [?] No need to have so much spacer taken up by the four academies. Better the dynamic content as it will allure far more.
   - So remove this? Or make it smaller somehow?
 - [?] Ensure what there is about the academies is cross linked with intro.
   - So this is Maud's content that should link to the academies?
-- [?] Make sure each city has patron, Prince, cardinal and field marshal listed with blurb by flag cross linked to each individuals page of course!
+- [X] Make sure each city has patron, Prince, cardinal and field marshal listed with blurb by flag cross linked to each individuals page of course!
   - Avalon should add this info to /library/world/Mercinae in a list. It is very hard to find character names from their titles.
 
 General
