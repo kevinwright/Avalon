@@ -43,7 +43,7 @@ block content
                 .ui.fluid.icon.input
                   label HELP
                   input(type="text", name="page", list="pages")
-                  i.search.icon
+                  i.search.icon.link(onclick="this.parentNode.parentNode.submit()")
           .ui.block.help.downloads
             .content
               h2.ui.title.underline #{meta.downloads.title}

@@ -19,5 +19,6 @@ router.get('/pages/:page.html', help.page);
 
 router.get('/pages/:page', help.page);
 router.get("/search", help.search);
+router.get('/pages', help.page);
 
 module.exports = router;

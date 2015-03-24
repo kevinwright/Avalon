@@ -162,6 +162,7 @@ function Controller() {
   // :page
   this.page = function(req, res, next) {
     var page = req.params.page || req.query.page;
+    if (!page) return res.redirect("/help/");
 
     readPage(page, function(err, data) {
       if (err) {

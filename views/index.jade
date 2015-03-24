@@ -47,7 +47,7 @@ block content
                 .ui.fluid.icon.input
                   label HELP
                   input(type="text", name="page", list="pages", placeholder="search...")
-                  i.search.icon
+                  i.search.icon.link(onclick="this.parentNode.parentNode.submit()")
 
             .content
               p #{meta.search.rollcall}
@@ -55,7 +55,7 @@ block content
                 .ui.fluid.icon.input
                   label HISTORY
                   input(type="text", name="character", placeholder="search...")
-                  i.search.icon
+                  i.search.icon.link(onclick="this.parentNode.parentNode.submit()")
                     
           .ui.block
             .content

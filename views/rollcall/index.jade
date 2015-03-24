@@ -24,7 +24,7 @@ block content
               .ui.fluid.icon.input
                 label HISTORY
                 input(type="text", name="character", list="characters")
-                i.search.icon
+                i.search.icon.link(onclick="this.parentNode.parentNode.submit()")
 
       .cities.box.ui
         a(name="cities")

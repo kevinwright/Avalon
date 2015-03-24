@@ -22,7 +22,7 @@ nav#mp-menu.mp-menu
                     .ui.fluid.icon.input
                       label HELP
                       input(type="text", name="page", list="pages", placeholder="search...")
-                      i.search.icon
+                      i.search.icon.link(onclick="this.parentNode.parentNode.submit()")
                 ul
                   for subitem in item.items
                     if subitem.items
