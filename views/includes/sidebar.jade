@@ -41,3 +41,11 @@ nav#mp-menu.mp-menu
           else
             li
               +item(item)
+      if (avalon && avalon.users)
+        if (avalon.users().length != 0)
+          li
+            a.item(href="/rollcall/#who") #{avalon.users().length} Players Online
+      if avalon && avalon.menu
+        for item in avalon.menu.right
+          li
+            +item(item)

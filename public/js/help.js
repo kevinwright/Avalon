@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $(".help.index .expand").bind("click", function() {
+    navigator.vibrate(10);
     var id = $(this).data("id");
     var table = $("#section-"+id+" .ui.table");
     if (table.is(":visible")) table.hide("fast");
@@ -10,6 +11,7 @@ $(document).ready(function() {
   var expandAll = false;
   $(".expand.all").bind("click", function() {
     var table = $(".help.index .ui.table");
+    navigator.vibrate(10);
     if (expandAll === false) {
       table.show("fast");
       $(".help.section .icon").addClass("active");
