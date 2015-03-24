@@ -83,7 +83,7 @@ app.use(cookieParser());
 
 // static folders
 app.use(express.static(path.join(__dirname, 'public'), {
-    maxAge: 86400000 // 1 day
+    maxAge: 1800000 // 30 minutes
 }));
 app.use("/help/downloads", express.static(path.join(__dirname, 'downloads')));
 
