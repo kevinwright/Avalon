@@ -154,24 +154,78 @@
 
   // ----
 
-  html, body, .container, .scroller {
-    height: 100%;
+  @media @desktop {
+    #mobile-menu {
+      display: none;
+      background: @col_background;
+    }
   }
 
-  .scroller {
-    overflow-y: scroll;
-  }
 
-  .scroller,
-  .scroller-inner {
-    position: relative;
+  #share-mobile {
+    display: none;
+    .item {
+      padding: 5px;
+      text-decoration: none;
+      &.twitter {
+        color: #fff;
+        &:hover, &:active {
+          color: #4092cc;
+        }
+      }
+      &.facebook {
+        color: #fff;
+        &:hover, &:active {
+          color: #3b579d;
+        }
+      }
+      &.google.plus {
+        color: #fff;
+        &:hover, &:active {
+          color: #d34836;
+        }
+      }
+      &.pinterest {
+        color: #fff;
+        &:hover, &:active {
+          color: #b81621;
+        }
+      }
+      &.delicious {
+        color: #fff;
+        &:hover, &:active {
+          color: #07a5ff;
+        }
+      }
+      &.reddit {
+        color: #fff;
+        &:hover, &:active {
+          color: #D1E2F1;
+        }
+      }
+      &.stumbleupon {
+        color: #fff;
+        &:hover, &:active {
+          color: #eb4924;
+        }
+      }
+      &.tumblr {
+        color: #fff;
+        &:hover, &:active {
+          color: #36465D;
+        }
+      }
+    }
   }
-
-  .container {
-    position: relative;
-    overflow: hidden;
+  #mobile-menu {
+    .mm-footer {
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    #share-mobile {
+      display: block;
+    }
   }
-
 
 //    __  ______
 //   / / / /  _/
@@ -1768,4 +1822,4 @@
                                            
 @import "icons.less";
 @import "input.less";
-@import "mpmenu.less";
+@import "menu.less";

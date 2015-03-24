@@ -82,7 +82,7 @@ module.exports = function(grunt) {
     autoprefixer: {
       options: {
         safe: true,
-        browsers: ['last 5 versions', '> 1%', "ie >= 6", "iOS >= 4"]
+        browsers: ['last 20 versions', '> 1%', "ie >= 6", "iOS >= 1"]
       },
       dev: {
         src: ['public/css/style.css'],
