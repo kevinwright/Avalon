@@ -9,6 +9,13 @@ nav#mobile-menu
           li
             a(href=item.url, title=item.title, target=item.target, class=item.css) #{item.content}
             ul
+              if (item.url == "/help/")
+                li
+                  form(action="/help/search").helpform.inverted    
+                    .ui.fluid.icon.input   
+                      label HELP   
+                      input(type="text", name="page", list="pages", placeholder="search...")   
+                      i.search.icon.link(onclick="this.parentNode.parentNode.submit()")
               for subitem in item.items
                 if subitem.items
                   li
