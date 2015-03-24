@@ -1,0 +1,43 @@
+mixin item(item)
+  a(href=item.url, title=item.title, target=item.target, class=item.css) #{item.content}
+
+nav#mp-menu.mp-menu
+  .mp-level
+    h2(class="icon icon-world") Menu
+    ul
+      if avalon && avalon.menu
+        for item in avalon.menu.left
+          if item.items
+            li.icon.triangle.right
+              a(href=item.url, title=item.title, target=item.target, class=item.css)
+                | #{item.content}
+                i.icon.triangle.right
+              .mp-level
+                h2: a(href=item.url, title=item.title, target=item.target, class=item.css) #{item.content}
+                a.mp-back(href="#")
+                  i.icon.left.triangle
+                  | Back
+                ul
+                  li.icon.icon-arrow-left
+                    for subitem in item.items
+                      if subitem.items
+                        li.icon.icon-arrow-left
+                          a(href=subitem.url, title=subitem.title, target=subitem.target, class=subitem.css)
+                            | #{subitem.content}
+                            i.icon.triangle.right
+                          .mp-level
+                            h2: a(href=subitem.url, title=subitem.title, target=subitem.target, class=subitem.css) #{subitem.content}
+                            a.mp-back(href="#")
+                              i.icon.left.triangle
+                              | back
+                            ul
+                              for subsubitem in subitem.items
+                                li
+                                  +item(subsubitem)
+                      else
+                        li
+                          +item(subitem)
+
+          else
+            li
+              +item(item)

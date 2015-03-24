@@ -68,7 +68,7 @@
   @col_primary: #D2B063;
   @col_secondary: #00D1FF;
   @col_foreground: #fff;
-  @col_background: #13161A;
+  @col_background: #020F17;
   @col_footer: #2b1e0a;
 
   @col_red: #FF2F2F;
@@ -155,6 +155,27 @@
     border-bottom: solid 1px rgba(43, 105, 134, 0.4);
     border-top: solid 1px rgba(0, 0, 0, 1);
     margin-bottom: 1em;
+  }
+
+
+  // ----
+
+  html, body, .container, .scroller {
+    height: 100%;
+  }
+
+  .scroller {
+    overflow-y: scroll;
+  }
+
+  .scroller,
+  .scroller-inner {
+    position: relative;
+  }
+
+  .container {
+    position: relative;
+    overflow: hidden;
   }
 
 
@@ -1360,6 +1381,10 @@
     z-index: 100000;
     background: url("/img/pattern/topbar.png");
 
+    #open-sidebar {
+      padding: 10px 15px;
+    }
+    
     .menu .item {
       padding: 10px .5em;
       i.icon {
@@ -1755,3 +1780,4 @@
                                            
 @import "icons.less";
 @import "input.less";
+@import "mpmenu.less";

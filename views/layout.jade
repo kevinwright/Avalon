@@ -7,13 +7,21 @@ html
     include includes/seo
     include includes/gtm
   body(class=body)
-    include includes/topbar
-    block header
-      .ui.header
-        .logo-wrap
-          a(href="/"): img.logo(src="/img/logo.png", alt=avalon.website.alt.header, title=avalon.website.alt.header)
-    block content
-    include includes/footer
+    .container
+      .mp-pusher#mp-pusher
+        include includes/sidebar
+        .scroller
+          .scroller-inner
+            include includes/topbar
+            block header
+              .ui.header
+                .logo-wrap
+                  a(href="/"): img.logo(src="/img/logo.png", alt=avalon.website.alt.header, title=avalon.website.alt.header)
+            block content
+            include includes/footer
     script(type="text/javascript", src="/js/jquery.min.js")
+    script(src="/js/snap.svg.js")
     script(src="/js/main.js")
+    script.
+      new mlPushMenu( document.getElementById( 'mp-menu' ), document.getElementById( 'open-sidebar' ) );
     block scripts

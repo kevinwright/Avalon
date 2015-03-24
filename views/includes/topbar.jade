@@ -35,16 +35,10 @@ mixin item(item)
         for item in avalon.menu.right
           +item(item)
 
-  .ui.menu.mobile.very.tiny.contain
+  .ui.menu.mobile.contain
     .left.menu
+      a.item#open-sidebar(title="Open Menu", alt="Open Menu", href="#")
+        i.icon.list.link.small
+        | &ensp; Menu
+    .right.menu
       a.item(href="/") Avalon RPG
-      .ui.dropdown.item
-        i.icon.triangle.down
-        .menu
-          if avalon && avalon.menu
-            for item in avalon.menu.left
-              if (item.url)
-                +item(item)
-            for item in avalon.menu.right
-              if (item.url)
-                +item(item)
