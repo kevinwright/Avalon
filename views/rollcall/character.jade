@@ -63,9 +63,31 @@ block content
                     if person.order != "No Order"
                       | Order of 
                     | #{person.order}
+
+      .ui.grid.two.column.mobile-responsive
+        .column
+          .ui.box.small
+           include ../includes/disqus
+        .column
+          center.ui.box.small
+            include ../includes/share-icons
               
-          .ui.block
-            .content
-              a(href="/rollcall/")
-                i.icon.left.triangle
-                | Back to Rollcall
+          .ui.box.small
+            if (person.city != "god")
+              .ui.menu.vertical
+                a.item(href="/rollcall/cities/"+person.city)
+                  if person.city != "No Citizenship"
+                    | Citizens of 
+                  | #{person.city}
+                a.item(href="/rollcall/guilds/"+person.guild)
+                  | #{person.guild}
+                  if person.guild != "No Guild"
+                    |  Guild
+                a.item(href="/rollcall/orders/"+person.order)
+                  if person.order != "No Order"
+                    | Order of 
+                  | #{person.order}
+                  
+          a(href="/rollcall/").ui.button.fluid
+            i.icon.left.triangle
+            | Back to Rollcall

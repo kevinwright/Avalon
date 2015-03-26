@@ -120,7 +120,7 @@ var readdir = function(dir, callback) {
     var mySplitInput = splitInput(src);
 
     return mySplitInput ?  {
-        meta : yaml.safeLoad(mySplitInput[0]),
+        meta : yaml.safeLoad(mySplitInput[0], {onWarning: function(err) {console.warn(err)}}),
         html : marked(mySplitInput[1], opt, callback)
       } : {
         meta : null,

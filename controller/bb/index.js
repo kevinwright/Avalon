@@ -202,12 +202,22 @@ function Controller() {
         });
 
         if (!post) return self.errorPost(res, board, id);
+
+        var nextPost = _.find(posts, function(post) {
+          return post.number === id - 1;
+        });
+        var prevPost = _.find(posts, function(post) {
+          return post.number === id + 1;
+        });
+
         readPost(board.id, post.body.href, function(err, content) {
           if (err) return self.errorPost(res, board, id);
 
           res.render("bb/post", {
             board: board,
             post: post,
+            nextPost: nextPost,
+            prevPost: prevPost,
             description: util.getDescription(content),
             keywords: util.getKeywords(content),
             content: parser(content)

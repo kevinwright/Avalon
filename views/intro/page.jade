@@ -83,6 +83,24 @@ block content
                       else
                         a(href="/intro" + sub.url).item #{sub.content}
 
+      .ui.grid.two.column.mobile-responsive
+        .column
+          .ui.box.small
+           include ../includes/disqus
+        .column
+          center.ui.box.small
+            include ../includes/share-icons
+          nav.ui.menu.vertical
+            .item.head
+              | #{cat.content}
+            .menu
+              for sub in cat.items
+                if (sub.content == page.content)
+                  a(href="/intro" + sub.url).item.active #{sub.content}
+                else
+                  a(href="/intro" + sub.url).item #{sub.content}
+
+
 block scripts
   script(src="/js/accordion.js")
   script(src="/js/reveal.js")

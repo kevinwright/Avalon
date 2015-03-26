@@ -24,11 +24,12 @@ block content
         .ten.column.wide.main
           | !{extra.intro.html}
           if recent
-            h2.ui.title.underline #{meta.events.title}
-            for update in recent.splice(0, meta.events.max)
-              .event.ui.box.small
-                .date #{update.date}
-                .text #{update.item}
+            .recent
+              h2.ui.title.underline #{meta.events.title}
+              for update in recent.splice(0, meta.events.max)
+                .event.ui.box.small
+                  .date #{update.date}
+                  .text #{update.item}
 
 
         .six.column.wide.sidebar

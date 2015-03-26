@@ -8,13 +8,6 @@ block head
 block content
   .ui.content.bb
     .contain
-      .bread
-        a(href="/bb/") BB
-        i.icon.angle.right
-        a(href="/bb/" + board.url)  #{board.title}
-        i.icon.angle.right
-        |  Post <b>#{post.number}</b>
-
       .ui.box
         h2.ui.title.underline
           | #{post.subject}
@@ -33,3 +26,25 @@ block content
                 a(href="/bb/" + board.url + "/participant/"+post.to.shortname) #{post.to.fullname}
 
           .text.bb !{content}
+
+      .ui.grid.two.column.mobile-responsive
+        .column
+          .ui.box.small
+           include ../includes/disqus
+        .column
+          center.ui.box.small
+            include ../includes/share-icons
+          ul.ui.menu.simple.vertical.box
+            li.item
+              a(href="/bb/") Bulletin Boards
+              ul
+                li.item
+                  a(href="/bb/" + board.url)  #{board.title}
+                  ul
+                    if prevPost
+                      li.item
+                        a(href="/bb/" + board.url + "/" + prevPost.number + +"/"+encodeURIComponent(prevPost.subject)) #{prevPost.from.shortname}: #{prevPost.subject}
+                    li.item.active #{post.from.shortname}:  #{post.subject}
+                    if nextPost
+                      li.item
+                        a(href="/bb/" + board.url + "/" + nextPost.number + +"/"+encodeURIComponent(nextPost.subject)) #{nextPost.from.shortname}: #{nextPost.subject}

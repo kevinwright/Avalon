@@ -57,7 +57,7 @@ block content
         
         .four.wide.column.sidebar
           if (page.content.library && page.content.library.meta && page.content.library.meta.rel)
-            ui.block
+            .ui.block
               .content
                 if (section)
                   h3.ui.title.center.underline #{section.id} - #{section.title}
@@ -106,13 +106,24 @@ block content
                   for pagelink in page.content.library.meta.rel
                     li
                       a(href="/help/pages/" + pagelink.toLowerCase()).item #{pagelink}
-          //- if (page.content.library && page.content.library.meta && page.content.library.meta.keywords)
-          //-   .ui.block
-          //-     .content
-          //-       h3.ui.title.center.underline Keywords
-          //-       ui.ui.menu.vertical
-          //-         for keyword in page.content.library.meta.keywords
-          //-           li
-          //-             a(href="/help/keywords/" + keyword.toLowerCase()).item #{keyword}
 
-       
+      .ui.grid.two.column.mobile-responsive
+        .column
+          .ui.box.small
+           include ../includes/disqus
+        .column
+          center.ui.box.small
+            include ../includes/share-icons
+          nav.ui.menu.box.small
+            .item.head
+              a(href="/help/") Help
+              |  - 
+              a(href="/help/sections/" + page.section) Section #{page.section}
+            .menu
+              for pagelink in section.pages
+                if (pagelink.id == page.id)
+                  .active.item
+                    b #{pagelink.title}
+                else
+                  a(href="/help/pages/" + pagelink.title.toLowerCase(), title=pagelink.description).item
+                    b #{pagelink.title}

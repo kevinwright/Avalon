@@ -164,6 +164,10 @@
 
   #share-mobile {
     display: none;
+  }
+
+  .share-icons,
+  .ui.menu .share-icons {
     .item {
       padding: 5px;
       text-decoration: none;
@@ -217,6 +221,7 @@
       }
     }
   }
+
   #mobile-menu {
     .mm-footer {
       overflow: hidden;
@@ -1402,6 +1407,25 @@
       background: @col_footer;
       color: @col_foreground;
     }
+
+    @media only screen and (min-width: 480px) and (max-width: 1024px) {
+      .ui.grid.responsive .column, .ui.grid.responsive .wide.column, .ui.grid.responsive.columns .column {
+        width: 50%;
+
+        a.ui.button.social {
+          width: 50%;
+          display: inline-block;
+          float: left;
+          margin: 0;
+          border-radius: 0;
+        }
+
+        &:last-child {
+          width: 100%;
+        }
+
+      }
+    }
   }
 
 //   ______            __              
@@ -1489,6 +1513,53 @@
     .ui.footer {
        margin-top: 0px;
     }
+
+    @media @tablet {
+      .recent {
+        margin-top: 1em;
+
+        .ui.title {
+          display: none;
+        }
+
+        .event.box {
+          width: 50%;
+          float: left;
+          display: inline-block;
+          margin: 0;
+          padding: 10px;
+          height: 80px;
+          overflow: hidden;
+          border-radius: 0;
+
+          .date {
+            display: none;
+          }
+
+          .text {
+            padding-top: 0;
+          }
+
+          &:after {
+            content: "";
+             text-align: right;
+             position: absolute;
+             bottom: 0;
+             right: 0;
+             width: 100%;
+             height: 50px;
+             background: linear-gradient(to bottom, rgba(2, 15, 23, 0), rgba(2, 15, 23, 1) 100%);
+          }
+        }
+      }
+    }
+
+    @media @phone {
+      .recent {
+        display: none;
+      }
+    }
+
   }
 
   .ui.scroll {
@@ -1503,8 +1574,12 @@
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2) inset;
     background: fade(darken(@col_background, 5%), 50%);
 
-    @media @phone, @tablet {
+    @media @tablet {
       height: 500px;
+    }
+
+    @media @phone {
+      display: none;
     }
 
     .top {
@@ -1569,6 +1644,7 @@
         left: -100%;
       }
     }
+
   }
 
 

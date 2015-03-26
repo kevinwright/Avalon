@@ -44,19 +44,4 @@ nav#mobile-menu
           +item(item)
 
 #share-mobile
-  a(title="Tweet", alt="Tweet", href="JavaScript:window.open('https://twitter.com/share?url='+window.location.href+'&text=&via=AvalonOnlineRPG','','width=657,height=400,scrollbars=1')", target="_blank").twitter.item
-    i.icon.twitter
-  a(title="Share", alt="Share", href="JavaScript:window.open('http://www.facebook.com/sharer.php?u='+window.location.href,'','width=657,height=400,scrollbars=1')", target="_blank").facebook.item
-    i.icon.facebook
-  a(title="Post", alt="Post", href="https://plus.google.com/share?url=http://www.avalon-rpg.com" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;").google.plus.item
-    i.icon.google.plus
-  a(title="Pin", alt="Pin", href="http://pinterest.com/pin/create/button/?url=http://kurtnoble.com/labs/rrssb/index.html&media=http://kurtnoble.com/labs/rrssb/media/facebook-share.jpg&description=Ridiculously%20responsive%20social%20sharing%20buttons%20by%20KNI%20Labs.").pinterest.item
-    i.icon.pinterest
-  a(alt="Submit to Reddit", title="Submit to Reddit", href="http://www.reddit.com/submit", onclick="javascript:window.open('http://www.reddit.com/submit?url=' + encodeURIComponent(window.location)); return false").reddit.item
-    i.icon.reddit
-  a(title="Save on Delicious", alt="Save on Delicious", href="#", onclick=onclick="window.open('https://delicious.com/save?v=5&provider=Avalon%20RPG&noui&jump=close&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=550,height=550'); return false;").delicious.item
-    i.icon.delicious
-  a(alt="Share on Stumbleupon", title="Share on Stumbleupon", href="#", onclick=onclick="window.open('http://www.stumbleupon.com/badge/?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title), 'stumbleupon','toolbar=no,width=550,height=550'); return false;").stumbleupon.item
-    i.icon.stumbleupon
-  a(alt="Share on Tumblr", title="Share on Tumblr", href="#", onclick="javascript:var d=document,w=window,e=w.getSelection,k=d.getSelection,x=d.selection,s=(e?e():(k)?k():(x?x.createRange().text:0)),f='https://www.tumblr.com/share',l=d.location,e=encodeURIComponent,p='?v=3&u='+e(l.href) +'&t='+e(d.title) +'&s='+e(s),u=f+p,sw=0,sd;try{sd =d.createElement('div');sd.style.height ='100px';sd.style.width='100px';sd.style.overflow='scroll';d.body.appendChild(sd);sw=sd.offsetWidth-sd.clientWidth;d.body.removeChild(sd);}catch(z){};try{if(!/^(.*\.)?tumblr[^.]*$/.test(l.host))throw(0);tstbklt();}catch(z){a =function(){if(!w.open(u,'_blank','toolbar=0,resizable=0,status=1,scrollbars=1,width='+(540+sw)+',height=600'))l.href=u;};setTimeout(a,10);}void(0);").tumblr.item
-    i.icon.tumblr
+ include share-icons
