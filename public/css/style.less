@@ -1,5 +1,39 @@
 
 @import url(http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700,900);
+@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans:100,300,400,400italic,500,700italic,900);
+
+//  _    __               
+// | |  / /___ ___________
+// | | / / __ `/ ___/ ___/
+// | |/ / /_/ / /  (__  ) 
+// |___/\__,_/_/  /____/  
+                       
+
+  @width_max: 1024px;
+  @col_primary: #D2B063;
+  @col_secondary: #00D1FF;
+  @col_foreground: #fff;
+  @col_background: #020F17;
+  @col_footer: #2b1e0a;
+
+  @col_red: #FF2F2F;
+  @col_orange: #FF8B2F;
+  @col_yellow: #FFF32F;
+  @col_green: #85F02C;
+  @col_cyan: #7cdede;
+  @col_blue: @col_primary;
+  @col_purple: #7F35D3;
+
+  @font_serif: "Alegreya", "Times New Roman", "Times", serif;
+  @font_sans: "Alegreya Sans", "Helvetica", "Arial", sans-serif;
+
+  @large_responsive:   ~"only screen and (max-width: 1280px)"; // smaller than contain.large
+  @desktop:   ~"only screen and (min-width: 1024px)";
+  @tablet:    ~"only screen and (min-width: 720px) and (max-width: 1023px)";
+  @phone:   ~"only screen and (max-width: 719px)";
+  @tiny:   ~"only screen and (max-width: 380px)";
+
+
 
 //     ____                 __ 
 //    / __ \___  ________  / /_
@@ -7,11 +41,13 @@
 //  / _, _/  __(__  )  __/ /_  
 // /_/ |_|\___/____/\___/\__/  
                             
+  
 
   html, body {
-    background: #000A12;
+    background: @col_background;
+    color: @col_foreground;
     border: 0;
-    font-family: "Alegreya", "Times New Roman", "Times", serif;
+    font-family: @font_sans;
     line-height: 1.5;
     margin: 0;
     padding: 0;
@@ -57,33 +93,6 @@
     outline: 0;
   }
 
-//  _    __               
-// | |  / /___ ___________
-// | | / / __ `/ ___/ ___/
-// | |/ / /_/ / /  (__  ) 
-// |___/\__,_/_/  /____/  
-                       
-
-  @width_max: 1024px;
-  @col_primary: #D2B063;
-  @col_secondary: #00D1FF;
-  @col_foreground: #fff;
-  @col_background: #020F17;
-  @col_footer: #2b1e0a;
-
-  @col_red: #FF2F2F;
-  @col_orange: #FF8B2F;
-  @col_yellow: #FFF32F;
-  @col_green: #85F02C;
-  @col_cyan: #7cdede;
-  @col_blue: @col_primary;
-  @col_purple: #7F35D3;
-
-  @large_responsive:   ~"only screen and (max-width: 1280px)"; // smaller than contain.large
-  @desktop:   ~"only screen and (min-width: 1024px)";
-  @tablet:    ~"only screen and (min-width: 720px) and (max-width: 1023px)";
-  @phone:   ~"only screen and (max-width: 719px)";
-
 
 //    ______                           __
 //   / ____/__  ____  ___  _________ _/ /
@@ -107,7 +116,7 @@
   a {
     color: @col_primary;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 500;
     &:visited {
       color: darken(@col_primary, 15%);
     }
@@ -128,6 +137,7 @@
 
   p {
     margin: 1em 0em;
+    font-family: @font_serif;
     &.lead {
       font-size: 1.2em;
     }
@@ -260,14 +270,22 @@
         padding-left: 20px;
         padding-right: 20px;
       }
+      @media @tiny {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
     }
     @media @tablet {
       padding-left: 20px;
       padding-right: 20px;
     }
     @media @phone {
-      padding-left: 20px;
-      padding-right: 20px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    @media @tiny {
+      padding-left: 5px;
+      padding-right: 5px;
     }
   }
 
@@ -286,6 +304,7 @@
   h6 { font-size: .75em; }
 
   .ui.title {
+    font-weight: 500;
     &.center, &.centre {text-align: center;}
     &.overline {
       margin: .4em auto;
@@ -311,6 +330,7 @@
     &.sub {
       margin-top: 0px;
       padding-top: 0px;
+      font-weight: 400;
     }
     .right.label {
       float: right;
@@ -429,6 +449,9 @@
       .content {
         display: none;
       }
+    }
+    @media @tiny {
+      padding: 0px;
     }
   }
 
@@ -1183,6 +1206,8 @@
       font-size: 3em;
       padding-left: 20px;
       line-height: 1;
+      font-family: @font_serif;
+      font-weight: 700;
       @media @phone {
         text-align: center;
       }
@@ -1190,7 +1215,7 @@
   }
 
   .ui.timeline {
-    font-family: "Roboto", sans-serif;
+    font-family: @font_sans;
     max-width: 760px;
     margin: auto;
     display: table;
@@ -1221,7 +1246,7 @@
           text-transform: uppercase;
         }
         .month {
-          font-weight: 600;
+          font-weight: 500;
           font-size: 16px;
           text-transform: uppercase;
         }
@@ -1256,9 +1281,11 @@
       
       .content {
         .title {
-          font-weight: 400;
+          font-family: @font_sans;
+          font-weight: 500;
         }
-        font-weight: 300;
+        font-family: @font_serif;
+        font-weight: 400;
         display: table-cell;
         vertical-align: middle;
         height: 75px;
@@ -1285,7 +1312,7 @@
           font-size: 32px;
           font-style: italic;
           font-weight: normal;
-          font-family: "Alegreya";
+          font-family: @font_serif;
         }
       }
     }
@@ -1369,11 +1396,36 @@
         cursor: pointer;
       }
     }
+
     .logo {
       height: 150px;
       max-width: 100%;
       width: auto;
       height: auto;
+
+    }
+    .logo-wrap {
+      .ui.title, .ui.title a {
+        color: @col_foreground;
+        font-weight: 700;
+        font-size: 82px;
+        font-family: @font_serif;
+        line-height: 0.7;
+        padding-top: 50px;
+        text-shadow: 1px 1px 10px black;
+        text-decoration: none;
+      }
+    }
+
+
+    @media @tiny {
+      height: 320px;
+      .logo-wrap {
+        .ui.title, .ui.title a {
+          font-weight: 700;
+          font-size: 48px;
+        }
+      }
     }
   }
 
@@ -1392,6 +1444,9 @@
     min-height: 300px;
     padding: 20px 0;
     margin-top: 100px;
+    @media @tiny {
+      margin-top: 0px;
+    }
     .ui.title {
       font-weight: 400;
       color: @col_footer;
@@ -1622,8 +1677,7 @@
 
       .title {
         font-size: 2em;
-        font-weight: 100;
-        font-style: italic;
+        font-weight: 300;
         &.subtitle {
           font-size: 1.5em;
           line-height: .8;
@@ -1632,9 +1686,14 @@
       }
 
       p {
-        font-size: 1.5em;
         color: #ccc;
-        line-height: 1.2;
+        line-height: 1.5;
+        font-family: "Alegreya Sans";
+        max-width: 940px;
+        margin: auto;
+        font-weight: 300;
+        margin-bottom: 1em;
+        font-size: 1.2em;
       }
 
       &.active {
@@ -1663,6 +1722,9 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 5px;
         position: relative;
+        @media @tiny {
+          padding: 5px 10px;
+        }
         &.breadcrumbed {
           padding-top: 50px;
           .ui.breadcrumb {
@@ -1681,6 +1743,13 @@
             box-shadow: 0px 2px 2px rgba(00, 0, 0, 0.5);
             height: 50px;
           }
+          @media @tiny {
+            padding-top: 40px;
+            .ui.breadcrumb {
+              padding: 5px 10px;
+              height: 40px;
+            }
+          }
         }
       }
       > .sidebar {
@@ -1690,6 +1759,9 @@
           padding: 0px;
           .content {
             padding: 0 20px;
+            @media @tiny {
+              padding: 0px;
+            }
 
             .menu {
               .head {
@@ -1712,6 +1784,9 @@
             content: " ";
             height: 30px;
             display: block;
+            @media @tiny {
+              height: 10px;
+            }
           }
           &:last-child {
             &:after {
@@ -1751,7 +1826,7 @@
         padding: .5em;
         padding-right: 2em!important;
         padding-left: 3em!important;
-        font-family: "Alegreya";
+        font-family: @font_sans;
         text-transform: uppercase;
         opacity: 1;
         color: black;

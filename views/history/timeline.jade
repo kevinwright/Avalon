@@ -1,7 +1,6 @@
 extends ../layout
 
 block head
-  link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Roboto:300,400,600,900")
   if (avalon.website.history[page])
     - var title = mkTitle(avalon.website.history[page].title, "History")
     - var description = avalon.website.history[page].description

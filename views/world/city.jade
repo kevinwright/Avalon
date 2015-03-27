@@ -5,11 +5,14 @@ block head
   - var description = city.get("intro", true)
   - var keywords = mkKeywords(city.title + ", " + avalon.website.world.city.keywords)
   - var canonical = "http://www.avalon-rpg.com/cities/" + city.name
+block header
+  .ui.header
+    .logo-wrap
+      h1.ui.title: a(href="/", id="top") #{city.title}
 
 block content
   .ui.content.city
     .contain
-      h1.ui.title #{city.title}
       .ui.grid.responsive
         .twelve.column.wide.main.breadcrumbed
           .ui.breadcrumb

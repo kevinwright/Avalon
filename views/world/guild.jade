@@ -6,11 +6,14 @@ block head
   - var keywords = mkKeywords(guild.title + ", " + avalon.website.world.guild.keywords)
   - var canonical = "http://www.avalon-rpg.com/guilds/" + guild.name
 
+block header
+  .ui.header(style="background-image: url(/img/headers/" + guild.info.profession.toLowerCase() + ".png);")
+    .logo-wrap
+      h1.ui.title: a(href="/", id="top") The #{guild.title}
+
 block content
   .ui.content.guild
     .contain
-      h1.ui.title The #{guild.title}
-
       .ui.grid.responsive
         .twelve.column.wide.main.breadcrumbed
           .ui.breadcrumb
