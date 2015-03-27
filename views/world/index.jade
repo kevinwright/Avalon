@@ -34,7 +34,8 @@ block content
             ul.right.label.ui.menu
               for guild in guilds
                 a.item(href="/guilds/" + guild.toLowerCase()) #{guild}
-          img(src="http://www.avalon-rpg.com/images/wingart/profthumbs/" + title.toLowerCase() + ".gif").left.floated.ui.image
+          a(href="/help/pages/" + title.toLowerCase())
+            img(height=180, src="/img/professions/" + title.toLowerCase() + ".jpg").left.floated.ui.image
           p= description
          
       .section.guilds.box.ui

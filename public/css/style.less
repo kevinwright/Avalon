@@ -1189,6 +1189,12 @@
     .section .row {
       margin-top: 10px;
       padding-top: 10px;
+      &:after {
+        clear: both;
+        overflow: hidden;
+        content: " ";
+        display: block;
+      }
     }
   }
   .ui.content.city, .ui.content.guild, .ui.page.academy {
