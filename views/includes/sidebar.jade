@@ -6,7 +6,7 @@ nav#mobile-menu
     if avalon && avalon.menu
       for item in avalon.menu.left
         if item.items
-          li
+          li(class=item.css)
             a(href=item.url, title=item.title, target=item.target, class=item.css) #{item.content}
             ul
               if (item.url == "/help/")
@@ -18,18 +18,18 @@ nav#mobile-menu
                       i.search.icon.link(onclick="this.parentNode.parentNode.submit()")
               for subitem in item.items
                 if subitem.items
-                  li
+                  li(class=subitem.css)
                     a(href=subitem.url, title=subitem.title, target=subitem.target, class=subitem.css) #{subitem.content}
                     ul
                       for subsubitem in subitem.items
-                        li
+                        li(class=subsubitem.css)
                           +item(subsubitem)
                 else
-                  li
+                  li(class=subitem.css)
                     +item(subitem)
 
         else
-          li
+          li(class=item.css)
             +item(item)
     else
       li
@@ -40,7 +40,7 @@ nav#mobile-menu
           a.item(href="/rollcall/#who") #{avalon.users().length} Players Online
     if avalon && avalon.menu
       for item in avalon.menu.right
-        li
+        li(class=item.css)
           +item(item)
 
 #share-mobile.social-sidebar
