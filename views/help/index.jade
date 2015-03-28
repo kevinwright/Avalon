@@ -31,9 +31,9 @@ block content
                   tbody
                     for page in section.pages
                       tr
-                        td #{page.id}
-                        td: a(href="/help/pages/" + page.title.toLowerCase()) #{page.title}
-                        td #{page.description}
+                        td(style="width: 10%") #{page.id}
+                        td(style="width: 20%"): a(href="/help/pages/" + page.title.toLowerCase()) #{page.title}
+                        td(style="width: 70%") #{page.description}
 
         .four.column.wide.sidebar
           .ui.block

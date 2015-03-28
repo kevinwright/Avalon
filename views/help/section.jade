@@ -5,16 +5,24 @@ block head
   if avalon.website.help[section.id]
     - var description = avalon.website.help[section.id].description
   - var canonical = "http://www.avalon-rpg.com/help/sections/" + section.id
+
 block content
   .ui.content.manual
     .contain
-      .bread
-        a(href="/help/") Help
-        |  &gt; 
-        b Section #{section.id}
       .ui.box
-        h1.ui.title.center.underline Section #{section.id} - #{section.title}
-    
+        h1.ui.title.center Section #{section.id} - #{section.title}
+
+        .pagination.ui.menu(style="text-align:center;")
+          if prevSection
+            a(href="/help/sections/"+prevSection.id).item
+              | #{prevSection.id} - #{prevSection.title}
+            i.item.primary.icon.triangle.left
+          .item.primary Section #{section.id}
+          if nextSection
+            i.item.primary.icon.triangle.right
+            a(href="/help/sections/"+nextSection.id).item
+              | #{nextSection.id} - #{nextSection.title}
+        hr
         table.ui.table
           tbody
             for page in section.pages
@@ -22,4 +30,16 @@ block content
                 td #{page.id}
                 td: a(href="/help/pages/" + page.title.toLowerCase()) #{page.title}
                 td #{page.description}
-      center: a(href="/help/") Back to Index
+
+        hr
+        .pagination.ui.menu(style="text-align:center;")
+          a.primary.item(href="/help/") Back to Index
+          if prevSection
+            a(href="/help/sections/"+prevSection.id).item
+              | #{prevSection.id} - #{prevSection.title}
+            i.item.primary.icon.triangle.left
+          .item.primary Section #{section.id}
+          if nextSection
+            i.item.primary.icon.triangle.right
+            a(href="/help/sections/"+nextSection.id).item
+              | #{nextSection.id} - #{nextSection.title}

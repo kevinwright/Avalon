@@ -123,10 +123,16 @@ function Controller() {
   this.section = function(req, res) {
     var section = req.params.section || req.query.section;
     if (!self.sections[section]) return res.redirect("/help/");
+
+    var prevSection = self.sections[parseInt(section) - 1];
+    var nextSection = self.sections[parseInt(section) + 1];
+
     res.render("help/section", {
       title: section,
       section: self.sections[section],
       sections: self.sections,
+      prevSection: prevSection,
+      nextSection: nextSection,
       keywords: _.pluck(self.sections[section].pages, "title").join(", ").toLowerCase()
     });
   };
@@ -173,10 +179,12 @@ function Controller() {
         });
       } 
 
+      var section = self.sections[data.section];
+
       res.render("help/page", {
         title: page,
         page: data,
-        section: self.sections[data.section]
+        section: section
       });
     });
   };

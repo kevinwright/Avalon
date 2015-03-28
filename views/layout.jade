@@ -16,6 +16,13 @@ html
       block content
       include includes/footer
     include includes/sidebar
+    script(type="application/javascript").
+      var meta = {
+        title: '#{title}',
+        description: '#{description}',
+        keywords: '#{keywords}',
+        url: '#{canonical}'
+      };
     script(type="application/javascript", src="/js/jquery.min.js")
     script(type="application/javascript", src="/js/hammer.js")
     script(type="application/javascript", src="/js/menu.js")

@@ -3,8 +3,6 @@ if (canVibrate && !("vibrate" in navigator))
     navigator.vibrate = navigator.mozVibrate;
 
 $(document).ready(function() {
-  $(".ui.button.google.plus").attr("href", "https://plus.google.com/share?url="+window.location.href);
-
   $("#mobile-menu").mmenu({
     extensions: ["theme-black", "border-none"],
     header: true,
@@ -22,4 +20,8 @@ $(document).ready(function() {
   }, {
     transitionDuration: 200
   });
+
+  
+  $(".ui.button.google.plus").attr("href", "https://plus.google.com/share?url="+window.location.href);
+
 });

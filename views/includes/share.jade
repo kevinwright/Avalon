@@ -4,10 +4,10 @@ a(href="JavaScript:window.open('https://twitter.com/share?url='+window.location.
 a(href="JavaScript:window.open('http://www.facebook.com/sharer.php?u='+window.location.href,'','width=657,height=400,scrollbars=1')", target="_blank").ui.social.button.facebook.item
   i.icon.facebook
   | Share
-a(href="https://plus.google.com/share?url=http://www.avalon-rpg.com" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;").ui.button.social.google.plus.item
+a(href="https://plus.google.com/share?url=http://www.avalon-rpg.com", onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;").ui.button.social.google.plus.item
   i.icon.google.plus
   | Post
-a(href="http://pinterest.com/pin/create/button/?url=http://kurtnoble.com/labs/rrssb/index.html&media=http://kurtnoble.com/labs/rrssb/media/facebook-share.jpg&description=Ridiculously%20responsive%20social%20sharing%20buttons%20by%20KNI%20Labs.").ui.social.button.pinterest.item
+a(href="http://pinterest.com/pin/create/button/?url=http://www.avalon-rpg.com&description=", onclick="javascript:window.open('http://pinterest.com/pin/create/button/?url='+window.location+'&description='+encodeURIComponent(document.title), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600'); return false;").ui.social.button.pinterest.item
   i.icon.pinterest
   | Pin
 a(href="http://www.reddit.com/submit", onclick="javascript:window.open('http://www.reddit.com/submit?url=' + encodeURIComponent(window.location)); return false").ui.social.button.reddit.item

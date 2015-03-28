@@ -20,14 +20,16 @@ block content
   .ui.content.manual
     .contain
       .ui.grid.responsive
-        .column.twelve.wide.main
-          .bread
-            a(href="/help/") Help
-            if (section)
-              i.icon.angle.right
-              a(href="/help/sections/" + page.section) Section #{page.section}
-            i.icon.angle.right
-            b #{page.id} #{page.title}
+        .column.twelve.wide.main.breadcrumbed
+          .ui.breadcrumb(style="padding: 5px;")
+            .pagination.ui.menu(style="text-align:center;")
+              a(href="/help/").item
+                | Help
+              i.item.icon.triangle.right
+              if (section)
+                a(href="/help/sections/" + page.section).item Section #{page.section}
+                i.item.icon.triangle.right
+              .item.primary #{page.title}
           if (page.content.library && page.content.library.meta && page.content.library.meta.title)
             h1.ui.title.center.underline #{page.content.library.meta.title}
           else
@@ -53,6 +55,15 @@ block content
               
           else
             .text.help !{page.html}
+
+          .pagination.ui.menu(style="text-align:center;")
+            a(href="/help/").item
+              | Help
+            i.item.icon.triangle.right
+            if (section)
+              a(href="/help/sections/" + page.section).item Section #{page.section}
+              i.item.icon.triangle.right
+            .item.primary #{page.title}
 
         
         .four.wide.column.sidebar
@@ -112,7 +123,7 @@ block content
           .ui.box.small
            include ../includes/disqus
         .column
-          center.ui.box.small
+          center.ui.box.small.social-article-bottom
             include ../includes/share-icons
           nav.ui.menu.box.small
             .item.head

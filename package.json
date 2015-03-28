@@ -32,6 +32,7 @@
     "node-cache": "^1.1.0",
     "pmx": "^0.3.4",
     "request": "^2.53.0",
-    "sanitize-html": "^1.4.3"
+    "sanitize-html": "^1.4.3",
+    "universal-analytics": "^0.3.6"
   }
 }

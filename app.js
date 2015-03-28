@@ -14,6 +14,7 @@ var logger = require('morgan');
 var compression = require('compression');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var ua = require('universal-analytics');
 
 if (process.env.NODE_ENV === "production") {
   global.avalon = {
@@ -76,6 +77,7 @@ if (app.get('env') === 'development') {
   app.use(logger("dev"));
 }
 
+app.use(ua.middleware("UA-XXXX-Y", {cookieName: '_ga'}));
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
