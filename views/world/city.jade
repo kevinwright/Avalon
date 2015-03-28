@@ -57,6 +57,7 @@ block content
               img(src="/img/cities/"+city.name+ ".png").ui.image.fluid
           .ui.block
             .content
+              h5.ui.title.underline.center #{city.title}
               .ui.menu.vertical
                 a.item(href="#found") Founding
                 a.item(href="#intro") Introduction
@@ -67,14 +68,25 @@ block content
               
           .ui.block
             .content
-              a(href="/maps/viewmap.php?back=city&map=" + city.name) View the Large Map
+              h5.ui.title.underline.center Miscellaneous
+              .ui.menu.vertical
+                a.item(href="/maps/viewmap.php?back=city&map=" + city.name) View the Large Map
+                a.item(href="/rollcall/list.html?city=" + city.name) See prominent active citizens
 
           .ui.block
             .content
-              a(href="/rollcall/list.html?city=" + city.name) See prominent active citizens
-
+              h5.ui.title.underline.center Villages Conquered
+              .ui.vertical.menu
+                for affair in affairs
+                  if affair.city == city.title
+                    a.item(href="/help/pages/"+affair.village.toLowerCase().split(" ")[0]) #{affair.village}
+                
           .ui.block
             .content
-              a(href="/world/")
-                i.icon.left.triangle
-                | Back to World
+              h5.ui.title.underline.center Cities
+              .ui.menu.vertical
+                for c in ["Thakria", "Silverfalls", "Mercinae", "Parrius"]
+                  a.item(href="/cities/"+c.toLowerCase(), class={active: city.title == c}) #{c}
+                a.item(href="/world/")
+                  i.icon.left.triangle
+                  | Back to World

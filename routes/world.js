@@ -25,8 +25,12 @@ var guild = require("../controller/world/guild.js");
         type: "city",
         city: req.params.city
       });
-      res.render('world/city', {
-        city: cityPage
+      util.renderYAML("/library/affairs", function(err, content) {
+        if (err) return next(err);
+        res.render('world/city', {
+          city: cityPage,
+          affairs: content.affairs
+        });
       });
     });
   }
