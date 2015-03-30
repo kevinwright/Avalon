@@ -28,6 +28,22 @@ block content
               h4.ui.title: a(href=item.url) #{item.title}
               | #{item.description}
 
+      .section.history.ui.box
+        .ui.grid.responsive.one.columns
+          for link in meta.links
+            .column
+              h2.ui.title: a(href=link.url) #{link.title}
+              | #{link.description}
+
+      .section.modern.box.ui
+        h2.ui.title.underline #{meta.modern.title}
+        .ui.grid.responsive.two.columns
+          for item in meta.modern.items
+            .column
+              h4.ui.title: a(href=item.url) #{item.title}
+              | #{item.description}
+
+
       .section.military.affairs.box.ui
         h2.ui.title.underline #{meta.military.title}
         table.ui.sortable.selectable.revealable.table#militaryTable

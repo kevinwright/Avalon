@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var util = require("../helper/util");
 
-var files = require(global.avalon.files.pages);
+var files = util.renderYAMLSync(global.avalon.files.pages);
 
 function renderPage(page) {
   return function (req, res, next) {

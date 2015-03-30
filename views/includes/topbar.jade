@@ -2,7 +2,7 @@ mixin item(item)
   a.item(href=item.url, title=item.title, target=item.target, class=item.css) #{item.content}
 
 .ui.topbar
-  .ui.menu.very.tiny.contain.desktop
+  .ui.menu.contain.desktop
     .left.menu
       if avalon && avalon.menu
         for item in avalon.menu.left
@@ -18,7 +18,15 @@ mixin item(item)
                       i.icon.triangle.down
                       .menu
                         for subsubitem in subitem.items
-                          +item(subsubitem)
+                          if subsubitem.items
+                            .ui.dropdown.item
+                              a(href=subsubitem.url, title=subsubitem.title, target=subsubitem.target, class=subsubitem.css) #{subsubitem.content}
+                              i.icon.triangle.down
+                              .menu
+                                for subsubsubitems in subsubitem.items
+                                  +item(subsubsubitems)
+                          else
+                            +item(subsubitem)
                   else
                     +item(subitem)
 
@@ -40,5 +48,5 @@ mixin item(item)
       a.item(href="/") Avalon RPG
     .right.menu
       a.item#open-sidebar(title="Open Menu", alt="Open Menu", href="#mobile-menu")
-        i.icon.list.link.small
+        i.icon.ellipsis.vertical.small
         | &ensp; Menu

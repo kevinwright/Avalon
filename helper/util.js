@@ -203,6 +203,11 @@ var readdir = function(dir, callback) {
     });
   };
 
+  var renderYAMLSync = function(file) {
+    return yaml.safeLoad(fs.readFileSync(file));
+  };
+
+
   var renderJSON = function(file, callback) {
     if (file in fileErrCache) return callback(fileErrCache[file]);
     readFile(file, function(fileErr, content) {
@@ -270,6 +275,7 @@ module.exports = {
   renderFile: renderFile,
   renderFileSync: renderFileSync,
   renderYAML: renderYAML,
+  renderYAMLSync: renderYAMLSync,
   renderJSON: renderJSON,
   cap: cap,
   getKeywords: getKeywords,

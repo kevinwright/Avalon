@@ -1,11 +1,12 @@
-var fs = require("fs");
 var _ = require("lodash");
 var synonyms = require(global.avalon.files.synonyms);
 var express = require('express');
 var app = express();
+var fs = require("fs");
+var util = require("../helper/util.js");
 
 var TOCFILE = global.avalon.files.toc;
-var toc = require(TOCFILE);
+var toc = util.renderYAMLSync(TOCFILE);
 
 var AUTOHELPDIR = global.avalon.dir.autohelp,
     HELPDIR = global.avalon.dir.help;

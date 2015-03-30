@@ -10,8 +10,7 @@
                        
 
   @width_max: 1024px;
-  @col_primary: #D2B063;
-  @col_secondary: #00D1FF;
+  @col_primary: #009DFF;
   @col_foreground: #fff;
   @col_background: #020F17;
   @col_footer: #2b1e0a;
@@ -118,15 +117,17 @@
   }
 
   a {
-    color: @col_primary;
+    color: #80C0E8;
     text-decoration: none;
     font-weight: 500;
     &:visited {
-      color: darken(@col_primary, 15%);
+      color: lighten(#80c0e8, 10%);
+      &:hover, &:focus {
+        color: #009DFF;
+      }
     }
     &:hover, &:focus {
-      color: lighten(@col_primary, 20%);
-      text-decoration: underline;
+      color: #009DFF;
     }
   }
 
@@ -560,7 +561,7 @@
       .item {
         width: 50%;
         text-align: center;
-        font-weight: bold;
+        font-weight: 500;
         cursor: pointer;
         &.active {
           cursor: default;
@@ -573,7 +574,7 @@
       padding: .5em;
       color: rgba(255, 255, 255, .8);
       text-decoration: none;
-      transition: background 0.2s;
+      transition: background 0.2s, color 0.2s;
       font-size: 16px;
       a {
         color: rgba(255, 255, 255, .8);
@@ -583,15 +584,15 @@
         }
       }
       &:hover, &:focus {
-        color: rgba(255, 255, 255, 1);
+        color: @col_primary;
         background: rgba(255, 255, 255, .05);
       }
       &.active {
         // color: rgba(255, 255, 255, 1);
-        color: @col_secondary;
+        color: @col_primary;
         background: rgba(255, 255, 255, .05);
         &:hover, &:focus {
-          color: @col_secondary;
+          color: @col_primary;
           background: rgba(255, 255, 255, .05);
         }
       }
@@ -646,7 +647,7 @@
         background:  transparent !important;
       }
       &.active {
-        color: @col_secondary;
+        color: @col_primary;
       }
       &:before, &:after {
         display: none !important;
@@ -732,27 +733,31 @@
   
   .ui.menu.inverted .item.button,
   .ui.button {
-    border: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.1);
     color: #fafafa;
-    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.5) inset;
-    font-weight: 400;
+    font-weight: 500;
     margin: 0em 0.25em 0em 0em;
     padding: 0.8em 1.5em 0.8em;
     text-decoration: none;
-    border-radius: 3px;
     font-size: 1rem;
     cursor: pointer;
-    transition: color 0.2s, box-shadow 0.2s;
+
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 0.25em;
+
+    background: linear-gradient( rgba(7, 29, 42, 0.8), rgba(5, 20, 31, .1));
+
+    transition: background 0.2s, border 0.2s;
     &.fluid {
       width: 100%;
       display: block;
       text-align: center;
     }
     &:hover, &:active {
-      box-shadow: 0px 0px 0px 2px @col_primary inset;
-      color: @col_primary;
-      background: fade(@col_primary, 10%);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.2);
+      background: linear-gradient( rgba(7, 29, 42, 0.8), rgba(5, 20, 31, .1));
     }
     &.blue, &.yellow {
       transition: color 0.2s, background 0.2s;
@@ -762,6 +767,8 @@
       box-shadow: none;
       &:hover {box-shadow: none;}
     }
+
+
     &.social {
       box-shadow: none;
       font-size: 12px;
@@ -770,71 +777,70 @@
         box-shadow: none;
       }
     }
+
+
     &.twitter {
-      background-color: #4092cc;
+      background: #4092cc;
       color: #fff;
-      background-image: linear-gradient(rgba(255,255,255,.05),rgba(0,0,0,.1));
       &:hover, &:active {
-        background-color: #549dd1;
+        background: #549dd1;
         color: #fff;
       }
     }
     &.facebook {
-      background-color: #3b579d;
+      background: #3b579d;
       color: #fff;
-      background-image: linear-gradient(rgba(255,255,255,.05),rgba(0,0,0,.1));
       &:hover, &:active {
-        background-color: #4261b0;
+        background: #4261b0;
         color: #fff;
       }
     }
     &.google.plus {
-      background-color: #d34836;
+      background: #d34836;
       color: #fff;
-      background-image: linear-gradient(rgba(255,255,255,.05),rgba(0,0,0,.1));
       &:hover, &:active {
-        background-color: #d85b4b;
+        background: #d85b4b;
         color: #fff;
       }
     }
     &.pinterest {
-      background-color: #b81621;
+      background: #b81621;
       color: #fff;
       &:hover, &:active {
-        background-color: lighten(#b81621, 5%);
+        background: lighten(#b81621, 5%);
         color: #fff;
         text-shadow: none;
       }
     }
     &.delicious {
-      background-color: #07a5ff;
+      background: #07a5ff;
       color: #fff;
       &:hover, &:active {
-        background-color: lighten(#07a5ff, 5%);
+        background: lighten(#07a5ff, 5%);
         color: #fff;
       }
     }
     &.reddit {
-      background-color: #D1E2F1;
+      background: #D1E2F1;
       color: #000;
       &:hover, &:active {
-        background-color: lighten(#D1E2F1, 5%);
+        background-: lighten(#D1E2F1, 5%);
         color: #000;
       }
     }
     &.stumbleupon {
-      background-color: #eb4924;
+      background: #eb4924;
       color: #fff;
       &:hover, &:active {
-        background-color: lighten(#eb4924, 5%);
+        background: lighten(#eb4924, 5%);
         color: #fff;
       }
     }
     &.tumblr {
-      background-color: #36465D;
+      background: #36465D;
       color: #fff;
       &:hover, &:active {
-        background-color: lighten(#36465D, 5%);
+        background: lighten(#36465D, 5%);
         color: #fff;
       }
     }
@@ -1259,6 +1265,9 @@
           border-color: transparent;
           border-right-color: #242D35;
         }
+        .read.more {
+          float: right;
+        }
         .date {
           left: auto;
           right: 122%;
@@ -1336,18 +1345,6 @@
         height: 60px;
         left: 50%;
         margin-left: -30px;
-        /* Force Hardware Acceleration in WebKit */
-        -webkit-transform: translateZ(0);
-        -webkit-backface-visibility: hidden;
-
-        .cssanimations &.is-hidden {
-          visibility: hidden;
-        }
-
-        .cssanimations &.bounce-in {
-          visibility: visible;
-          //@include animation(cd-bounce-1 .6s);
-        }
       }
     }
 
@@ -1387,11 +1384,31 @@
         display: table;
         clear: both;
       }
-
+      .read.more, .date {
+        font-size: 13px;
+      }
+      p {
+        margin: 1em 0;
+        line-height: 1.6;
+      }
+      .date, .read.more {
+        display: inline-block;
+      }
       .date {
         float: left;
         padding: .8em 0;
         opacity: .7;
+      }
+
+      .read.more {
+        float: right;
+        padding: .8em 1em;
+        background: rgba(0,0,0,.2);
+        color: @col_primary;
+
+        &:hover {
+          background-color: rgba(0,0,0,.3);
+        }
       }
 
       &::before {
@@ -1403,6 +1420,18 @@
         width: 0;
         border: 7px solid transparent;
         border-right: 7px solid #242D35;
+      }
+
+      @media @tablet {
+        .title {
+          font-size: 20px;
+        }
+        p {
+          font-size: 16px;
+        }
+        .read.more, .date {
+          font-size: 14px;
+        }
       }
 
       @media @desktop {
@@ -1417,12 +1446,17 @@
           border-left-color: #242D35;
         }
 
+        .read.more {
+          float: left;
+        }
+
         .date {
           font-family: @font_sans;
           position: absolute;
           width: 100%;
           left: 122%;
           top: -6px;
+          font-size: 16px;
         }
       }
     }
@@ -1456,7 +1490,6 @@
     }
 
     .block {
-
       &.purple { 
         .image {
           background: #F7A6EC;
@@ -1583,10 +1616,18 @@
         }
       }
 
+      &.orange, &.cyan, &.red, &.yellow, &.green, &.purple {
+        .content {
+          background-size: 100%;
+          background-size: cover;
+        }
+      }
+
 
     }
 
   }
+
 
 //     ____                         
 //    /  _/___ ___  ____ _____ ____ 
@@ -1764,6 +1805,7 @@
       }
     }
     .mobile.menu {display: none;}
+
     @media @tablet, @phone  {
       .desktop.menu {display: none;}
       .mobile.menu {
@@ -1772,6 +1814,14 @@
           background: #000;
           color: #fff;
         }
+      }
+    }
+
+    @media @desktop {
+      height: 48px;
+      .menu > .item {
+        font-size: 14px;
+        padding: 15px 10px;
       }
     }
   }

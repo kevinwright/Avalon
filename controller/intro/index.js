@@ -3,7 +3,7 @@ var INTRODIR = global.avalon.dir.intro,
 
 var util = require("../../helper/util.js");
 
-var toc = require(TOCFILE);
+var toc = util.renderYAMLSync(TOCFILE);
 var legacy = require(INTRODIR + "/legacy.js");
 
 var _ = require("lodash");

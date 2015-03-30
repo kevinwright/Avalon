@@ -24,6 +24,10 @@ nav#mobile-menu
                       for subsubitem in subitem.items
                         li(class=subsubitem.css)
                           +item(subsubitem)
+                        if subsubitem.items
+                          for subsubsubitem in subsubitem.items
+                            li
+                              +item(subsubsubitem)
                 else
                   li(class=subitem.css)
                     +item(subitem)

@@ -29,34 +29,34 @@ if (process.env.NODE_ENV === "production") {
       intro: "/library/intro"
     },
     files: {
-      menu: "/library/menu.js",
+      menu: "/library/menu.yaml",
       synonyms: "/library/synonyms.json",
-      pages: "/library/pages.js",
-      toc: "/library/intro/toc.js",
+      pages: "/library/pages.yaml",
+      toc: "/library/intro/toc.yaml",
       website: "/library/website.yaml"
     }
   };
 } else {
-    global.avalon = {
-        dir: {
-            help: "/help/help",
-            world: "/library/test/world/",
-            rollcall: "/help/rollcall",
-            autohelp: "/help/autohelp",
-            bb: "/help/bb",
-            library: "/library/test",
-            library_pages: "/library/test/pages",
-            library_help: "/library/test/help",
-            intro: "/library/test/intro"
-        },
-        files: {
-            menu: "/library/test/menu.js",
-            synonyms: "/library/test/synonyms.json",
-            pages: "/library/test/pages.js",
-            toc: "/library/test/intro/toc.js",
-            website: "/library/test/website.yaml"
-        }
-    };
+  global.avalon = {
+    dir: {
+      help: "/help/help",
+      world: "/library/test/world/",
+      rollcall: "/help/rollcall",
+      autohelp: "/help/autohelp",
+      bb: "/help/bb",
+      library: "/library/test",
+      library_pages: "/library/test/pages",
+      library_help: "/library/test/help",
+      intro: "/library/test/intro"
+    },
+    files: {
+      menu: "/library/test/menu.yaml",
+      synonyms: "/library/test/synonyms.json",
+      pages: "/library/test/pages.yaml",
+      toc: "/library/test/intro/toc.yaml",
+      website: "/library/test/website.yaml"
+    }
+  };
 }
 
 var avalon = require("./controller/avalon");
@@ -85,7 +85,7 @@ app.use(cookieParser());
 // static folders
 app.use(express.static(path.join(__dirname, 'public'), {
     maxAge: 1800000 // 30 minutes
-}));
+  }));
 app.use("/help/downloads", express.static(path.join(__dirname, 'downloads')));
 
 
@@ -150,19 +150,19 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   switch(err.type) {
     case "help":
-      ErrorHandler.help(err, req, res, next);
-      break;
+    ErrorHandler.help(err, req, res, next);
+    break;
     case "guild":
-      res.redirect("/world#guilds");
-      break;
+    res.redirect("/world#guilds");
+    break;
     case "city":
-      res.redirect("/world#cities");
-      break;
+    res.redirect("/world#cities");
+    break;
     case "intro":
-      ErrorHandler.intro(err, req, res, next);
-      break;
+    ErrorHandler.intro(err, req, res, next);
+    break;
     default:
-      ErrorHandler.print(err, req, res, next);
+    ErrorHandler.print(err, req, res, next);
   }
 });
 
