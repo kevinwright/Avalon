@@ -11,26 +11,39 @@ block content
       h2.ui.title.center.underline #{meta.title}
       if meta.subtitle
         h4.sub.title.center.ui #{meta.subtitle}
-      .section.timeline.ui.grid.mobile-responsive
+      section#timeline.ui.timeline
         for item in meta.timeline
-          .row(class={day: item.date, month: item.month, year: item.year, real: item.real}, class=item.type)
-            .date.column.four.wide
-              if item.date
-                .day #{item.date}
-              if item.month
-                .month #{item.month}
-              if item.year
-                .year #{item.year}
-              if item.real
+          .block(class={day: item.date, month: item.month, year: item.year, real: item.real}, class=item.color)
+            .image(class=item.icon)
+              if item.icon == "ordination"
+                img(src="/img/timeline/ordination.svg", alt="ordination")
+              else if item.icon == "banner"
+                img(src="/img/timeline/banner.svg", alt="banner")
+              else if item.icon == "crown"
+                img(src="/img/timeline/prince.svg", alt="prince")
+              else if item.icon == "war"
+                img(src="/img/timeline/war.svg", alt="war")
+              else if item.icon == "death"
+                img(src="/img/timeline/death.svg", alt="death")
+              else if item.icon == "handshake"
+                img(src="/img/timeline/handshake.svg", alt="handshake")
+              else if item.icon
+                i.icon(class=item.icon)
+              else
+                if meta.default_icon
+                  i.icon(class=meta.default_icon)
+                else
+                  i.icon.asterisk
+            .content(class={background: item.image}, style=(item.image ? "background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7) ),url("+item.image+");" : ""))
+              if item.title
+                h2.title !{item.title}
+              p !{item.content}
+              if item.link
+                a(href=item.link).read.more Read More
+
+              span.date
+                span #{item.date} #{item.month} #{item.year}
                 .real #{item.real}
-            .column.twelve.wide
-              .content
-                if item.title
-                  h4.title !{item.title}
-                | !{item.content}
-
-
-
 
       center.section
         a(href="/history") Return to History

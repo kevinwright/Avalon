@@ -100,6 +100,10 @@
 // / /_/ /  __/ / / /  __/ /  / /_/ / /  
 // \____/\___/_/ /_/\___/_/   \__,_/_/   
                                       
+  html * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
   *,
   ::before,
@@ -1225,162 +1229,343 @@
 
   .ui.timeline {
     font-family: @font_sans;
-    max-width: 760px;
-    margin: auto;
-    display: table;
-    .row {
-      .date {
-        text-align: center;
-        line-height: 1;
-      }
-      &.year.real:not(.month) {
-        .year {
-          font-weight: 900;
-          font-size: 48px;
-        }
-        .real {
-          font-weight: 300;
-          font-size: 22px;
-          text-transform: uppercase;
-        }
-      }
-      &.year.real.month {
-        .year {
-          font-weight: 900;
-          font-size: 48px;
-        }
-        .real {
-          font-weight: 300;
-          font-size: 22px;
-          text-transform: uppercase;
-        }
-        .month {
-          font-weight: 500;
-          font-size: 16px;
-          text-transform: uppercase;
-        }
-      }
-      &.real:not(.year) {
-        .real {
-          font-weight: 900;
-          font-size: 22px;
-           line-height: 75px;
-          text-transform: uppercase;
-        }
-      }
-
-      &.year:not(.real) {
-        .year {
-          font-weight: 900;
-          font-size: 48px;
-        }
-      }
-
-      &.year.month:not(.real) {
-        .year {
-          font-weight: 900;
-          font-size: 48px;
-        }
-        .month {
-          font-weight: 600;
-          font-size: 16px;
-          text-transform: uppercase;
-        }
-      }
-      
-      .content {
-        .title {
-          font-family: @font_sans;
-          font-weight: 500;
-        }
-        font-family: @font_serif;
-        font-weight: 400;
-        display: table-cell;
-        vertical-align: middle;
-        height: 75px;
-      }
-
-
-      &.anniversary {
-        color: white;
-        .column {
-          display: block;
-          width: 100%;
-        }
-        &.real {
-          .real {
-            line-height: 1;
-            font-size: 54px;
-          }
-        }
-        .content {
-          text-align: center;
-          display: block;
-          font-weight: 900;
-          height: auto;
-          font-size: 32px;
-          font-style: italic;
-          font-weight: normal;
-          font-family: @font_serif;
-        }
-      }
-
-      &.ordination {
-        a {
-          color: #9966cc;
-        }
-      }
-
-      &.war {
-        .title {
-          color: #CF3B3B;
-        }
-      }
-
-      &.treaty {
-        .title {
-          color: #D7FF84;
-        }
-      }
-
-      &.outofgame {
-        .content {
-          font-style: italic;
-        }
-      }
-
-
+    position: relative;
+    padding: 2em 0;
+    margin: 2em auto;
+    &::before {
+      /* this is the vertical line */
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 18px;
+      height: 100%;
+      width: 4px;
+      background: darken(@col_foreground, 5%);
     }
 
-    @media @phone {
-      .row {
+    @media @desktop {
+      margin: 3em auto;
+      &::before {
+        left: 50%;
+        margin-left: -2px;
+      }
+
+      .block:nth-child(even) .content {
+        float: right;
+        &::before {
+          top: 24px;
+          left: auto;
+          right: 100%;
+          border-color: transparent;
+          border-right-color: #242D35;
+        }
         .date {
-          text-align: left;
-          .month, .year, .real, .day {
-            display: inline-block;
-            font-size: 16px !important;
-            font-weight: bold !important;
-            text-transform: inherit !important;
-            margin-right: 1em;
-          }
-        }
-        .content {
-          height: auto;
-          display: block;
-        }
-        &.anniversary {
-          .date {
-            text-align: center;
-          }
+          left: auto;
+          right: 122%;
+          text-align: right;
         }
       }
+    }
+
+    .block {
+      position: relative;
+      margin: 2em 0;
+
+      &:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      @media @desktop {
+        margin: 4em 0;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: @col_foreground;
+      box-shadow: 0 0 0 4px @col_background, inset 0 2px 0 rgba(0,0,0, .08), 0 3px 0 4px rgba(0,0,0, .05) ;
+      .icon {
+        display: block;
+        width: 24px;
+        height: 24px;
+        position: relative;
+        left: 50%;
+        top: 50%;
+        margin-left: -12px;
+        margin-top: -12px;
+        font-size: 24px;
+        color: @col_background;
+      }
+
+      img {
+        display: block;
+        width: 50px;
+        height: 50px;
+        position: relative;
+        left: 50%;
+        top: 50%;
+        margin-left: -23px;
+        margin-top: -26px;
+      }
+
+      @media @desktop {
+        width: 60px;
+        height: 60px;
+        left: 50%;
+        margin-left: -30px;
+        /* Force Hardware Acceleration in WebKit */
+        -webkit-transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+
+        .cssanimations &.is-hidden {
+          visibility: hidden;
+        }
+
+        .cssanimations &.bounce-in {
+          visibility: visible;
+          //@include animation(cd-bounce-1 .6s);
+        }
+      }
+    }
+
+    .content {
+      position: relative;
+      margin-left: 60px;
+      border-radius: 0.25em;
+      padding: 1em;
+
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.25em;
+
+      &.background {
+        background-position: center;
+        background-size: 100%;
+        background-size: cover;
+      }
+      &:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      .date {
+        float: left;
+        padding: .8em 0;
+        opacity: .7;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 16px;
+        right: 100%;
+        height: 0;
+        width: 0;
+        border: 7px solid transparent;
+        border-right: 7px solid #242D35;
+      }
+
+      @media @desktop {
+        margin-left: 0;
+        padding: 1.6em;
+        width: 45%;
+
+        &::before {
+          top: 24px;
+          left: 100%;
+          border-color: transparent;
+          border-left-color: #242D35;
+        }
+
+        .date {
+          font-family: @font_sans;
+          position: absolute;
+          width: 100%;
+          left: 122%;
+          top: -6px;
+        }
+      }
+    }
+
+    .image {
+      &.handshake {
+        img {
+          width: 100px;
+          height: 100px;
+          margin-left: -46px;
+          margin-top: -51px;
+        }
+      }
+      &.crown {
+        img {
+          margin-left: -23px;
+          margin-top: -29px;
+        }
+      }
+      &.war {
+        img {
+          margin-left: -23px;
+          margin-top: -28px;
+        }
+      }
+      &.ordination {
+        img {
+          margin-left: -23px;
+        }
+      }
+    }
+
+    .block {
+
+      &.purple { 
+        .image {
+          background: #F7A6EC;
+        }
+        .content {
+          background-color: #240023;
+          border-color: #BB04B9;
+          a {
+            color: #FF00F8;
+          }
+          &:before {
+            border-left-color: #BB04B9;
+          }
+        }
+        &:nth-child(even) .content::before {
+          border-left-color: transparent;
+          border-right-color: #BB04B9;
+        }
+      }
+
+      &.green {
+        .image {
+          background: #AAEA90;
+        }
+        .content {
+          background-color: #0B200D;
+          border-color: #16761F;
+          a {
+            color: #17CB28;
+          }
+          &:before {
+            border-left-color: #16761F;
+          }
+        }
+        &:nth-child(even) .content::before {
+          border-left-color: transparent;
+          border-right-color: #16761F;
+        }
+      }
+
+      &.yellow {
+        .image {
+          background: #FFDF00;
+        }
+        .content {
+          background-color: #3A2C06;
+          border-color: #FFDF00;
+          a {
+            color: #FFDF00;
+          }
+          &:before {
+            border-left-color: #FFDF00;
+          }
+        }
+        &:nth-child(even) .content::before {
+          border-left-color: transparent;
+          border-right-color: #FFDF00;
+        }
+      }
+
+      &.red {
+        .image {
+          background: #D73232;
+        }
+        .content {
+          background-color: #350A0A;
+          border-color: #FF004D;
+          a {
+            color: #FF004D;
+          }
+          &:before {
+            border-left-color: #FF004D;
+          }
+        }
+        &:nth-child(even) .content::before {
+          border-left-color: transparent;
+          border-right-color: #FF004D;
+        }
+      }
+
+      &.cyan {
+        .image {
+          background: #32D7D7;
+        }
+        .content {
+          background-color: #0A3535;
+          border-color: #00FFFF;
+          a {
+            color: #00FFFF;
+          }
+          &:before {
+            border-left-color: #00FFFF;
+          }
+        }
+        &:nth-child(even) .content::before {
+          border-left-color: transparent;
+          border-right-color: #00FFFF;
+        }
+      }
+
+      &.orange {
+        .image {
+          background: #FF8801;
+        }
+        .content {
+          background-color: #5F380C;
+          border-color: #F80;
+          a {
+            color: #F80;
+          }
+          &:before {
+            border-left-color: #F80;
+          }
+        }
+        &:nth-child(even) .content::before {
+          border-left-color: transparent;
+          border-right-color: #F80;
+        }
+      }
+
+
     }
 
   }
-
-
-
-
 
 //     ____                         
 //    /  _/___ ___  ____ _____ ____ 
