@@ -1,19 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var _ = require("lodash");
 
 var avalon = require("../controller/avalon");
 
 // Methods
-  function getIndex(req, res, next) {
-    avalon.info("history/history.md", function(err, meta, extra) {
-      if (err) return next(err);
-      res.render('history/index', {
-        meta:meta.meta,
-        extra:extra
-      });
-    });
-  }
-
   function getOrdinations(req, res, next) {
     avalon.info("history/ordinations.md", function(err, meta) {
       if (err) return next(err);
@@ -47,16 +38,25 @@ var avalon = require("../controller/avalon");
   function getTimeline(req, res, next) {
     avalon.info("history/timeline.md", function(err, meta) {
       if (err) return next(err);
+      var _mapped = {};
+      var timeline = _.map(meta.meta.timeline, function(n) {
+        var century = Math.floor(n.year / 100) + 1;
+        if (_mapped[century]) return n;
+        n.anchor = century;
+        _mapped[century] = true;
+        return n;
+      });
       res.render('history/timeline', {
         page: "timeline",
-        meta: meta.meta
+        meta: meta.meta,
+        timeline : timeline
       });
     });
   }
 
 
 // Routes
-  router.get(['/', "/index.html"], getIndex);
+  router.get(['/', "/index.html"], getTimeline);
   router.get(['/ordinations', "/ordinations.html"], getOrdinations);
   router.get(['/timeline'], getTimeline);
   router.get(['/modernhistory', "/modernhistory.html"], getModernHistory);

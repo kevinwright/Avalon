@@ -24,6 +24,10 @@ module.exports = {
   }
 };
 
+var syncTime = 10000;
+if (process.env.NODE_ENV === "production")
+  syncTime = 180000;
+
 setInterval(function() {
   util.renderYAML(global.avalon.files.website, function(err, content) {
     if (err) return;
@@ -33,4 +37,4 @@ setInterval(function() {
     if (err) return;
     _menu = content;
   });
-}, 180000);
+}, syncTime);
