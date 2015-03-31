@@ -46,7 +46,7 @@ describe('Avalon.Index', function(){
   it('Load history index', function(done){
     request(app)
       .get('/history/')
-      .expect(/History of This Roleplaying World/)
+      .expect(/Avalon's 25th Anniversary/)
       .end(function(err){
         if (err) return done(err);
         done();
