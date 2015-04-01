@@ -23,13 +23,61 @@ block content
       .ui.grid.responsive
         .ten.column.wide.main
           | !{extra.intro.html}
-          if recent
-            .recent
-              h2.ui.title.underline #{meta.events.title}
-              for update in recent.splice(0, meta.events.max)
-                .event.ui.box.small
-                  .date #{update.date}
-                  .text #{update.item}
+          .ui.tabs
+            .tabs.ui.menu
+              .item(data-id="recent").active Latest Events in Society
+              .item(data-id="events") Forthcoming Events
+              .item(data-id="affairs") Military Affairs
+            .content.active(data-id="recent")
+              if recent
+                .recent
+                  for update in recent.splice(0, meta.events.max)
+                    .event.ui.box.small
+                      .date #{update.date}
+                      .text #{update.item}
+            .content.ui.markdown(data-id="events")
+              .help.text !{events}
+            .content(data-id="affairs")
+              table.ui.sortable.selectable.revealable.table#militaryTable
+                thead
+                  tr
+                    th(data-sort="string") Village
+                    th(data-sort="string") City
+                    th(data-sort="string") Conflict
+                    th(data-sort="string") Occupied
+                    th(data-sort="int") Legions
+                tbody
+                  for affair,i in affairs
+                    tr(data-id=i, class={expand: affair.legions})
+                      td
+                        if affair.legions
+                          i.icon.angle.down
+                        | #{affair.village}
+                      td #{affair.city}
+                      td #{affair.conflict}
+                      td #{affair.occupied}
+                      if affair.legions
+                        td #{affair.legions.length}
+                      else
+                        td 0
+                      if affair.legions
+                        td(data-id=i, style="", colspan="5").expandable
+                          table(width="100%", class="ui box small")
+                            thead
+                              tr
+                                th Legion
+                                th Structure
+                                th Commander
+                                th Size
+                            tbody
+                              for legion in affair.legions
+                                - leg = legion.match(/^(\w+) (\w+) (\w+) x (\d+)$/)
+                                if leg
+                                  tr
+                                    td #{leg[1]}
+                                    td #{leg[2]}
+                                    td #{leg[3]}
+                                    td #{leg[4]}
 
 
         .six.column.wide.sidebar
@@ -84,4 +132,4 @@ block scripts
   script(src="/js/jquery.validate.min.js")
   script(src="/js/login.js")
   script(src="/js/scroller.js")
-    
+  script(src="/js/front.js")

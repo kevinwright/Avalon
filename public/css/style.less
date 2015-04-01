@@ -1629,6 +1629,25 @@
   }
 
 
+// Tabs
+
+.ui.tabs {
+  margin-top: 1em;
+  .tabs {
+    text-align: center;
+    .item {
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
+  .content {
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+}
+
 //     ____                         
 //    /  _/___ ___  ____ _____ ____ 
 //    / // __ `__ \/ __ `/ __ `/ _ \
@@ -2156,7 +2175,7 @@
     }
   }
 
-  .ui.manual, .ui.bb, .ui.intro, .ui.news {
+  .ui.manual, .ui.bb, .ui.intro, .ui.news, .ui.markdown {
     span.to {
       color: #ccc;
       a {color: #ccc;}

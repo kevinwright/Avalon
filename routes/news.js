@@ -9,7 +9,7 @@ var HELPDIR = global.avalon.dir.help;
 
 // Methods
   function getIndex(req, res, next) {
-    util.readFile(HELPDIR+"/"+"events", function(err, eventsFile) {
+    util.readFile(HELPDIR+"/"+"schedule", function(err, eventsFile) {
       if (err) return next(err);
       var eventsData = helpParser(eventsFile);
       recent(function(err, recents) {
