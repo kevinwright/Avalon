@@ -5,9 +5,9 @@ block head
   - var description = avalon.website.news.description
   - var keywords = mkKeywords(avalon.website.news.keywords)
   - var canonical = "http://www.avalon-rpg.com/news/"
-
+  - var body = "news"
 block content
-  .ui.content
+  .ui.content.news
     .contain
       h1.ui.title.center.underline #{meta.title}
       p.lead #{meta.summary}
@@ -43,6 +43,24 @@ block content
               h4.ui.title: a(href=item.url) #{item.title}
               | #{item.description}
 
+
+      if recent
+        .recent.section.ui.box
+          h2.ui.title.underline Recent events in Society
+          table.ui.table
+            thead
+              tr
+                th Date
+                th Event
+            tbody
+              for update in recent
+                tr
+                  td(width="20%") #{update.date}
+                  td #{update.item}
+
+      .section.box.ui
+        h2.ui.title.underline Forthcoming Events
+        .help.text !{events}
 
       .section.military.affairs.box.ui
         h2.ui.title.underline #{meta.military.title}
