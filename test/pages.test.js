@@ -1,7 +1,8 @@
 var app = require("../app");
 var request = require('supertest');
 
-var pages = require("/library/pages.js");
+var util = require("../helper/util.js");
+var pages = util.renderYAMLSync("/library/pages.yaml");
 
 
 describe('Avalon.Pages', function(){

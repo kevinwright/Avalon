@@ -1,7 +1,8 @@
 var app = require("../app");
 var request = require('supertest');
 
-var toc = require("/library/intro/toc.js");
+var util = require("../helper/util.js");
+var toc = util.renderYAMLSync("/library/test/intro/toc.yaml");
 
 
 describe('Avalon.Intro', function(){

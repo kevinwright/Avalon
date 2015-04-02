@@ -6,6 +6,6 @@ $(document).ready(function() {
     $(".ui.tabs .content, .ui.tabs .tabs .item").removeClass("active");
     $(".ui.tabs .content[data-id="+id+"], .ui.tabs .tabs .item[data-id="+id+"]").addClass("active");
 
-    navigator.vibrate(10);
+    if (navigator.vibrate) navigator.vibrate(10);
   });
 });

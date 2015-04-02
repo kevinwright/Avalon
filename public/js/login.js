@@ -23,7 +23,7 @@ $(document).ready(function() {
       $(".switch.menu .item").removeClass("active");
       target.addClass("active");
     }
-    navigator.vibrate(10);
+    if (navigator.vibrate) navigator.vibrate(10);
   });
 
   $("#createForm").validate({
@@ -80,6 +80,6 @@ $(document).ready(function() {
     //- if (value == "umbra") form.attr("action", "http://localhost:2252");
     if (value === "applet") form.attr("action", "/javalon/");
     if (value === "lumiere") form.attr("action", "/lumiere/");
-    navigator.vibrate(10);
+    if (navigator.vibrate) navigator.vibrate(10);
   });
 });
