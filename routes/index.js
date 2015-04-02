@@ -8,7 +8,7 @@ var util = require("../helper/util");
 // Methods
 
   function getIndex(req, res, next) {
-   schedule(function(err, scheduleData) {
+   schedule(function(err, scheduleData, scheduleHelp) {
       if (err) return next(err);
       recent(function(err, recents) {
         if (err) return next(err);
@@ -21,7 +21,8 @@ var util = require("../helper/util");
               extra:extra,
               affairs: content.affairs,
               recent: recents,
-              events: scheduleData
+              events: scheduleData,
+              scheduleHelp: scheduleHelp
             });
           });
         });

@@ -35,8 +35,21 @@ block content
                     .event.ui.box.small
                       .date #{update.date}
                       .text #{update.item}
+
             .content.ui.markdown(data-id="events")
-              .help.text !{events}
+              table.ui.table
+                thead
+                  tr
+                    th Date
+                    th Event
+                tbody
+                  for update,key in events
+                    for event in update
+                      tr
+                        td(width="20%") !{key}
+                        td !{event}
+              .text.help !{scheduleHelp}
+
             .content(data-id="affairs")
               table.ui.sortable.selectable.revealable.table#militaryTable
                 thead

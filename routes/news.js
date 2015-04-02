@@ -7,7 +7,7 @@ var schedule = require("../controller/news/schedule.js");
 
 // Methods
   function getIndex(req, res, next) {
-    schedule(function(err, scheduleData) {
+    schedule(function(err, scheduleData, scheduleHelp) {
       if (err) return next(err);
       recent(function(err, recents) {
         if (err) return next(err);
@@ -19,7 +19,8 @@ var schedule = require("../controller/news/schedule.js");
               meta: meta.meta,
               affairs: content.affairs,
               recent: recents,
-              events: scheduleData
+              events: scheduleData,
+              scheduleHelp: scheduleHelp
             });
           });
         });

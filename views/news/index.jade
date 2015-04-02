@@ -60,7 +60,18 @@ block content
 
       .section.box.ui
         h2.ui.title.underline Forthcoming Events
-        .help.text !{events}
+        table.ui.table
+          thead
+            tr
+              th Date
+              th Event
+          tbody
+            for update,key in events
+              for event in update
+                tr
+                  td(width="20%") !{key}
+                  td !{event}
+        .text.help !{scheduleHelp}
 
       .section.military.affairs.box.ui
         h2.ui.title.underline #{meta.military.title}
