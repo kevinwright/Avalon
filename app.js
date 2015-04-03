@@ -137,7 +137,6 @@ app.use('/', require('./routes/world'));
 // /_____/_/  /_/   \____/_/  /____/  
 
 var ErrorHandler = require("./controller/error");
-app.use(pmx.expressErrorHandler());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -166,6 +165,7 @@ app.use(function(err, req, res, next) {
   }
 });
 
+app.use(pmx.expressErrorHandler());
 app.use(function(err, req, res, next) {
   ErrorHandler.print(err, req, res, next);
 });

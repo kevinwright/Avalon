@@ -1814,6 +1814,26 @@
       }
     }
 
+    .dropdown.ui .menu {
+      padding: 0px;
+      li {
+        &.item {
+          padding: 0px !important;
+          a {
+            padding: 10px 10px;
+            display: block;
+            padding-right: 20px;
+          }
+          i.icon.triangle.down {
+            float: right;
+            position: absolute;
+            right: 5px;
+            top: 9px;
+          }
+        }
+      }
+    }
+
     .menu .item.playnow {
       color: @col_primary;
       color: fade(@col_primary, 80%);

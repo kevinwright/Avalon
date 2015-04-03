@@ -1,52 +1,61 @@
 mixin item(item)
-  a.item(href=item.url, title=item.title, target=item.target, class=item.css) #{item.content}
+  a(href=item.url, title=item.title, target=item.target, class=item.css) #{item.content}
 
 .ui.topbar
-  .ui.menu.contain.desktop
-    .left.menu
+  nav.ui.menu.contain.desktop
+    ul.left.menu
       if avalon && avalon.menu
         for item in avalon.menu.left
           if item.items
-            .ui.dropdown.item
+            li.ui.dropdown.item
               a(href=item.url, title=item.title, target=item.target, class=item.css) #{item.content}
               i.icon.triangle.down
-              .menu
+              ul.menu
                 for subitem in item.items
                   if subitem.items
-                    .ui.dropdown.item
+                    li.ui.dropdown.item
                       a(href=subitem.url, title=subitem.title, target=subitem.target, class=subitem.css) #{subitem.content}
                       i.icon.triangle.down
-                      .menu
+                      ul.menu
                         for subsubitem in subitem.items
                           if subsubitem.items
-                            .ui.dropdown.item
+                            li.ui.dropdown.item
                               a(href=subsubitem.url, title=subsubitem.title, target=subsubitem.target, class=subsubitem.css) #{subsubitem.content}
                               i.icon.triangle.down
-                              .menu
+                              ul.menu
                                 for subsubsubitems in subsubitem.items
-                                  +item(subsubsubitems)
+                                  li.item
+                                    +item(subsubsubitems)
                           else
-                            +item(subsubitem)
+                            li.item
+                              +item(subsubitem)
                   else
-                    +item(subitem)
+                    li.item
+                      +item(subitem)
 
           else
-            +item(item)
+            li.item
+              +item(item)
       else
-        +item({url: "/", content: "Avalon RPG"})
+        li.item
+          +item({url: "/", content: "Avalon RPG"})
 
-    .right.menu
+    ul.right.menu
       if (avalon && avalon.users)
         if (avalon.users().length != 0)
-          a.item(href="/rollcall/#who") #{avalon.users().length} Players Online
+          li.item
+            a(hr&ef="/rollcall/#who") #{avalon.users().length} Players Online
       if avalon && avalon.menu
         for item in avalon.menu.right
-          +item(item)
+          li.item
+            +item(item)
 
-  .ui.menu.mobile.contain
-    .left.menu
-      a.item(href="/") Avalon RPG
-    .right.menu
-      a.item#open-sidebar(title="Open Menu", alt="Open Menu", href="#mobile-menu")
-        i.icon.ellipsis.vertical.small
-        | &ensp; Menu
+  nav.ui.menu.mobile.contain
+    ul.left.menu
+      li.item
+        a(href="/") Avalon RPG
+    ul.right.menu
+      li.item
+        a#open-sidebar(title="Open Menu", alt="Open Menu", href="#mobile-menu")
+          i.icon.ellipsis.vertical.small
+          | &ensp; Menu

@@ -8,13 +8,13 @@ html
     include includes/gtm
   body(class=body)
     .container
-      include includes/topbar
       block header
         .ui.header
           .logo-wrap
             a(href="/", id="top"): img.logo(src="/img/logo.png", alt=avalon.website.alt.header, title=avalon.website.alt.header)
       block content
       include includes/footer
+      include includes/topbar
     include includes/sidebar
     script(type="application/javascript").
       var meta = {
