@@ -998,7 +998,7 @@
         position: absolute;
         padding-top: 40px;
         z-index: 100000;
-        width: @width_max;
+        max-width: @width_max;
         right:0px;
         margin: auto;
         left: 0px;
@@ -1916,12 +1916,6 @@
              background: linear-gradient(to bottom, rgba(2, 15, 23, 0), rgba(2, 15, 23, 1) 100%);
           }
         }
-      }
-    }
-
-    @media @phone {
-      .recent {
-        display: none;
       }
     }
 

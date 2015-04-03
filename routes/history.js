@@ -38,12 +38,9 @@ var avalon = require("../controller/avalon");
   function getTimeline(req, res, next) {
     avalon.info("history/timeline.md", function(err, meta) {
       if (err) return next(err);
-      var _mapped = {};
       var timeline = _.map(meta.meta.timeline, function(n) {
         var century = Math.floor(n.year / 100) + 1;
-        if (_mapped[century]) return n;
-        n.anchor = century;
-        _mapped[century] = true;
+        if (!n.anchor) n.anchor = century;
         return n;
       });
       res.render('history/timeline', {

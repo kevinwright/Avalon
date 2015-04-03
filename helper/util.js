@@ -10,17 +10,10 @@ if (process.env.NODE_ENV === "production") ttlTime = 600;
 else ttlTime = 10;
 
 var fileCache = new NodeCache( { stdTTL: ttlTime, checkperiod: ttlTime*2 } );
-var fileErrCache = {}; // we should cache errors, or else it will try to look for it each time
-
 var markCache = new NodeCache( { stdTTL: ttlTime, checkperiod: ttlTime*2 } );
-var markErrCache = {};
 
 // returns: err, success
 var readFile = function(file, callback) {
-  if (file in fileErrCache) {
-    return callback(fileErrCache[file]);
-  }
-
   fileCache.get(file, function(err, hit){
     if( !err && hit[file] ) {
       return callback(null, hit[file]);
@@ -28,8 +21,6 @@ var readFile = function(file, callback) {
 
     fs.readFile(file, "utf8", function(fileErr, content) {
       if (fileErr) {
-        console.log( "Error Cached: ", file );
-        fileErrCache[file] = fileErr;
         return callback(fileErr);
       }
       
@@ -48,10 +39,6 @@ var readFile = function(file, callback) {
 };
 
 var readdir = function(dir, callback) {
-  if (dir in fileErrCache) {
-    return callback(fileErrCache[dir]);
-  }
-
   fileCache.get(dir, function(err, hit){
     if( !err && hit[dir] ) {
       return callback(null, hit[dir]);
@@ -59,8 +46,6 @@ var readdir = function(dir, callback) {
 
     fs.readdir(dir, function(fileErr, content) {
       if (fileErr) {
-        console.log( "Error Cached: ", dir );
-        fileErrCache[dir] = fileErr;
         return callback(fileErr);
       }
       
@@ -151,23 +136,16 @@ var readdir = function(dir, callback) {
   };
 
   var renderFile = function(file, callback) {
-    if (file in fileErrCache) return callback(fileErrCache[file]);
-    if (file in markErrCache) return callback(markErrCache[file]);
-
     markCache.get(file, function( err, hit ){
       if (!err && hit[file]) return callback(null, hit[file]);
 
       readFile(file, function(fileErr, content) {
         if (fileErr) {
-          console.log( "Error Cached: ", file );
-          fileErrCache[file] = fileErr;
           return callback(fileErr);
         }
 
         render(content, function(markErr, blocks) {
           if (markErr) {
-            console.log( "Error Cached: ", file );
-            markErrCache[file] = markErr;
             return callback(markErr);
           }
 
@@ -192,11 +170,8 @@ var readdir = function(dir, callback) {
   };
 
   var renderYAML = function(file, callback) {
-    if (file in fileErrCache) return callback(fileErrCache[file]);
     readFile(file, function(fileErr, content) {
       if (fileErr) {
-        console.log( "Error Cached: ", file );
-        fileErrCache[file] = fileErr;
         return callback(fileErr);
       }
       callback(null, yaml.safeLoad(content));
@@ -209,11 +184,8 @@ var readdir = function(dir, callback) {
 
 
   var renderJSON = function(file, callback) {
-    if (file in fileErrCache) return callback(fileErrCache[file]);
     readFile(file, function(fileErr, content) {
       if (fileErr) {
-        console.log( "Error Cached: ", file );
-        fileErrCache[file] = fileErr;
         return callback(fileErr);
       }
       callback(null, JSON.parse(content));
