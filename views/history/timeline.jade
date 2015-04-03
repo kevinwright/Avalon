@@ -12,7 +12,7 @@ block content
       if meta.subtitle
         h4.sub.title.center.ui #{meta.subtitle}
       section#timeline.ui.timeline
-        for item in timeline
+        for item in timeline.reverse()
           .block(class={day: item.date, month: item.month, year: item.year, real: item.real}, class=item.color)
             if item.anchor
               a(id=item.anchor)

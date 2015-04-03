@@ -10,9 +10,9 @@ var schedule = function(callback) {
     var events = {}, current = "";
     _(data.match(/^\*.*$/gm))
       .filter(function(line) {
-        return !/^\*$/.test(line);
+        return !/^\*$/.test(line) && !/\*\+$/.test(line);
       })
-      .forEach(function(line, key) {
+      .forEach(function(line) {
         if (/^\*\*/.test(line)) {
           current = line.replace(/\*\*/, "");
           events[current] = [];
