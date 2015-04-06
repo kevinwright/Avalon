@@ -82,13 +82,13 @@ block content
                 td #{affair.conflict}
                 td #{affair.occupied}
                 if affair.legionsByCommand && affair.legionsByCommand.length == 1
-                  td(title=affair.legionsByCommand[0].commander) #{affair.legionsByCommand[0].size} Men
+                  td(title=affair.legionsByCommand[0].commander) #{affair.legionsByCommand[0].size}
                 else
-                  td #{_.sum(_.pluck(affair.legionsByCommand, 'size'))} Men
+                  td #{_.sum(_.pluck(affair.legionsByCommand, 'size'))}
                 if affair.legions
-                  td #{affair.legions.length} Legions
+                  td #{affair.legions.length}
                 else
-                  td 0 Legions
+                  td 0
                 if affair.legionsByCommand && affair.legionsByCommand.length > 1
                   td(data-id=i, style="", colspan="5").expandable
                     table(width="100%", class="ui box small")
