@@ -3,7 +3,7 @@ var router = express.Router();
 var avalon = require("../controller/avalon");
 var recent = require("../controller/news/recent.js");
 var schedule = require("../controller/news/schedule.js");
-var util = require("../helper/util");
+var affairs = require("../controller/news/affairs.js");
 
 // Methods
 
@@ -14,12 +14,12 @@ var util = require("../helper/util");
         if (err) return next(err);
         avalon.info("front.md", function(err, meta, extra) {
           if (err) return next(err);
-          util.renderYAML("/library/affairs", function(err, content) {
+          affairs(function(err, affairsData) {
             if (err) return next(err);
             res.render('index', {
               meta: meta.meta,
               extra:extra,
-              affairs: content.affairs,
+              affairs: affairsData,
               recent: recents,
               events: scheduleData,
               scheduleHelp: scheduleHelp

@@ -24,6 +24,8 @@ var schedule = function(callback) {
 
     data = data.replace(/^\*.*/gmi, "");
     var help = helpParser(data);
+    help = help.replace("GEMHOLDERS", "<a href='/help/pages/gemholders'>GEMHOLDERS</a>");
+    help = help.replace("CONTENDERS", "<a href='/help/pages/contenders'>CONTENDERS</a>");
 
     callback(null, events, help);
   });

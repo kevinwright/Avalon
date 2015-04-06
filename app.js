@@ -90,6 +90,7 @@ app.use("/help/downloads", express.static(path.join(__dirname, 'downloads')));
 
 
 // Add avalon controller in every view
+app.locals._ = require("lodash");
 app.locals.avalon = avalon;
 app.locals.mkTitle = function() {
 	if (arguments.length === 0) return avalon.website.index.title;

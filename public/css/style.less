@@ -1834,7 +1834,7 @@
       }
     }
 
-    .menu .item.playnow {
+    .menu .playnow {
       color: @col_primary;
       color: fade(@col_primary, 80%);
       font-weight: 700;
@@ -1861,6 +1861,12 @@
       .menu > .item {
         font-size: 14px;
         padding: 15px 10px;
+      }
+    }
+
+    @media @tiny {
+      .playnow {
+        display: none;
       }
     }
   }

@@ -28,30 +28,15 @@ block content
               h4.ui.title: a(href=item.url) #{item.title}
               | #{item.description}
 
-      //- .section.history.ui.box
-      //-   .ui.grid.responsive.one.columns
-      //-     for link in meta.links
-      //-       .column
-      //-         h2.ui.title: a(href=link.url) #{link.title}
-      //-         | #{link.description}
-
-      //- .section.modern.box.ui
-      //-   h2.ui.title.underline #{meta.modern.title}
-      //-   .ui.grid.responsive.two.columns
-      //-     for item in meta.modern.items
-      //-       .column
-      //-         h4.ui.title: a(href=item.url) #{item.title}
-      //-         | #{item.description}
-
-
       if recent
         .recent.section.ui.box
-          h2.ui.title.underline Recent events in Society
+          a(id="appointments")
+          h2.ui.title.underline Latest Appointments
           table.ui.table
             thead
               tr
                 th Date
-                th Event
+                th Appointment
             tbody
               for update in recent
                 tr
@@ -59,6 +44,7 @@ block content
                   td #{update.item}
 
       .section.box.ui
+        a(id="events")
         h2.ui.title.underline Forthcoming Events
         table.ui.table
           thead
@@ -74,6 +60,7 @@ block content
         .text.help !{scheduleHelp}
 
       .section.military.affairs.box.ui
+        a(id="affairs")
         h2.ui.title.underline #{meta.military.title}
         table.ui.sortable.selectable.revealable.table#militaryTable
           thead
@@ -82,39 +69,34 @@ block content
               th(data-sort="string") City
               th(data-sort="string") Conflict
               th(data-sort="string") Occupied
+              th(data-sort="int") Troops
               th(data-sort="int") Legions
           tbody
             for affair,i in affairs
-              tr(data-id=i, class={expand: affair.legions})
+              tr(data-id=i, class={expand: affair.legionsByCommand && affair.legionsByCommand.length > 1})
                 td
-                  if affair.legions
+                  if affair.legionsByCommand && affair.legionsByCommand.length > 1
                     i.icon.angle.down
                   | #{affair.village}
                 td #{affair.city}
                 td #{affair.conflict}
                 td #{affair.occupied}
-                if affair.legions
-                  td #{affair.legions.length}
+                if affair.legionsByCommand && affair.legionsByCommand.length == 1
+                  td(title=affair.legionsByCommand[0].commander) #{affair.legionsByCommand[0].size} Men
                 else
-                  td 0
+                  td #{_.sum(_.pluck(affair.legionsByCommand, 'size'))} Men
                 if affair.legions
+                  td #{affair.legions.length} Legions
+                else
+                  td 0 Legions
+                if affair.legionsByCommand && affair.legionsByCommand.length > 1
                   td(data-id=i, style="", colspan="5").expandable
                     table(width="100%", class="ui box small")
-                      thead
-                        tr
-                          th Legion
-                          th Structure
-                          th Commander
-                          th Size
                       tbody
-                        for legion in affair.legions
-                          - leg = legion.match(/^(\w+) (\w+) (\w+) x (\d+)$/)
-                          if leg
-                            tr
-                              td #{leg[1]}
-                              td #{leg[2]}
-                              td #{leg[3]}
-                              td #{leg[4]}
+                        for legion in affair.legionsByCommand
+                          tr
+                            th #{legion.commander}
+                            td #{legion.size}
 block scripts
   script(src="/js/jquery.table.js")
   script(src="/js/affairs.js")

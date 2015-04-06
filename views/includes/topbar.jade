@@ -53,8 +53,13 @@ mixin item(item)
   nav.ui.menu.mobile.contain
     ul.left.menu
       li.item
-        a(href="/") Avalon RPG
+        if body == "index"
+          a(href="/play/") Avalon RPG
+        else
+          a(href="/") Avalon RPG
     ul.right.menu
+      li.item
+        a(href="/play/").playnow Play Now
       li.item
         a#open-sidebar(title="Open Menu", alt="Open Menu", href="#mobile-menu")
           i.icon.ellipsis.vertical.small

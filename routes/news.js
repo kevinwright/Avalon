@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var avalon = require("../controller/avalon");
-var util = require("../helper/util");
 var recent = require("../controller/news/recent.js");
 var schedule = require("../controller/news/schedule.js");
+var affairs = require("../controller/news/affairs.js");
 
 // Methods
   function getIndex(req, res, next) {
@@ -13,11 +13,11 @@ var schedule = require("../controller/news/schedule.js");
         if (err) return next(err);
         avalon.info("news.md", function(err, meta) {
           if (err) return next(err);
-          util.renderYAML("/library/affairs", function(err, content) {
+          affairs(function(err, affairsData) {
             if (err) return next(err);
             res.render('news/index', {
               meta: meta.meta,
-              affairs: content.affairs,
+              affairs: affairsData,
               recent: recents,
               events: scheduleData,
               scheduleHelp: scheduleHelp
