@@ -7,6 +7,10 @@ var parser = require("../help/parser");
 var guilds = require(WORLDDIR + "guilds.json");
 var _ = require("lodash");
 
+var professions = {};
+_.forEach(util.renderFileSync(global.avalon.dir.library_pages+"/world.md").normal.meta.guilds.professions, function(obj) {
+  professions[obj.profession.toLowerCase()] = obj.guilds;
+});
 function parseInfo(content) {
   var result = {};
   var lines = content.split("\n");
@@ -32,8 +36,16 @@ function parseSkill(loc) {
 
 
 module.exports = function (guildName, callback) {
-  this.name = guildName;
+  this.name = guildName.toLowerCase();
   this.title = util.cap(this.name);
+  this.profession = "Other";
+  this.guilds = _.find(professions, function(prof, key) {
+    if (_.includes(prof, this.title)) {
+      this.profession = key;
+      return true;
+    }
+    return false;
+  });
 
   this.baseLocation = WORLDDIR + this.title + "/";
 

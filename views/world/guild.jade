@@ -16,10 +16,11 @@ block content
     .contain
       .ui.grid.responsive
         .twelve.column.wide.main.breadcrumbed
-          .ui.breadcrumb
-            a(href="/world/#guilds") Guilds
-            i.icon.angle.right
-            b  The #{guild.title} Guild
+          .ui.breadcrumb(style="padding: 5px;")
+            .pagination.ui.menu(style="text-align:center;")
+              a.primary.item(href="/world#guilds") Back to World
+              for g in guild.guilds
+                a(class={active: g == guild.title}, href="/guilds/" + g.toLowerCase()).item #{g}
           p.lead #{guild.info.outlook}
           p
             | Founded on the #{guild.info.founded} by 
@@ -56,6 +57,12 @@ block content
           a(name="location")
           h2.ui.title.overline Location
           != guild.get("location")
+
+          hr
+          .pagination.ui.menu(style="text-align:center;")
+            a.primary.item(href="/world#guilds") Back to World
+            for g in guild.guilds
+              a(class={active: g == guild.title}, href="/guilds/" + g.toLowerCase()).item #{g}
 
 
         .four.column.wide.sidebar
