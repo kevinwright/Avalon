@@ -69,6 +69,7 @@ var guild = require("../controller/world/guild.js");
   router.get('/guilds/:guild', getGuild);
   router.get("/citguilds", redirectIndex);
   router.get(["/citguilds/:page.html", "/citguilds/:page"], redirectCityGuilds);
+  router.get(["/world/:page.html", "/world/:page"], redirectCityGuilds);
 
 
 module.exports = router;
