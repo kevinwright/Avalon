@@ -25,16 +25,20 @@
           | Email
           i.icon.question.mark
         input(type="email", name="email", placeholder="myaddress@example.com")#create-email
-      .inline.fields
-        .field Gender
-        .field
+      .fields
+        .four.center.wide.field Gender
+        .six.center.wide.input.field
           .ui.radio.checkbox
             input#create-male(type="radio", name="gender", value="male", checked="checked")
-            label(for="create-male") Male
-        .field
+            label(for="create-male")
+              i.icon.male
+              | Male
+        .six.center.wide.input.field
           .ui.radio.checkbox
             input#create-female(type="radio", name="gender", value="female")
-            label(for="create-female") Female
+            label(for="create-female")
+              i.icon.female
+              | Female
       .fields
         .four.center.wide.field Client:
         .four.center.wide.input.field
