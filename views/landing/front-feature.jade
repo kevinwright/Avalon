@@ -10,7 +10,7 @@ block head
 block header
 
 block content
-  .ui.content(class=extra.intro.meta.css).margin-top
+  .ui.feature(id="intro", class=extra.intro.meta.css, class={background: extra.intro.meta.image}, style=(extra.intro.meta.image ? "background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7) ),url("+extra.intro.meta.image+");" : ""))
     .contain
       .ui.grid.responsive
         .eight.column.wide
@@ -64,7 +64,7 @@ block content
                   i.icon.large(class=item.social)
                   | #{item.title}
 
-      .ui.two.columns.grid.responsive.contain.large
+      .ui.two.columns.grid.responsive.contain.large.text-margin-bottom
         .column
           .content.active(data-id="recent")
             h2.ui.title.underline Latest Appointments
