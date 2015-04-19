@@ -7,17 +7,17 @@ block head
   - var keywords = mkKeywords(meta.keywords, avalon.website.front.keywords)
   - var canonical = "http://www.avalon-rpg.com/"
 
-block content
-  .ui.content
-    .contain.large
-      h1.ui.center.title #{meta.title}
-      if meta.subtitle
-        h4.ui.sub.title.center #{meta.subtitle}
+block header
 
+block content
+  .ui.content(class=extra.intro.meta.css).margin-top
+    .contain
       .ui.grid.responsive
-        .six.column.wide
-          p !{extra.intro.html}
-        .ten.column.wide
+        .eight.column.wide
+          a(href="/", id="top", style="text-align: center;display: block;")
+            img.ui.image.maxed(src="/img/logo.png", width="400", alt=avalon.website.alt.header, title=avalon.website.alt.header)
+          !{extra.intro.html}
+        .eight.column.wide
           include /includes/multiform.jade
 
 

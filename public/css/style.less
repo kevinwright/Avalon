@@ -140,6 +140,57 @@
     font-style: italic;
   }
 
+  .text-center {
+    text-align: center;
+  }
+  .text-ultrathin {
+    font-weight: 100;
+  }
+  .text-thin {
+    font-weight: 300;
+  }
+  .text-normal {
+    font-weight: 400;
+  }
+  .text-semibold {
+    font-weight: 500;
+  }
+  .text-bold {
+    font-weight: 700;
+  }
+  .text-ultrabold {
+    font-weight: 900;
+  }
+  .text-italic {
+    font-style: italic;
+  }
+  .text-uppercase {
+    text-transform: uppercase;
+  }
+  .text-sans {
+    font-family: @font_sans;
+  }
+  .text-serif {
+    font-family: @font_serif;
+  }
+
+  .text-small {
+    font-size: .8em;
+  }
+  .text-large {
+    font-size: 1.2em;
+  }
+
+  .text-margin {
+    margin: 1em auto;
+  }
+  .text-margin-top {
+    margin-top: 1em;
+  }
+  .text-margin-bottom {
+    margin-bottom: 1em;
+  }
+
   p {
     margin: 1em 0em;
     font-family: @font_serif;
@@ -261,6 +312,9 @@
     &.margin-top {
       margin-top: 75px;
       @media @tablet, @phone {margin-top: 00px;}
+    }
+    &.padding-bottom {
+      padding-bottom: 75px;
     }
   }
 
@@ -657,15 +711,15 @@
       .item {
         text-indent: -.2em;
         &:before {
-          content: " ◦ ";
+          content: " ● ";
           margin-right: .2em;
           color: rgba(255, 255, 255, .5);
         }
         &:hover, &.active {
           background: inherit;
           &:before {
-            content: " • ";
-            color: rgba(255, 255, 255, 1);
+            content: " ● ";
+            color: @col_primary;
           }
         }
       }
@@ -1933,6 +1987,9 @@
       }
     }
   }
+
+
+ 
 
   .ui.feature {
     background: rgba(0,0,0,.2);
