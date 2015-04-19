@@ -109,15 +109,27 @@ function Controller() {
         });
       } else {
         if (!blocks.normal.meta) return next(err);
-        res.render("intro/page", {
-          meta: blocks.normal.meta,
-          extra: blocks,
-          toc: toc,
-          cat: cat,
-          page: result,
-          previous: previous,
-          next: nextArticle
-        });
+        if (blocks.normal.meta.template) {
+          res.render("intro/"+blocks.normal.meta.template, {
+            meta: blocks.normal.meta,
+            extra: blocks,
+            toc: toc,
+            cat: cat,
+            page: result,
+            previous: previous,
+            next: nextArticle
+          });
+        } else {
+          res.render("intro/page", {
+            meta: blocks.normal.meta,
+            extra: blocks,
+            toc: toc,
+            cat: cat,
+            page: result,
+            previous: previous,
+            next: nextArticle
+          });
+        }
       }
     });
   };

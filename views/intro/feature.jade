@@ -1,0 +1,74 @@
+extends /layout
+
+block head
+  if cat
+    - var title = mkTitle(meta.title, cat.content)
+  else
+    - var title = mkTitle(meta.title)
+  - var description = meta.summary
+  - var keywords =  mkKeywords(meta.keywords.toString().toLowerCase())
+  - var canonical = "http://www.avalon-rpg.com/intro/" + page.url
+
+block header
+
+block content
+  if Object.keys(extra).length > 1
+    if extra.intro
+      .ui.feature(id="intro", class=extra.intro.meta.css, class={background: extra.intro.meta.image}, style=(extra.intro.meta.image ? "background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7) ),url("+extra.intro.meta.image+");" : ""))
+        .contain
+          a(href="/", id="top", style="text-align: center;display: block;")
+            img.ui.image.maxed(src="/img/logo.png", width="400", alt=avalon.website.alt.header, title=avalon.website.alt.header)
+          !{extra.intro.html}
+
+    for key in _.drop(Object.keys(extra), 2)
+      - var item = extra[key]
+      - var m = item.meta || {}
+      .ui.feature(id=key, class=m.css, class={background: m.image}, style=(m.image ? "background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7) ),url("+m.image+");" : ""))
+        .contain
+          if m.title
+            h2.title !{m.title}
+          .content !{item.html}
+          if m.link
+            a(href=m.link).read.more Read More
+
+  else
+    .ui.feature
+      .contain
+        a(href="/", id="top", style="text-align: center;display: block;")
+          img.ui.image.maxed(src="/img/logo.png", width="400", alt=avalon.website.alt.header, title=avalon.website.alt.header)
+        !{extra.normal.html}
+
+
+
+  .text-center.ui.feature
+    .pagination.ui.menu(style="text-align:center;")
+      a.primary.item(href="/intro") Back to Index
+      if previous
+        a(href="/intro" + previous.url).item
+          i.icon.left.triangle
+          | #{previous.content}
+      .item.primary #{page.content}
+      if next
+        a(href="/intro" + next.url).item
+          | #{next.content}
+          i.icon.right.triangle
+      include ../includes/share-icons
+
+  .ui.feature
+    .contain
+      nav.ui.menu.vertical
+        .item.head
+          | #{cat.content}
+        .menu
+          for sub in cat.items
+            if (sub.content == page.content)
+              a(href="/intro" + sub.url).item.active #{sub.content}
+            else
+              a(href="/intro" + sub.url).item #{sub.content}
+
+  .contain
+    include ../includes/disqus
+
+block scripts
+  script(src="/js/accordion.js")
+  script(src="/js/reveal.js")

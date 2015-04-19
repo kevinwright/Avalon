@@ -817,6 +817,18 @@
       transition: color 0.2s, background 0.2s;
       box-shadow: none;
     }
+    &.red {
+      transition: color 0.2s, background 0.2s;
+      box-shadow: none;
+
+      background-color: #940A0A;
+      background: linear-gradient( #C30A02, #940A0A);
+      border-color: #FF004D;
+
+      &:hover {
+        background: linear-gradient( lighten(#C30A02, 5%), lighten(#940A0A, 5%));
+      }
+    }
     &.simple {
       box-shadow: none;
       &:hover {box-shadow: none;}
