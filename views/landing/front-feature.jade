@@ -20,14 +20,18 @@ block content
         .ten.column.wide
           include /includes/multiform.jade
 
+
   for key in _.drop(Object.keys(extra), 2)
     - var item = extra[key]
     - var m = item.meta || {}
-    .ui.feature(class=m.css, class={background: m.image}, style=(m.image ? "background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7) ),url("+m.image+");" : ""))
+    .ui.feature(id=key, class=m.css, class={background: m.image}, style=(m.image ? "background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7) ),url("+m.image+");" : ""))
       .contain.large
         if m.title
           h2.title !{m.title}
-        p !{item.html}
+        .content !{item.html}
+        if m.link
+          a(href=m.link).read.more Read More
+
 
   .ui.content
     .contain.large
@@ -99,3 +103,4 @@ block scripts
   script(src="/js/front.js")
   script(src="/js/jquery.table.js")
   script(src="/js/affairs.js")
+  script(src="/js/reveal.js")

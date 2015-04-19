@@ -1491,23 +1491,11 @@
 
     .block {
       &.purple { 
-        .image {
-          background: #F7A6EC;
-        }
-        .content {
-          background-color: #240023;
-          background: linear-gradient( #3C0747, #230032);
-          border-color: #BB04B9;
-          a {
-            color: #FF00F8;
-          }
-          &:before {
-            border-left-color: #BB04B9;
-          }
-        }
-        &:nth-child(even) .content::before {
-          border-left-color: transparent;
-          border-right-color: #BB04B9;
+        background-color: #240023;
+        background: linear-gradient( #3C0747, #230032);
+        border-color: #BB04B9;
+        a {
+          color: #FF00F8;
         }
       }
 
@@ -1954,7 +1942,6 @@
 
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0.25em;
 
     &.background {
       background-position: center;
@@ -1962,23 +1949,37 @@
       background-size: cover;
     }
 
-    .header {
 
+    .read.more {
+      float: right;
+      padding: .8em 1em;
+      background: rgba(0,0,0,.2);
+      color: @col_primary;
+
+      &:hover {
+        background-color: rgba(0,0,0,.3);
+      }
+
+      &.fluid {
+        float: none;
+        width: 100%;
+        display: block;
+        text-align: center;
+      }
     }
-    .text {
 
+    &.transparent {
+      background: transparent;
+      border: none;
+      box-shadow: none;
     }
-    .image {
-
-    }
-    .list {
-
-    }
-    .quote {
-
-    }
-    .readmore {
-
+    &.purple { 
+      background-color: #240023;
+      background: linear-gradient( #3C0747, #230032);
+      border-color: #BB04B9;
+      a, a.read.more {
+        color: #FF00F8;
+      }
     }
   }
 
@@ -2296,36 +2297,41 @@
     }
   }
 
-  .ui.manual .text.help.markdown pre,
-  .ui.bb .text.help.markdown pre,
-  .ui.intro .text.help.markdown pre {
-    &.mud-output {
-      color: #c0c0c0;
-      background-color: #000;
-      font-family: monospace;
+  pre.mud-output {
+    color: #c0c0c0;
+    background-color: #000;
+    font-family: monospace;
 
-      .reset     {color: #c0c0c0;}
-      .bg-reset  {background-color: #000;}
-      .black     {color: #000;}
-      .red       {color: red;}
-      .green     {color: lime;}
-      .yellow    {color: yellow;}
-      .blue      {color: #3333FF;}
-      .purple    {color: fuchsia;}
-      .cyan      {color: aqua;}
-      .white     {color: #c0c0c0;}
-      .bg-black  {background-color: #000;}
-      .bg-red    {background-color: red;}
-      .bg-green  {background-color: lime;}
-      .bg-yellow {background-color: yellow;}
-      .bg-blue   {background-color: #3333FF;}
-      .bg-purple {background-color: fuchsia;}
-      .bg-cyan   {background-color: aqua;}
-      .bg-white  {background-color: #c0c0c0;}
-      .underline {text-decoration: underline;}
-      .bold      {font-weight: bold;}
-      .blink     {text-decoration: blink;}
+    &.transparent {
+      background-color: transparent;
     }
+    .reset     {color: #c0c0c0;}
+    .bg-reset  {background-color: #000;}
+    .black     {color: #000;}
+    .red       {color: red;}
+    .green     {color: lime;}
+    .yellow    {color: yellow;}
+    .blue      {color: #3333FF;}
+    .purple    {color: fuchsia;}
+    .cyan      {color: aqua;}
+    .white     {color: #c0c0c0;}
+    .bg-black  {background-color: #000;}
+    .bg-red    {background-color: red;}
+    .bg-green  {background-color: lime;}
+    .bg-yellow {background-color: yellow;}
+    .bg-blue   {background-color: #3333FF;}
+    .bg-purple {background-color: fuchsia;}
+    .bg-cyan   {background-color: aqua;}
+    .bg-white  {background-color: #c0c0c0;}
+    .underline {text-decoration: underline;}
+    .bold      {font-weight: bold;}
+    .blink     {text-decoration: blink;}
+
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
   }
 
 
