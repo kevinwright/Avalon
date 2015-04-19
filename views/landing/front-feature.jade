@@ -33,10 +33,10 @@ block content
           a(href=m.link).read.more Read More
 
 
-  .ui.content
+  .ui.feature.spacing-small
     .contain.large
 
-      .ui.three.columns.grid.responsive.contain.large
+      .ui.three.columns.grid.responsive
         .column
           h2.ui.title.underline #{meta.information.title}
           ul.ui.menu
@@ -64,7 +64,9 @@ block content
                   i.icon.large(class=item.social)
                   | #{item.title}
 
-      .ui.two.columns.grid.responsive.contain.large.text-margin-bottom
+  .ui.feature.spacing-small
+    .contain.large
+      .ui.two.columns.grid.responsive
         .column
           .content.active(data-id="recent")
             h2.ui.title.underline Latest Appointments
