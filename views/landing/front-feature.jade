@@ -10,7 +10,9 @@ block head
 block header
 
 block content
-  .ui.feature(id="intro", class=extra.intro.meta.css, class={background: extra.intro.meta.image}, style=(extra.intro.meta.image ? "background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7) ),url("+extra.intro.meta.image+");" : ""))
+  .ui.feature(id="intro", class=extra.intro.meta.css, class={background: extra.intro.meta.image})
+    if extra.intro.meta.image
+      +background-gradient-image("intro", extra.intro.meta.image)
     .contain
       .ui.grid.responsive
         .eight.column.wide
@@ -24,7 +26,9 @@ block content
   for key in _.drop(Object.keys(extra), 2)
     - var item = extra[key]
     - var m = item.meta || {}
-    .ui.feature(id=key, class=m.css, class={background: m.image}, style=(m.image ? "background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7) ),url("+m.image+");" : ""))
+    .ui.feature(id=key, class=m.css, class={background: m.image})
+      if m.image
+        +background-gradient-image(key, m.image)
       .contain.large
         if m.title
           h2.title !{m.title}
