@@ -2,25 +2,25 @@ extends /layout
 
 block head
   - var body = "index front-feature"
-  - var title = avalon.website.front.title
-  - var description = avalon.website.front.description
-  - var keywords = avalon.website.front.keywords
+  - var title = mkTitle(meta.title, avalon.website.front.title)
+  - var description = meta.subtitle + " - " + avalon.website.front.description
+  - var keywords = mkKeywords(meta.keywords, avalon.website.front.keywords)
   - var canonical = "http://www.avalon-rpg.com/"
-
-block header
-  .ui.header
-    .logo-wrap
-      h1.ui.title: a(href="/", id="top") #{meta.title}
 
 block content
   .ui.content
-    .contain
+    .contain.large
+      h1.ui.center.title #{meta.title}
       if meta.subtitle
         h4.ui.sub.title.center #{meta.subtitle}
-      .ui.box
-        include /includes/multiform.jade
 
-  for key in _.drop(Object.keys(extra), 1)
+      .ui.grid.responsive
+        .six.column.wide
+          p !{extra.intro.html}
+        .ten.column.wide
+          include /includes/multiform.jade
+
+  for key in _.drop(Object.keys(extra), 2)
     - var item = extra[key]
     - var m = item.meta || {}
     .ui.feature(class=m.css, class={background: m.image}, style=(m.image ? "background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7) ),url("+m.image+");" : ""))
@@ -32,14 +32,14 @@ block content
   .ui.content
     .contain.large
 
-      .ui.three.columns.grid.responsive
+      .ui.three.columns.grid.responsive.contain.large
         .column
-          h3.ui.title.underline #{meta.information.title}
+          h2.ui.title.underline #{meta.information.title}
           ul.ui.menu
             for item in meta.information.items
               li: a(href=item.url).item #{item.title}
         .column
-          h3.ui.title.underline #{meta.search.title}
+          h2.ui.title.underline #{meta.search.title}
           form(action="/help/search").helpform
             .ui.fluid.icon.input
               label HELP
@@ -52,7 +52,7 @@ block content
               i.search.icon.link(onclick="this.parentNode.parentNode.submit()")
                 
         .column
-          h3.ui.title.underline #{meta.links.title}
+          h2.ui.title.underline #{meta.links.title}
           ul.ui.menu.social
             for item in meta.links.items
               if item.social
@@ -60,9 +60,10 @@ block content
                   i.icon.large(class=item.social)
                   | #{item.title}
 
-      .ui.three.columns.grid.responsive
+      .ui.two.columns.grid.responsive.contain.large
         .column
           .content.active(data-id="recent")
+            h2.ui.title.underline Latest Appointments
             if recent
               table.ui.table
                 thead
@@ -77,6 +78,7 @@ block content
 
         .column
           .content.ui.markdown(data-id="events")
+            h2.ui.title.underline Forthcoming Events
             table.ui.table
               thead
                 tr
@@ -89,43 +91,6 @@ block content
                       td(width="20%") !{key}
                       td !{event}
             .text.help !{scheduleHelp}
-        .column
-          .content(data-id="affairs")
-           table.ui.sortable.selectable.revealable.table#militaryTable
-             thead
-               tr
-                 th(data-sort="string") Village
-                 th(data-sort="string") City
-                 th(data-sort="string") Conflict
-                 th(data-sort="string") Occupied
-                 th(data-sort="int") Troops
-                 th(data-sort="int") Legions
-             tbody
-               for affair,i in affairs
-                 tr(data-id=i, class={expand: affair.legionsByCommand && affair.legionsByCommand.length > 1})
-                   td
-                     if affair.legionsByCommand && affair.legionsByCommand.length > 1
-                       i.icon.angle.down
-                     | #{affair.village}
-                   td #{affair.city}
-                   td #{affair.conflict}
-                   td #{affair.occupied}
-                   if affair.legionsByCommand && affair.legionsByCommand.length == 1
-                     td(title=affair.legionsByCommand[0].commander) #{affair.legionsByCommand[0].size}
-                   else
-                     td #{_.sum(_.pluck(affair.legionsByCommand, 'size'))}
-                   if affair.legions
-                     td #{affair.legions.length}
-                   else
-                     td 0
-                   if affair.legionsByCommand && affair.legionsByCommand.length > 1
-                     td(data-id=i, style="", colspan="5").expandable
-                       table(width="100%", class="ui box small")
-                         tbody
-                           for legion in affair.legionsByCommand
-                             tr
-                               th #{legion.commander}
-                               td #{legion.size}
 
 block scripts
   script(src="/js/jquery.validate.min.js")
