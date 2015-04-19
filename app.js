@@ -89,6 +89,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
 app.use("/help/downloads", express.static(path.join(__dirname, 'downloads')));
 
 
+app.locals.basedir = path.join(__dirname, 'views');
 // Add avalon controller in every view
 app.locals._ = require("lodash");
 app.locals.avalon = avalon;

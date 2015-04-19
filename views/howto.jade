@@ -1,13 +1,13 @@
 doctype html
 html
   head
-    include includes/meta
+    include /includes/meta
     - var title = $.title
-    include includes/seo
-    include includes/css
+    include /includes/seo
+    include /includes/css
   body
     -console.log($)
-    include includes/topbar
+    include /includes/topbar
     .ui.header
       .logo-wrap
         a(href="/"): img.logo(src="/img/logo.png")

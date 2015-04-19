@@ -16,7 +16,9 @@ var affairs = require("../controller/news/affairs.js");
           if (err) return next(err);
           affairs(function(err, affairsData) {
             if (err) return next(err);
-            res.render('index', {
+
+
+            res.render('landing/'+meta.meta.template, {
               meta: meta.meta,
               extra:extra,
               affairs: affairsData,
@@ -24,6 +26,9 @@ var affairs = require("../controller/news/affairs.js");
               events: scheduleData,
               scheduleHelp: scheduleHelp
             });
+
+
+
           });
         });
       });

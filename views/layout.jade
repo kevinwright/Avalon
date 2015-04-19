@@ -1,11 +1,11 @@
 doctype html
 html
   head
-    include includes/meta
+    include /includes/meta
     block head
-    include includes/css
-    include includes/seo
-    include includes/gtm
+    include /includes/css
+    include /includes/seo
+    include /includes/gtm
   body(class=body)
     .container
       block header
@@ -13,9 +13,9 @@ html
           .logo-wrap
             a(href="/", id="top"): img.logo(src="/img/logo.png", alt=avalon.website.alt.header, title=avalon.website.alt.header)
       block content
-      include includes/footer
-      include includes/topbar
-    include includes/sidebar
+      include /includes/footer
+      include /includes/topbar
+    include /includes/sidebar
     script(type="application/javascript").
       var meta = {
         title: '#{title}',

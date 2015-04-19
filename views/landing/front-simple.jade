@@ -1,4 +1,4 @@
-extends layout
+extends /layout
 
 block head
   - var body = "index"
@@ -94,7 +94,7 @@ block content
 
 
         .six.column.wide.sidebar
-          include includes/multiform.jade
+          include /includes/multiform.jade
           .ui.block
             .content
               h3.ui.title.underline #{meta.information.title}
