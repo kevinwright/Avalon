@@ -14,6 +14,15 @@ var api = {
       stats: util.cache.file.getStats()
     });
   },
+  editor: function(req, res) {
+    res.render("editor.jade");
+  },
+  editorPost: function(req, res) {
+    util.render(req.body.text, function(err, content) {
+      if (err) return res.send(err);
+      res.send(content);
+    })
+  },
   checkName : function(req, res) {
     try {
       var name = req.params.username || req.query.username;

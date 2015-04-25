@@ -1,0 +1,31 @@
+extends /layout
+
+block content
+  .ui.content
+    .contain
+      .ui.form
+        textarea#text
+        input.ui.button.fluid#send(type="submit")
+
+  .ui.content#result(style="margin: 100px auto; border: 1px solid white; padding: 100px;")
+
+block scripts
+  script.
+    $("#send").click(function() {
+
+      $.ajax({
+          type: "POST",
+          url: "/api/editor",
+          data: {
+            "text": $("#text").val()
+          },
+          success: function(markdown_text){
+            console.log(markdown_text);
+            $('#result').html(markdown_text.normal.html);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown){
+            alert('Error!');
+          }
+      });
+
+    })
