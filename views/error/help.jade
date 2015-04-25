@@ -8,11 +8,12 @@ block content
     .contain
       h2.ui.title.center.underline= "The help file '" + page + "' was not found."
       
-      .ui.box
-        h2.ui.title Perhaps you meant to view one of these?
-        .ui.menu.vertical
-          for match in matches
-            a.item(href="/help/pages/" + match) #{match}
+      if matches && matches.length > 0
+        .ui.box
+          h2.ui.title Perhaps you meant to view one of these?
+          .ui.menu.vertical
+            for match in matches
+              a.item(href="/help/pages/" + match) #{match}
 
       center.section
         a(href="/help") Return to Help
