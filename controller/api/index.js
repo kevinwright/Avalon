@@ -17,6 +17,21 @@ var api = {
   editor: function(req, res) {
     res.render("editor.jade");
   },
+  editorFeature: function(req, res, next) {
+    util.render(req.body.text, function(err, blocks) {
+      if (err) return next(err);
+
+      var meta = null;
+      if (blocks.normal) meta =  blocks.normal.meta;
+      var featureOpts = {
+        meta: meta,
+        extra: blocks,
+        page: {},
+        cat: {items: []}
+      }
+      res.render("intro/feature", featureOpts);
+    })
+  },
   editorPost: function(req, res) {
     util.render(req.body.text, function(err, content) {
       if (err) return res.send(err);

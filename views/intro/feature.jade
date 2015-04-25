@@ -1,13 +1,14 @@
 extends /layout
 
 block head
-  if cat
-    - var title = mkTitle(meta.title, cat.content)
-  else
-    - var title = mkTitle(meta.title)
-  - var description = meta.summary
-  - var keywords =  mkKeywords(meta.keywords.toString().toLowerCase())
-  - var canonical = "http://www.avalon-rpg.com/intro/" + page.url
+  if meta
+    if cat
+      - var title = mkTitle(meta.title, cat.content)
+    else
+      - var title = mkTitle(meta.title)
+    - var description = meta.summary
+    - var keywords =  mkKeywords(meta.keywords.toString().toLowerCase())
+    - var canonical = "http://www.avalon-rpg.com/intro/" + page.url
 
 block header
 
@@ -32,12 +33,23 @@ block content
             a(href=m.link).read.more Read More
 
   else
-    .ui.feature
-      .contain
-        a(href="/", id="top", style="text-align: center;display: block;")
-          img.ui.image.maxed(src="/img/logo.png", width="400", alt=avalon.website.alt.header, title=avalon.website.alt.header)
-        !{extra.normal.html}
-
+    if extra.normal
+      .ui.feature
+        .contain
+          a(href="/", id="top", style="text-align: center;display: block;")
+            img.ui.image.maxed(src="/img/logo.png", width="400", alt=avalon.website.alt.header, title=avalon.website.alt.header)
+          !{extra.normal.html}
+    else
+      for key in Object.keys(extra)
+        - var item = extra[key]
+        - var m = item.meta || {}
+        .ui.feature(id=key, class=m.css, class={background: m.image}, style=(m.image ? "background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7) ),url("+m.image+");" : ""))
+          .contain
+            if m.title
+              h2.title !{m.title}
+            .content !{item.html}
+            if m.link
+              a(href=m.link).read.more Read More
 
 
   .text-center.ui.feature

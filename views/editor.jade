@@ -1,18 +1,27 @@
 extends /layout
 
 block content
+  style.
+    #result {
+      margin: 100px auto; border: 1px solid white; 
+    }
+    #result.simple {
+      padding: 100px;
+    }
+
   .ui.content
     .contain
       .ui.form
         textarea#text
-        input.ui.button.fluid#send(type="submit")
+        input.ui.button.fluid#send(type="submit", value="Format Markdown")
+        input.ui.button.fluid#sendFeature(type="submit", value="Format Feature")
 
-  .ui.content#result(style="margin: 100px auto; border: 1px solid white; padding: 100px;")
+  .ui.content#result(style=";")
 
 block scripts
   script.
     $("#send").click(function() {
-
+      $("#result").addClass("simple");
       $.ajax({
           type: "POST",
           url: "/api/editor",
@@ -23,8 +32,30 @@ block scripts
             console.log(markdown_text);
             $('#result').html(markdown_text.normal.html);
           },
-          error: function(XMLHttpRequest, textStatus, errorThrown){
-            alert('Error!');
+          error: function(x, textStatus, errorThrown){
+            console.log(x, textStatus, errorThrown);
+            $('#result').html(x.responseText);
+            $("#result").removeClass("simple");
+          }
+      });
+
+    })
+
+    $("#sendFeature").click(function() {
+      $("#result").removeClass("simple");
+      $.ajax({
+          type: "POST",
+          url: "/api/editorFeature",
+          data: {
+            "text": $("#text").val()
+          },
+          success: function(markdown_text){
+            console.log(markdown_text);
+            $('#result').html(markdown_text);
+          },
+          error: function(x, textStatus, errorThrown){
+            console.log(x, textStatus, errorThrown);
+            $('#result').html(x.responseText);
           }
       });
 
