@@ -8,7 +8,7 @@ block head
       - var title = mkTitle(meta.title)
     - var description = meta.summary
     - var keywords =  mkKeywords(meta.keywords.toString().toLowerCase())
-    - var canonical = "http://www.avalon-rpg.com" + prefix + page.url
+    - var canonical = "http://www.avalon-rpg.com" + page.url
 
 block header
   mixin feature(key)
@@ -50,21 +50,6 @@ block content
       for key in Object.keys(extra)
         +feature(key)
 
-
-  .text-center.ui.feature
-    .pagination.ui.menu(style="text-align:center;")
-      a.primary.item(href=prefix) Back to Index
-      if previous
-        a(href=prefix + previous.url).item
-          i.icon.left.triangle
-          | #{previous.content}
-      .item.primary #{page.content}
-      if next
-        a(href=prefix + next.url).item
-          | #{next.content}
-          i.icon.right.triangle
-      include ../includes/share-icons
-
   .ui.feature
     .contain
       nav.ui.menu.vertical
@@ -76,9 +61,6 @@ block content
               a(href=prefix + sub.url).item.active #{sub.content}
             else
               a(href=prefix + sub.url).item #{sub.content}
-
-  .contain
-    include ../includes/disqus
 
 block scripts
   script(src="/js/accordion.js")

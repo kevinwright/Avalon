@@ -2,45 +2,18 @@
   img(alt=avalon.website.alt.wax, title=avalon.website.alt.footer, src="/img/wax.png", style="position: absolute; right: 0px; top: 0px; height: 250px")
   .contain
     .ui.five.columns.grid.responsive
-      
-      .column
-        h3.ui.title.underline World
-        ul.ui.inverted.vertical.menu
-          li: a.item(href="/intro/") Intro
-          li: a.item(href="/history/") History
-          li: a.item(href="/world/") World
-          li: a.item(href="/maps/") Maps
-          li: a.item(href="/news/") News
-          li: a.item(href="/rollcall/") Rollcall
-      
-      .column
-        h3.ui.title.underline Gameplay
-        ul.ui.inverted.vertical.menu
-          li: a.item(href="/play/") Play Now
-          li: a.item(href="/help/") Guide
-          li: a.item(href="/connect") Mud Clients
-        h3.ui.title.underline Connect
-        ul.ui.inverted.vertical.menu
-          a.umbra.item(href="http://umbra.avalon-rpg.com", title="umbra.avalon-rpg.com") Umbra browser client
-          a.item(href="telnet://avalon-rpg.com:23") Telnet: <b>avalon-rpg.com 23</b>
-
-      .column
-        h3.ui.title.underline About
-        ul.ui.inverted.vertical.menu
-          li: a.item(href="/help/pages/privacy") Privacy Policy
-          li: a.item(href="/help/pages/terms") Terms &amp; Agreements
-          li: a.item(href="/vote") Vote to Support Us
-          li: a.item(href="/site_map") Sitemap
-
-      .column
-        h3.ui.title.underline Contact
-        ul.ui.inverted.social.vertical.menu
-          li: a.item(href="/help/pages/contact") Contact
-          li: a.item(href="http://www.meetplace.net", target="_blank") Meetplace Community
-          li: a.social.facebook.item(href="https://www.facebook.com/pages/Avalon-the-Legend-Lives-Game-Page/184129298274122", target="_blank") Facebook
-          li: a.social.twitter.item(href="https://twitter.com/AvalonOnlineRPG", target="_blank") Twitter
-          li: a.social.google.plus.item(href="https://plus.google.com/u/0/113841723211814320828/posts", target="_blank") Google+
-
+      for section in avalon.footer
+        .column
+          h3.ui.title.underline #{section.content}
+          ul.ui.inverted.vertical.menu
+            for item in section.items
+              li: a.item(href=item.url) #{item.content}
+          if section.include == "connect"
+            h3.ui.title.underline Connect
+            ul.ui.inverted.vertical.menu
+              a.umbra.item(href="http://umbra.avalon-rpg.com", title="umbra.avalon-rpg.com") Umbra browser client
+              a.item(href="telnet://avalon-rpg.com:23") Telnet: <b>avalon-rpg.com 23</b>
+              
       .column
         h3.ui.title.underline Share
         ul.ui.inverted.vertical.menu.social-footer

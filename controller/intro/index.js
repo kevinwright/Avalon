@@ -1,5 +1,7 @@
-var INTRODIR = global.avalon.dir.intro,
-    TOCFILE = global.avalon.files.toc;
+var INTRODIR = global.avalon.dir.intro;
+var TOCFILE = global.avalon.files.toc;
+var FEATURESDIR = global.avalon.dir.features;
+var GUIDEDIR = global.avalon.dir.guide;
 
 var util = require("../../helper/util.js");
 
@@ -20,6 +22,7 @@ function NoPageError(url, cat, result, params) {
 }
 
 function Controller() {
+  var self = this;
   this.index = function(req, res, next) {
     util.renderFile(INTRODIR + "/index.md", function(err, blocks) {
       if (err) return next(err);
@@ -117,7 +120,8 @@ function Controller() {
             cat: cat,
             page: result,
             previous: previous,
-            next: nextArticle
+            next: nextArticle,
+            prefix: "/intro"
           });
         } else {
           res.render("intro/page", {
@@ -133,6 +137,141 @@ function Controller() {
       }
     });
   };
+
+
+
+
+  this.feature = function(req, res, next) {
+    var page = req.params.page || req.query.page;
+
+    util.renderFile(FEATURESDIR+"/index.md", function(err, index) {
+      if (err) return next(err);
+
+
+      var features = index.normal.meta.features;
+      var featurePage = features.filter(function(feat) {
+        return feat.url == "/"+page;
+      })[0];
+
+
+      if (!featurePage) {
+        return next();
+      }
+
+
+      var index = _.findIndex(features, featurePage);
+      var previous = features[index - 1];
+      var nextArticle = features[index + 1];
+
+
+      util.renderFile(FEATURESDIR+"/"+featurePage.file, function(err, blocks) {
+        if (err) return next(err);
+
+        res.render("intro/feature", {
+            meta: blocks.normal.meta,
+            cat: {
+              content: "Features",
+              items: features
+            },
+            prefix: "/features",
+            extra: blocks,
+            toc: features,
+            page: featurePage,
+            previous: previous,
+            next: nextArticle
+        });
+
+      });
+    });
+  }
+
+  this.guide = function(req, res, next) {
+    var page = req.params.page || req.query.page;
+    util.renderFile(GUIDEDIR+"/index.md", function(err, index) {
+      if (err) return next(err);
+
+      var guide = index.normal.meta.guide;
+
+      var guidePage = guide.filter(function(feat) {
+        return feat.url == "/"+page;
+      })[0];
+
+
+      if (!guidePage) {
+        return next();
+      }
+
+
+      var index = _.findIndex(guide, guidePage);
+      var previous = guide[index - 1];
+      var nextArticle = guide[index + 1];
+
+
+      util.renderFile(GUIDEDIR+"/"+guidePage.file, function(err, blocks) {
+        if (err) return next(err);
+
+        res.render("intro/feature", {
+            meta: blocks.normal.meta,
+            cat: {
+              content: "Guide",
+              items: guide
+            },
+            prefix: "/guide",
+            extra: blocks,
+            toc: guide,
+            page: guidePage,
+            previous: previous,
+            next: nextArticle,
+        });
+
+      });
+
+    });
+  }
+
+  this.featureIndex = function(req, res, next) {
+    util.renderFile(FEATURESDIR+"/index.md", function(err, index) {
+      if (err) return next(err);
+      var features = index.normal.meta.features;
+
+      res.render("intro/featureIndex", {
+          meta: index.normal.meta,
+          cat: {
+            content: "Features",
+            items: features
+          },
+          prefix: "/features",
+          extra: index,
+          toc: features,
+          page: {
+            url: "/features"
+          }
+      });
+
+    });
+  }
+
+  this.guideIndex = function(req, res, next) {
+    util.renderFile(GUIDEDIR+"/index.md", function(err, index) {
+      if (err) return next(err);
+      var guide = index.normal.meta.guide;
+
+      res.render("intro/featureIndex", {
+          meta: index.normal.meta,
+          cat: {
+            content: "Guide",
+            items: guide
+          },
+          prefix: "/guide",
+          extra: index,
+          toc: guide,
+          page: {
+            url: "/guide"
+          }
+      });
+
+    });
+  }
 }
 
 module.exports = new Controller();

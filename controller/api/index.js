@@ -28,15 +28,15 @@ var api = {
         extra: blocks,
         page: {},
         cat: {items: []}
-      }
+      };
       res.render("intro/feature", featureOpts);
-    })
+    });
   },
   editorPost: function(req, res) {
     util.render(req.body.text, function(err, content) {
       if (err) return res.send(err);
       res.send(content);
-    })
+    });
   },
   checkName : function(req, res) {
     try {

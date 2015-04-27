@@ -36,7 +36,7 @@ describe('Avalon.Index', function(){
     request(app)
       .get('/help/')
       .expect(/This is the full, comprehensive Avalon manual/)
-      .expect(/Purchasing equipment and services in real currency/)
+      .expect(/Cellar Door/)
       .end(function(err){
         if (err) return done(err);
         done();

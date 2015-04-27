@@ -26,14 +26,17 @@ if (process.env.NODE_ENV === "production") {
       library: "/library",
       library_pages: "/library/pages",
       library_help: "/library/help",
-      intro: "/library/intro"
+      intro: "/library/intro",
+      features: "/library/features",
+      guide: "/library/guide"
     },
     files: {
       menu: "/library/menu.yaml",
       synonyms: "/library/synonyms.json",
       pages: "/library/pages.yaml",
       toc: "/library/intro/toc.yaml",
-      website: "/library/website.yaml"
+      website: "/library/website.yaml",
+      footer: "/library/footer.yaml"
     }
   };
 } else {
@@ -47,14 +50,17 @@ if (process.env.NODE_ENV === "production") {
       library: "/library/test",
       library_pages: "/library/test/pages",
       library_help: "/library/test/help",
-      intro: "/library/test/intro"
+      intro: "/library/test/intro",
+      features: "/library/test/features",
+      guide: "/library/test/guide"
     },
     files: {
       menu: "/library/test/menu.yaml",
       synonyms: "/library/test/synonyms.json",
       pages: "/library/test/pages.yaml",
       toc: "/library/test/intro/toc.yaml",
-      website: "/library/test/website.yaml"
+      website: "/library/test/website.yaml",
+      footer: "/library/test/footer.yaml"
     }
   };
 }
@@ -119,7 +125,6 @@ app.locals.pickTitle = function(a, b) {
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/dynamic'));
 
-app.use('/intro', require('./routes/intro'));
 app.use('/api', require('./routes/api'));
 app.use('/bb', require('./routes/bb'));
 app.use('/help', require('./routes/help'));
@@ -130,6 +135,7 @@ app.use('/history', require('./routes/history'));
 app.use('/maps', require('./routes/maps'));
 app.use('/lumiere', require('./routes/lumiere'));
 
+app.use('/', require('./routes/intro'));
 app.use('/', require('./routes/world'));
 
 //     ______                         

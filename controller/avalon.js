@@ -4,8 +4,12 @@ var util = require("../helper/util");
 
 var _website = util.renderYAMLSync(global.avalon.files.website);
 var _menu = util.renderYAMLSync(global.avalon.files.menu);
+var _footer = util.renderYAMLSync(global.avalon.files.footer);
 
 module.exports = {
+  get footer() {
+    return _footer;
+  },
   get menu () {
     return _menu;
   },
@@ -36,5 +40,9 @@ setInterval(function() {
   util.renderYAML(global.avalon.files.menu, function(err, content) {
     if (err) return;
     _menu = content;
+  });
+  util.renderYAML(global.avalon.files.footer, function(err, content) {
+    if (err) return;
+    _footer = content;
   });
 }, syncTime);
