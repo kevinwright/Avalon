@@ -536,9 +536,6 @@
         display: none;
       }
     }
-    @media @tiny {
-      padding: 0px;
-    }
   }
 
 
@@ -2193,6 +2190,12 @@
       }
     }
 
+    @media @tiny {
+      padding: 2em 1em;
+      &.spacing-small {
+        padding: 1em 1em 2em;
+      }
+    }
   }
 
   .ui.scroll {
