@@ -45,6 +45,7 @@ block content
         .contain
           a(href="/", id="top", style="text-align: center;display: block;")
             img.ui.image.maxed(src="/img/logo.png", width="400", alt=avalon.website.alt.header, title=avalon.website.alt.header)
+          h1.ui.title.underline #{meta.title}
           !{extra.normal.html}
     else
       for key in Object.keys(extra)
