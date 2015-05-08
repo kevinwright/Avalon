@@ -1,33 +1,36 @@
 var helpParser = require("../help/parser");
-var HELPDIR = global.avalon.dir.help;
+var LIBDIR = global.avalon.dir.library;
 var util = require("../../helper/util");
 var _ = require("lodash");
 
 var schedule = function(callback) {
-  util.readFile(HELPDIR + "/schedule", function(err, data) {
+  util.readFile(LIBDIR + "/webevents", function(err, data) {
     if (err) return callback(err);
 
-    var events = {}, current = "";
-    _(data.match(/^\*.*$/gm))
-      .filter(function(line) {
-        return !/^\*$/.test(line) && !/\*\+$/.test(line);
-      })
-      .forEach(function(line) {
-        if (/^\*\*/.test(line)) {
-          current = line.replace(/\*\*/, "");
-          events[current] = [];
-        } else {
-          events[current].push(line.replace(/\*/, ""));
-        }
-      })
-      .value();
+    var events = {}, current = "", state = false, helpFile = "";
 
-    data = data.replace(/^\*.*/gmi, "");
-    var help = helpParser(data);
+    for (var i = 0; i < data.split("\n").length; i++) {
+      var line = data.split("\n")[i];
+      if (_.startsWith(line, "*")) {
+        current = line.replace(/\*/gmi, "").trim();
+        state = true;
+      } else {
+        if (state) {
+          events[current] = line;
+          state = false;
+        } else {
+          helpFile += line + "\n";
+        }
+      }
+    }
+
+    console.log(events);
+
+    var help = helpParser(helpFile);
     help = help.replace("GEMHOLDERS", "<a href='/help/pages/gemholders'>GEMHOLDERS</a>");
     help = help.replace("CONTENDERS", "<a href='/help/pages/contenders'>CONTENDERS</a>");
 
-    callback(null, events, help);
+    callback(null, events, null);
   });
 };
 

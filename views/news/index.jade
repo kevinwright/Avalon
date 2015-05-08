@@ -53,10 +53,9 @@ block content
               th Event
           tbody
             for update,key in events
-              for event in update
-                tr
-                  td(width="20%") !{key}
-                  td !{event}
+              tr
+                td(width="20%") !{key}
+                td !{update}
         .text.help !{scheduleHelp}
 
       .section.military.affairs.box.ui
