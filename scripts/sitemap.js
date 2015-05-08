@@ -16,15 +16,19 @@ global.avalon = {
     library: "/library",
     library_pages: "/library/pages",
     library_help: "/library/help",
-    intro: "/library/intro"
+    intro: "/library/intro",
+    features: "/library/features",
+    guide: "/library/guide"
   },
   files: {
-    menu: "/library/menu.js",
-    synonyms: "/library/synonyms.js",
-    pages: "/library/pages.js",
-    toc: "/library/intro/toc.js"
+    menu: "/library/menu.yaml",
+    synonyms: "/library/synonyms.json",
+    pages: "/library/pages.yaml",
+    toc: "/library/intro/toc.yaml",
+    website: "/library/website.yaml",
+    footer: "/library/footer.yaml"
   }
-}
+};
 
 // /                                  Index
 // /.*                                Pages
@@ -147,19 +151,19 @@ function getBBBoards() {
         id: board.id,
         file: board.href,
         lastmod: fs.statSync(location).mtime
-      }
+      };
     } catch(err) {
       // console.error("No board file for: ", board.shortname);
     }
-  }).filter(function(file) {return file});
+  }).filter(function(file) {return file;});
 }
 
 function getPages() {
-  return require(global.avalon.files.pages);
+  return util.renderYAMLSync(global.avalon.files.pages);
 }
 
 function getIntro() {
-  var toc = require(global.avalon.files.toc);
+  var toc = util.renderYAMLSync(global.avalon.files.toc);
   return toc;
 }
 

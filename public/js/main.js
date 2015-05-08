@@ -12,11 +12,15 @@ $(document).ready(function() {
    dragOpen: {
       open: $.mmenu.support.touch
    },
-   footer: {
-       add: true,
-       title: "Share",
-       content: $("#share-mobile"),
-    }
+   navbars: [
+      true,
+      {
+         add: true,
+         title: "Share",
+         position: "bottom",
+         content: $("#share-mobile"),
+      }
+   ]
   }, {
     transitionDuration: 200
   });
