@@ -42,15 +42,15 @@
         .four.center.wide.field Client:
         .four.center.wide.input.field
           .ui.radio.checkbox
-            input#create-umbra(type="radio", name="run", value="umbra", checked={checked: avalon.website.default_client == "lumiere"})
+            input#create-umbra(type="radio", name="run", value="umbra", checked=avalon.website.default_client == "umbra")
             label(for="create-umbra") Umbra
         .four.center.wide.input.field
           .ui.radio.checkbox
-            input#create-lumiere(type="radio", name="run", value="lumiere", checked={checked: avalon.website.default_client == "lumiere"})
+            input#create-lumiere(type="radio", name="run", value="lumiere", checked=avalon.website.default_client == "lumiere")
             label(for="create-lumiere") Lumiere
         .four.center.wide.input.field
           .ui.radio.checkbox
-            input#create-javalon(type="radio", name="run", value="applet", checked={checked: avalon.website.default_client == "applet"})
+            input#create-javalon(type="radio", name="run", value="applet", checked=avalon.website.default_client == "applet")
             label(for="create-javalon") Javalon
         input(type="hidden", name="create", value="yes")
         input(type="hidden", name="loginkey", value="")
