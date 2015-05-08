@@ -221,6 +221,18 @@
     ul {
       padding-left: 1em;
     }
+    &.list-arrow {
+      li {
+        list-style: none;
+        margin-left: 10px;
+        &:before {
+          content: "\00BB";
+          margin-left: -5px;
+          font-size: 100%;
+          padding-right: 5px;
+        }
+      }
+    }
   }
 
   hr {
@@ -2032,13 +2044,16 @@
 
 
     .read.more {
-      float: right;
       padding: .8em 1em;
-      background: rgba(0,0,0,.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0,0,0,.5);
       color: @col_primary;
-
-      &:hover {
-        background-color: rgba(0,0,0,.3);
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+      font-family: @font_sans;
+      transition: color 0.2s, background 0.2s;
+      &:hover, &:focus, &:active {
+        background-color: rgba(0,0,0,.8);
+        color: lighten(@col_primary, 10%);
       }
 
       &.fluid {
@@ -2049,8 +2064,14 @@
       }
     }
 
+    &.title-center {
+      .contain > .title {
+        text-align: center;
+      }
+    }
+
     &.spacing-small {
-      padding: 2.5em 2em;
+      padding: 2em 2em 2.5em;
     }
 
     &.spacing-large {
@@ -2061,6 +2082,15 @@
       background: transparent;
       border: none;
       box-shadow: none;
+      .column a.ui.box {
+        display: block;
+        color: inherit;
+        transition: border 0.2s, background 0.2s;
+        &:hover, &:active, &:focus {
+          border: 1px solid rgba(255,255,255,.3);
+          background: rgba(255,255,255,.06);
+        }
+      }
     }
     &.purple { 
       background-color: #240023;
@@ -2119,17 +2149,20 @@
           font-style: italic;
         }
       }
-      .content p {
+      .content p, .content ul {
         line-height: 1.5em;
         font-size: 17px;
         margin: auto;
+        font-family: @font_serif;
+        &.lead {
+          padding: 8px;
+        }
       }
       .read.more {
-        float: left;
+        display: inline-block;
+        float: none;
+        margin-bottom: 10px;
         margin-top: 10px;
-        color: rgba(255, 255, 255, 0.43);
-        background: none;
-        padding: 8px;
       }
     }
 

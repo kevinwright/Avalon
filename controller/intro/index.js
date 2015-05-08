@@ -150,18 +150,22 @@ function Controller() {
 
       var features = index.normal.meta.features;
       var featurePage = features.filter(function(feat) {
-        return feat.url == "/"+page;
+        return feat.url === "/"+page;
       })[0];
 
 
       if (!featurePage) {
-        return next();
+        featurePage = {
+          file: page+".md",
+          url: "/"+page,
+          content: page
+        };
       }
 
 
-      var index = _.findIndex(features, featurePage);
-      var previous = features[index - 1];
-      var nextArticle = features[index + 1];
+      var i = _.findIndex(features, featurePage);
+      var previous = features[i - 1];
+      var nextArticle = features[i + 1];
 
 
       util.renderFile(FEATURESDIR+"/"+featurePage.file, function(err, blocks) {
@@ -183,7 +187,7 @@ function Controller() {
 
       });
     });
-  }
+  };
 
   this.guide = function(req, res, next) {
     var page = req.params.page || req.query.page;
@@ -191,21 +195,22 @@ function Controller() {
       if (err) return next(err);
 
       var guide = index.normal.meta.guide;
-
       var guidePage = guide.filter(function(feat) {
-        return feat.url == "/"+page;
+        return feat.url === "/"+page;
       })[0];
 
 
       if (!guidePage) {
-        return next();
+        guidePage = {
+          file: page+".md",
+          url: "/"+page,
+          content: page
+        };
       }
 
-
-      var index = _.findIndex(guide, guidePage);
-      var previous = guide[index - 1];
-      var nextArticle = guide[index + 1];
-
+      var i = _.findIndex(guide, guidePage);
+      var previous = guide[i - 1];
+      var nextArticle = guide[i + 1];
 
       util.renderFile(GUIDEDIR+"/"+guidePage.file, function(err, blocks) {
         if (err) return next(err);
@@ -227,7 +232,7 @@ function Controller() {
       });
 
     });
-  }
+  };
 
   this.featureIndex = function(req, res, next) {
     util.renderFile(FEATURESDIR+"/index.md", function(err, index) {
@@ -249,7 +254,7 @@ function Controller() {
       });
 
     });
-  }
+  };
 
   this.guideIndex = function(req, res, next) {
     util.renderFile(GUIDEDIR+"/index.md", function(err, index) {
@@ -271,7 +276,7 @@ function Controller() {
       });
 
     });
-  }
+  };
 }
 
 module.exports = new Controller();
