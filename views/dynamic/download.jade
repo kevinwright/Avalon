@@ -1,0 +1,44 @@
+extends ../layout
+
+block head
+  if (page.type == "library")
+    - var title = mkTitle(page.library.meta.seo.title)
+    - var description = page.library.meta.seo.description
+    - var keywords = mkKeywords(page.library.meta.seo.keywords)
+  if (page.canonical)
+    - var canonical = page.canonical
+  else if (page.library.meta.canonical)
+    - var canonical = page.library.meta.canonical
+block content
+  .ui.content.page.download
+    .contain.large
+      if (page.type == "library")
+        if (page.library.meta.subtitle)
+          h1.ui.title.center #{page.library.meta.title}
+          h2.ui.sub.title.center.underline #{page.library.meta.subtitle}
+        else
+          h1.ui.title.center.underline #{page.library.meta.title}
+      .ui.grid.responsive
+        .eleven.column.wide.main
+          if (page.library)
+            .text.help.markdown !{page.library.html}
+          else
+            .text.help !{page.html}
+
+        .five.column.wide.sidebar
+          include ../includes/multiform
+          if page.library.meta.downloads
+            .ui.block.help.downloads
+              .content
+                -console.log(page.library.meta)
+                h2.ui.title.underline #{page.library.meta.downloads.title}
+                p #{page.library.meta.downloads.description}
+                .ui.menu.vertical
+                  for item in page.library.meta.downloads.links
+                    a(target="_blank", href=item.file).item
+                      i.icon.file
+                      | #{item.text}
+
+block scripts
+  script(src="/js/jquery.validate.min.js")
+  script(src="/js/login.js")
