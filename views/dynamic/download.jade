@@ -26,7 +26,6 @@ block content
             .text.help !{page.html}
 
         .five.column.wide.sidebar
-          include ../includes/multiform
           if page.library.meta.downloads
             .ui.block.help.downloads
               .content
@@ -38,6 +37,7 @@ block content
                     a(target="_blank", href=item.file).item
                       i.icon.file
                       | #{item.text}
+          include ../includes/multiform
 
 block scripts
   script(src="/js/jquery.validate.min.js")
