@@ -2,18 +2,13 @@
   img(alt=avalon.website.alt.wax, title=avalon.website.alt.footer, src="/img/wax.png", style="position: absolute; right: 0px; top: 0px; height: 250px")
   .contain
     .ui.five.columns.grid.responsive
-      for section in avalon.footer
+      for column in avalon.footer
         .column
-          h3.ui.title.underline #{section.content}
-          ul.ui.inverted.vertical.menu
-            for item in section.items
-              li: a.item(href=item.url) #{item.content}
-          if section.include == "connect"
-            h3.ui.title.underline Connect
+          for section in column.rows
+            h3.ui.title.underline #{section.content}
             ul.ui.inverted.vertical.menu
-              a.umbra.item(href="http://umbra.avalon-rpg.com", title="umbra.avalon-rpg.com") Umbra browser client
-              a.item(href="telnet://avalon-rpg.com:23") Telnet: <b>avalon-rpg.com 23</b>
-              
+              for item in section.items
+                li: a.item(href=item.url, title=item.title, target=item.target) !{item.content}
       .column
         h3.ui.title.underline Share
         ul.ui.inverted.vertical.menu.social-footer
