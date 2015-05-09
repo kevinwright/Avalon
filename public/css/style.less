@@ -216,6 +216,10 @@
     color: @col_foreground;
   }
 
+  ol {
+    list-style: inside upper-roman;
+  }
+
   ul {
     list-style: inside;
     ul {
@@ -2124,9 +2128,11 @@
       }
     }
 
-    .content ul {
+    &.list-bold {
+      .content ul {
       font-weight: bold;
       color: aliceblue;
+      }
     }
 
     &.feature-hugequote {
@@ -2197,6 +2203,11 @@
         line-height: 1.1em;
         margin-bottom: 15px;
         padding: 8px;
+      }
+      &.title-small {
+        .title {
+          font-size: 30px;
+        }
       }
       p.lead {
         font-size: 26px;
