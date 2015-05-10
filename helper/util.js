@@ -4,9 +4,9 @@ var fs = require("fs");
 var yaml = require("js-yaml");
 var marked = require("marked");
 var _ = require("lodash");
-var ttlTime = 600;
+var ttlTime = 10;
 
-if (process.env.NODE_ENV === "production") ttlTime = 600;
+if (process.env.NODE_ENV === "production") ttlTime = 10;
 else ttlTime = 10;
 
 var fileCache = new NodeCache( { stdTTL: ttlTime, checkperiod: ttlTime*2 } );
