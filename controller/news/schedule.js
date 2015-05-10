@@ -24,8 +24,6 @@ var schedule = function(callback) {
       }
     }
 
-    console.log(events);
-
     var help = helpParser(helpFile);
     help = help.replace("GEMHOLDERS", "<a href='/help/pages/gemholders'>GEMHOLDERS</a>");
     help = help.replace("CONTENDERS", "<a href='/help/pages/contenders'>CONTENDERS</a>");

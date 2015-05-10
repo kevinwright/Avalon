@@ -22,7 +22,6 @@ function NoPageError(url, cat, result, params) {
 }
 
 function Controller() {
-  var self = this;
   this.index = function(req, res, next) {
     util.renderFile(INTRODIR + "/index.md", function(err, blocks) {
       if (err) return next(err);
