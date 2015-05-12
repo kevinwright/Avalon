@@ -46,6 +46,19 @@ block content
               img.ui.image.maxed(src="/img/logo.png", width="400", alt=avalon.website.alt.header, title=avalon.website.alt.header)
             | !{extra.intro.html}
 
+          .text-center.text-margin-top
+            .pagination.ui.menu(style="text-align:center;")
+              a.primary.item(href=prefix) Back to Index
+              if previous
+                a(href=prefix + previous.url).item
+                  i.icon.left.triangle
+                  | #{previous.content}
+              .item.primary #{page.content}
+              if next
+                a(href=prefix + next.url).item
+                  | #{next.content}
+                  i.icon.right.triangle
+
       for key in _.drop(Object.keys(extra), 2)
         +feature(key)
     else
@@ -68,6 +81,7 @@ block content
   .text-center.ui.feature
     .pagination.ui.menu(style="text-align:center;")
       a.primary.item(href=prefix) Back to Index
+      a.primary.item(href="#top") Scroll to Top
       if previous
         a(href=prefix + previous.url).item
           i.icon.left.triangle
