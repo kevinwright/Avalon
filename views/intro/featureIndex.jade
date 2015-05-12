@@ -14,7 +14,9 @@ block header
   mixin feature(key)
     - var item = extra[key]
     - var m = item.meta || {}
-    .ui.feature(id=key, class=m.css, class={background: m.image}, style=(m.image ? "background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7) ),url("+m.image+");" : ""))
+    .ui.feature(id=key, class=m.css, class={background: m.image})
+      if m.image
+        +background-gradient-image(key, m.image)
       .contain
         if m.title
           h2.title !{m.title}
@@ -26,16 +28,27 @@ block header
 block content
   if Object.keys(extra).length > 1
     if extra.intro
-      .ui.feature(id="intro", class=extra.intro.meta.css, class={background: extra.intro.meta.image}, style=(extra.intro.meta.image ? "background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7) ),url("+extra.intro.meta.image+");" : ""))
+      - if (extra.intro.meta == null) extra.intro.meta = {}
+      .ui.feature(id="intro", class=extra.intro.meta.css, class={background: extra.intro.meta.image})
+        if extra.intro.meta.image
+          +background-gradient-image("intro", extra.intro.meta.image)
         .contain
-          a(href="/", id="top", style="text-align: center;display: block;")
-            img.ui.image.maxed(src="/img/logo.png", width="400", alt=avalon.website.alt.header, title=avalon.website.alt.header)
-          !{extra.intro.html}
+          if extra.intro.meta.login
+            .ui.grid.responsive
+              .eight.column.wide
+                a(href="/", id="top", style="text-align: center;display: block;")
+                  img.ui.image.maxed(src="/img/logo.png", width="400", alt=avalon.website.alt.header, title=avalon.website.alt.header)
+                | !{extra.intro.html}
+              .eight.column.wide
+                include /includes/multiform.jade
+          else
+            a(href="/", id="top", style="text-align: center;display: block;")
+              img.ui.image.maxed(src="/img/logo.png", width="400", alt=avalon.website.alt.header, title=avalon.website.alt.header)
+            | !{extra.intro.html}
 
       for key in _.drop(Object.keys(extra), 2)
         +feature(key)
     else
-
       for key in _.drop(Object.keys(extra), 1)
         +feature(key)
 
