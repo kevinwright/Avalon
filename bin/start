@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 var app = require('../app');
 
-if (process.env.NODE_ENV === "production")
+if(process.env.AVWEB_PORT) {
+  app.set('port', process.env.AVWEB_PORT);
+} else if (process.env.NODE_ENV === "production") {
   app.set('port', 3000);
-else
+} else {
   app.set("port", 3001);
+}
 
-var server = app.listen(app.get('port'), function() {
+//0.0.0.0 forces explicit binding to IPv4 only
+var server = app.listen(app.get('port'), '0.0.0.0', function() {
   console.log('Express server listening on port ' + server.address().port);
 });
