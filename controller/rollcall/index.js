@@ -26,7 +26,9 @@ function RollCallController() {
           city: line[2],
           guild: line[3],
           order: line[4],
-          orderlevel: line[5]
+          orderlevel: line[5],
+          titles: line[6],
+          status: line[7]
         };
         return obj;
       });
@@ -36,6 +38,12 @@ function RollCallController() {
     });
   };
 
+  this.getActive = function(callback) {
+    self.get(function(person) {
+      if (!person.status) return false;
+      return person.status.indexOf('ACTIVE') >= 0;
+    }, callback);
+  };
   this.getCity = function(city, callback) {
     self.get(function(person) {
       if (!person.city) return false;
@@ -109,8 +117,16 @@ function RollCallController() {
       var status = req.params.status || req.query.status;
 
       if (status === "god") {
-        self.getCity(status, function(err, list) {
+        self.getCity("god", function(err, list) {
           res.render('rollcall/list', { 
+            status: util.cap(status),
+            list: list,
+            meta: meta.meta
+          });
+        });
+      } else if (status === "active") {
+        self.getActive(function(err, list) {
+          res.render('rollcall/list', {
             status: util.cap(status),
             list: list,
             meta: meta.meta
@@ -215,6 +231,10 @@ function RollCallController() {
     self.list(req, res, next);
   };
 
+  this.active = function(req, res, next) {
+    req.query = {status: "active"};
+    self.list(req, res, next);
+  };
 }
 
 module.exports = new RollCallController();
