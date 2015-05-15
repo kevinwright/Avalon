@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "test": "grunt test",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "kevdev": "set AVWEB_PORT=3003&& iojs ./bin/start"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
