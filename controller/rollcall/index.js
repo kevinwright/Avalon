@@ -27,8 +27,8 @@ function RollCallController() {
           guild: line[3],
           order: line[4],
           orderlevel: line[5],
-          titles: line[6],
-          status: line[7]
+          offices: line[6],
+          tags: line[7]
         };
         return obj;
       });
@@ -38,10 +38,35 @@ function RollCallController() {
     });
   };
 
-  this.getActive = function(callback) {
+  //function filterEqual(paramName) {
+  //  return function(paramVal, callback) {
+  //    var seek = paramVal.toLowerCase();
+  //    self.get(function(person) {
+  //      if (!person.hasOwnProperty(paramName))
+  //        return false;
+  //      else
+  //        return person[paramName].toLowerCase() === seek;
+  //    }, callback);
+  //  };
+  //}
+  //
+  //function filterContains(paramName) {
+  //  return function(paramVal, callback) {
+  //    var seek = paramVal.toLowerCase();
+  //    self.get(function(person) {
+  //      if (!person.hasOwnProperty(paramName))
+  //        return false;
+  //      else
+  //        return person[paramName].toLowerCase().indexOf(seek) >= 0;
+  //    }, callback);
+  //  };
+  //}
+
+
+  this.getName = function(name, callback) {
     self.get(function(person) {
-      if (!person.status) return false;
-      return person.status.indexOf('ACTIVE') >= 0;
+      if (!person.name) return false;
+      return person.name.toLowerCase() === name.toLowerCase();
     }, callback);
   };
   this.getCity = function(city, callback) {
@@ -62,10 +87,16 @@ function RollCallController() {
       return person.order.toLowerCase() === order.toLowerCase();
     }, callback);
   };
-  this.getName = function(name, callback) {
+  this.getOffice = function(office, callback) {
     self.get(function(person) {
-      if (!person.name) return false;
-      return person.name.toLowerCase() === name.toLowerCase();
+      if (!person.offices) return false;
+      return person.offices.toLowerCase().indexOf(office.toLowerCase()) >= 0;
+    }, callback);
+  };
+  this.getTag = function(tag, callback) {
+    self.get(function(person) {
+      if (!person.tags) return false;
+      return person.tags.toLowerCase().indexOf(tag.toLowerCase()) >= 0;
     }, callback);
   };
 
@@ -114,25 +145,10 @@ function RollCallController() {
       var city = req.params.city || req.query.city;
       var guild = req.params.guild || req.query.guild;
       var order = req.params.order || req.query.order;
-      var status = req.params.status || req.query.status;
+      var tag = req.params.tag || req.query.tag;
+      var office = req.params.office || req.query.office;
 
-      if (status === "god") {
-        self.getCity("god", function(err, list) {
-          res.render('rollcall/list', { 
-            status: util.cap(status),
-            list: list,
-            meta: meta.meta
-          });
-        });
-      } else if (status === "active") {
-        self.getActive(function(err, list) {
-          res.render('rollcall/list', {
-            status: util.cap(status),
-            list: list,
-            meta: meta.meta
-          });
-        });
-      } else if (city) {
+      if (city) {
         self.getCity(city, function(err, list) {
           list = list.sort(self.sortPatron);
           res.render('rollcall/list', { 
@@ -153,6 +169,22 @@ function RollCallController() {
       } else if (order) {
         self.getOrder(order, function(err, list) {
           res.render('rollcall/list', { 
+            order: util.cap(order),
+            list: list,
+            meta: meta.meta
+          });
+        });
+      } else if (office) {
+        self.getOffice(office, function(err, list) {
+          res.render('rollcall/list', {
+            order: util.cap(order),
+            list: list,
+            meta: meta.meta
+          });
+        });
+      } else if (tag) {
+        self.getTag(tag, function(err, list) {
+          res.render('rollcall/list', {
             order: util.cap(order),
             list: list,
             meta: meta.meta
@@ -201,7 +233,7 @@ function RollCallController() {
           res.render('rollcall/character', {
             help: parser(help),
             character: character,
-            list: list,
+            list: list
           });
         });
 
@@ -219,7 +251,7 @@ function RollCallController() {
             character: character,
             description: util.getDescription(help),
             keywords: util.getKeywords(help),
-            list: list,
+            list: list
           });
         });
       }
@@ -227,12 +259,7 @@ function RollCallController() {
   };
 
   this.deities = function(req, res, next) {
-    req.query = {status: "god"};
-    self.list(req, res, next);
-  };
-
-  this.active = function(req, res, next) {
-    req.query = {status: "active"};
+    req.query = {city: "god"};
     self.list(req, res, next);
   };
 }
