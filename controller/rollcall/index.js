@@ -177,7 +177,6 @@ function RollCallController() {
       } else if (office) {
         self.getOffice(office, function(err, list) {
           res.render('rollcall/list', {
-            order: util.cap(order),
             list: list,
             meta: meta.meta
           });
@@ -185,7 +184,6 @@ function RollCallController() {
       } else if (tag) {
         self.getTag(tag, function(err, list) {
           res.render('rollcall/list', {
-            order: util.cap(order),
             list: list,
             meta: meta.meta
           });
