@@ -94,6 +94,7 @@ function parseSummaries(callback) {
     var regex = /^(\d+) "(.*)" @ (.*)$/;
     var summaries = [];
     lines.forEach(function(line){
+      Console.log(line);
       var match = regex.exec(line);
       var id = match[1];
       var group = match[2];
