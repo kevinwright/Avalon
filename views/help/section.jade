@@ -10,18 +10,21 @@ block content
   .ui.content.manual
     .contain
       h1.ui.title.center Section #{section.id} - #{section.title}
-      .pagination.ui.menu(style="text-align:center;")
-        if prevSection
-          a(href="/help/sections/"+prevSection.id).item
-            | #{prevSection.id} - #{prevSection.title}
-          i.item.primary.icon.triangle.left
-        .item.primary Section #{section.id}
-        if nextSection
-          i.item.primary.icon.triangle.right
-          a(href="/help/sections/"+nextSection.id).item
-            | #{nextSection.id} - #{nextSection.title}
+      h3.center #{section.hint}
     .contain
       .ui.box
+        .pagination.ui.menu(style="text-align:center;")
+          a.primary.item(href="/help/") Back to Index
+          if prevSection
+            a(href="/help/sections/" + prevSection.id).item
+              | #{prevSection.id} - #{prevSection.title}
+            i.item.primary.icon.triangle.left
+          .item.primary Section #{section.id}
+          if nextSection
+            i.item.primary.icon.triangle.right
+            a(href="/help/sections/" + nextSection.id).item
+              | #{nextSection.id} - #{nextSection.title}
+       hr
         table.ui.table
           tbody
             for page in section.pages
