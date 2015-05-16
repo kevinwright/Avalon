@@ -1,6 +1,7 @@
 var AUTOHELPDIR = global.avalon.dir.autohelp,
     HELPDIR = global.avalon.dir.help,
-    LIBRARYHELPDIR = global.avalon.dir.library_help;
+    LIBRARYHELPDIR = global.avalon.dir.library_help,
+    HELPSUMMARYFILE = global.avalon.files.help_summary;
 
 var util = require("../../helper/util.js");
 var avalon = require("../avalon.js");
@@ -86,22 +87,43 @@ function readPage(title, callback) {
 
 }
 
+function parseSummaries(callback) {
+  util.readFile(HELPSUMMARYFILE, function(err, data) {
+    if (err) return callback(err);
+    var lines = data.split(/[\r\n]+/g);
+    var regex = /^(\d+) "(.*)" @ (.*)$/;
+    var summaries = [];
+    lines.forEach(function(line){
+      var match = regex.exec(line);
+      var id = matches[1];
+      var group = matches[2];
+      var summary = matches[3];
+      summaries[id] = summary;
+    });
+
+    callback(summaries);
+  });
+}
+
 // Parses the /help/autohelp/0 file and returns the sections.
 function parseSections(callback) {
   util.readFile(AUTOHELPDIR + "/0", function(err, data) {
     if (err) return callback(err);
 
-    var sectionContents = data.split(/Section #\d+ - .*/g); // get the content in between the headers
-    var sectionHeaders = data.match(/Section #\d+ - (.*)/g); // get the headers
-    var sectionHints = hints; // get the hints file
+    parseSummaries(function(summaries) {
+      var sectionContents = data.split(/Section #\d+ - .*/g); // get the content in between the headers
+      var sectionHeaders = data.match(/Section #\d+ - (.*)/g); // get the headers
+      //var sectionHints = hints; // get the hints file
 
-    var sections = {};
-    // make a Section object for each section.
-    for (var i = 1; i<sectionContents.length; i++) {
-      sections[i] = new Section(sectionHeaders[i-1], sectionHints[i], sectionContents[i]);
-    }
+      var sections = {};
+      // make a Section object for each section.
+      for (var i = 1; i<sectionContents.length; i++) {
+        sections[i] = new Section(sectionHeaders[i-1], summaries[i], sectionContents[i]);
+      }
 
-    callback(null, sections);
+      callback(null, sections);
+    });
+
   });
 }
 

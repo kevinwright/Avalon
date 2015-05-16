@@ -31,6 +31,7 @@ if (process.env.NODE_ENV === "production") {
       guide: "/library/guide"
     },
     files: {
+      help_summary: "/help/library/summaries",
       menu: "/library/menu.yaml",
       synonyms: "/library/synonyms.json",
       pages: "/library/pages.yaml",
@@ -55,6 +56,7 @@ if (process.env.NODE_ENV === "production") {
       guide: "/library/test/guide"
     },
     files: {
+      help_summary: "/help/library/summaries",
       menu: "/library/test/menu.yaml",
       synonyms: "/library/test/synonyms.json",
       pages: "/library/test/pages.yaml",
