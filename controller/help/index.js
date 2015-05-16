@@ -96,10 +96,12 @@ function parseSummaries(callback) {
     lines.forEach(function(line){
       console.log(line);
       var match = regex.exec(line);
-      var id = match[1];
-      var group = match[2];
-      var summary = match[3];
-      summaries[id] = summary;
+      if(match) {
+        var id = match[1];
+        var group = match[2];
+        var summary = match[3];
+        summaries[id] = summary;
+      }
     });
 
     callback(summaries);
