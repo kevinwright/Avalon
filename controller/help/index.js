@@ -95,9 +95,9 @@ function parseSummaries(callback) {
     var summaries = [];
     lines.forEach(function(line){
       var match = regex.exec(line);
-      var id = matches[1];
-      var group = matches[2];
-      var summary = matches[3];
+      var id = match[1];
+      var group = match[2];
+      var summary = match[3];
       summaries[id] = summary;
     });
 
