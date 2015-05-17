@@ -26,12 +26,12 @@ block content
             a(href="/help/sections/" + nextSection.id).item
               | #{nextSection.id} - #{nextSection.title}
         .ui.steps.horzcentre
-          .step.indexstep
+          a.step(href="/help/")
             .content
               .title Index
               .description Back to Index
           if prevSection
-            .step.prevstep
+            a.step(href="/help/sections/" + prevSection.id)
               .content
                 .title Prev
                 .description #{prevSection.id}. #{prevSection.title}
@@ -40,7 +40,7 @@ block content
               .title Section #{section.id}
               .description #{section.title}
           if nextSection
-            .step.nextstep
+            a.step(href="/help/sections/" + prevSection.id)
               .content
                 .title Next
                 .description #{nextSection.id}. #{nextSection.title}
@@ -65,3 +65,4 @@ block content
             i.item.primary.icon.triangle.right
             a(href="/help/sections/"+nextSection.id).item
               | #{nextSection.id} - #{nextSection.title}
+
