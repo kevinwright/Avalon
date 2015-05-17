@@ -327,29 +327,6 @@
   }
 
 
-  .ui.steps .step:first-child {
-    padding-left: 1.5em;
-    border-radius: .2857rem 0 0 .2857rem;
-  }
-  .ui.step, .ui.steps .step {
-    font-size: 1rem;
-  }
-  .ui.steps .step, .ui.steps .step:after {
-    -webkit-transition: background-color .2s ease,opacity .2s ease,color .2s ease,box-shadow .2s ease;
-    transition: background-color .2s ease,opacity .2s ease,color .2s ease,box-shadow .2s ease;
-  }
-  .ui.steps .step {
-    position: relative;
-    display: table-cell;
-    vertical-align: middle;
-    margin: 0;
-    padding: .9285em 1.5em .9285em 2.25em;
-    background: #fff;
-    color: rgba(0,0,0,.8);
-    box-shadow: 0 0 0 1px #d4d4d5;
-    border-radius: 0;
-  }
-
 //    __  ______
 //   / / / /  _/
 //  / / / // /  
@@ -2639,7 +2616,8 @@
 //   / __/ | |/_/ __/ _ \/ ___/ __ \/ __ `/ / 
 //  / /____>  </ /_/  __/ /  / / / / /_/ / /  
 // /_____/_/|_|\__/\___/_/  /_/ /_/\__,_/_/   
-                                           
+
+@import "step.less";
 @import "icons.less";
 @import "input.less";
 @import "menu.less";
