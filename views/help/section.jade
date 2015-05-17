@@ -40,7 +40,7 @@ block content
               .title Section #{section.id}
               .description #{section.title}
           if nextSection
-            a.step(href="/help/sections/" + prevSection.id)
+            a.step(href="/help/sections/" + nextSection.id)
               .content
                 .title Next
                 .description #{nextSection.id}. #{nextSection.title}
