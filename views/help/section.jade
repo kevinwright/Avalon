@@ -26,6 +26,22 @@ block content
             a(href="/help/sections/" + nextSection.id).item
               | #{nextSection.id} - #{nextSection.title}
         hr
+        .ui.steps
+          if prevSection
+            .step.prevstep
+              .content
+                .title Prev - #{prevSection.id}
+                .description #{prevSection.title}
+          .active.step
+            .content
+              .title Section #{section.id}
+              .description #{section.title}
+          if nextSection
+            .step.nextstep
+              .content
+                .title Next - #{nextSection.id}
+                .description #{nextSection.title}
+        hr
         table.ui.table
           tbody
             for page in section.pages
