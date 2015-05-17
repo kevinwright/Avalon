@@ -14,17 +14,6 @@ block content
       br
     .contain
       .ui.box
-        .pagination.ui.menu(style="text-align:center;")
-          a.primary.item(href="/help/") Back to Index
-          if prevSection
-            a(href="/help/sections/" + prevSection.id).item
-              | #{prevSection.id} - #{prevSection.title}
-            i.item.primary.icon.triangle.left
-          .item.primary Section #{section.id}
-          if nextSection
-            i.item.primary.icon.triangle.right
-            a(href="/help/sections/" + nextSection.id).item
-              | #{nextSection.id} - #{nextSection.title}
         .ui.steps.horzcentre
           a.step(href="/help/")
             .content
@@ -52,17 +41,24 @@ block content
                 td #{page.id}
                 td: a(href="/help/pages/" + page.title.toLowerCase()) #{page.title}
                 td #{page.description}
-
-        hr
-        .pagination.ui.menu(style="text-align:center;")
-          a.primary.item(href="/help/") Back to Index
+        br
+        .ui.steps.horzcentre
+          a.step(href="/help/")
+            .content
+              .title Index
+              .description Back to Index
           if prevSection
-            a(href="/help/sections/"+prevSection.id).item
-              | #{prevSection.id} - #{prevSection.title}
-            i.item.primary.icon.triangle.left
-          .item.primary Section #{section.id}
+            a.step(href="/help/sections/" + prevSection.id)
+              .content
+                .title Prev
+                .description #{prevSection.id}. #{prevSection.title}
+          .active.step
+            .content
+              .title Section #{section.id}
+              .description #{section.title}
           if nextSection
-            i.item.primary.icon.triangle.right
-            a(href="/help/sections/"+nextSection.id).item
-              | #{nextSection.id} - #{nextSection.title}
+            a.step(href="/help/sections/" + nextSection.id)
+              .content
+                .title Next
+                .description #{nextSection.id}. #{nextSection.title}
 
