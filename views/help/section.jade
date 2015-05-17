@@ -25,27 +25,26 @@ block content
             i.item.primary.icon.triangle.right
             a(href="/help/sections/" + nextSection.id).item
               | #{nextSection.id} - #{nextSection.title}
-        .horzcentre
-          .ui.steps
-            .step.indexstep
+        .ui.steps.horzcentre
+          .step.indexstep
+            .content
+              .title Index
+              .description Back to Index
+          if prevSection
+            .step.prevstep
               .content
-                .title Index
-                .description Back to Index
-          .ui.steps
-            if prevSection
-              .step.prevstep
-                .content
-                  .title Prev - #{prevSection.id}
-                  .description #{prevSection.title}
-            .active.step
+                .title Prev
+                .description #{prevSection.id}. #{prevSection.title}
+          .active.step
+            .content
+              .title Section #{section.id}
+              .description #{section.title}
+          if nextSection
+            .step.nextstep
               .content
-                .title Section #{section.id}
-                .description #{section.title}
-            if nextSection
-              .step.nextstep
-                .content
-                  .title Next - #{nextSection.id}
-                  .description #{nextSection.title}
+                .title Next
+                .description #{nextSection.id}. #{nextSection.title}
+        br
         table.ui.table
           tbody
             for page in section.pages
