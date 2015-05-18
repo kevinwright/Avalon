@@ -11,41 +11,29 @@ block content
     .contain
       h1.ui.title.center.underline #{meta.title}
       p.lead #{meta.summary}
-      
-      .section.bulletin.boards.box.ui
-        h2.ui.title.underline #{meta.bulletin.title}
-        .ui.grid.responsive.two.columns
-          for item in meta.bulletin.items
-            .column
-              h4.ui.title: a(href=item.url) #{item.title}
-              | #{item.description}
 
-      .section.affairs.box.ui
-        h2.ui.title.underline #{meta.affairs.title}
-        .ui.grid.responsive.two.columns
-          for item in meta.affairs.items
-            .column
-              h4.ui.title: a(href=item.url) #{item.title}
-              | #{item.description}
+      //-
+        Desired order:
+          1. Real-Time feed
+          2. Ordination XII
+             - STRIP -
+          3a. BB subset: Public/news/treaties (+ link to full BB)
+          3b. Digests: Voice, Chronicle, Bugle, Echo (+ link to back issues)
+             - STRIP -
+          4. Latest politics (named to avoid confusion with "appointments")
+          5. Military Affairs: Highlight "blood curdling" stuff like villages under active conquest
+             Maybe also realtime SOI size
 
-      if recent
-        .recent.section.ui.box
-          a(id="appointments")
-          h2.ui.title.underline Latest Appointments
-          table.ui.table
-            thead
-              tr
-                th Date
-                th Appointment
-            tbody
-              for update in recent
-                tr
-                  td(width="20%") #{update.date}
-                  td #{update.item}
+
+      //- "real time" feed to go here
+
 
       .section.box.ui
         a(id="events")
         h2.ui.title.underline Forthcoming Events
+        h4(class="ui title")
+          a(href="/help/pages/gemholder") The Hunt for Ordination
+        | Current Holders of Divine Gems and Contenders for God
         table.ui.table
           thead
             tr
@@ -57,6 +45,40 @@ block content
                 td(width="20%") !{key}
                 td !{update}
         .text.help !{scheduleHelp}
+
+      //- Bulletin board
+      .section.bulletin.boards.box.ui
+        h2.ui.title.underline #{meta.bulletin.title}
+        .ui.grid.responsive.two.columns
+          for item in meta.bulletin.items
+            .column
+              h4.ui.title: a(href=item.url) #{item.title}
+              | #{item.description}
+
+      if recent
+        .recent.section.ui.box
+          a(id="politics")
+          h2.ui.title.underline Recent Politics
+          table.ui.table
+            thead
+              tr
+                th Date
+                th Event
+            tbody
+              for update in recent
+                tr
+                  td(width="20%") #{update.date}
+                  td #{update.item}
+
+      //- Current Affairs
+        .section.affairs.box.ui
+          h2.ui.title.underline #{meta.affairs.title}
+          .ui.grid.responsive.two.columns
+            for item in meta.affairs.items
+              .column
+                h4.ui.title: a(href=item.url) #{item.title}
+                | #{item.description}
+
 
       .section.military.affairs.box.ui
         a(id="affairs")
