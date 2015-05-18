@@ -31,9 +31,6 @@ block content
       .section.box.ui
         a(id="events")
         h2.ui.title.underline Forthcoming Events
-        h4(class="ui title")
-          a(href="/help/pages/gemholder") The Hunt for Ordination
-        | Current Holders of Divine Gems and Contenders for God
         table.ui.table
           thead
             tr
@@ -44,6 +41,11 @@ block content
               tr
                 td(width="20%") !{key}
                 td !{update}
+        hr
+        h4(class="ui title")
+          a(href="/help/pages/gemholder") The Hunt for Ordination
+        | Current Holders of Divine Gems and Contenders for God
+        br
         .text.help !{scheduleHelp}
 
       //- Bulletin board
@@ -51,9 +53,10 @@ block content
         h2.ui.title.underline #{meta.bulletin.title}
         .ui.grid.responsive.two.columns
           for item in meta.bulletin.items
-            .column
-              h4.ui.title: a(href=item.url) #{item.title}
-              | #{item.description}
+            if item.showasnews
+              .column
+                h4.ui.title: a(href=item.url) #{item.title}
+                | #{item.description}
 
       if recent
         .recent.section.ui.box
