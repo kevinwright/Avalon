@@ -129,7 +129,9 @@ app.use('/', require('./routes/dynamic'));
 
 app.use('/api', require('./routes/api'));
 app.use('/bb', require('./routes/bb'));
-app.use('/help', require('./routes/help'));
+var helproute = require('./routes/help');
+app.use('/help', helproute);
+app.use('/codex', helproute);
 // app.use('/play', require('./routes/play')); //now an alias for /connect
 app.use('/news', require('./routes/news'));
 app.use('/rollcall', require('./routes/rollcall'));
