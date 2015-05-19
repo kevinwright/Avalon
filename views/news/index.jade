@@ -8,18 +8,31 @@ block head
   - var body = "news"
 block content
   .ui.feature.feature-double.spacing-small.background(id="newsintro")
-    +background-gradient-image("newsintro", "/img/news.png")
     h1.ui.title.center.underline #{meta.title}
     p.lead #{meta.summary}
 
-  .ui.feature.feature-double.spacing-small.background(id="whatis")
-    +background-gradient-image("whatis", "/img/headers/mage.png")
-    | Sample full-width block
+  .ui.feature.feature-double.spacing-small.background(id="events")
+    +background-gradient-image("newsintro", "/img/news.png")
+    a(id="events")
+    h2.title Forthcoming Events
+    table.ui.table
+      thead
+        tr
+          th Date
+          th Event
+      tbody
+        for update, key in events
+          tr
+            td(width="20%") !{key}
+            td !{update}
+
+  .ui.feature.feature-double.spacing-small.background(id="strip1")
+    h4.ui.title
+      a(href="/help/pages/gemholder") The Hunt for Ordination
+    | Current Holders of Divine Gems and Contenders for God
 
   .ui.content.news
     .contain
-      h1.ui.title.center.underline #{meta.title}
-      p.lead #{meta.summary}
 
       //-
         Desired order:
@@ -37,25 +50,7 @@ block content
       //- "real time" feed to go here
 
 
-      .section.box.ui
-        a(id="events")
-        h2.ui.title.underline Forthcoming Events
-        table.ui.table
-          thead
-            tr
-              th Date
-              th Event
-          tbody
-            for update, key in events
-              tr
-                td(width="20%") !{key}
-                td !{update}
-        hr
-        h4(class="ui title")
-          a(href="/help/pages/gemholder") The Hunt for Ordination
-        | Current Holders of Divine Gems and Contenders for God
-        br
-        .text.help !{scheduleHelp}
+      .text.help !{scheduleHelp}
 
       //- Bulletin board
       .section.bulletin.boards.box.ui
