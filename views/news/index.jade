@@ -7,14 +7,20 @@ block head
   - var canonical = "http://www.avalon-rpg.com/news/"
   - var body = "news"
 block content
+  .ui.feature.feature-double.spacing-small.background(id="newsintro")
+    +background-gradient-image("newsintro", "/img/news.png")
+    h1.ui.title.center.underline #{meta.title}
+    p.lead #{meta.summary}
+
+  .ui.feature.feature-double.spacing-small.background(id="whatis")
+    +background-gradient-image("whatis", "/img/headers/mage.png")
+    | Sample full-width block
+
   .ui.content.news
     .contain
       h1.ui.title.center.underline #{meta.title}
       p.lead #{meta.summary}
 
-      .ui.feature.feature-double.spacing-small.background(id="whatis")
-        +background-gradient-image("whatis", "/img/headers/mage.png")
-        | Sample full-width block
       //-
         Desired order:
           1. Real-Time feed
