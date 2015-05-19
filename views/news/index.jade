@@ -12,7 +12,7 @@ block content
     p.lead #{meta.summary}
 
   .ui.feature.feature-double.spacing-small.background(id="events")
-    +background-gradient-image("newsintro", "/img/news.png")
+    +background-gradient-image("events", "/img/news.png")
     a(id="events")
     h2.title Forthcoming Events
     table.ui.table
@@ -26,10 +26,13 @@ block content
             td(width="20%") !{key}
             td !{update}
 
-  .ui.feature.feature-double.spacing-small.background(id="strip1")
-    h4.ui.title
-      a(href="/help/pages/gemholder") The Hunt for Ordination
-    | Current Holders of Divine Gems and Contenders for God
+  .ui.feature.spacing-small.background(id="strip1")
+    .contain.large
+      .content
+        blockquote.large.center
+          p
+            a(href="/help/pages/gemholder") The Hunt for Ordination
+          cite Current Holders of Divine Gems and Contenders for God
 
   .ui.content.news
     .contain
