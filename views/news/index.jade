@@ -7,12 +7,12 @@ block head
   - var canonical = "http://www.avalon-rpg.com/news/"
   - var body = "news"
 block content
-  .ui.feature.feature-double.spacing-small.background(id="newsintro")
+  .ui.feature.feature-double.spacing-small.background(id="intro-section")
     h1.ui.title.center.underline #{meta.title}
     p.lead #{meta.summary}
 
-  .ui.feature.feature-double.spacing-small.background(id="events")
-    +background-gradient-image("events", "/img/news.png")
+  .ui.feature.feature-double.spacing-small.background(id="events-section")
+    +background-gradient-image("events-section", "/img/news.png")
     a(id="events")
     h2.title Forthcoming Events
     table.ui.table
@@ -25,8 +25,9 @@ block content
           tr
             td(width="20%") !{key}
             td !{update}
+    .text.help !{scheduleHelp}
 
-  .ui.feature.spacing-small.background(id="strip1")
+  .ui.feature.spacing-small.background(id="strip-1")
     .contain.large
       .content
         blockquote.large.center
@@ -34,8 +35,70 @@ block content
             a(href="/help/pages/gemholder") The Hunt for Ordination
           cite Current Holders of Divine Gems and Contenders for God
 
-  .ui.content.news
-    .contain
+  .ui.feature.feature-double.spacing-small.background(id="bb-section")
+    h2.title #{meta.bulletin.title}
+    .ui.grid.responsive.two.columns
+      for item in meta.bulletin.items
+        //- if item.showasnews
+        .column
+          h4.ui.title: a(href=item.url) #{item.title}
+          | #{item.description}
+
+  if recent
+    .ui.feature.feature-double.spacing-small.background(id="politics-section")
+      +background-gradient-image("politics-section", "/img/politics.png")
+      a(id="politics")
+      h2.title Recent Politics
+      table.ui.table
+        thead
+          tr
+            th Date
+            th Event
+        tbody
+          for update in recent
+            tr
+              td(width="20%") #{update.date}
+              td #{update.item}
+
+  .ui.feature.feature-double.spacing-small.background(id="military-section")
+    a(id="military")
+    h2.title #{meta.military.title}
+    table.ui.sortable.selectable.revealable.table#militaryTable
+      thead
+        tr
+          th(data-sort="string") Village
+          th(data-sort="string") City
+          th(data-sort="string") Conflict
+          th(data-sort="string") Occupied
+          th(data-sort="int") Troops
+          th(data-sort="int") Legions
+      tbody
+        for affair,i in affairs
+          tr(data-id=i, class={expand: affair.legionsByCommand && affair.legionsByCommand.length > 1})
+            td
+              if affair.legionsByCommand && affair.legionsByCommand.length > 1
+                i.icon.angle.down
+              | #{affair.village}
+            td #{affair.city}
+            td #{affair.conflict}
+            td #{affair.occupied}
+            if affair.legionsByCommand && affair.legionsByCommand.length == 1
+              td(title=affair.legionsByCommand[0].commander) #{affair.legionsByCommand[0].size}
+            else
+              td #{_.sum(_.pluck(affair.legionsByCommand, 'size'))}
+            if affair.legions
+              td #{affair.legions.length}
+            else
+              td 0
+            if affair.legionsByCommand && affair.legionsByCommand.length > 1
+              td(data-id=i, style="", colspan="5").expandable
+                table(width="100%", class="ui box small")
+                  tbody
+                    for legion in affair.legionsByCommand
+                      tr
+                        th #{legion.commander}
+                        td #{legion.size}
+
 
       //-
         Desired order:
@@ -53,32 +116,9 @@ block content
       //- "real time" feed to go here
 
 
-      .text.help !{scheduleHelp}
 
-      //- Bulletin board
-      .section.bulletin.boards.box.ui
-        h2.ui.title.underline #{meta.bulletin.title}
-        .ui.grid.responsive.two.columns
-          for item in meta.bulletin.items
-            if item.showasnews
-              .column
-                h4.ui.title: a(href=item.url) #{item.title}
-                | #{item.description}
 
-      if recent
-        .recent.section.ui.box
-          a(id="politics")
-          h2.ui.title.underline Recent Politics
-          table.ui.table
-            thead
-              tr
-                th Date
-                th Event
-            tbody
-              for update in recent
-                tr
-                  td(width="20%") #{update.date}
-                  td #{update.item}
+
 
       //- Current Affairs
         .section.affairs.box.ui
@@ -90,44 +130,7 @@ block content
                 | #{item.description}
 
 
-      .section.military.affairs.box.ui
-        a(id="affairs")
-        h2.ui.title.underline #{meta.military.title}
-        table.ui.sortable.selectable.revealable.table#militaryTable
-          thead
-            tr
-              th(data-sort="string") Village
-              th(data-sort="string") City
-              th(data-sort="string") Conflict
-              th(data-sort="string") Occupied
-              th(data-sort="int") Troops
-              th(data-sort="int") Legions
-          tbody
-            for affair,i in affairs
-              tr(data-id=i, class={expand: affair.legionsByCommand && affair.legionsByCommand.length > 1})
-                td
-                  if affair.legionsByCommand && affair.legionsByCommand.length > 1
-                    i.icon.angle.down
-                  | #{affair.village}
-                td #{affair.city}
-                td #{affair.conflict}
-                td #{affair.occupied}
-                if affair.legionsByCommand && affair.legionsByCommand.length == 1
-                  td(title=affair.legionsByCommand[0].commander) #{affair.legionsByCommand[0].size}
-                else
-                  td #{_.sum(_.pluck(affair.legionsByCommand, 'size'))}
-                if affair.legions
-                  td #{affair.legions.length}
-                else
-                  td 0
-                if affair.legionsByCommand && affair.legionsByCommand.length > 1
-                  td(data-id=i, style="", colspan="5").expandable
-                    table(width="100%", class="ui box small")
-                      tbody
-                        for legion in affair.legionsByCommand
-                          tr
-                            th #{legion.commander}
-                            td #{legion.size}
+
 block scripts
   script(src="/js/jquery.table.js")
   script(src="/js/affairs.js")
