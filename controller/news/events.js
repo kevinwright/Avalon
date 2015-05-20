@@ -2,7 +2,7 @@ var helpParser = require("../help/parser");
 var LIBDIR = global.avalon.dir.library;
 var util = require("../../helper/util");
 var _ = require("lodash");
-var moment = require('moment');
+var moment = require('moment-timezone');
 
 var iconref = {
   ARENAQUEST:      "trophy",         // Arena Combat League
