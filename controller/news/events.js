@@ -6,7 +6,7 @@ var moment = require('moment-timezone');
 
 var iconref = {
   ARENAQUEST:      "trophy",         // Arena Combat League
-  BATTLESANDS:     "yellow trophy",         // Battleisle Sands Competition
+  BATTLESANDS:     "yellow trophy",  // Battleisle Sands Competition
   DEITYQUEST:      "trophy",         // Quest Completion and Experience Gain Competition
   FLAGQUEST:       "flag outline",   // The Flag Quest per GODHELP FLAGQUEST
   TORCHQUEST:      "fire",           // The Torch Quest per GODHELP TORCHQUEST
@@ -19,9 +19,9 @@ var iconref = {
   MULTIQUEST:      "trophy",         // Multiple Quests - Single League
   SANDSQUEST:      "wait",           // Sands Eliminator or Sands Contest
   COMBATQUEST:     "diamond",        // Generic Combat Quest (Ruby Gem Quest)
-  QUIZ:            "blue help",           // Question and Answer Quiz
+  QUIZ:            "blue idea",      // Question and Answer Quiz
   YEARQUEST:       "world",          // Quest across a whole Avalon Year
-  EMERALDQUEST:    "green diamond",        // Quest for the Emerald Gem
+  EMERALDQUEST:    "green diamond",  // Quest for the Emerald Gem
   LEAGUEQUEST:     "trophy",         // Quest League of Combat (Seeded for Equality)
   CORALQUEST:      "diamond",        // Coral GemQuest or DROPROOM Lodge+Redeem Quest
   GUILDQUEST:      "trophy",         // Quest Event for a Guild or Between Guilds
