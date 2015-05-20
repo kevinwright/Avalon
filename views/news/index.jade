@@ -6,26 +6,42 @@ block head
   - var keywords = mkKeywords(avalon.website.news.keywords)
   - var canonical = "http://www.avalon-rpg.com/news/"
   - var body = "news"
+
+mixin panel(id, title, background)
+  .ui.feature.feature-double.spacing-small.background(id="#{id}-section")
+    if background
+      +background-gradient-image("#{id}-section", "#{background}")
+    .contain.large
+      a(id="#{id}")
+      h2.title= title
+      .content
+        block
+
 block content
   .ui.feature.feature-double.spacing-small.background(id="intro-section")
     h1.ui.title.center.underline #{meta.title}
     p.lead #{meta.summary}
 
+  panel("intro2", meta.title)
+    p.lead #{meta.summary}
+
   .ui.feature.feature-double.spacing-small.background(id="events-section")
     +background-gradient-image("events-section", "/img/news.png")
-    a(id="events")
-    h2.title Forthcoming Events
-    table.ui.table
-      thead
-        tr
-          th Date
-          th Event
-      tbody
-        for update, key in events
-          tr
-            td(width="20%") !{key}
-            td !{update}
-    .text.help !{scheduleHelp}
+    .contain.large
+      a(id="events")
+      h2.title Forthcoming Events
+      .content
+        table.ui.table
+          thead
+            tr
+              th Date
+              th Event
+          tbody
+            for update, key in events
+              tr
+                td(width="20%") !{key}
+                td !{update}
+        .text.help !{scheduleHelp}
 
   .ui.feature.spacing-small.background(id="strip-1")
     +background-gradient-image("strip-1", "/img/headers/bard.png")
@@ -38,69 +54,75 @@ block content
 
   .ui.feature.feature-double.spacing-small.background(id="bb-section")
     +background-gradient-image("bb-section", "/img/bb.png")
-    h2.title #{meta.bulletin.title}
-    .ui.grid.responsive.two.columns
-      for item in meta.bulletin.items
-        //- if item.showasnews
-        .column
-          h4.ui.title: a(href=item.url) #{item.title}
-          | #{item.description}
+    .contain.large
+      h2.title #{meta.bulletin.title}
+      .content
+        .ui.grid.responsive.two.columns
+          for item in meta.bulletin.items
+            //- if item.showasnews
+            .column
+              h4.ui.title: a(href=item.url) #{item.title}
+              | #{item.description}
 
   if recent
     .ui.feature.feature-double.spacing-small.background(id="politics-section")
       +background-gradient-image("politics-section", "/img/politics.png")
-      a(id="politics")
-      h2.title Recent Politics
-      table.ui.table
-        thead
-          tr
-            th Date
-            th Event
-        tbody
-          for update in recent
-            tr
-              td(width="20%") #{update.date}
-              td #{update.item}
+      .contain.large
+        a(id="politics")
+        h2.title Recent Politics
+        .content
+          table.ui.table
+            thead
+              tr
+                th Date
+                th Event
+            tbody
+              for update in recent
+                tr
+                  td(width="20%") #{update.date}
+                  td #{update.item}
 
   .ui.feature.feature-double.spacing-small.background(id="military-section")
     +background-gradient-image("military-section", "/img/military.png")
-    a(id="military")
-    h2.title #{meta.military.title}
-    table.ui.sortable.selectable.revealable.table#militaryTable
-      thead
-        tr
-          th(data-sort="string") Village
-          th(data-sort="string") City
-          th(data-sort="string") Conflict
-          th(data-sort="string") Occupied
-          th(data-sort="int") Troops
-          th(data-sort="int") Legions
-      tbody
-        for affair,i in affairs
-          tr(data-id=i, class={expand: affair.legionsByCommand && affair.legionsByCommand.length > 1})
-            td
-              if affair.legionsByCommand && affair.legionsByCommand.length > 1
-                i.icon.angle.down
-              | #{affair.village}
-            td #{affair.city}
-            td #{affair.conflict}
-            td #{affair.occupied}
-            if affair.legionsByCommand && affair.legionsByCommand.length == 1
-              td(title=affair.legionsByCommand[0].commander) #{affair.legionsByCommand[0].size}
-            else
-              td #{_.sum(_.pluck(affair.legionsByCommand, 'size'))}
-            if affair.legions
-              td #{affair.legions.length}
-            else
-              td 0
-            if affair.legionsByCommand && affair.legionsByCommand.length > 1
-              td(data-id=i, style="", colspan="5").expandable
-                table(width="100%", class="ui box small")
-                  tbody
-                    for legion in affair.legionsByCommand
-                      tr
-                        th #{legion.commander}
-                        td #{legion.size}
+    .contain.large
+      a(id="military")
+      h2.title #{meta.military.title}
+      .content
+        table.ui.sortable.selectable.revealable.table#militaryTable
+          thead
+            tr
+              th(data-sort="string") Village
+              th(data-sort="string") City
+              th(data-sort="string") Conflict
+              th(data-sort="string") Occupied
+              th(data-sort="int") Troops
+              th(data-sort="int") Legions
+          tbody
+            for affair,i in affairs
+              tr(data-id=i, class={expand: affair.legionsByCommand && affair.legionsByCommand.length > 1})
+                td
+                  if affair.legionsByCommand && affair.legionsByCommand.length > 1
+                    i.icon.angle.down
+                  | #{affair.village}
+                td #{affair.city}
+                td #{affair.conflict}
+                td #{affair.occupied}
+                if affair.legionsByCommand && affair.legionsByCommand.length == 1
+                  td(title=affair.legionsByCommand[0].commander) #{affair.legionsByCommand[0].size}
+                else
+                  td #{_.sum(_.pluck(affair.legionsByCommand, 'size'))}
+                if affair.legions
+                  td #{affair.legions.length}
+                else
+                  td 0
+                if affair.legionsByCommand && affair.legionsByCommand.length > 1
+                  td(data-id=i, style="", colspan="5").expandable
+                    table(width="100%", class="ui box small")
+                      tbody
+                        for legion in affair.legionsByCommand
+                          tr
+                            th #{legion.commander}
+                            td #{legion.size}
 
 
       //-
