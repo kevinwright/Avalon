@@ -49,8 +49,8 @@ var events = function(callback) {
       var match = regex.exec(line);
       if(match) {
         var icon = iconref[match[1]] || "info";
-        var gmtdate = moment(match[2]);
-        var estdate = gmtdate.tz('America/New_York');
+        var gmtdate = moment.tz(match[2], "Europe/London");
+        var estdate = gmtdate.clone().tz('America/New_York');
         events.push({
           type: match[1],
           gmtdate: gmtdate.format('LLLL'),

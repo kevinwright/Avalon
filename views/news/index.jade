@@ -55,7 +55,8 @@ block content
                 .label
                   i(class="#{event.icon} icon")
                 .content
-                  .date #{event.gmtdate} GMT / #{event.estdate} EMT
+                  .date #{event.gmtdate} GMT
+                  .date #{event.estdate} EMT
                   .date= event.avdate
                   .summary= event.title
                   .extra.text= event.description
