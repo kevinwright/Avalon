@@ -17,133 +17,95 @@ mixin panel(id, title, background)
       .content
         block
 
+mixin strip(id, background)
+  .ui.feature.spacing-small.background(id="#{id}")
+    if background
+      +background-gradient-image("#{id}", "#{background}")
+    .contain.large
+      .content
+        block
+
 block content
-  .ui.feature.feature-double.spacing-small.background(id="intro-section")
-    h1.ui.title.center.underline #{meta.title}
-    p.lead #{meta.summary}
 
   +panel("intro2", meta.title)
     p.lead #{meta.summary}
 
-  .ui.feature.feature-double.spacing-small.background(id="events-section")
-    +background-gradient-image("events-section", "/img/news.png")
-    .contain.large
-      a(id="events")
-      h2.title Forthcoming Events
-      .content
-        table.ui.table
-          thead
-            tr
-              th Date
-              th Event
-          tbody
-            for update, key in events
-              tr
-                td(width="20%") !{key}
-                td !{update}
-        .text.help !{scheduleHelp}
+  +panel("events", "Forthcoming Events", "/img/news.png")
+    table.ui.table
+      thead
+        tr
+          th Date
+          th Event
+      tbody
+        for update, key in events
+          tr
+            td(width="20%") !{key}
+            td !{update}
+    .text.help !{scheduleHelp}
 
-  .ui.feature.spacing-small.background(id="strip-1")
-    +background-gradient-image("strip-1", "/img/headers/bard.png")
-    .contain.large
-      .content
-        blockquote.large.center
-          p
-            a(href="/help/pages/gemholder") The Hunt for Ordination
-          cite Current Holders of Divine Gems and Contenders for God
+  +strip("strip-1", "/img/headers/bard.png")
+    blockquote.large.center
+      p
+        a(href="/help/pages/gemholder") The Hunt for Ordination
+      cite Current Holders of Divine Gems and Contenders for God
 
-  .ui.feature.feature-double.spacing-small.background(id="bb-section")
-    +background-gradient-image("bb-section", "/img/bb.png")
-    .contain.large
-      h2.title #{meta.bulletin.title}
-      .content
-        .ui.grid.responsive.two.columns
-          for item in meta.bulletin.items
-            //- if item.showasnews
-            .column
-              h4.ui.title: a(href=item.url) #{item.title}
-              | #{item.description}
+  +panel("bb", meta.bulletin.title, "/img/bb.png")
+    .ui.grid.responsive.two.columns
+      for item in meta.bulletin.items
+        //- if item.showasnews
+        .column
+          h4.ui.title: a(href=item.url) #{item.title}
+          | #{item.description}
 
   if recent
-    .ui.feature.feature-double.spacing-small.background(id="politics-section")
-      +background-gradient-image("politics-section", "/img/politics.png")
-      .contain.large
-        a(id="politics")
-        h2.title Recent Politics
-        .content
-          table.ui.table
-            thead
-              tr
-                th Date
-                th Event
-            tbody
-              for update in recent
-                tr
-                  td(width="20%") #{update.date}
-                  td #{update.item}
-
-  .ui.feature.feature-double.spacing-small.background(id="military-section")
-    +background-gradient-image("military-section", "/img/military.png")
-    .contain.large
-      a(id="military")
-      h2.title #{meta.military.title}
-      .content
-        table.ui.sortable.selectable.revealable.table#militaryTable
-          thead
+    +panel("politics", "Recent Politics", "/img/politics.png")
+      table.ui.table
+        thead
+          tr
+            th Date
+            th Event
+        tbody
+          for update in recent
             tr
-              th(data-sort="string") Village
-              th(data-sort="string") City
-              th(data-sort="string") Conflict
-              th(data-sort="string") Occupied
-              th(data-sort="int") Troops
-              th(data-sort="int") Legions
-          tbody
-            for affair,i in affairs
-              tr(data-id=i, class={expand: affair.legionsByCommand && affair.legionsByCommand.length > 1})
-                td
-                  if affair.legionsByCommand && affair.legionsByCommand.length > 1
-                    i.icon.angle.down
-                  | #{affair.village}
-                td #{affair.city}
-                td #{affair.conflict}
-                td #{affair.occupied}
-                if affair.legionsByCommand && affair.legionsByCommand.length == 1
-                  td(title=affair.legionsByCommand[0].commander) #{affair.legionsByCommand[0].size}
-                else
-                  td #{_.sum(_.pluck(affair.legionsByCommand, 'size'))}
-                if affair.legions
-                  td #{affair.legions.length}
-                else
-                  td 0
-                if affair.legionsByCommand && affair.legionsByCommand.length > 1
-                  td(data-id=i, style="", colspan="5").expandable
-                    table(width="100%", class="ui box small")
-                      tbody
-                        for legion in affair.legionsByCommand
-                          tr
-                            th #{legion.commander}
-                            td #{legion.size}
+              td(width="20%") #{update.date}
+              td #{update.item}
 
-
-      //-
-        Desired order:
-          1. Real-Time feed
-          2. Ordination XII
-             - STRIP -
-          3a. BB subset: Public/news/treaties (+ link to full BB)
-          3b. Digests: Voice, Chronicle, Bugle, Echo (+ link to back issues)
-             - STRIP -
-          4. Latest politics (named to avoid confusion with "appointments")
-          5. Military Affairs: Highlight "blood curdling" stuff like villages under active conquest
-             Maybe also realtime SOI size
-
-
-      //- "real time" feed to go here
-
-
-
-
-
+  +panel("military", meta.military.title, "/img/military.png")
+    table.ui.sortable.selectable.revealable.table#militaryTable
+      thead
+        tr
+          th(data-sort="string") Village
+          th(data-sort="string") City
+          th(data-sort="string") Conflict
+          th(data-sort="string") Occupied
+          th(data-sort="int") Troops
+          th(data-sort="int") Legions
+      tbody
+        for affair,i in affairs
+          tr(data-id=i, class={expand: affair.legionsByCommand && affair.legionsByCommand.length > 1})
+            td
+              if affair.legionsByCommand && affair.legionsByCommand.length > 1
+                i.icon.angle.down
+              | #{affair.village}
+            td #{affair.city}
+            td #{affair.conflict}
+            td #{affair.occupied}
+            if affair.legionsByCommand && affair.legionsByCommand.length == 1
+              td(title=affair.legionsByCommand[0].commander) #{affair.legionsByCommand[0].size}
+            else
+              td #{_.sum(_.pluck(affair.legionsByCommand, 'size'))}
+            if affair.legions
+              td #{affair.legions.length}
+            else
+              td 0
+            if affair.legionsByCommand && affair.legionsByCommand.length > 1
+              td(data-id=i, style="", colspan="5").expandable
+                table(width="100%", class="ui box small")
+                  tbody
+                    for legion in affair.legionsByCommand
+                      tr
+                        th #{legion.commander}
+                        td #{legion.size}
 
       //- Current Affairs
         .section.affairs.box.ui
