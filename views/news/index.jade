@@ -38,15 +38,12 @@ mixin eventsfeed(events, extraclass)
           .summary
             = event.title
             .date= event.timestamp.clone().tz("Europe/London").calendar()
-              = " gmt"
+              = " (gmt)"
+          .description= event.description
           .date= event.avdate
-          //- .date
-            b= "EST: "
-            = event.timestamp.clone().tz("America/New_York").format('LLL')
-          .extra.text= event.description
           .meta
             i.green.checkmark.icon
-            | #{event.participants} / #{event.potentials} participating
+            | #{event.participants} participants
 
 block content
 

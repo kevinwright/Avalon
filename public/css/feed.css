@@ -217,6 +217,9 @@
   line-height: 1.33;
 }
 
+ .ui.feed > .event > .content .description {
+   padding-bottom: 1em;
+ }
 /*--------------
       Meta
 ---------------*/
