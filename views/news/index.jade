@@ -46,30 +46,21 @@ block content
     .text.help !{scheduleHelp}
 
   +panel("events", "Forthcoming Events", "/img/news.png")
-    .ui.feed
-      for event in events
-        .event
-          .label
-            i(class="#{event.icon} icon")
-          .content
-            .date= event.avdate
-            .summary= event.title
-            .extra.text= event.description
-            .meta
-              i.checkmark.icon
-              | #{event.participants} / #{event.potentials} participating
-
-
-    table.ui.table
-      thead
-        tr
-          th Date
-          th Event
-      tbody
-        for update, key in schedule
-          tr
-            td(width="20%") !{key}
-            td !{update}
+    .ui.grid.responsive.two.columns
+      .ui.feed
+        for event in events
+          .column
+            .event
+              .label
+                i(class="#{event.icon} icon")
+              .content
+                .date= event.avdate
+                .date= event.date
+                .summary= event.title
+                .extra.text= event.description
+                .meta
+                  i.checkmark.icon
+                  | #{event.participants} / #{event.potentials} participating
 
   +strip("strip-1", "/img/headers/bard.png")
     blockquote.large.center
