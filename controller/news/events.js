@@ -48,6 +48,12 @@ var events = function(callback) {
       right: []
     };
 
+    moment.locale('en-my-settings', {
+      calendar : {
+        sameElse : 'llll'
+      }
+    });
+
     var regex = /^(\S+) @ (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d) \/ "(.*)" participants=(\d+) potential=(\d+) position=(.*) title="(.*)" description="(.*)"$/;
     var lines = data.split("\n");
     lines.forEach(function(line) {

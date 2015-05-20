@@ -37,10 +37,9 @@ mixin eventsfeed(events, extraclass)
         .content
           .summary
             = event.title
-            .date= event.avdate
-          .date
-            b= "GMT: "
-            = event.timestamp.clone().tz("Europe/London").calendar()
+            .date= event.timestamp.clone().tz("Europe/London").calendar()
+              = " gmt"
+          .date= event.avdate
           //- .date
             b= "EST: "
             = event.timestamp.clone().tz("America/New_York").format('LLL')
