@@ -33,12 +33,12 @@ mixin eventsfeed(events)
       .event
         .label
           i(class="#{event.icon} icon")
-          .countdown= event.timestamp.fromNow()
+          //- .countdown= event.timestamp.fromNow()
         .content
           .summary= event.title
           .date
             b= "GMT: "
-            = event.timestamp.clone().tz("Europe/London").format('LLL')
+            = event.timestamp.clone().tz("Europe/London").calendar()
           .date
             b= "EST: "
             = event.timestamp.clone().tz("America/New_York").format('LLL')
