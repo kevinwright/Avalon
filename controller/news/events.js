@@ -18,9 +18,9 @@ var iconref = {
   MULTIQUEST:      "trophy",         // Multiple Quests - Single League
   SANDSQUEST:      "wait",           // Sands Eliminator or Sands Contest
   COMBATQUEST:     "diamond",        // Generic Combat Quest (Ruby Gem Quest)
-  QUIZ:            "green help",           // Question and Answer Quiz
+  QUIZ:            "blue help",           // Question and Answer Quiz
   YEARQUEST:       "world",          // Quest across a whole Avalon Year
-  EMERALDQUEST:    "blue diamond",        // Quest for the Emerald Gem
+  EMERALDQUEST:    "green diamond",        // Quest for the Emerald Gem
   LEAGUEQUEST:     "trophy",         // Quest League of Combat (Seeded for Equality)
   CORALQUEST:      "diamond",        // Coral GemQuest or DROPROOM Lodge+Redeem Quest
   GUILDQUEST:      "trophy",         // Quest Event for a Guild or Between Guilds
