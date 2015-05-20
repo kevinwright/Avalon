@@ -42,7 +42,7 @@ var events = function(callback) {
     if (err) return callback(err);
 
     var events = [];
-    var regex = /^(\S+) @ (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d) \/ (".*") participants=(\d+) potential=(\d+) title="(.*)" description="(.*)"$/;
+    var regex = /^(\S+) @ (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d) \/ "(.*)" participants=(\d+) potential=(\d+) title="(.*)" description="(.*)"$/;
     var lines = data.split("\n");
     lines.forEach(function(line) {
       var match = regex.exec(line);

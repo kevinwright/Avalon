@@ -6,7 +6,7 @@ block head
   - var keywords = mkKeywords(avalon.website.news.keywords)
   - var canonical = "http://www.avalon-rpg.com/news/"
   - var body = "news"
-  link(rel="stylesheet" href="/css/feed.min.css")
+  link(rel="stylesheet" href="/css/feed.css")
 
 mixin panel(id, title, background)
   - var sectionid = id + "-section";
@@ -56,7 +56,8 @@ block content
             .summary= event.title
             .extra.text= event.description
             .meta
-              i.checkmark.icon #{event.participants}+ / #{event.potentials} participating
+              i.checkmark.icon
+              | #{event.participants} / #{event.potentials} participating
 
 
     table.ui.table
