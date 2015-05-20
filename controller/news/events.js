@@ -54,8 +54,8 @@ var events = function(callback) {
         events.push({
           type: match[1],
           moment: gmtdate,
-          gmtdate: gmtdate.format('LLLL'),
-          estdate: estdate.format('LLLL'),
+          gmtdate: gmtdate.calendar(),
+          estdate: estdate.calendar(),
           avdate: match[3],
           participants: match[4],
           potentials: match[5],

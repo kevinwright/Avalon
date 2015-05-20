@@ -54,16 +54,20 @@ block content
               .event
                 .label
                   i(class="#{event.icon} icon")
+                  .countdown= event.moment.fromNow()
                 .content
-                  .date #{event.gmtdate} GMT
-                  .date #{event.estdate} EST
-                  .date= event.avdate
                   .summary= event.title
+                  .date
+                    b GMT:
+                    = event.gmtdate
+                  .date
+                    b EST:
+                    = event.estdate
+                  .date= event.avdate
                   .extra.text= event.description
                   .meta
                     i.green.checkmark.icon
                     | #{event.participants} / #{event.potentials} participating
-                  .countdown= event.moment.fromNow()
 
   +strip("strip-1", "/img/headers/bard.png")
     blockquote.large.center
