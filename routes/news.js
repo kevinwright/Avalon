@@ -18,15 +18,11 @@ var events = require("../controller/news/events.js");
             if (err) return next(err);
             events(function(err, eventsData) {
               if (err) return next(err);
-              var eventSplit = Math.ceil(eventsData.length / 2);
               res.render('news/index', {
                 meta: meta.meta,
                 affairs: affairsData,
                 recent: recents,
-                events: [
-                  eventsData.slice(0,eventSplit),
-                  eventsData.slice(eventSplit)
-                ],
+                events: eventsData,
                 schedule: scheduleData,
                 scheduleHelp: scheduleHelp
               });

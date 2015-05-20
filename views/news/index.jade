@@ -27,6 +27,29 @@ mixin strip(id, background)
       .content
         block
 
+mixin eventsfeed(events)
+  .ui.feed
+    for event in events
+      .event
+        .label
+          i(class="#{event.icon} icon")
+          .countdown= event.moment.fromNow()
+        .content
+          .summary= event.title
+          .date
+            b= "GMT: "
+            = event.timestamp.clone().tz("Europe/London").format('LLL')
+          .date
+            b= "EST: "
+            = event.timestamp.clone().tz("America/New_York").format('LLL')
+          .date
+            b= "AVALON: "
+            = event.avdate
+          .extra.text= event.description
+          .meta
+            i.green.checkmark.icon
+            | #{event.participants} / #{event.potentials} participating
+
 block content
 
   +panel("intro2", meta.title)
@@ -46,28 +69,11 @@ block content
     .text.help !{scheduleHelp}
 
   +panel("events", "Forthcoming Events", "/img/news.png")
+    +eventsfeed(events.top)
     .ui.grid.responsive.two.columns
-      for col in events
-        .column
-          .ui.feed
-            for event in col
-              .event
-                .label
-                  i(class="#{event.icon} icon")
-                  .countdown= event.moment.fromNow()
-                .content
-                  .summary= event.title
-                  .date
-                    b GMT:
-                    = event.gmtdate
-                  .date
-                    b EST:
-                    = event.estdate
-                  .date= event.avdate
-                  .extra.text= event.description
-                  .meta
-                    i.green.checkmark.icon
-                    | #{event.participants} / #{event.potentials} participating
+      .column
+        +eventsfeed(events.left)
+        +eventsfeed(events.right)
 
   +strip("strip-1", "/img/headers/bard.png")
     blockquote.large.center

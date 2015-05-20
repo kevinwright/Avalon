@@ -76,6 +76,7 @@
   height: 2.5em;
   vertical-align: top;
   text-align: left;
+  position: relative;
 }
 .ui.feed > .event > .label .icon {
   opacity: 1;

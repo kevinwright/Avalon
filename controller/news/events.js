@@ -42,25 +42,27 @@ var events = function(callback) {
   util.readFile(LIBDIR + "/webevents2", function(err, data) {
     if (err) return callback(err);
 
-    var events = [];
-    var regex = /^(\S+) @ (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d) \/ "(.*)" participants=(\d+) potential=(\d+) title="(.*)" description="(.*)"$/;
+    var events = {
+      top: [],
+      left: [],
+      right: []
+    };
+
+    var regex = /^(\S+) @ (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d) \/ "(.*)" participants=(\d+) potential=(\d+) position=(.*) title="(.*)" description="(.*)"$/;
     var lines = data.split("\n");
     lines.forEach(function(line) {
       var match = regex.exec(line);
       if(match) {
         var icon = iconref[match[1]] || "info";
-        var gmtdate = moment.tz(match[2], "Europe/London");
-        var estdate = gmtdate.clone().tz('America/New_York');
-        events.push({
+        var position = match[6];
+        events[position].push({
           type: match[1],
-          moment: gmtdate,
-          gmtdate: gmtdate.calendar(),
-          estdate: estdate.calendar(),
+          timestamp: moment.tz(match[2], "Europe/London"),
           avdate: match[3],
           participants: match[4],
           potentials: match[5],
-          title: match[6],
-          description: match[7],
+          title: match[7],
+          description: match[8],
           icon: icon
         });
       }
