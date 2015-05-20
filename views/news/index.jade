@@ -68,7 +68,7 @@ block content
     .text.help !{scheduleHelp}
 
   +panel("events", "Forthcoming Events", "/img/news.png")
-    +eventsfeed(events.top)
+    +eventsfeed(events.top, 'top')
     .ui.grid.responsive.two.columns
       .column
         +eventsfeed(events.left)
