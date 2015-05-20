@@ -46,10 +46,10 @@ block content
     .text.help !{scheduleHelp}
 
   +panel("events", "Forthcoming Events", "/img/news.png")
-    .ui.feed
-      .ui.grid.responsive.two.columns
-        for col in events
-          .column
+    .ui.grid.responsive.two.columns
+      for col in events
+        .column
+          .ui.feed
             for event in col
               .event
                 .label
