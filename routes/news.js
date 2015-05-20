@@ -4,6 +4,7 @@ var avalon = require("../controller/avalon");
 var recent = require("../controller/news/recent.js");
 var schedule = require("../controller/news/schedule.js");
 var affairs = require("../controller/news/affairs.js");
+var events = require("../controller/news/events.js");
 
 // Methods
   function getIndex(req, res, next) {
@@ -15,12 +16,16 @@ var affairs = require("../controller/news/affairs.js");
           if (err) return next(err);
           affairs(function(err, affairsData) {
             if (err) return next(err);
-            res.render('news/index', {
-              meta: meta.meta,
-              affairs: affairsData,
-              recent: recents,
-              events: scheduleData,
-              scheduleHelp: scheduleHelp
+            events(function(err, eventsData) {
+              if (err) return next(err);
+              res.render('news/index', {
+                meta: meta.meta,
+                affairs: affairsData,
+                recent: recents,
+                events: eventsData,
+                schedule: scheduleData,
+                scheduleHelp: scheduleHelp
+              });
             });
           });
         });

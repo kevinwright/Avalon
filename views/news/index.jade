@@ -6,6 +6,7 @@ block head
   - var keywords = mkKeywords(avalon.website.news.keywords)
   - var canonical = "http://www.avalon-rpg.com/news/"
   - var body = "news"
+  link(rel="stylesheet" href="/css/feed.min.css")
 
 mixin panel(id, title, background)
   - var sectionid = id + "-section";
@@ -31,18 +32,43 @@ block content
   +panel("intro2", meta.title)
     p.lead #{meta.summary}
 
-  +panel("events", "Forthcoming Events", "/img/news.png")
+  +panel("schedule", "Forthcoming Events (old style)", "/img/news.png")
     table.ui.table
       thead
         tr
           th Date
           th Event
       tbody
-        for update, key in events
+        for update, key in schedule
           tr
             td(width="20%") !{key}
             td !{update}
     .text.help !{scheduleHelp}
+
+  +panel("events", "Forthcoming Events", "/img/news.png")
+    .ui.feed
+      for event in events
+        .event
+          .label
+            i(class="#{event.icon} icon")
+          .content
+            .date= event.avdate
+            .summary= event.title
+            .extra.text= event.description
+            .meta
+              i.checkmark.icon #{event.participants}+ / #{event.potentials} participating
+
+
+    table.ui.table
+      thead
+        tr
+          th Date
+          th Event
+      tbody
+        for update, key in schedule
+          tr
+            td(width="20%") !{key}
+            td !{update}
 
   +strip("strip-1", "/img/headers/bard.png")
     blockquote.large.center
