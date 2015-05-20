@@ -5,7 +5,7 @@ var _ = require("lodash");
 
 var iconref = {
   ARENAQUEST:      "trophy",         // Arena Combat League
-  BATTLESANDS:     "trophy",         // Battleisle Sands Competition
+  BATTLESANDS:     "yellow trophy",         // Battleisle Sands Competition
   DEITYQUEST:      "trophy",         // Quest Completion and Experience Gain Competition
   FLAGQUEST:       "flag outline",   // The Flag Quest per GODHELP FLAGQUEST
   TORCHQUEST:      "fire",           // The Torch Quest per GODHELP TORCHQUEST
@@ -18,9 +18,9 @@ var iconref = {
   MULTIQUEST:      "trophy",         // Multiple Quests - Single League
   SANDSQUEST:      "wait",           // Sands Eliminator or Sands Contest
   COMBATQUEST:     "diamond",        // Generic Combat Quest (Ruby Gem Quest)
-  QUIZ:            "help",           // Question and Answer Quiz
+  QUIZ:            "green help",           // Question and Answer Quiz
   YEARQUEST:       "world",          // Quest across a whole Avalon Year
-  EMERALDQUEST:    "diamond",        // Quest for the Emerald Gem
+  EMERALDQUEST:    "blue diamond",        // Quest for the Emerald Gem
   LEAGUEQUEST:     "trophy",         // Quest League of Combat (Seeded for Equality)
   CORALQUEST:      "diamond",        // Coral GemQuest or DROPROOM Lodge+Redeem Quest
   GUILDQUEST:      "trophy",         // Quest Event for a Guild or Between Guilds

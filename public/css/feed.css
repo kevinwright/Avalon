@@ -81,6 +81,7 @@
   vertical-align: top;
   text-align: left;
   word-wrap: break-word;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 .ui.feed > .event:last-child > .content {
   padding-bottom: 0em;
@@ -110,7 +111,7 @@
 
 .ui.feed > .event > .content .summary {
   margin: 0em;
-  font-size: 1em;
+  font-size: 1.5em;
   font-weight: bold;
   color: rgba(255, 255, 255, 0.8);
 }
