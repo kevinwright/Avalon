@@ -63,6 +63,7 @@ block content
                   .meta
                     i.green.checkmark.icon
                     | #{event.participants} / #{event.potentials} participating
+                  .countdown= event.moment.fromNow()
 
   +strip("strip-1", "/img/headers/bard.png")
     blockquote.large.center

@@ -48,6 +48,18 @@
   padding-bottom: 0em;
 }
 
+.countdown {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1.5em;
+  line-height: 1em;
+  color: black;
+  background: rgba(255, 255, 255, 0.62);
+  border-radius: .5em;
+  padding: 5px;
+}
+
 /* Event Label */
 .ui.feed > .event > .label {
   display: table-cell;
@@ -55,7 +67,7 @@
   height: 2.5em;
   vertical-align: top;
   text-align: left;
-  padding-top: 2em;
+  padding-top: 3em;
 }
 .ui.feed > .event > .label .icon {
   opacity: 1;
@@ -83,6 +95,7 @@
   text-align: left;
   word-wrap: break-word;
   border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  position: relative;
 }
 .ui.feed > .event:last-child > .content {
   padding-bottom: 0em;

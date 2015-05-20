@@ -53,6 +53,7 @@ var events = function(callback) {
         var estdate = gmtdate.clone().tz('America/New_York');
         events.push({
           type: match[1],
+          moment: gmtdate,
           gmtdate: gmtdate.format('LLLL'),
           estdate: estdate.format('LLLL'),
           avdate: match[3],
