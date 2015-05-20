@@ -103,7 +103,7 @@
   vertical-align: top;
   text-align: left;
   word-wrap: break-word;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  /* border-bottom: 2px solid rgba(255, 255, 255, 0.2); */
   position: relative;
 }
 .ui.feed > .event:last-child > .content {
@@ -138,6 +138,8 @@
   font-size: 1.5em;
   font-weight: bold;
   color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 /* Summary Image */

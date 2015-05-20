@@ -35,16 +35,15 @@ mixin eventsfeed(events)
           i(class="#{event.icon} icon")
           //- .countdown= event.timestamp.fromNow()
         .content
-          .summary= event.title
+          .summary
+            = event.title
+            .date= event.avdate
           .date
             b= "GMT: "
             = event.timestamp.clone().tz("Europe/London").calendar()
-          .date
+          //- .date
             b= "EST: "
             = event.timestamp.clone().tz("America/New_York").format('LLL')
-          .date
-            b= "AVALON: "
-            = event.avdate
           .extra.text= event.description
           .meta
             i.green.checkmark.icon
