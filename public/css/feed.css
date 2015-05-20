@@ -85,6 +85,7 @@
 }
 .ui.feed > .event:last-child > .content {
   padding-bottom: 0em;
+  border-bottom: 0;
 }
 
 /* Link */
