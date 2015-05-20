@@ -135,11 +135,15 @@
 
 .ui.feed > .event > .content .summary {
   margin: 0em;
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: bold;
   color: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
   border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.ui.feed > .top.event > .content .summary {
+  font-size: 1.5em;
 }
 
 /* Summary Image */

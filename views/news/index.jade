@@ -27,10 +27,10 @@ mixin strip(id, background)
       .content
         block
 
-mixin eventsfeed(events)
+mixin eventsfeed(events, extraclass)
   .ui.feed
     for event in events
-      .event
+      .event(class=extraclass)
         .label
           i(class="#{event.icon} icon")
           //- .countdown= event.timestamp.fromNow()
