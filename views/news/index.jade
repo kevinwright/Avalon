@@ -46,21 +46,22 @@ block content
     .text.help !{scheduleHelp}
 
   +panel("events", "Forthcoming Events", "/img/news.png")
-    .ui.grid.responsive.two.columns
-      .ui.feed
-        for event in events
+    .ui.feed
+      .ui.grid.responsive.two.columns
+        for col in events
           .column
-            .event
-              .label
-                i(class="#{event.icon} icon")
-              .content
-                .date= event.avdate
-                .date= event.date
-                .summary= event.title
-                .extra.text= event.description
-                .meta
-                  i.checkmark.icon
-                  | #{event.participants} / #{event.potentials} participating
+            for event in col
+              .event
+                .label
+                  i(class="#{event.icon} icon")
+                .content
+                  .date= event.avdate
+                  .date= event.date
+                  .summary= event.title
+                  .extra.text= event.description
+                  .meta
+                    i.checkmark.icon
+                    | #{event.participants} / #{event.potentials} participating
 
   +strip("strip-1", "/img/headers/bard.png")
     blockquote.large.center
