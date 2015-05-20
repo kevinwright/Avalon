@@ -33,7 +33,7 @@ mixin eventsfeed(events)
       .event
         .label
           i(class="#{event.icon} icon")
-          .countdown= event.moment.fromNow()
+          .countdown= event.timestamp.fromNow()
         .content
           .summary= event.title
           .date
