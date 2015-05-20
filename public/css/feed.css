@@ -55,6 +55,7 @@
   height: 2.5em;
   vertical-align: top;
   text-align: left;
+  padding-top: 2em;
 }
 .ui.feed > .event > .label .icon {
   opacity: 1;

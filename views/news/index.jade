@@ -55,12 +55,12 @@ block content
                 .label
                   i(class="#{event.icon} icon")
                 .content
+                  .date #{event.gmtdate} GMT / #{event.estdate} EMT
                   .date= event.avdate
-                  .date= event.date
                   .summary= event.title
                   .extra.text= event.description
                   .meta
-                    i.checkmark.icon
+                    i.green.checkmark.icon
                     | #{event.participants} / #{event.potentials} participating
 
   +strip("strip-1", "/img/headers/bard.png")

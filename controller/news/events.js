@@ -2,6 +2,7 @@ var helpParser = require("../help/parser");
 var LIBDIR = global.avalon.dir.library;
 var util = require("../../helper/util");
 var _ = require("lodash");
+var moment = require('moment');
 
 var iconref = {
   ARENAQUEST:      "trophy",         // Arena Combat League
@@ -48,9 +49,12 @@ var events = function(callback) {
       var match = regex.exec(line);
       if(match) {
         var icon = iconref[match[1]] || "info";
+        var gmtdate = moment(match[2]);
+        var estdate = gmtdate.tz('America/New_York');
         events.push({
           type: match[1],
-          date: match[2],
+          gmtdate: gmtdate.format('LLLL'),
+          estdate: estdate.format('LLLL'),
           avdate: match[3],
           participants: match[4],
           potentials: match[5],
