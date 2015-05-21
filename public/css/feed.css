@@ -76,9 +76,6 @@
 .countdown > .months::after {
   content: ' months';
 }
-.countdown > .weeks::after {
-  content: ' weeks';
-}
 .countdown > .days::after {
   content: ' days';
 }

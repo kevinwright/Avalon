@@ -38,14 +38,13 @@ mixin eventsfeed(events, extraclass)
           .summary
             = event.title
             .date
-              = event.timestamp.clone().tz("Europe/London").calendar()
+              = event.timestamp.calendar()
               = " (gmt)"
           .description= event.description
           .date
-            .countdown
+            .countdown(data-to=event.timestamp.toISOString())
               .years=   event.countdown.years()
               .months=  event.countdown.months()
-              .weeks=   event.countdown.weeks()
               .days=    event.countdown.days()
               .hours=   event.countdown.hours()
               .minutes= event.countdown.minutes()
