@@ -70,6 +70,11 @@
 }
 */
 
+.countdown > .years > *:after {
+  content: 'years';
+}
+
+
 /* Event Label */
 .ui.feed > .event > .label {
   display: table-cell;
