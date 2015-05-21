@@ -39,10 +39,10 @@ mixin eventsfeed(events, extraclass)
             .date
               = event.timestamp.calendar()
               = " (gmt)"
+            br
             if(event.countdown.years() + event.countdown.months() <= 0)
               .date
-              .countdown(data-to=event.timestamp.toISOString())
-              br
+                .countdown(data-to=event.timestamp.toISOString())
           .description= event.description
           .date= event.avdate
           .meta
