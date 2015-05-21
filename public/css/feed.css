@@ -211,6 +211,12 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+.ui.feed > .event > .content .summary > .countdown {
+  background: rgba(255,255,255, 0.1);
+  border-radius: 10px;
+  border: 1px solid silver;
+}
+
 /*--------------
   Extra Summary
 ---------------*/
@@ -243,7 +249,8 @@
    clear: right;
  }
 
- .countdown table th, td {
+
+ .countdown table th, .countdown table td {
    padding: 0 .2em 0 .2em !important;
    text-align: center !important;
  }
