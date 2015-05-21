@@ -15,7 +15,7 @@
 
   function Snippet (el) {
     this.el = el;
-    this.to = moment(el.attr("#data-to"));
+    this.to = moment(el.attr("data-to"));
   }
 
   var parts = ['days', 'hours', 'minutes', 'seconds'];
