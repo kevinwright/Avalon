@@ -242,7 +242,7 @@
    padding-bottom: 1em;
  }
 
- .date > table th, td {
+ .date table th, td {
    padding: 0 .2em 0 .2em;
    text-align: center;
  }

@@ -37,7 +37,7 @@
 
     output = output.slice(0,2);
     namesused = namesused.slice(0,2);
-    if(past) { output.push(" ago"); }
+    if(past) { namesused.push(" ago"); }
     var th = "<tr><th>" + output.join("</th><th>")+ "</th></tr>";
     var tr = "<tr><td>" + namesused.join("</td><td>")+ "</td></tr>";
     var output_html = "<table><thead>" + th + "</thead><tbody>" + tr + "</tbody></table>";
