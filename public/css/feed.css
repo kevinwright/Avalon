@@ -159,7 +159,7 @@
 
 /* Date inside Summary */
 .ui.feed > .event > .content .summary > .date {
-  display: inline-block;
+  display: block;
   float: right;
   font-weight: normal;
   font-size: 0.875em;
