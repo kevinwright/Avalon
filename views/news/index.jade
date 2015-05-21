@@ -54,6 +54,19 @@ block content
   +panel("intro2", meta.title)
     p.lead #{meta.summary}
 
+  +panel("schedule", "Forthcoming Events (old style)", "/img/news.jpg")
+    table.ui.table
+      thead
+        tr
+          th Date
+          th Event
+      tbody
+        for update, key in schedule
+          tr
+            td(width="20%") !{key}
+            td !{update}
+    .text.help !{scheduleHelp}
+
   +panel("events", "Forthcoming Events", "/img/news.jpg")
     +eventsfeed(events.top, 'top')
     .ui.grid.responsive.two.columns
