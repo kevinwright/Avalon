@@ -241,13 +241,19 @@
  .ui.feed > .event > .content .description {
    padding-bottom: 1em;
  }
+
+ .date > table th, td {
+   padding: 0 .2em 0 .2em;
+   text-align: center;
+ }
+
 /*--------------
       Meta
 ---------------*/
 
 .ui.feed > .event > .content .meta {
   display: inline-block;
-  font-size: 0.875em;
+  font-size: 1.1em;
   margin: 0.5em 0em 0em;
   background: none;
   border: none;
