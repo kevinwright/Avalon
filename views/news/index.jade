@@ -41,14 +41,13 @@ mixin eventsfeed(events, extraclass)
               = event.timestamp.calendar()
               = " (gmt)"
           .description= event.description
-          .date
-            .countdown(data-to=event.timestamp.toISOString())
-              .years=   event.countdown.years()
-              .months=  event.countdown.months()
-              .days=    event.countdown.days()
-              .hours=   event.countdown.hours()
-              .minutes= event.countdown.minutes()
-              .seconds= event.countdown.seconds()
+          if(event.countdown.years() + event.countdown.months() <= 0)
+            .date
+              .countdown(data-to=event.timestamp.toISOString())
+                .days=    event.countdown.days()
+                .hours=   event.countdown.hours()
+                .minutes= event.countdown.minutes()
+                .seconds= event.countdown.seconds()
           .date= event.avdate
           .meta
             i.green.checkmark.icon
