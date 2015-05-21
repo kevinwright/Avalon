@@ -40,7 +40,8 @@ mixin eventsfeed(events, extraclass)
               = event.timestamp.calendar()
               = " (gmt)"
               br
-              if(event.countdown.years() + event.countdown.months() <= 0)
+              //if(event.countdown.years() + event.countdown.months() <= 0)
+              if(event.countdown.years() <= 0)
                 .countdown(data-to=event.timestamp.toISOString())
           .description= event.description
           .date= event.avdate
