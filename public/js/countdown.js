@@ -21,7 +21,7 @@
   var parts = ['days', 'hours', 'minutes', 'seconds'];
 
   Snippet.prototype.render = function () {
-    var duration = moment.duration( timestamp.diff(moment().tz("Europe/London")) );
+    var duration = moment.duration( this.to.diff(moment().tz("Europe/London")) );
     var output = [];
 
     parts.forEach(function(name){
