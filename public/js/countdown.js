@@ -18,7 +18,7 @@
     this.to = moment(el.attr("data-to"));
   }
 
-  var parts = ['days', 'hours', 'minutes', 'seconds'];
+  var parts = ['months', 'days', 'hours', 'minutes', 'seconds'];
 
   Snippet.prototype.render = function () {
     var duration = moment.duration( this.to.diff(moment().tz("Europe/London")) );
