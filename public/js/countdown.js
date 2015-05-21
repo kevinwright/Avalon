@@ -29,8 +29,13 @@
     parts.forEach(function(name){
       var value = duration[name]();
       if(value !== 0) {
-        output.push(Math.abs(value));
-        namesused.push(name);
+        var absval = Math.abs(value);
+        output.push(absval);
+        if(absval === 1 ) {
+          namesused.push(name.substring(0,name.length-1));
+        } else {
+          namesused.push(name);
+        }
         past = past || (value < 0);
       }
     });
