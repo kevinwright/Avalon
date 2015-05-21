@@ -67,9 +67,7 @@ var events = function(callback) {
         var icon = iconref[match[1]] || "info";
         var position = match[6];
         var timestamp = moment.tz(match[2], "Europe/London");
-        var countdown = moment.duration(
-          moment().tz("Europe/London").diff(timestamp)
-        );
+        var countdown = moment.duration( timestamp.diff(moment().tz("Europe/London")) );
         events[position].push({
           type: match[1],
           timestamp: timestamp,
