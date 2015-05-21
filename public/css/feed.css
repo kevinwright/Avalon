@@ -64,7 +64,7 @@
   padding: 0.25em;
   background: none;
   border: none;
-  border-radius: none;
+  border-radius: 0;
   color: rgba(255, 255, 255, 0.6);
 }
 .ui.feed > .event > .label img {
@@ -73,7 +73,7 @@
   border-radius: 500rem;
 }
 .ui.feed > .event > .label + .content {
-  padding: 0.5em 0em 0.5em 1.25em;
+  padding: 0.5em 0em 0.5em 0.25em;
 }
 
 /* Content */
@@ -164,18 +164,19 @@
   font-weight: normal;
   font-size: 0.875em;
   font-style: normal;
-  margin: 0em 0em 0em 0.5em;
-  padding: 0em;
+  margin: 0.5em 0 0 0.5em;
+  padding: 0 0 0 0.5em;
   color: rgba(255, 255, 255, 0.6);
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .ui.feed > .event > .content .summary > .countdown {
 }
 
-.ui.feed > .event > .content .summary > .countdown tbody {
+.ui.feed > .event > .content .summary .countdown tbody {
   background: rgba(255,255,255, 0.1);
 }
-.ui.feed > .event > .content .summary > .countdown thead {
+.ui.feed > .event > .content .summary .countdown thead {
   background: rgba(255,255,255, 0.2);
 }
 
