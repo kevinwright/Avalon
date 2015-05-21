@@ -56,6 +56,7 @@
   vertical-align: top;
   text-align: left;
   position: relative;
+  padding-top: 0.6em;
 }
 .ui.feed > .event > .label .icon {
   opacity: 1;
@@ -117,8 +118,8 @@
   font-size: 1.1em;
   font-weight: bold;
   color: rgba(255, 255, 255, 0.8);
-  border-radius: 5px;
   border-top: 1px solid rgba(255, 255, 255, 0.4);
+  padding-top: 0.125em;
 }
 
 .ui.feed > .top.event > .content .summary {
