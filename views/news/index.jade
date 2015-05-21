@@ -49,20 +49,7 @@ block content
 
   +panel("intro2", meta.title)
     p.lead #{meta.summary}
-
-  +panel("schedule", "Forthcoming Events (old style)", "/img/news.png")
-    table.ui.table
-      thead
-        tr
-          th Date
-          th Event
-      tbody
-        for update, key in schedule
-          tr
-            td(width="20%") !{key}
-            td !{update}
-    .text.help !{scheduleHelp}
-
+    
   +panel("events", "Forthcoming Events", "/img/news.png")
     +eventsfeed(events.top, 'top')
     .ui.grid.responsive.two.columns
@@ -134,17 +121,6 @@ block content
                       tr
                         th #{legion.commander}
                         td #{legion.size}
-
-      //- Current Affairs
-        .section.affairs.box.ui
-          h2.ui.title.underline #{meta.affairs.title}
-          .ui.grid.responsive.two.columns
-            for item in meta.affairs.items
-              .column
-                h4.ui.title: a(href=item.url) #{item.title}
-                | #{item.description}
-
-
 
 block scripts
   script(src="/js/jquery.table.js")
