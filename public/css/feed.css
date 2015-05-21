@@ -71,11 +71,29 @@
 */
 
 .countdown > .years::after {
-  content: 'years';
+  content: ' years';
+}
+.countdown > .months::after {
+  content: ' months';
+}
+.countdown > .weeks::after {
+  content: ' weeks';
+}
+.countdown > .days::after {
+  content: ' days';
+}
+.countdown > .hours::after {
+  content: ' hours';
+}
+.countdown > .minutes::after {
+  content: ' minutes';
+}
+.countdown > .seconds::after {
+  content: ' seconds';
 }
 
 
-/* Event Label */
+ /* Event Label */
 .ui.feed > .event > .label {
   display: table-cell;
   width: 2.5em;
