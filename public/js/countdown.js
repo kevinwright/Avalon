@@ -42,7 +42,10 @@
 
     output = output.slice(0,2);
     namesused = namesused.slice(0,2);
-    if(past) { namesused.push(" ago"); }
+    if(past) {
+      output.push("");
+      namesused.push(" ago");
+    }
     var th = "<tr><th>" + output.join("</th><th>")+ "</th></tr>";
     var tr = "<tr><td>" + namesused.join("</td><td>")+ "</td></tr>";
     var output_html = "<table><thead>" + th + "</thead><tbody>" + tr + "</tbody></table>";

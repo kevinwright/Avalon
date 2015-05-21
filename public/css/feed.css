@@ -48,48 +48,6 @@
   padding-bottom: 0em;
 }
 
-/*
-.countdown {
-  position: absolute;
-  right: 0;
-  top: 0;
-  font-size: 1.5em;
-  line-height: 1em;
-  color: black;
-  background: rgba(255, 255, 255, 0.62);
-  border-radius: .5em;
-  padding: 5px;
-  -webkit-transform: rotate(-90deg);
-  -webkit-transform-origin: bottom right;
-  -moz-transform: rotate(-90deg);
-  -moz-transform-origin: bottom right;
-  -ms-transform: rotate(-90deg);
-  -ms-transform-origin: bottom right;
-  -o-transform: rotate(-90deg);
-  -o-transform-origin: bottom right;
-}
-*/
-
-.countdown > .years::after {
-  content: ' years';
-}
-.countdown > .months::after {
-  content: ' months';
-}
-.countdown > .days::after {
-  content: ' days';
-}
-.countdown > .hours::after {
-  content: ' hours';
-}
-.countdown > .minutes::after {
-  content: ' minutes';
-}
-.countdown > .seconds::after {
-  content: ' seconds';
-}
-
-
  /* Event Label */
 .ui.feed > .event > .label {
   display: table-cell;
@@ -215,6 +173,13 @@
   background: rgba(255,255,255, 0.1);
   border-radius: 10px;
   border: 1px solid silver;
+}
+
+.ui.feed > .event > .content .summary > .countdown tbody {
+  background: rgba(255,255,255, 0.1);
+}
+.ui.feed > .event > .content .summary > .countdown thead {
+  background: rgba(255,255,255, 0.2);
 }
 
 /*--------------
