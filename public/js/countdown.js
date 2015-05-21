@@ -23,17 +23,20 @@
   Snippet.prototype.render = function () {
     var duration = moment.duration( this.to.diff(moment().tz("Europe/London")) );
     var output = [];
+    var past = false;
 
     parts.forEach(function(name){
       var value = duration[name]();
-      if(value > 0) {
+      if(value !== 0) {
         output.push(value + " " + name);
+        past = past || (value < 0);
       }
     });
 
-    output = output.slice(0,2);
+    var output_text = output.slice(0,2).join(', ');
+    if(past) { output_text = output_text + " ago"; }
 
-    this.el.html(output.join(', '));
+    this.el.html(output_text);
   };
 
 
