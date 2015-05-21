@@ -37,17 +37,14 @@ mixin eventsfeed(events, extraclass)
         .content
           .summary
             = event.title
+            if(event.countdown.years() + event.countdown.months() <= 0)
+              .date
+                .countdown(data-to=event.timestamp.toISOString())
+              br
             .date
               = event.timestamp.calendar()
               = " (gmt)"
           .description= event.description
-          if(event.countdown.years() + event.countdown.months() <= 0)
-            .date
-              .countdown(data-to=event.timestamp.toISOString())
-                .days=    event.countdown.days()
-                .hours=   event.countdown.hours()
-                .minutes= event.countdown.minutes()
-                .seconds= event.countdown.seconds()
           .date= event.avdate
           .meta
             i.green.checkmark.icon

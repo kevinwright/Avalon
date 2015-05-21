@@ -28,7 +28,7 @@
     parts.forEach(function(name){
       var value = duration[name]();
       if(value !== 0) {
-        output.push(value + " " + name);
+        output.push(Math.abs(value) + " " + name);
         past = past || (value < 0);
       }
     });
