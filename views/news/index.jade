@@ -37,9 +37,19 @@ mixin eventsfeed(events, extraclass)
         .content
           .summary
             = event.title
-            .date= event.timestamp.clone().tz("Europe/London").calendar()
+            .date
+              = event.timestamp.clone().tz("Europe/London").calendar()
               = " (gmt)"
           .description= event.description
+          .date
+            .countdown
+              .years=   event.countdown.years()
+              .months=  event.countdown.months()
+              .weeks=   event.countdown.weeks()
+              .days=    event.countdown.days()
+              .hours=   event.countdown.hours()
+              .minutes= event.countdown.minutes()
+              .seconds= event.countdown.seconds()
           .date= event.avdate
           .meta
             i.green.checkmark.icon
@@ -49,7 +59,7 @@ block content
 
   +panel("intro2", meta.title)
     p.lead #{meta.summary}
-    
+
   +panel("events", "Forthcoming Events", "/img/news.png")
     +eventsfeed(events.top, 'top')
     .ui.grid.responsive.two.columns

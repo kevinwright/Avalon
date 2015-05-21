@@ -66,9 +66,14 @@ var events = function(callback) {
       if(match) {
         var icon = iconref[match[1]] || "info";
         var position = match[6];
+        var timestamp = moment.tz(match[2], "Europe/London");
+        var countdown = moment.duration(
+          moment().tz("Europe/London").diff(timestamp)
+        );
         events[position].push({
           type: match[1],
-          timestamp: moment.tz(match[2], "Europe/London"),
+          timestamp: timestamp,
+          countdown: countdown,
           avdate: match[3],
           participants: match[4],
           potentials: match[5],
