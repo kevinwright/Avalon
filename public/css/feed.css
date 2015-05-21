@@ -202,13 +202,13 @@
 /* Date inside Summary */
 .ui.feed > .event > .content .summary > .date {
   display: inline-block;
-  float: none;
+  float: right;
   font-weight: normal;
   font-size: 0.875em;
   font-style: normal;
   margin: 0em 0em 0em 0.5em;
   padding: 0em;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /*--------------

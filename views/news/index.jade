@@ -33,17 +33,16 @@ mixin eventsfeed(events, extraclass)
       .event(class=extraclass)
         .label
           i(class="#{event.icon} icon")
-          //- .countdown= event.timestamp.fromNow()
         .content
           .summary
             = event.title
-            if(event.countdown.years() + event.countdown.months() <= 0)
-              .date
-                .countdown(data-to=event.timestamp.toISOString())
-              br
             .date
               = event.timestamp.calendar()
               = " (gmt)"
+            if(event.countdown.years() + event.countdown.months() <= 0)
+              .date
+              .countdown(data-to=event.timestamp.toISOString())
+              br
           .description= event.description
           .date= event.avdate
           .meta
