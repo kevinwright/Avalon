@@ -25,10 +25,12 @@
     var output = [];
     var namesused = [];
     var past = false;
+    var active = false;
 
     parts.forEach(function(name){
       var value = duration[name]();
-      if(value !== 0) {
+      if (value !== 0) { active = true; }
+      if (active) {
         var absval = Math.abs(value);
         output.push(absval);
         if(absval === 1 ) {
