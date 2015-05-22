@@ -71,8 +71,10 @@ block content
             td !{update}
     .text.help !{scheduleHelp}
 
-  +panel("events", "Forthcoming Events", "/img/news.jpg")
+  +panel("events", "Ordination", "/img/ordination.jpg")
     +eventsfeed(events.top, 'top')
+
+  +panel("events", "Forthcoming Events", "/img/news.jpg")
     .ui.grid.responsive.two.columns
       .column
         +eventsfeed(events.left)
