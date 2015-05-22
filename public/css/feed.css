@@ -190,6 +190,14 @@
 }
 */
 
+.column:first-child > .ui.feed > .event > .label {
+  border-left: none;
+}
+
+.column > .ui.feed > .event > .label {
+  border-left: 4px solid rgba(255, 255, 255, 0.2);
+}
+
 /*--------------
   Extra Summary
 ---------------*/
