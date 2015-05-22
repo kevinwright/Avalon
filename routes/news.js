@@ -5,6 +5,8 @@ var recent = require("../controller/news/recent.js");
 var schedule = require("../controller/news/schedule.js");
 var affairs = require("../controller/news/affairs.js");
 var events = require("../controller/news/events.js");
+var elections = require("../controller/news/elections.js");
+
 
 // Methods
   function getIndex(req, res, next) {
