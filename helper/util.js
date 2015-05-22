@@ -1,9 +1,11 @@
 var NodeCache = require( "node-cache" );
+var moment = require('moment-timezone');
 
 var fs = require("fs");
 var yaml = require("js-yaml");
 var marked = require("marked");
 var _ = require("lodash");
+
 var ttlTime = 10;
 
 if (process.env.NODE_ENV === "production") ttlTime = 10;
@@ -35,6 +37,86 @@ var readFile = function(file, callback) {
       });
 
     });
+  });
+};
+
+var readStdFile = function(filename, callback) {
+  readFile(filename, function(err, data) {
+    if (err) return callback(err);
+
+    var entries = [];
+
+    var preambleRegex = /^(\S+) ?@ ?(.+) ?$/;
+
+    var lines = data.split("\n");
+
+    lines.forEach(function(line) {
+      var parts = line.split('###');
+      var preamble = preambleRegex.exec(parts.shift()); //mutates parts
+      if(preamble) {
+        var entry = {
+          type: preamble[1],
+          qualifier: preamble[2]
+        };
+
+        parts.forEach(function(part){
+          var nv = part.split('=');
+          var name = nv.shift().trim();
+          var value = nv.join('=').trim();
+          entry[name] = value;
+        });
+        entries.push(entry);
+      }
+    });
+
+    callback(null, entries);
+  });
+};
+
+moment.locale('en-my-settings', {
+  calendar : {
+    lastDay : '[Yesterday at] LT',
+    sameDay : '[Today at] LT',
+    nextDay : '[Tomorrow at] LT',
+    lastWeek : '[last] dddd [at] LT',
+    nextWeek : 'dddd [at] LT',
+    sameElse : 'llll'
+  }
+});
+
+var compoundDateRegex = /^\s*(\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d[z|Z]?) ?\/ ?(.*)\s*$/;
+
+var parseCompoundDate = function(str) {
+  var match = compoundDateRegex.exec(str);
+  if(match) {
+    var gmtNow = moment().tz("Europe/London");
+    var gmtDateTime = moment.tz(match[1], "Europe/London");
+    var avDate =  match[2];
+    var inPast = gmtDateTime.isBefore(gmtNow);
+    return {
+      gmtDateTime: gmtDateTime,
+      avDate: avDate,
+      inPast: inPast
+    }
+  }
+};
+
+var readStdEventFile = function(filename, callback) {
+  readStdFile(filename, function(err, entries) {
+    if (err) return callback(err);
+
+    entries.forEach(function(entry) {
+      var dates = parseCompoundDate(entry.qualifier);
+
+      for (var prop in dates) {
+        if (dates.hasOwnProperty(prop)) {
+          entry[prop] = dates[prop];
+        }
+      }
+      delete entry.qualifier;
+    });
+
+    callback(null, entries);
   });
 };
 
@@ -239,6 +321,9 @@ function getDescription(str) {
 
 module.exports = {
   readFile: readFile,
+  readStdFile: readStdFile,
+  readStdEventFile: readStdEventFile,
+  parseCompoundDate: parseCompoundDate,
   readdir: readdir,
   catchBlock: catchBlock,
   marked: metaMarked,

@@ -1,4 +1,3 @@
-var helpParser = require("../help/parser");
 var LIBDIR = global.avalon.dir.library;
 var util = require("../../helper/util");
 var _ = require("lodash");
@@ -39,7 +38,7 @@ var iconref = {
 };
 
 var events = function(callback) {
-  util.readFile(LIBDIR + "/webevents2", function(err, data) {
+  util.readStdEventFile(LIBDIR + "/webevents2", function(err, entries) {
     if (err) return callback(err);
 
     var events = {
@@ -48,48 +47,12 @@ var events = function(callback) {
       right: []
     };
 
-    moment.locale('en-my-settings', {
-      calendar : {
-        lastDay : '[Yesterday at] LT',
-        sameDay : '[Today at] LT',
-        nextDay : '[Tomorrow at] LT',
-        lastWeek : '[last] dddd [at] LT',
-        nextWeek : 'dddd [at] LT',
-        sameElse : 'llll'
-      }
-    });
+    if (entries.length > 0) {
+      entries[0].fulltimer = true;
+    }
 
-    var regex = /^(\S+) @ (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d) \/ (.*) ###participants=(\d+) ###potential=(\d+) ###position=(.*) ###title=(.*) ###description=(.*)$/;
-    var preambleRegex = /^(\S+) ?@ ?(\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d) \/ (.*) $/;
-
-    var lines = data.split("\n");
-    var first = true;
-    lines.forEach(function(line) {
-      var parts = line.split('###');
-      var preamble = preambleRegex.exec(parts.shift()); //mutates parts
-      if(preamble) {
-        var type = preamble[1];
-        var now = moment().tz("Europe/London");
-        var timestamp = moment.tz(preamble[2], "Europe/London");
-
-        var event = {
-          fulltimer: first,
-          type: type,
-          icon: iconref[type] || "info",
-          timestamp: timestamp,
-          avdate: preamble[3],
-          inPast: timestamp.isBefore(now)
-        };
-
-        parts.forEach(function(part){
-          var nv = part.split('=');
-          var name = nv.shift().trim();
-          var value = nv.join('=').trim();
-          event[name] = value;
-        });
-        events[event.position].push(event);
-        first = false;
-      }
+    entries.forEach(function(entry) {
+      entry.icon = iconref[entry.type] || "info"
     });
 
     callback(null, events);
