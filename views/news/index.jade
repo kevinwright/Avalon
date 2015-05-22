@@ -106,7 +106,7 @@ block content
                     data-to = election.ends.toISOString()
                     class = "fulltimer"
                   )
-              //- .description= event.description
+              .description= "Incumbent: " + election.incumbent
               .meta
                 i.green.checkmark.icon
                 | #{election.votes} votes cast
