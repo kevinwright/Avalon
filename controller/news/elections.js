@@ -16,6 +16,7 @@ var elections = function(callback) {
       delete election.ends;
 
       election.icon = "yellow " + (election.type === "CITY") ? "university" : "paw";
+      election.venue = election.qualifier;
       election.gmtStarted = started.gmtDateTime;
       election.avStarted = started.avDate;
       election.gmtEnds = ends.gmtDateTime;
