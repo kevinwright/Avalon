@@ -96,12 +96,12 @@ block content
               .summary
                 = "Election: " + election.venue + " " + election.position
                 .date
-                  = "started: " + election.started.calendar() + " (gmt)"
+                  = "started: " + election.gmtStarted.calendar() + " (gmt)"
                   br
-                  = "ends: " + election.ends.calendar() + " (gmt)"
+                  = "ends: " + election.gmtEnds.calendar() + " (gmt)"
                   br
                   .countdown(
-                    data-to = election.ends.toISOString()
+                    data-to = election.gmtEnds.toISOString()
                     class = "fulltimer"
                   )
               .description= "Incumbent: " + election.incumbent
