@@ -5,7 +5,7 @@ var moment = require('moment-timezone');
 
 
 var elections = function(callback) {
-  util.readFile(LIBDIR + "/webevents2", function(err, data) {
+  util.readFile(LIBDIR + "/elections", function(err, data) {
     if (err) return callback(err);
 
     var elections = [];
@@ -21,7 +21,7 @@ var elections = function(callback) {
       }
     });
 
-    var regex = /^(\S+) @ (\S+) ###position=(\S+) ###started=(.*)\/(.*) ###ends=(.*)\/(.*) ###incumbent=(.*) ###votes=(\d+) ###electorate=(\d*)$/;
+    var regex = /^(\S+) @ (\S+) ###position=(\S+) ###started=(.*)\/(.*) ###ends=(.*)\/(.*) ###incumbent=(.*) ###votes=(\d+) ###electorate=(\d+)$/;
     var lines = data.split("\n");
     lines.forEach(function(line) {
       var match = regex.exec(line);
