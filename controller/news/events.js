@@ -59,7 +59,7 @@ var events = function(callback) {
       }
     });
 
-    var regex = /^(\S+) @ (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d) \/ "(.*)" participants=(\d+) potential=(\d+) position=(.*) title="(.*)" description="(.*)"$/;
+    var regex = /^(\S+) @ (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d) \/ (.*) ###participants=(\d+) ###potential=(\d+) ###position=(.*) ###title=(.*) ###description=(.*)$/;
     var lines = data.split("\n");
     var first = true;
     lines.forEach(function(line) {
