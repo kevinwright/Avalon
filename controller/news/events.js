@@ -82,8 +82,10 @@ var events = function(callback) {
         };
 
         parts.forEach(function(part){
-          var nv = part.split(/=/);
-          event[nv[0]] = nv[1];
+          var nv = part.split('=');
+          var name = nv.shift().trim();
+          var value = nv.join('=').trim();
+          event[name] = value;
         });
         events[event.position].push(event);
         first = false;
