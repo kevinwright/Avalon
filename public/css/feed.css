@@ -171,6 +171,7 @@
   border-left: 2px solid rgba(255, 255, 255, 0.2);
 }
 
+/*
 .ui.feed > .event > .content .summary > .countdown {
 }
 
@@ -187,6 +188,7 @@
 .ui.feed > .event > .content .summary .countdown.inpast tbody {
   background: radial-gradient(ellipse at top, rgba(128, 0, 0, 0.5), transparent 75%)
 }
+*/
 
 /*--------------
   Extra Summary
