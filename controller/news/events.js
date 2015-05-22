@@ -66,11 +66,13 @@ var events = function(callback) {
       if(match) {
         var icon = iconref[match[1]] || "info";
         var position = match[6];
+        var now = moment().tz("Europe/London");
         var timestamp = moment.tz(match[2], "Europe/London");
-        var countdown = moment.duration( timestamp.diff(moment().tz("Europe/London")) );
+        var countdown = moment.duration( timestamp.diff(now) );
         events[position].push({
           type: match[1],
           timestamp: timestamp,
+          inPast: timestamp.isBefore(now),
           countdown: countdown,
           avdate: match[3],
           participants: match[4],

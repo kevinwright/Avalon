@@ -42,7 +42,7 @@ mixin eventsfeed(events, extraclass)
               br
               //if(event.countdown.years() + event.countdown.months() <= 0)
               if(event.countdown.years() <= 0)
-                .countdown(data-to=event.timestamp.toISOString())
+                .countdown(data-to = event.timestamp.toISOString())(class = event.inPast ? "inpast" : "")
           .description= event.description
           .date= event.avdate
           .meta
@@ -54,7 +54,7 @@ block content
   +panel("intro2", meta.title)
     p.lead #{meta.summary}
 
-  +panel("schedule", "Forthcoming Events (old style)", "/img/news.jpg")
+  //- +panel("schedule", "Forthcoming Events (old style)", "/img/news.jpg")
     table.ui.table
       thead
         tr

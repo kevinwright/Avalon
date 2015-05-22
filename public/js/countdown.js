@@ -16,6 +16,7 @@
   function Snippet (el) {
     this.el = el;
     this.to = moment(el.attr("data-to"));
+    this.inPast = el.hasClass('inpast');
   }
 
   var parts = ['months', 'days', 'hours', 'minutes', 'seconds'];

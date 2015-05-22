@@ -174,11 +174,18 @@
 .ui.feed > .event > .content .summary > .countdown {
 }
 
-.ui.feed > .event > .content .summary .countdown tbody {
-  background: rgba(255,255,255, 0.1);
-}
 .ui.feed > .event > .content .summary .countdown thead {
-  background: rgba(255,255,255, 0.2);
+  background: radial-gradient(ellipse at bottom, rgba(0, 128, 0, 0.5), transparent 75%)
+}
+.ui.feed > .event > .content .summary .countdown tbody {
+  background: radial-gradient(ellipse at top, rgba(0, 128, 0, 0.5), transparent 75%)
+}
+
+.ui.feed > .event > .content .summary .countdown.inpast thead {
+  background: radial-gradient(ellipse at bottom, rgba(128, 0, 0, 0.5), transparent 75%)
+}
+.ui.feed > .event > .content .summary .countdown.inpast tbody {
+  background: radial-gradient(ellipse at top, rgba(128, 0, 0, 0.5), transparent 75%)
 }
 
 /*--------------
