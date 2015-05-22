@@ -83,8 +83,8 @@ var events = function(callback) {
           description: match[8],
           icon: icon
         });
+        first = false;
       }
-      first = false;
     });
 
     callback(null, events);
