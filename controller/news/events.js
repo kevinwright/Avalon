@@ -60,29 +60,32 @@ var events = function(callback) {
     });
 
     var regex = /^(\S+) @ (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d) \/ (.*) ###participants=(\d+) ###potential=(\d+) ###position=(.*) ###title=(.*) ###description=(.*)$/;
+    var preambleRegex = /^(\S+) ?@ ?(\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d) \/ (.*) $/;
+
     var lines = data.split("\n");
     var first = true;
     lines.forEach(function(line) {
-      var match = regex.exec(line);
-      if(match) {
-        var icon = iconref[match[1]] || "info";
-        var position = match[6];
+      var parts = line.split('###');
+      var preamble = preambleRegex.exec(parts.shift()); //mutates parts
+      if(preamble) {
+        var type = preamble[1];
         var now = moment().tz("Europe/London");
-        var timestamp = moment.tz(match[2], "Europe/London");
-        var countdown = moment.duration( timestamp.diff(now) );
-        events[position].push({
+        var timestamp = moment.tz(preamble[2], "Europe/London");
+
+        var event = {
           fulltimer: first,
-          type: match[1],
+          type: type,
+          icon: iconref[type] || "info",
           timestamp: timestamp,
-          inPast: timestamp.isBefore(now),
-          countdown: countdown,
-          avdate: match[3],
-          participants: match[4],
-          potentials: match[5],
-          title: match[7],
-          description: match[8],
-          icon: icon
+          avdate: preamble[3],
+          inPast: timestamp.isBefore(now)
+        };
+
+        parts.forEach(function(part){
+          var nv = part.split(/=/);
+          event[nv[0]] = nv[1];
         });
+        events[event.position].push(event);
         first = false;
       }
     });
