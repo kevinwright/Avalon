@@ -52,8 +52,10 @@ var events = function(callback) {
     }
 
     entries.forEach(function(entry) {
-      entry.icon = iconref[entry.type] || "info"
+      entry.icon = iconref[entry.type] || "info";
+      events[entry.position].push(entry);
     });
+
 
     callback(null, events);
   });
