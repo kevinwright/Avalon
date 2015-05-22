@@ -61,6 +61,7 @@ var events = function(callback) {
 
     var regex = /^(\S+) @ (\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d) \/ "(.*)" participants=(\d+) potential=(\d+) position=(.*) title="(.*)" description="(.*)"$/;
     var lines = data.split("\n");
+    var first = false;
     lines.forEach(function(line) {
       var match = regex.exec(line);
       if(match) {
@@ -70,6 +71,7 @@ var events = function(callback) {
         var timestamp = moment.tz(match[2], "Europe/London");
         var countdown = moment.duration( timestamp.diff(now) );
         events[position].push({
+          fulltimer: first,
           type: match[1],
           timestamp: timestamp,
           inPast: timestamp.isBefore(now),
@@ -82,6 +84,7 @@ var events = function(callback) {
           icon: icon
         });
       }
+      first = false;
     });
 
     callback(null, events);

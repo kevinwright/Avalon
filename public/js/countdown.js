@@ -17,6 +17,7 @@
     this.el = el;
     this.to = moment(el.attr("data-to"));
     this.inPast = el.hasClass('inpast');
+    this.fulltimer = el.hasClass('fulltimer');
   }
 
   var parts = ['months', 'days', 'hours', 'minutes', 'seconds'];
@@ -43,9 +44,12 @@
       }
     });
 
-    output = output.slice(0,2);
-    namesused = namesused.slice(0,2);
+    if(!this.fulltimer) {
+      output = output.slice(0, 2);
+      namesused = namesused.slice(0, 2);
+    }
     if(past) {
+      this.el.addClass('inpast');
       output.push("");
       namesused.push(" ago");
     }
