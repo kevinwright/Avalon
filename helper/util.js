@@ -46,7 +46,7 @@ var readStdFile = function(filename, callback) {
 
     var entries = [];
 
-    var preambleRegex = /^(\S+) ?@ ?(.+) ?$/;
+    var preambleRegex = /^(\S+) ?@ ?(.+)\s+$/;
 
     var lines = data.split("\n");
 
