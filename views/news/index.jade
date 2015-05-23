@@ -29,8 +29,8 @@ mixin strip(id, background)
 
 mixin eventsfeed(evts, extraclass)
   .ui.feed
-    for event in evts
-      - console.log(JSON.stringify(event))
+    p= JSON.stringify(evts)
+    //- for event in evts
       .event(class=extraclass)
         .label
           i(class="#{event.icon} icon")
