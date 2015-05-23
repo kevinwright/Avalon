@@ -37,27 +37,31 @@ var iconref = {
   EGGMELEE:        "trophy"          // The Crystal Egg Melee Quest
 };
 
+var assignIcon = function(event) {
+  event.icon = iconref[event.type] || "info";
+};
+
 var events = function(callback) {
-  util.readStdEventFile(LIBDIR + "/webevents2", function(err, entries) {
+  util.renderYAML(LIBDIR + "/webevents2", function(err, content) {
     if (err) return callback(err);
 
-    var events = {
+    var entries = {
       top: [],
       left: [],
       right: []
     };
 
-    if (entries.length > 0) {
-      entries[0].fulltimer = true;
+    if (content.events.length > 0) {
+      content.events[0].fulltimer = true;
     }
-
-    entries.forEach(function(entry) {
-      entry.icon = iconref[entry.type] || "info";
-      events[entry.position].push(entry);
+    content.events.forEach(function(event){
+      assignIcon(event);
+      util.postProcessYamlDate(event.start);
+      util.postProcessYamlDate(event.end);
+      entries[event.position] = event;
     });
 
-
-    callback(null, events);
+    callback(null, entries);
   });
 };
 
