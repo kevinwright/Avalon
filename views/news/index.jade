@@ -141,6 +141,7 @@ block content
       thead
         tr
           th(data-sort="string") Village
+          th(data-sort="string") Governance
           th(data-sort="string") City
           th(data-sort="string") Conflict
           th(data-sort="string") Occupied
@@ -153,6 +154,7 @@ block content
               if affair.legionsByCommand && affair.legionsByCommand.length > 1
                 i.icon.angle.down
               | #{affair.village}
+            td #{affair.governance}
             td #{affair.city}
             td #{affair.conflict}
             td #{affair.occupied}

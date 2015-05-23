@@ -15,7 +15,7 @@ var compression = require('compression');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production" || process.env.USE_PROD_FILES === "true") {
   global.avalon = {
     dir: {
       help: "/help/help",
