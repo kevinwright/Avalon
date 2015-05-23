@@ -46,7 +46,7 @@ var digest = function(callback) {
 
     entries.forEach(function(entry) { entry.icon = iconref[entry.type] || "info"; });
 
-    callback(null, events);
+    callback(null, entries);
   });
 };
 
