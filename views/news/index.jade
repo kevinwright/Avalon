@@ -88,6 +88,12 @@ block content
   +panel("ordination", "Ordination", "/img/ordination.jpg")
     +eventsfeed(events.top, 'top')
 
+  +strip("strip-1", "/img/headers/bard.png")
+    blockquote.large.center
+      p
+        a(href="/help/pages/gemholder") The Hunt for Ordination
+      cite Current Holders of Divine Gems and Contenders for God
+
   +panel("events", "Forthcoming Events", "/img/news.jpg")
     .ui.grid.responsive.two.columns
       .column
@@ -108,12 +114,6 @@ block content
             td= entry.type
             td= entry.avDate
             td= entry.description
-
-  +strip("strip-1", "/img/headers/bard.png")
-    blockquote.large.center
-      p
-        a(href="/help/pages/gemholder") The Hunt for Ordination
-      cite Current Holders of Divine Gems and Contenders for God
 
   +panel("bb", meta.bulletin.title, "/img/bb.png")
     .ui.grid.responsive.two.columns
