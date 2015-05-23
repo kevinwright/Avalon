@@ -62,6 +62,7 @@ var readStdFile = function(filename, callback) {
         parts.forEach(function(part){
           var nv = part.split('=');
           var name = nv.shift().trim();
+          if(name==='type') { name='altType'; }
           var value = nv.join('=').trim();
           entry[name] = value;
         });
