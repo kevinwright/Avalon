@@ -81,6 +81,20 @@ block content
       .column
         +eventsfeed(events.right)
 
+  +panel("digest", "Digest")
+    table.ui.table#digestTable
+      thead
+        tr
+          th Type
+          th Date
+          th Event
+      tbody
+        for entry in digest
+          tr
+            td= entry.type
+            td= entry.avDate
+            td= entry.description
+
   +strip("strip-1", "/img/headers/bard.png")
     blockquote.large.center
       p

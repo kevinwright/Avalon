@@ -6,6 +6,7 @@ var schedule = require("../controller/news/schedule.js");
 var affairs = require("../controller/news/affairs.js");
 var events = require("../controller/news/events.js");
 var elections = require("../controller/news/elections.js");
+var digest = require("../controller/news/digest.js");
 
 
 // Methods
@@ -22,14 +23,18 @@ var elections = require("../controller/news/elections.js");
               if (err) return next(err);
               elections(function(err, electionsData) {
                 if (err) return next(err);
-                res.render('news/index', {
-                  meta: meta.meta,
-                  affairs: affairsData,
-                  recent: recents,
-                  events: eventsData,
-                  elections: electionsData,
-                  schedule: scheduleData,
-                  scheduleHelp: scheduleHelp
+                digest(function(err, digestData) {
+                  if (err) return next(err);
+                  res.render('news/index', {
+                    meta: meta.meta,
+                    affairs: affairsData,
+                    recent: recents,
+                    events: eventsData,
+                    elections: electionsData,
+                    digest: digestData,
+                    schedule: scheduleData,
+                    scheduleHelp: scheduleHelp
+                  });
                 });
               });
             });
