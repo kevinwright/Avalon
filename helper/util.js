@@ -102,6 +102,13 @@ var parseCompoundDate = function(str) {
   }
 };
 
+//expect a date object containing the fields "gmt" and avalon"
+var postProcessYamlDate = function(dt) {
+  var gmtNow = moment().tz("Europe/London");
+  dt.gmt = moment.tz(dt.gmt, "Europe/London");
+  dt.inPast = dt.gmt.isBefore(gmtNow);
+};
+
 var readStdEventFile = function(filename, callback) {
   readStdFile(filename, function(err, entries) {
     if (err) return callback(err);
@@ -325,6 +332,7 @@ module.exports = {
   readStdFile: readStdFile,
   readStdEventFile: readStdEventFile,
   parseCompoundDate: parseCompoundDate,
+  postProcessYamlDate: postProcessYamlDate,
   readdir: readdir,
   catchBlock: catchBlock,
   marked: metaMarked,

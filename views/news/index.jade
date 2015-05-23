@@ -69,15 +69,18 @@ block content
               .summary
                 = "Election: " + election.venue + " " + election.position
                 .date
-                  = "started: " + election.gmtStarted.calendar() + " (gmt)"
+                  = "started: " + election.start.gmt.calendar() + " (gmt)"
                   br
-                  = "ends: " + election.gmtEnds.calendar() + " (gmt)"
+                  = "ends: " + election.end.gmt.calendar() + " (gmt)"
                   br
                   .countdown(
-                  data-to = election.gmtEnds.toISOString()
+                  data-to = election.end.gmt.toISOString()
                   class = "fulltimer"
                   )
-              .description= "Incumbent: " + election.incumbent
+              .description
+                = "Incumbent: "
+                a(href='/rollcall/characters/' + election.candidate.name)
+                  = election.incumbent.fullname
               .meta
                 i.green.checkmark.icon
                 | #{election.votes} votes cast

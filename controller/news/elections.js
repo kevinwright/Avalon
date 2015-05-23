@@ -5,25 +5,17 @@ var moment = require('moment-timezone');
 
 
 var elections = function(callback) {
-  util.readStdFile(LIBDIR + "/elections", function(err, elections) {
+  util.renderYAML(LIBDIR + "/elections", function(err, content) {
     if (err) return callback(err);
 
-    elections.forEach(function(election) {
-      var started = util.parseCompoundDate(election.started);
-      var ends = util.parseCompoundDate(election.ends);
-
-      delete election.started;
-      delete election.ends;
+    content.elections.forEach(function(election) {
+      util.postProcessYamlDate(election.start);
+      util.postProcessYamlDate(election.end);
 
       election.icon = "yellow " + (election.type === "CITY") ? "university" : "paw";
-      election.venue = election.qualifier;
-      election.gmtStarted = started.gmtDateTime;
-      election.avStarted = started.avDate;
-      election.gmtEnds = ends.gmtDateTime;
-      election.avEnds = ends.avDate;
     });
 
-    callback(null, elections);
+    callback(null, content.elections);
   });
 };
 
