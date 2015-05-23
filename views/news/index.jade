@@ -29,7 +29,6 @@ mixin strip(id, background)
 
 mixin eventsfeed(evts, extraclass)
   .ui.feed
-    //- p= JSON.stringify(evts)
     for event in evts
       .event(class=extraclass)
         .label
@@ -79,9 +78,17 @@ block content
                   class = "fulltimer"
                   )
               .description
-                = "Incumbent: "
-                a(href='/rollcall/characters/' + election.incumbent.name)
-                  = election.incumbent.fullname
+                p
+                  = "Incumbent: "
+                  a(href='/rollcall/characters/' + election.incumbent.name)
+                    = election.incumbent.fullname
+                p
+                  = "Candidates: "
+                  ul
+                    for candidate in election.candidates
+                      li
+                        a(href='/rollcall/characters/' + candidate.name)
+                          = candidate.fullname
               .meta
                 i.green.checkmark.icon
                 | #{election.votes} votes cast
