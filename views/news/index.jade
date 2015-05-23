@@ -27,9 +27,9 @@ mixin strip(id, background)
       .content
         block
 
-mixin eventsfeed(events, extraclass)
+mixin eventsfeed(evts, extraclass)
   .ui.feed
-    for event in events
+    for event in evts
       .event(class=extraclass)
         .label
           i(class="#{event.icon} icon")

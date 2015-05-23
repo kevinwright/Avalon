@@ -59,7 +59,6 @@ var events = function(callback) {
       util.postProcessYamlDate(event.start);
       util.postProcessYamlDate(event.end);
       entries[event.position] = event;
-      console.log(JSON.stringify(event));
     });
 
     callback(null, entries);

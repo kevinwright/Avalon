@@ -25,6 +25,7 @@ var digest = require("../controller/news/digest.js");
                 if (err) return next(err);
                 digest(function(err, digestData) {
                   if (err) return next(err);
+                  console.log(JSON.stringify(eventsData));
                   res.render('news/index', {
                     meta: meta.meta,
                     affairs: affairsData,
