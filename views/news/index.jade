@@ -36,7 +36,7 @@ mixin eventsfeed(events, extraclass)
         .content
           .summary
             = event.title
-            //- .date
+            .date
               = event.start.gmt.calendar()
               = " (gmt)"
               br
