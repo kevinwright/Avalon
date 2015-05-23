@@ -76,6 +76,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set("x-powered-by", false);
 
+console.log("USING LIBRARY FROM: " + global.avalon.dir.library);
+
 if (app.get('env') === 'development') {
   console.log("LOGGING IN DEVELOPMENT MODE");
   app.use(logger('dev'));
