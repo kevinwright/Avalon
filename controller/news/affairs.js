@@ -32,14 +32,14 @@ var affairs = function(callback) {
               size: count
             };
           });
+        }
 
-          if (village.occupied === 'conquered') {
-            village.governance = village.city;
-          } else if (village.occupied === 'not' && village.city === 'independent') {
-            village.governance = 'independent';
-          } else {
-            village.governance = 'disputed';
-          }
+        if (village.occupied === 'conquered') {
+          village.governance = village.city;
+        } else if (village.occupied === 'not' && village.city === 'independent') {
+          village.governance = 'independent';
+        } else {
+          village.governance = 'disputed';
         }
       })
       .value();
