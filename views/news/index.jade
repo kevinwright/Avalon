@@ -58,18 +58,32 @@ block content
   +panel("intro2", meta.title)
     p.lead #{meta.summary}
 
-  //- +panel("schedule", "Forthcoming Events (old style)", "/img/news.jpg")
-    table.ui.table
-      thead
-        tr
-          th Date
-          th Event
-      tbody
-        for update, key in schedule
-          tr
-            td(width="20%") !{key}
-            td !{update}
-    .text.help !{scheduleHelp}
+  if elections
+    +panel("elections", "Elections", "/img/politics.jpg")
+      .ui.feed
+        for election in elections
+          .event(class=extraclass)
+            .label
+              i(class="#{election.icon} icon")
+            .content
+              .summary
+                = "Election: " + election.venue + " " + election.position
+                .date
+                  = "started: " + election.gmtStarted.calendar() + " (gmt)"
+                  br
+                  = "ends: " + election.gmtEnds.calendar() + " (gmt)"
+                  br
+                  .countdown(
+                  data-to = election.gmtEnds.toISOString()
+                  class = "fulltimer"
+                  )
+              .description= "Incumbent: " + election.incumbent
+              .meta
+                i.green.checkmark.icon
+                | #{election.votes} votes cast
+              .meta
+                i.blue.users.icon
+                | #{election.electorate} possible electorate
 
   +panel("ordination", "Ordination", "/img/ordination.jpg")
     +eventsfeed(events.top, 'top')
@@ -100,33 +114,6 @@ block content
       p
         a(href="/help/pages/gemholder") The Hunt for Ordination
       cite Current Holders of Divine Gems and Contenders for God
-
-  if elections
-    +panel("elections", "Elections", "/img/politics.jpg")
-      .ui.feed
-        for election in elections
-          .event(class=extraclass)
-            .label
-              i(class="#{election.icon} icon")
-            .content
-              .summary
-                = "Election: " + election.venue + " " + election.position
-                .date
-                  = "started: " + election.gmtStarted.calendar() + " (gmt)"
-                  br
-                  = "ends: " + election.gmtEnds.calendar() + " (gmt)"
-                  br
-                  .countdown(
-                    data-to = election.gmtEnds.toISOString()
-                    class = "fulltimer"
-                  )
-              .description= "Incumbent: " + election.incumbent
-              .meta
-                i.green.checkmark.icon
-                | #{election.votes} votes cast
-              .meta
-                i.blue.users.icon
-                | #{election.electorate} possible electorate
 
   +panel("bb", meta.bulletin.title, "/img/bb.png")
     .ui.grid.responsive.two.columns
