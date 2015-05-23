@@ -37,7 +37,7 @@ var affairs = function(callback) {
         if (village.occupied === 'conquered') {
           village.governance = village.city;
         } else if (village.occupied === 'not' && village.city === 'independent') {
-          village.governance = 'independent';
+          village.governance = '';
         } else {
           village.governance = 'disputed';
         }
