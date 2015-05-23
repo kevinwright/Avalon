@@ -58,7 +58,7 @@ var events = function(callback) {
       assignIcon(event);
       util.postProcessYamlDate(event.start);
       util.postProcessYamlDate(event.end);
-      entries[event.position] = event;
+      entries[event.position].push(event);
     });
 
     callback(null, entries);
