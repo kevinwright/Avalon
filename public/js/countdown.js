@@ -67,7 +67,7 @@
         sameElse : 'llll'
       }
     });
-    
+
     var start = this.start;
     var end = this.end;
     var now = moment().tz("Europe/London");

@@ -38,7 +38,7 @@ mixin eventsfeed(evts, extraclass)
             = event.title
             .date
               .countdown(
-                data-start = event.end.gmt.toISOString()
+                data-start = event.start.gmt.toISOString()
                 data-end = event.end.gmt.toISOString()
                 class = event.fulltimer ? "fulltimer" : ""
               )
