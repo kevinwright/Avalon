@@ -43,6 +43,16 @@ mixin eventsfeed(evts, extraclass)
                 class = event.fulltimer ? "fulltimer" : ""
               )
           .description= event.description
+            if event.results
+              ul
+              each result,name in event.results
+                li
+                  = result + ": "
+                  if typeof name === "string"
+                    a(href='/rollcall/characters/' + name)= name
+                  else //it's an array
+                    each subname in name
+                      a(href='/rollcall/characters/' + name)= name
             .date= event.start.avalon
             .meta
               i.green.checkmark.icon
