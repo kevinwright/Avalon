@@ -6,17 +6,6 @@
   function updateSnippets () {
     var i;
 
-    moment.locale('en-my-settings', {
-      calendar : {
-        lastDay : '[Yesterday at] LT',
-        sameDay : '[Today at] LT',
-        nextDay : '[Tomorrow at] LT',
-        lastWeek : '[last] dddd [at] LT',
-        nextWeek : 'dddd [at] LT',
-        sameElse : 'llll'
-      }
-    });
-
     for (i = 0; i < snippets.length; i++) {
       snippets[i].render();
     }
@@ -31,7 +20,7 @@
 
   var parts = ['months', 'days', 'hours', 'minutes', 'seconds'];
 
-  Snippet.prototype.mkTimer = function(when, now, full) {
+  Snippet.prototype.mkTimer = function(now, when, full) {
     var duration = moment.duration( when.diff(now) );
     var values = [];
     var names = [];
@@ -68,6 +57,17 @@
   };
 
   Snippet.prototype.render = function () {
+    moment.locale('en-my-settings', {
+      calendar : {
+        lastDay : '[Yesterday at] LT',
+        sameDay : '[Today at] LT',
+        nextDay : '[Tomorrow at] LT',
+        lastWeek : '[last] dddd [at] LT',
+        nextWeek : 'dddd [at] LT',
+        sameElse : 'llll'
+      }
+    });
+    
     var start = this.start;
     var end = this.end;
     var now = moment().tz("Europe/London");
