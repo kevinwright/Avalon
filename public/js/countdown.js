@@ -90,26 +90,26 @@
     if(end && end.isBefore(now)) {
       //complete
       html = "started: " + start.calendar() + "<br/>" +
-             "<b>ended:</b> " + end.calendar() +
+             "<span class='neongreen'>ended:</span> " + end.calendar() +
              this.mkTimer(now,end,false);
     } else if (end && start && start.isBefore(now) && end.isAfter(now)) {
       //in progress (end known)
-      html = "<b>started:</b> " + start.calendar() + "<br/>" +
+      html = "<span class='neongreen'>started:</span> " + start.calendar() + "<br/>" +
              "ends: " + end.calendar() +
              this.mkTimer(now,end,true);
     } else if(start && start.isBefore(now)) {
       //in progress (end unknown)
-      html = "<b>started:</b> " + start.calendar() +
+      html = "<span class='neongreen'>started:</span> " + start.calendar() +
       this.mkTimer(now,start,true);
     } else if (start && start.isAfter(now)) {
       //scheduled
-      html = "<b>starts:</b> " + start.calendar() + this.mkTimer(now,start,this.fulltimer);
+      html = "<span class='neongreen'>starts:</span> " + start.calendar() + this.mkTimer(now,start,this.fulltimer);
       if(end && !end.isSame(start)) {
         html = html + "ends: " + end.calendar();
       }
     } else {
       // unscheduled
-      html = "<b>Unscheduled</b>"
+      html = "<span class='neongreen'>Unscheduled</span>"
     }
 
     this.el.html(html);
