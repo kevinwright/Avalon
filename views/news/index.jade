@@ -45,7 +45,7 @@ mixin eventsfeed(evts, extraclass)
           .description= event.description
             if event.results
               ul
-              each result,name in event.results
+              each name, result in event.results
                 li
                   = result + ": "
                   if typeof name === "string"
