@@ -77,20 +77,23 @@
     if(end && end.isBefore(now)) {
       //complete
       html = "started: " + start.calendar() + "<br/>" +
-             "ended: " + start.calendar() + "<br/>" +
+             "ended: " + start.calendar() +
              this.mkTimer(now,end,false);
     } else if (end && start && start.isBefore(now) && end.isAfter(now)) {
       //in progress
-      html = "started: " + start.calendar() + "<br/>" +
-             this.mkTimer(now,start,true) + "<br/>" +
-             "ends: " + start.calendar() + "<br/>" +
+      html = "started: " + start.calendar() +
+             this.mkTimer(now,start,true) +
+             "ends: " + start.calendar() +
              this.mkTimer(now,end,true);
     } else if (start && start.isAfter(now)) {
-      //in progress
-      html = "starts: " + start.calendar() + "<br/>" +
-        this.mkTimer(now,start,this.fulltimer) + "<br/>" +
-        "ends: " + start.calendar();
+      //scheduled
+      html = "starts: " + start.calendar() +
+        this.mkTimer(now,start,this.fulltimer)
+      if(end.isAfter(start)) {
+        html = html + "ends: " + start.calendar();
+      }
     } else {
+      // unscheduled
       html = ""
     }
 
