@@ -42,8 +42,7 @@ mixin eventsfeed(evts, extraclass)
                 data-end = event.end.gmt.toISOString()
                 class = event.fulltimer ? "fulltimer" : ""
               )
-
-    .description= event.description
+        .description= event.description
           .date= event.start.avalon
           .meta
             i.green.checkmark.icon
