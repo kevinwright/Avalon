@@ -41,7 +41,7 @@ var digest = function(callback) {
   util.readStdEventFile(LIBDIR + "/webdigest", function(err, entries) {
     if (err) return callback(err);
 
-    var notTicker = function (evt) { return evt.title.toUpperCase().indexOf("TICKER") >= 0 };
+    var notTicker = function (evt) { return evt.title.toUpperCase().indexOf("TICKER") < 0 };
     entries = entries.filter(notTicker);
 
     entries.forEach(function(entry) { entry.icon = iconref[entry.type] || "info"; });
