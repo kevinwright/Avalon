@@ -24,7 +24,10 @@
   function Snippet (el) {
     this.el = el;
     this.start = moment(el.attr("data-start"));
-    this.end = moment(el.attr("data-end"));
+    var endattr = el.attr("data-end");
+    if (typeof endattr !== typeof undefined && endattr !== false) {
+      this.end = moment(endattr);
+    }
     this.fulltimer = el.hasClass('fulltimer');
   }
 
