@@ -37,6 +37,15 @@ var iconref = {
   EGGMELEE:        "trophy"          // The Crystal Egg Melee Quest
 };
 
+function escapeHtml(unsafe) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 var digest = function(callback) {
   util.readStdEventFile(LIBDIR + "/webdigest", function(err, entries) {
     if (err) return callback(err);
@@ -44,7 +53,10 @@ var digest = function(callback) {
     var notTicker = function (evt) { return evt.title.toUpperCase().indexOf("TICKER") < 0 };
     entries = entries.filter(notTicker);
 
-    entries.forEach(function(entry) { entry.icon = iconref[entry.type] || "info"; });
+    entries.forEach(function(entry) {
+      entry.icon = iconref[entry.type] || "info";
+      entry.description = escapeHtml(entry.description).replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+    });
 
     callback(null, entries);
   });
