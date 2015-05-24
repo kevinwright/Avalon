@@ -37,17 +37,13 @@ mixin eventsfeed(evts, extraclass)
           .summary
             = event.title
             .date
-              = event.start.gmt.calendar()
-              = " (gmt)"
-              br
               .countdown(
-                data-to = event.start.gmt.toISOString()
-                class = [
-                  event.inPast ? "inpast" : "",
-                  event.fulltimer ? "fulltimer" : ""
-                ].join(" ")
+                data-start = event.end.gmt.toISOString()
+                data-end = event.end.gmt.toISOString()
+                class = event.fulltimer ? "fulltimer" : ""
               )
-          .description= event.description
+
+    .description= event.description
           .date= event.start.avalon
           .meta
             i.green.checkmark.icon

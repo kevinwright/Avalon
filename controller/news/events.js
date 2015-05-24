@@ -56,8 +56,25 @@ var events = function(callback) {
     }
     content.events.forEach(function(event){
       assignIcon(event);
-      util.postProcessYamlDate(event.start);
-      util.postProcessYamlDate(event.end);
+      if(event.start) {
+        util.postProcessYamlDate(event.start);
+        if(event.end) {
+          util.postProcessYamlDate(event.end);
+        } else {
+          event.end = event.start;
+        }
+      }
+
+      if(event.end && event.end.inPast) {
+        event.state = "complete"
+      } else if (event.end && event.start && event.start.inPast && !event.end.inPast) {
+        event.state = "in progress"
+      } else if (event.start && !event.start.inPast) {
+        event.state = "scheduled"
+      } else {
+        event.state = "unscheduled"
+      }
+
       entries[event.position].push(event);
     });
 

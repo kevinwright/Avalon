@@ -15,17 +15,17 @@
 
   function Snippet (el) {
     this.el = el;
-    this.to = moment(el.attr("data-to"));
-    this.inPast = el.hasClass('inpast');
+    this.start = moment(el.attr("data-start"));
+    this.start = moment(el.attr("data-end"));
     this.fulltimer = el.hasClass('fulltimer');
   }
 
   var parts = ['months', 'days', 'hours', 'minutes', 'seconds'];
 
-  Snippet.prototype.render = function () {
-    var duration = moment.duration( this.to.diff(moment().tz("Europe/London")) );
-    var output = [];
-    var namesused = [];
+  Snippet.prototype.mkTimer = function(when, now, full) {
+    var duration = moment.duration( when.diff(now) );
+    var values = [];
+    var names = [];
     var past = false;
     var active = false;
 
@@ -34,30 +34,58 @@
       if (value !== 0) { active = true; }
       if (active) {
         var absval = Math.abs(value);
-        output.push(absval);
+        values.push(absval);
         if(absval === 1 ) {
-          namesused.push(name.substring(0,name.length-1));
+          names.push(name.substring(0,name.length-1));
         } else {
-          namesused.push(name);
+          names.push(name);
         }
         past = past || (value < 0);
       }
     });
 
-    if(!this.fulltimer) {
-      output = output.slice(0, 2);
-      namesused = namesused.slice(0, 2);
+    if(!full) {
+      values = values.slice(0, 2);
+      names = names.slice(0, 2);
     }
     if(past) {
       this.el.addClass('inpast');
-      output.push("");
-      namesused.push(" ago");
+      values.push("");
+      names.push(" ago");
     }
-    var th = "<tr><th>" + output.join("</th><th>")+ "</th></tr>";
-    var tr = "<tr><td>" + namesused.join("</td><td>")+ "</td></tr>";
-    var output_html = "<table><thead>" + th + "</thead><tbody>" + tr + "</tbody></table>";
+    var th = "<tr><th>" + values.join("</th><th>")+ "</th></tr>";
+    var tr = "<tr><td>" + names.join("</td><td>")+ "</td></tr>";
+    return "<table><thead>" + th + "</thead><tbody>" + tr + "</tbody></table>";
+  };
 
-    this.el.html(output_html);
+  Snippet.prototype.render = function () {
+    var start = this.start;
+    var end = this.end;
+    var now = moment().tz("Europe/London");
+
+    var html = "";
+
+    if(end && end.isBefore(now)) {
+      //complete
+      html = "started: " + start.calendar + "<br/>" +
+             "ended: " + start.calendar + "<br/>" +
+             this.mkTimer(now,end,false);
+    } else if (end && start && start.isBefore(now) && end.isAfter(now)) {
+      //in progress
+      html = "started: " + start.calendar + "<br/>" +
+             this.mkTimer(now,start,true) + "<br/>" +
+             "ends: " + start.calendar + "<br/>" +
+             this.mkTimer(now,end,true);
+    } else if (start && start.isAfter(now)) {
+      //in progress
+      html = "starts: " + start.calendar + "<br/>" +
+        this.mkTimer(now,start,this.fulltimer) + "<br/>" +
+        "ends: " + start.calendar;
+    } else {
+      html = ""
+    }
+
+    this.el.html(html);
   };
 
 
