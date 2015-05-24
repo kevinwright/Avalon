@@ -82,7 +82,7 @@
     } else if (end && start && start.isBefore(now) && end.isAfter(now)) {
       //in progress
       html = "started: " + start.calendar() + "<br/>" +
-             "ends: " + start.calendar() +
+             "ends: " + end.calendar() +
              this.mkTimer(now,end,true);
     } else if (start && start.isAfter(now)) {
       //scheduled
