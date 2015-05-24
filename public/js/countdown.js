@@ -99,7 +99,7 @@
              this.mkTimer(now,end,true);
     } else if(start && start.isBefore(now)) {
       //in progress (end unknown)
-      html = "started: " + start.calendar() +
+      html = "<b>started:</b> " + start.calendar() +
       this.mkTimer(now,start,true);
     } else if (start && start.isAfter(now)) {
       //scheduled
