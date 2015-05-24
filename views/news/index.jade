@@ -36,7 +36,7 @@ mixin eventsfeed(evts, extraclass)
         .content
           .summary
             if event.link
-              a(href=event.link) event.title
+              a(href=event.link)= event.title
             else
               = event.title
             .date
