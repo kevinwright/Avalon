@@ -53,7 +53,7 @@ mixin eventsfeed(evts, extraclass)
                   else
                     //- it's an array
                     each subname in name
-                      a(href='/rollcall/characters/' + name)= name
+                      a(href='/rollcall/characters/' + subname)= subname
             .date= event.start.avalon
             .meta
               i.green.checkmark.icon
