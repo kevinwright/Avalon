@@ -90,20 +90,20 @@
     if(end && end.isBefore(now)) {
       //complete
       html = "started: " + start.calendar() + "<br/>" +
-             "<span class='neongreen'>ended:</span> " + end.calendar() +
+             "<b class='neongreen'>ended:</b> " + end.calendar() +
              this.mkTimer(now,end,false);
     } else if (end && start && start.isBefore(now) && end.isAfter(now)) {
       //in progress (end known)
-      html = "<span class='neongreen'>started:</span> " + start.calendar() + "<br/>" +
+      html = "<b class='neongreen'>started:</b> " + start.calendar() + "<br/>" +
              "ends: " + end.calendar() +
              this.mkTimer(now,end,true);
     } else if(start && start.isBefore(now)) {
       //in progress (end unknown)
-      html = "<span class='neongreen'>started:</span> " + start.calendar() +
+      html = "<b class='neongreen'>started:</b> " + start.calendar() +
       this.mkTimer(now,start,true);
     } else if (start && start.isAfter(now)) {
       //scheduled
-      html = "<span class='neongreen'>starts:</span> " + start.calendar() + this.mkTimer(now,start,this.fulltimer);
+      html = "<b class='neongreen'>starts:</b> " + start.calendar() + this.mkTimer(now,start,this.fulltimer);
       if(end && !end.isSame(start)) {
         html = html + "ends: " + end.calendar();
       }
