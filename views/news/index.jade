@@ -50,7 +50,8 @@ mixin eventsfeed(evts, extraclass)
                   = result + ": "
                   if typeof name === "string"
                     a(href='/rollcall/characters/' + name)= name
-                  else //it's an array
+                  else
+                    //- it's an array
                     each subname in name
                       a(href='/rollcall/characters/' + name)= name
             .date= event.start.avalon
