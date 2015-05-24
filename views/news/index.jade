@@ -136,7 +136,7 @@ block content
           tr
             td= entry.type
             td= entry.avDate
-            td= entry.description
+            td!= entry.description
 
   +panel("bb", meta.bulletin.title, "/img/bb.png")
     .ui.grid.responsive.two.columns
