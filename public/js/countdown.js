@@ -87,7 +87,7 @@
     } else if (start && start.isAfter(now)) {
       //scheduled
       html = "starts: " + start.calendar() + this.mkTimer(now,start,this.fulltimer);
-      if(end && end.isAfter(start)) {
+      if(end && !end.isSame(start)) {
         html = html + "ends: " + start.calendar();
       }
     } else {
