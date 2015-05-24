@@ -42,11 +42,11 @@ mixin eventsfeed(evts, extraclass)
                 data-end = event.end.gmt.toISOString()
                 class = event.fulltimer ? "fulltimer" : ""
               )
-        .description= event.description
-          .date= event.start.avalon
-          .meta
-            i.green.checkmark.icon
-            | #{event.participants} participants
+          .description= event.description
+            .date= event.start.avalon
+            .meta
+              i.green.checkmark.icon
+              | #{event.participants} participants
 
 block content
 
