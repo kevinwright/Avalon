@@ -14,7 +14,7 @@
   function Snippet (el) {
     this.el = el;
     this.start = moment(el.attr("data-start"));
-    this.start = moment(el.attr("data-end"));
+    this.end = moment(el.attr("data-end"));
     this.fulltimer = el.hasClass('fulltimer');
   }
 
