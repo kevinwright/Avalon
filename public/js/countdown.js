@@ -77,7 +77,7 @@
     if(end && end.isBefore(now)) {
       //complete
       html = "started: " + start.calendar() + "<br/>" +
-             "ended: " + start.calendar() +
+             "ended: " + end.calendar() +
              this.mkTimer(now,end,false);
     } else if (end && start && start.isBefore(now) && end.isAfter(now)) {
       //in progress
@@ -88,7 +88,7 @@
       //scheduled
       html = "starts: " + start.calendar() + this.mkTimer(now,start,this.fulltimer);
       if(end && !end.isSame(start)) {
-        html = html + "ends: " + start.calendar();
+        html = html + "ends: " + end.calendar();
       }
     } else {
       // unscheduled
