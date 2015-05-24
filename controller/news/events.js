@@ -58,11 +58,9 @@ var events = function(callback) {
       assignIcon(event);
       if(event.start) {
         util.postProcessYamlDate(event.start);
-        if(event.end) {
-          util.postProcessYamlDate(event.end);
-        } else {
-          event.end = event.start;
-        }
+      }
+      if(event.end) {
+        util.postProcessYamlDate(event.end);
       }
 
       if(event.end && event.end.inPast) {

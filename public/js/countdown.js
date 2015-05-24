@@ -90,10 +90,14 @@
              "<b>ended:</b> " + end.calendar() +
              this.mkTimer(now,end,false);
     } else if (end && start && start.isBefore(now) && end.isAfter(now)) {
-      //in progress
+      //in progress (end known)
       html = "<b>started:</b> " + start.calendar() + "<br/>" +
              "ends: " + end.calendar() +
              this.mkTimer(now,end,true);
+    } else if(start && start.isBefore(now)) {
+      //in progress (end unknown)
+      html = "started: " + start.calendar() +
+      this.mkTimer(now,start,true);
     } else if (start && start.isAfter(now)) {
       //scheduled
       html = "<b>starts:</b> " + start.calendar() + this.mkTimer(now,start,this.fulltimer);
