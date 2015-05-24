@@ -67,20 +67,20 @@
 
     if(end && end.isBefore(now)) {
       //complete
-      html = "started: " + start.calendar + "<br/>" +
-             "ended: " + start.calendar + "<br/>" +
+      html = "started: " + start.calendar() + "<br/>" +
+             "ended: " + start.calendar() + "<br/>" +
              this.mkTimer(now,end,false);
     } else if (end && start && start.isBefore(now) && end.isAfter(now)) {
       //in progress
-      html = "started: " + start.calendar + "<br/>" +
+      html = "started: " + start.calendar() + "<br/>" +
              this.mkTimer(now,start,true) + "<br/>" +
-             "ends: " + start.calendar + "<br/>" +
+             "ends: " + start.calendar() + "<br/>" +
              this.mkTimer(now,end,true);
     } else if (start && start.isAfter(now)) {
       //in progress
-      html = "starts: " + start.calendar + "<br/>" +
+      html = "starts: " + start.calendar() + "<br/>" +
         this.mkTimer(now,start,this.fulltimer) + "<br/>" +
-        "ends: " + start.calendar;
+        "ends: " + start.calendar();
     } else {
       html = ""
     }
