@@ -35,7 +35,10 @@ mixin eventsfeed(evts, extraclass)
           i(class="#{event.icon} icon")
         .content
           .summary
-            = event.title
+            if event.link
+              a(href=event.link) event.title
+            else
+              = event.title
             .date
               .countdown(
                 data-start = event.start.gmt.toISOString()
