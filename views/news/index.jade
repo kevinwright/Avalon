@@ -70,7 +70,7 @@ block content
   +panel("intro2", meta.title)
     p.lead #{meta.summary}
 
-  if elections
+  if elections && elections.length > 0
     +panel("elections", "Elections", "/img/politics.jpg")
       .ui.feed
         for election in elections
@@ -81,13 +81,10 @@ block content
               .summary
                 = "Election: " + election.venue + " " + election.position
                 .date
-                  = "started: " + election.start.gmt.calendar() + " (gmt)"
-                  br
-                  = "ends: " + election.end.gmt.calendar() + " (gmt)"
-                  br
                   .countdown(
-                  data-to = election.end.gmt.toISOString()
-                  class = "fulltimer"
+                    data-start = election.start.gmt.toISOString()
+                    data-end = election.end.gmt.toISOString()
+                    class = "fulltimer"
                   )
               .description
                 div
