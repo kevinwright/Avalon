@@ -40,11 +40,17 @@ mixin eventsfeed(evts, extraclass)
             else
               = event.title
             .date
-              .countdown(
-                data-start = event.start.gmt.toISOString()
-                data-end = event.end.gmt.toISOString()
-                class = event.fulltimer ? "fulltimer" : ""
-              )
+              if event.end
+                .countdown(
+                  data-start = event.start.gmt.toISOString()
+                  data-end = event.end.gmt.toISOString()
+                  class = event.fulltimer ? "fulltimer" : ""
+                )
+              else
+                .countdown(
+                  data-start = event.start.gmt.toISOString()
+                  class = event.fulltimer ? "fulltimer" : ""
+                )
           .description= event.description
             if event.results
               br
