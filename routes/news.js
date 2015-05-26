@@ -44,8 +44,18 @@ var digest = require("../controller/news/digest.js");
     });
   }
 
+function getDigest(req, res, next) {
+  digest(function(err, digestData) {
+    if (err) return next(err);
+    res.render('news/digest', {
+      digest: digestData
+    });
+  });
+}
+
 // Routes
   router.get(['/', "/index.html"], getIndex);
+  router.get(['/digest/', '/digest/index.html', "/digest.html"], getDigest);
 
 
 module.exports = router;

@@ -1,0 +1,56 @@
+extends ../layout
+
+block head
+  - var title = mkTitle(avalon.website.news.title)
+  - var description = avalon.website.news.description
+  - var keywords = mkKeywords(avalon.website.news.keywords)
+  - var canonical = "http://www.avalon-rpg.com/news/"
+  - var body = "news"
+  link(rel="stylesheet" href="/css/feed.css")
+
+mixin panel(id, title, background)
+  - var sectionid = id + "-section";
+  .ui.feature.feature-double.spacing-small.background(id=sectionid)
+    if background
+      +background-gradient-image(sectionid, background)
+    .contain.large
+      a(id=id)
+      h2.title= title
+      .content
+        block
+
+mixin strip(id, background)
+  .ui.feature.spacing-small.background(id=id)
+    if background
+      +background-gradient-image(id, background)
+    .contain.large
+      .content
+        block
+
+block content
+
+  +panel("digest", "Digest", "/img/headers/loremaster.png")
+    table.ui.table#digestTable
+      thead
+        tr
+          th Type
+          th Date
+          th Event
+      tbody
+        for entry in digest.reverse()
+          tr(
+            class = "entry type-"+entry.type
+            data-type = entry.type
+          )
+            td.nowrap= entry.type
+            td.nowrap
+              = entry.avDate
+              br
+              = entry.gmtDateTime.calendar()
+            td!= entry.description
+
+
+block scripts
+  script(src="/js/jquery.table.js")
+  script(src="/js/digest.js")
+
