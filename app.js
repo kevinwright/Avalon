@@ -15,7 +15,32 @@ var compression = require('compression');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-if (process.env.NODE_ENV === "production" || process.env.USE_PROD_FILES === "true") {
+if (process.env.USE_LOCAL_FILES === "true") {
+  global.avalon = {
+    dir: {
+      help: "./localfiles/help/help",
+      world: "./localfiles/library/world/",
+      rollcall: "./localfiles/help/rollcall",
+      autohelp: "./localfiles/help/autohelp",
+      bb: "./localfiles/help/bb",
+      library: "./localfiles/library",
+      library_pages: "./localfiles/library/pages",
+      library_help: "./localfiles/library/help",
+      intro: "./localfiles/library/intro",
+      features: "./localfiles/library/features",
+      guide: "./localfiles/library/guide"
+    },
+    files: {
+      help_summary: "./localfiles/help/library/summaries",
+      menu: "./localfiles/library/menu.yaml",
+      synonyms: "./localfiles/library/synonyms.json",
+      pages: "./localfiles/library/pages.yaml",
+      toc: "./localfiles/library/intro/toc.yaml",
+      website: "./localfiles/library/website.yaml",
+      footer: "./localfiles/library/footer.yaml"
+    }
+  };
+} else if (process.env.NODE_ENV === "production" || process.env.USE_PROD_FILES === "true") {
   global.avalon = {
     dir: {
       help: "/help/help",
