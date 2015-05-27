@@ -1,5 +1,6 @@
 var fs = require("fs");
 var yaml = require("js-yaml");
+var libdir = (process.env.USE_LOCAL_FILES === "true") ? './localfiles/library' : '/library';
 
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -30,19 +31,19 @@ module.exports = function(grunt) {
           template: "views/howto.jade",
         },
         files: {
-          "public/howto": "/library/howto/*.md"
+          "public/howto": libdir + "/howto/*.md"
         }
       },
       email: {
         options: {
-          "config": yaml.safeLoad(fs.readFileSync("/library/emails/config.yaml")),
+          "config": yaml.safeLoad(fs.readFileSync(libdir + "/emails/config.yaml")),
           "template": "views/emails/default.jade",
           "jade": {
             pretty: true
           }
         },
         files: {
-          "tmp/emails": "/library/emails/default/*.md"
+          "tmp/emails": libdir + "/emails/default/*.md"
         }
       }
     },
@@ -57,7 +58,7 @@ module.exports = function(grunt) {
           src: ['*.html'],
           cwd: 'tmp/emails',
           ext: '.html',
-          dest: 'public/emails',
+          dest: 'public/emails'
         }]
       }
     },

@@ -16,28 +16,31 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 if (process.env.USE_LOCAL_FILES === "true") {
+  var localdir = path.resolve('./localfiles');
+  var libdir = path.resolve(localdir + '/library');
+  var helpdir = path.resolve(localdir + '/help');
   global.avalon = {
     dir: {
-      help: "./localfiles/help/help",
-      world: "./localfiles/library/world/",
-      rollcall: "./localfiles/help/rollcall",
-      autohelp: "./localfiles/help/autohelp",
-      bb: "./localfiles/help/bb",
-      library: "./localfiles/library",
-      library_pages: "./localfiles/library/pages",
-      library_help: "./localfiles/library/help",
-      intro: "./localfiles/library/intro",
-      features: "./localfiles/library/features",
-      guide: "./localfiles/library/guide"
+      help:          helpdir + "/help",
+      world:         libdir  + "/world/",
+      rollcall:      helpdir + "/rollcall",
+      autohelp:      helpdir + "/autohelp",
+      bb:            helpdir + "/bb",
+      library:       libdir,
+      library_pages: libdir  + "/pages",
+      library_help:  libdir  + "/help",
+      intro:         libdir  + "/intro",
+      features:      libdir  + "/features",
+      guide:         libdir  + "/guide"
     },
     files: {
-      help_summary: "./localfiles/help/library/summaries",
-      menu: "./localfiles/library/menu.yaml",
-      synonyms: "./localfiles/library/synonyms.json",
-      pages: "./localfiles/library/pages.yaml",
-      toc: "./localfiles/library/intro/toc.yaml",
-      website: "./localfiles/library/website.yaml",
-      footer: "./localfiles/library/footer.yaml"
+      help_summary:  helpdir + "/library/summaries",
+      menu:          libdir  + "/menu.yaml",
+      synonyms:      libdir  + "/synonyms.json",
+      pages:         libdir  + "/pages.yaml",
+      toc:           libdir  + "/intro/toc.yaml",
+      website:       libdir  + "/website.yaml",
+      footer:        libdir  + "/footer.yaml"
     }
   };
 } else if (process.env.NODE_ENV === "production" || process.env.USE_PROD_FILES === "true") {
@@ -101,7 +104,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set("x-powered-by", false);
 
-console.log("USING LIBRARY FROM: " + global.avalon.dir.library);
+console.log("USING LIBRARY FROM: " + path.resolve(global.avalon.dir.library));
 
 if (app.get('env') === 'development') {
   console.log("LOGGING IN DEVELOPMENT MODE");

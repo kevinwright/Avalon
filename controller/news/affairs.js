@@ -2,7 +2,7 @@ var util = require("../../helper/util.js");
 var _ = require("lodash");
 
 var affairs = function(callback) {
-  util.renderYAML("/library/affairs", function(err, content) {
+  util.renderYAML(global.avalon.dir.library + "/affairs", function(err, content) {
     if (err) return callback(err);
     var data = content.affairs;
     _(data)
