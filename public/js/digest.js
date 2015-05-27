@@ -1,10 +1,10 @@
 (function(){
 
 
-  $('.entry').click(function () {
-    var favoured = moment(el.attr("data-type"));
-    $('entry').addClass('de-emphasise');
-    $('entry-'+favoured).removeClass('de-emphasise').addClass('emphasise');
+  $('.typelabel').click(function () {
+    var favoured = $(this).attr("data-type");
+    $('.entry').removeClass('emphasise').addClass('de-emphasise');
+    $('.type-'+favoured).removeClass('de-emphasise').addClass('emphasise');
   });
 
 })();

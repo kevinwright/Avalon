@@ -38,16 +38,18 @@ block content
           th Event
       tbody
         for entry in digest.reverse()
-          tr(
-            class = "entry type-"+entry.type
-            data-type = entry.type
-          )
-            td.nowrap= entry.type
-            td.nowrap
+          tr
+            td.nowrap.entry(
+              class = "typelabel type-"+entry.type
+              data-type = entry.type
+            )
+              = entry.type
+            td.nowrap.entry(class = "type-"+entry.type)
               = entry.avDate
               br
               = entry.gmtDateTime.calendar()
-            td!= entry.description
+            td.entry(class = "type-"+entry.type)
+              != entry.description
 
 
 block scripts
