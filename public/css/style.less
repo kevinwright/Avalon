@@ -507,10 +507,22 @@
   }
 
   .de-emphasise {
-    color: rgba(255, 255, 255, 0.2);
+    opacity: 0.2;
   }
   .emphasise {
-    text-shadow: 2px 2px 5px white;
+    //text-shadow: 2px 2px 5px white;
+  }
+
+  .clickable {
+    color: #B1D7EF;
+    cursor: pointer;
+    transition: color 100ms;
+    text-decoration: none;
+  }
+
+  i.sup {
+    font-size: 80%;
+    vertical-align: top;
   }
 
 //     ____            
@@ -1489,6 +1501,9 @@ td.nowrap {
         transition: color 100ms;
         text-decoration: none;
       }
+
+
+
       &:hover {
         a {
           color: #80C0E8;

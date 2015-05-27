@@ -47,6 +47,12 @@ var digest = require("../controller/news/digest.js");
 function getDigest(req, res, next) {
   digest(function(err, digestData) {
     if (err) return next(err);
+    var type = req.params.type || req.query.type;
+    if(type) {
+      type = type.toUpperCase();
+      var filterFn = function(entry) { return entry.type.toUpperCase() === type }
+      digestData = digestData.filter(filterFn);
+    }
     res.render('news/digest', {
       digest: digestData
     });
@@ -55,7 +61,7 @@ function getDigest(req, res, next) {
 
 // Routes
   router.get(['/', "/index.html"], getIndex);
-  router.get(['/digest/', '/digest/index.html', "/digest.html"], getDigest);
-
+  router.get(['/digest', '/digests'], getDigest);
+  router.get(['/digest/:type', '/digests/:type'], getDigest);
 
 module.exports = router;

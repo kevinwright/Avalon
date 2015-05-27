@@ -30,7 +30,17 @@ mixin strip(id, background)
 block content
 
   +panel("digest", "Digest", "/img/headers/loremaster.png")
-    p Click on a digest type to highlight all other entries of that same type.
+    ul
+      li Click on a digest type or user name to highlight all other matching entries.
+      li
+        | Click
+        i.ui.icon.external
+        | against a digest type to show just entries of that type
+      li
+        | Click 
+        i.ui.icon.external
+        | against a link to go to the rollcall/help page
+
     br
     table.ui.table#digestTable
       thead
@@ -40,17 +50,21 @@ block content
           th Event
       tbody
         for entry in digest.reverse()
+          - var entrycss = "type-"+entry.type;
+          if(entry.linkHashes.length > 0)
+            - entrycss = entrycss + " link-" + entry.linkHashes.join(" link-");
           tr
-            td.nowrap.entry(
-              class = "typelabel type-"+entry.type
-              data-type = entry.type
-            )
-              = entry.type
-            td.nowrap.entry(class = "type-"+entry.type)
+            td.nowrap.entry(class = entrycss)
+              span.clickable.type(data-type = entry.type)
+                = entry.type
+              a(href='/news/digest/'+entry.type)
+                i.ui.sup.icon.external
+
+            td.nowrap.entry(class = entrycss)
               = entry.avDate
               br
               = entry.gmtDateTime.calendar()
-            td.entry(class = "type-"+entry.type)
+            td.entry(class = entrycss)
               != entry.description
 
 
