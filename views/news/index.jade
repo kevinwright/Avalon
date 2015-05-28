@@ -139,7 +139,7 @@ block content
           th Date
           th Event
       tbody
-        for entry in digest.reverse().slice(0,20)
+        for entry in digest.entries.reverse().slice(0,20)
           tr
             td.nowrap= entry.type
             td.nowrap
