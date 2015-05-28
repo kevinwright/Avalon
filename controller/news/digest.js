@@ -1,5 +1,6 @@
 var LIBDIR = global.avalon.dir.library;
 var util = require("../../helper/util");
+var fs = require('fs');
 var _ = require("lodash");
 var murmur = require('murmurhash3');
 
@@ -15,7 +16,7 @@ function escapeHtml(unsafe) {
 
 
 var digest = function(callback) {
-  util.readStdEventFile(LIBDIR + "/webdigest", function(err, entries) {
+  var readCallback = function(err, entries) {
     if (err) return callback(err);
 
     var notTicker = function (evt) { return evt.title.toUpperCase().indexOf("TICKER") < 0 };
@@ -23,6 +24,7 @@ var digest = function(callback) {
 
     entries.forEach(function(entry) {
       var escaped = escapeHtml(entry.description);
+      entry.type = entry.type.toUpperCase();
       entry.links = [];
       entry.linkHashes = [];
       entry.description = escaped.replace(
@@ -40,7 +42,13 @@ var digest = function(callback) {
     });
 
     callback(null, entries);
+  };
+
+  fs.stat(LIBDIR + "/webdigest-processed", function(err, stat){
+    var fname = (err || !stat.isFile()) ? "/webdigest" : "/webdigest-processed";
+    util.readStdEventFile(LIBDIR + fname, readCallback);
   });
+
 };
 
 module.exports = digest;
