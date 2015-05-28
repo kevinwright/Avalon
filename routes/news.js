@@ -51,7 +51,7 @@ function getDigest(req, res, next) {
     if(type) {
       type = type.toUpperCase();
       var filterFn = function(entry) { return entry.type.toUpperCase() === type }
-      digestData = digestData.filter(filterFn);
+      digestData.entries = digestData.entries.filter(filterFn);
     }
     res.render('news/digest', {
       digest: digestData

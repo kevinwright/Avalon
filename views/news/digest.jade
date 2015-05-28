@@ -16,7 +16,7 @@ mixin panel(id, title, background)
     .contain.large
       a(id=id)
       h2.title= title
-      .content
+      .ui.content
         block
 
 mixin strip(id, background)
@@ -24,23 +24,30 @@ mixin strip(id, background)
     if background
       +background-gradient-image(id, background)
     .contain.large
-      .content
+      .ui.content
         block
 
 block content
 
   +panel("digest", "Digest", "/img/headers/loremaster.png")
-    ul
-      li Click on a digest type or user name to highlight all other matching entries.
-      li
-        | Click
-        i.ui.icon.external
-        | against a digest type to show just entries of that type
-      li
-        | Click 
-        i.ui.icon.external
-        | against a link to go to the rollcall/help page
 
+    .ui.responsive.grid
+      .sixteen.column.wide.main
+        p Click on a digest type below to toggle visibility
+        p Click on a link to highlight matching entries
+        p
+          = "Click "
+          i.ui.icon.external
+          | against a link to go to the rollcall/help page
+        br
+
+        .ui.responsive.grid.four.columns
+          for type in digest.types.reverse()
+            .clickable.column.typetoggle(
+              data-type = type
+            )
+              i.ui.icon.unhide(class="vis-icon-"+type)
+              = type
     br
     table.ui.table#digestTable
       thead
@@ -49,23 +56,17 @@ block content
           th Date
           th Event
       tbody
-        for entry in digest.reverse()
+        for entry in digest.entries.reverse()
           - var entrycss = "type-"+entry.type;
           if(entry.linkHashes.length > 0)
             - entrycss = entrycss + " link-" + entry.linkHashes.join(" link-");
-          tr
-            td.nowrap.entry(class = entrycss)
-              span.clickable.type(data-type = entry.type)
-                = entry.type
-              a(href='/news/digest/'+entry.type)
-                i.ui.sup.icon.external
-
-            td.nowrap.entry(class = entrycss)
+          tr.entry(class = entrycss)
+            td.nowrap= entry.type
+            td.nowrap
               = entry.avDate
               br
               = entry.gmtDateTime.calendar()
-            td.entry(class = entrycss)
-              != entry.description
+            td!= entry.description
 
 
 block scripts

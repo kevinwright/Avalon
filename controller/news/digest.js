@@ -19,12 +19,27 @@ var digest = function(callback) {
   var readCallback = function(err, entries) {
     if (err) return callback(err);
 
+    var digest = {
+      types: [],
+      entries: []
+    };
+
     var notTicker = function (evt) { return evt.title.toUpperCase().indexOf("TICKER") < 0 };
     entries = entries.filter(notTicker);
 
+    var types = { maxCount: 0 };
+
     entries.forEach(function(entry) {
       var escaped = escapeHtml(entry.description);
-      entry.type = entry.type.toUpperCase();
+      var type = entry.type.trim().toUpperCase();
+      if(types.hasOwnProperty(type)) {
+        var newCount = types[type] + 1;
+        types[type] = newCount;
+        types.maxCount = Math.max(types.maxCount, newCount);
+      } else {
+        types[type] = 1;
+      }
+      entry.type = type;
       entry.links = [];
       entry.linkHashes = [];
       entry.description = escaped.replace(
@@ -39,9 +54,18 @@ var digest = function(callback) {
           return span + link;
         }
       );
+      digest.entries.push(entry);
     });
 
-    callback(null, entries);
+    for(var i=0; i <= types.maxCount; ++i) {
+      for(var key in types) {
+        if (types.hasOwnProperty(key) && key !== 'maxCount' && types[key] === i){
+          digest.types.push(key);
+        }
+      }
+    }
+
+    callback(null, digest);
   };
 
   fs.stat(LIBDIR + "/webdigest-processed", function(err, stat){
